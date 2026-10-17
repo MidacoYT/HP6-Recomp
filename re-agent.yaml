@@ -1,0 +1,77 @@
+# re-agent configuration
+# Profile: generic-cpp
+
+project_profile:
+  name: generic-cpp
+  language_standard: C++20
+  prompt_rules:
+  - Preserve the detected ABI, calling convention, widths, and signedness
+  - Use evidence-backed names and retain address-based placeholders when unresolved
+  hook_patterns: []
+  stub_patterns:
+  - TODO|NOT_IMPLEMENTED
+  stub_markers:
+  - NOT_IMPLEMENTED
+  stub_call_prefix: __re_agent_no_stub_prefix__
+  class_macro: ''
+  source_root: src
+  source_extensions:
+  - .cpp
+  - .cc
+  - .cxx
+  - .c
+  - .h
+  - .hpp
+  hooks_csv: null
+llm:
+  provider: codex
+  cli_path: 'C:\Users\trist\AppData\Roaming\npm\codex.cmd'
+  model: gpt-6-sol
+  max_tokens: 4096
+  temperature: 0.0
+  timeout_s: 1800
+  input_cost_per_million: 0.0
+  output_cost_per_million: 0.0
+backend:
+  type: ghidra-bridge
+  cli_path: 'D:\HP\HP6_Reconstructed\.venv\Scripts\ghidra-bridge.exe'
+  timeout_s: 120
+parity:
+  enabled: true
+  call_count_warn_diff: 3
+  inline_wrapper_autoskip: false
+  cache_dir: .cache/re-agent-parity
+orchestrator:
+  max_review_rounds: 4
+  max_llm_calls_per_function: 80
+  cumulative_validation: true
+  max_functions_per_class: 10
+  objective_verifier_enabled: true
+  objective_call_count_tolerance: 3
+  objective_control_flow_tolerance: 2
+  investigation_enabled: true
+  max_investigations: 8
+  selection_strategy: dependency-order
+  max_attempts_per_function: 3
+validation:
+  enabled: true
+  copy_project: false
+  project_root: .
+  build_commands: []
+  test_commands: []
+  runtime_commands: []
+  require_build: false
+  require_tests: false
+  require_runtime: false
+  require_verified: false
+  trust_configured_commands: false
+  parity_fail_on_red: true
+  parity_fail_on_yellow: false
+  command_timeout_s: 900
+  working_directory: .
+  keep_project_copy: false
+output:
+  report_dir: reports/re-agent
+  log_dir: reports/re-agent/logs
+  session_file: re-agent-progress.json
+  format: json

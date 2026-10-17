@@ -1,0 +1,1954 @@
+﻿address,value,length
+00715c7c,print_ch_memory,15
+00716790,"track %s: loading subbank %d failed because memory threshold exceeded, it was lowest priority",93
+0071b2b0,HARDWARE\DESCRIPTION\System\CentralProcessor\0,46
+00727334,"Stack memory around _alloca was corrupted
+",43
+00727398,"Stack memory was corrupted
+",28
+007277a8,Stack memory corruption,23
+007297b4,TextureConstants,16
+007297d8,TextureMatrix,13
+0072986c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00729cec,TextureConstants,16
+00729d2b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072a16c,TextureConstants,16
+0072a190,TextureMatrix,13
+0072a214,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072a6dc,TextureConstants,16
+0072a71b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072abdb,TextureConstants,16
+0072abec,TextureMatrix,13
+0072ac94,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072b20c,TextureConstants,16
+0072b25b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072b79c,TextureConstants,16
+0072b7ad,TextureMatrix,13
+0072b840,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072be04,TextureConstants,16
+0072be53,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072c350,TextureConstants,16
+0072c361,TextureMatrix,13
+0072c408,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072ca78,TextureConstants,16
+0072cacb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072d100,TextureConstants,16
+0072d111,TextureMatrix,13
+0072d1a8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072d868,TextureConstants,16
+0072d8bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072dfe1,TextureConstants,16
+0072dff2,TextureMatrix,13
+0072e0a9,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072e969,TextureConstants,16
+0072e9d8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072f258,TextureConstants,16
+0072f269,TextureMatrix,13
+0072f31d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0072fc28,TextureConstants,16
+0072fc98,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007303dc,TextureConstants,16
+00730400,TextureMatrix,13
+00730494,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073093c,TextureConstants,16
+0073097b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00730de4,TextureConstants,16
+00730e08,TextureMatrix,13
+00730e8c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073137c,TextureConstants,16
+007313bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007318a3,TextureConstants,16
+007318b4,TextureMatrix,13
+0073195c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00731efc,TextureConstants,16
+00731f4b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007324b4,TextureConstants,16
+007324c5,TextureMatrix,13
+00732558,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00732b44,TextureConstants,16
+00732b93,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007330b8,TextureConstants,16
+007330c9,TextureMatrix,13
+00733170,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007338f0,TextureConstants,16
+00733943,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00733fa0,TextureConstants,16
+00733fb1,TextureMatrix,13
+00734048,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00734820,TextureConstants,16
+00734873,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00734fc1,TextureConstants,16
+00734fd2,TextureMatrix,13
+00735089,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00735a49,TextureConstants,16
+00735ab8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00736360,TextureConstants,16
+00736371,TextureMatrix,13
+00736425,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00736e38,TextureConstants,16
+00736ea8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00737614,TextureConstants,16
+00737638,TextureMatrix,13
+007376cc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00737b74,TextureConstants,16
+00737bb3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073801c,TextureConstants,16
+00738040,TextureMatrix,13
+007380c4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007385b4,TextureConstants,16
+007385f3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00738adb,TextureConstants,16
+00738aec,TextureMatrix,13
+00738b94,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00739134,TextureConstants,16
+00739183,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007396ec,TextureConstants,16
+007396fd,TextureMatrix,13
+00739790,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00739d7c,TextureConstants,16
+00739dcb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073a1bc,iMsgDeleteEntity,16
+0073a300,TextureConstants,16
+0073a311,TextureMatrix,13
+0073a3b8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073aa50,TextureConstants,16
+0073aaa3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073b100,TextureConstants,16
+0073b111,TextureMatrix,13
+0073b1a8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073b764,iMsgOnDeleteEntity,18
+0073b8a0,TextureConstants,16
+0073b8f3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073c041,TextureConstants,16
+0073c052,TextureMatrix,13
+0073c109,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073c9f1,TextureConstants,16
+0073ca60,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073d308,TextureConstants,16
+0073d319,TextureMatrix,13
+0073d3cd,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073dd10,TextureConstants,16
+0073dd80,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073e4ec,TextureConstants,16
+0073e510,TextureMatrix,13
+0073e5a4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073ea84,TextureConstants,16
+0073eac3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073ef54,TextureConstants,16
+0073ef78,TextureMatrix,13
+0073effc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073f514,TextureConstants,16
+0073f553,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0073fa63,TextureConstants,16
+0073fa74,TextureMatrix,13
+0073fb1c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007400e4,TextureConstants,16
+00740133,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007406d4,TextureConstants,16
+007406e5,TextureMatrix,13
+00740778,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00740d8c,TextureConstants,16
+00740ddb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00741338,TextureConstants,16
+00741349,TextureMatrix,13
+007413f0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00741ba0,TextureConstants,16
+00741bf3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00742278,TextureConstants,16
+00742289,TextureMatrix,13
+00742320,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00742b30,TextureConstants,16
+00742b83,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007432f9,TextureConstants,16
+0074330a,TextureMatrix,13
+007433c1,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00743db1,TextureConstants,16
+00743e20,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007446f0,TextureConstants,16
+00744701,TextureMatrix,13
+007447b5,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007451f0,TextureConstants,16
+00745260,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007459f4,TextureConstants,16
+00745a18,TextureMatrix,13
+00745aac,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00745f64,TextureConstants,16
+00745fa3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074640c,TextureConstants,16
+00746430,TextureMatrix,13
+007464b4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007469a4,TextureConstants,16
+007469e3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00746ecb,TextureConstants,16
+00746edc,TextureMatrix,13
+00746f84,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00747524,TextureConstants,16
+00747573,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00747aec,TextureConstants,16
+00747afd,TextureMatrix,13
+00747b90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074817c,TextureConstants,16
+007481cb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00748700,TextureConstants,16
+00748711,TextureMatrix,13
+007487b8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00748e50,TextureConstants,16
+00748ea3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00749500,TextureConstants,16
+00749511,TextureMatrix,13
+007495a8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00749ca0,TextureConstants,16
+00749cf3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074a441,TextureConstants,16
+0074a452,TextureMatrix,13
+0074a509,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074ac04,iMsgDoRenderDirectorsCamera,27
+0074ae09,TextureConstants,16
+0074ae78,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074b720,TextureConstants,16
+0074b731,TextureMatrix,13
+0074b7e5,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074c128,TextureConstants,16
+0074c198,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074c904,TextureConstants,16
+0074c928,TextureMatrix,13
+0074c9bc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074ce94,TextureConstants,16
+0074ced3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074d364,TextureConstants,16
+0074d388,TextureMatrix,13
+0074d40c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074d924,TextureConstants,16
+0074d963,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074de73,TextureConstants,16
+0074de84,TextureMatrix,13
+0074df2c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074e4f4,TextureConstants,16
+0074e543,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074ead4,TextureConstants,16
+0074eae5,TextureMatrix,13
+0074eb78,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074f18c,TextureConstants,16
+0074f1db,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074f728,TextureConstants,16
+0074f739,TextureMatrix,13
+0074f7e0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0074ff90,TextureConstants,16
+0074ffe3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00750668,TextureConstants,16
+00750679,TextureMatrix,13
+00750710,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00750f10,TextureConstants,16
+00750f63,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007516d9,TextureConstants,16
+007516ea,TextureMatrix,13
+007517a1,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00752191,TextureConstants,16
+00752200,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00752ad0,TextureConstants,16
+00752ae1,TextureMatrix,13
+00752b95,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007535d0,TextureConstants,16
+00753640,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00753dd4,TextureConstants,16
+00753df8,TextureMatrix,13
+00753e8c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075435c,TextureConstants,16
+0075439b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075482c,TextureConstants,16
+00754850,TextureMatrix,13
+007548d4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00754dec,TextureConstants,16
+00754e2b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075533b,TextureConstants,16
+0075534c,TextureMatrix,13
+007553f4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007559bc,TextureConstants,16
+00755a0b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00755f9c,TextureConstants,16
+00755fad,TextureMatrix,13
+00756040,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00756654,TextureConstants,16
+007566a3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00756bf0,TextureConstants,16
+00756c01,TextureMatrix,13
+00756ca8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00757368,TextureConstants,16
+007573bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00757a40,TextureConstants,16
+00757a51,TextureMatrix,13
+00757ae8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007581f8,TextureConstants,16
+0075824b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007589c1,TextureConstants,16
+007589d2,TextureMatrix,13
+00758a89,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00759399,TextureConstants,16
+00759408,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00759cd8,TextureConstants,16
+00759ce9,TextureMatrix,13
+00759d9d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075a6f8,TextureConstants,16
+0075a768,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075aefc,TextureConstants,16
+0075af20,TextureMatrix,13
+0075afb4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075b4ac,TextureConstants,16
+0075b4eb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075b9a4,TextureConstants,16
+0075b9c8,TextureMatrix,13
+0075ba4c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075bf8c,TextureConstants,16
+0075bfcb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075c503,TextureConstants,16
+0075c514,TextureMatrix,13
+0075c5bc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075cbac,TextureConstants,16
+0075cbfb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075d1b4,TextureConstants,16
+0075d1c5,TextureMatrix,13
+0075d258,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075d894,TextureConstants,16
+0075d8e3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075de58,TextureConstants,16
+0075de69,TextureMatrix,13
+0075df10,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075e6e8,TextureConstants,16
+0075e73b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075ede8,TextureConstants,16
+0075edf9,TextureMatrix,13
+0075ee90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075f6b8,TextureConstants,16
+0075f70b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0075fea9,TextureConstants,16
+0075feba,TextureMatrix,13
+0075ff71,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00760989,TextureConstants,16
+007609f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007612f0,TextureConstants,16
+00761301,TextureMatrix,13
+007613b5,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00761e18,TextureConstants,16
+00761e88,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00762658,TextureConstants,16
+0076267c,TextureMatrix,13
+00762724,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00762ea0,TextureConstants,16
+00762f03,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00763648,TextureConstants,16
+0076366c,TextureMatrix,13
+00763704,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00763ed0,TextureConstants,16
+00763f33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076470f,TextureConstants,16
+00764720,TextureMatrix,13
+007647dc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007650b0,TextureConstants,16
+00765113,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007659a8,TextureConstants,16
+007659b9,TextureMatrix,13
+00765a60,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00766380,TextureConstants,16
+007663e3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00766c20,TextureConstants,16
+00766c31,TextureMatrix,13
+00766cd8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00767608,TextureConstants,16
+0076765b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00767f50,TextureConstants,16
+00767f61,TextureMatrix,13
+00767ff8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00768978,TextureConstants,16
+007689cb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007693b1,TextureConstants,16
+007693c2,TextureMatrix,13
+00769479,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076a051,TextureConstants,16
+0076a0c0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076ac58,TextureConstants,16
+0076ac69,TextureMatrix,13
+0076ad1d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076b940,TextureConstants,16
+0076b9b0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076c420,TextureConstants,16
+0076c444,TextureMatrix,13
+0076c4ec,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076cc90,TextureConstants,16
+0076ccf3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076d460,TextureConstants,16
+0076d484,TextureMatrix,13
+0076d51c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076dd10,TextureConstants,16
+0076dd73,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076e55f,TextureConstants,16
+0076e570,TextureMatrix,13
+0076e62c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076ef28,TextureConstants,16
+0076ef8b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0076f848,TextureConstants,16
+0076f859,TextureMatrix,13
+0076f900,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00770248,TextureConstants,16
+007702ab,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00770b10,TextureConstants,16
+00770b21,TextureMatrix,13
+00770bc8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00771608,TextureConstants,16
+0077165b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00771f78,TextureConstants,16
+00771f89,TextureMatrix,13
+00772020,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00772ab8,TextureConstants,16
+00772b0b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00773519,TextureConstants,16
+0077352a,TextureMatrix,13
+007735e1,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007742b9,TextureConstants,16
+00774328,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00774ee8,TextureConstants,16
+00774ef9,TextureMatrix,13
+00774fad,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00775cd8,TextureConstants,16
+00775d48,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007767e0,TextureConstants,16
+00776804,TextureMatrix,13
+007768ac,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00777050,TextureConstants,16
+007770b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00777820,TextureConstants,16
+00777844,TextureMatrix,13
+007778dc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007780d0,TextureConstants,16
+00778133,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077891f,TextureConstants,16
+00778930,TextureMatrix,13
+007789ec,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007792e8,TextureConstants,16
+0077934b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00779c08,TextureConstants,16
+00779c19,TextureMatrix,13
+00779cc0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077a608,TextureConstants,16
+0077a66b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077aed0,TextureConstants,16
+0077aee1,TextureMatrix,13
+0077af88,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077b8e0,TextureConstants,16
+0077b933,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077c250,TextureConstants,16
+0077c261,TextureMatrix,13
+0077c2f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077cca0,TextureConstants,16
+0077ccf3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077d701,TextureConstants,16
+0077d712,TextureMatrix,13
+0077d7c9,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077e3c9,TextureConstants,16
+0077e438,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077eff8,TextureConstants,16
+0077f009,TextureMatrix,13
+0077f0bd,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0077fd08,TextureConstants,16
+0077fd78,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00780810,TextureConstants,16
+00780834,TextureMatrix,13
+007808dc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007810a8,TextureConstants,16
+0078110b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007818a0,TextureConstants,16
+007818c4,TextureMatrix,13
+0078195c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00782178,TextureConstants,16
+007821db,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007829ef,TextureConstants,16
+00782a00,TextureMatrix,13
+00782abc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007833e0,TextureConstants,16
+00783443,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00783d28,TextureConstants,16
+00783d39,TextureMatrix,13
+00783de0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00784750,TextureConstants,16
+007847b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00785040,TextureConstants,16
+00785051,TextureMatrix,13
+007850f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00785b68,TextureConstants,16
+00785bbb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00786500,TextureConstants,16
+00786511,TextureMatrix,13
+007865a8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00787068,TextureConstants,16
+007870bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00787af1,TextureConstants,16
+00787b02,TextureMatrix,13
+00787bb9,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007888c1,TextureConstants,16
+00788930,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00789518,TextureConstants,16
+00789529,TextureMatrix,13
+007895dd,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078a330,TextureConstants,16
+0078a3a0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078ae60,TextureConstants,16
+0078ae84,TextureMatrix,13
+0078af2c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078b6d0,TextureConstants,16
+0078b733,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078bea0,TextureConstants,16
+0078bec4,TextureMatrix,13
+0078bf5c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078c750,TextureConstants,16
+0078c7b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078cf9f,TextureConstants,16
+0078cfb0,TextureMatrix,13
+0078d06c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078d968,TextureConstants,16
+0078d9cb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078e288,TextureConstants,16
+0078e299,TextureMatrix,13
+0078e340,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078ec88,TextureConstants,16
+0078eceb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078f550,TextureConstants,16
+0078f561,TextureMatrix,13
+0078f608,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0078ff60,TextureConstants,16
+0078ffb3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007908d0,TextureConstants,16
+007908e1,TextureMatrix,13
+00790978,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00791320,TextureConstants,16
+00791373,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00791d81,TextureConstants,16
+00791d92,TextureMatrix,13
+00791e49,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00792a49,TextureConstants,16
+00792ab8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00793678,TextureConstants,16
+00793689,TextureMatrix,13
+0079373d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00794388,TextureConstants,16
+007943f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00794e90,TextureConstants,16
+00794eb4,TextureMatrix,13
+00794f5c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00795728,TextureConstants,16
+0079578b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00795f20,TextureConstants,16
+00795f44,TextureMatrix,13
+00795fdc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007967f8,TextureConstants,16
+0079685b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079706f,TextureConstants,16
+00797080,TextureMatrix,13
+0079713c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00797a60,TextureConstants,16
+00797ac3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007983a8,TextureConstants,16
+007983b9,TextureMatrix,13
+00798460,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00798dd0,TextureConstants,16
+00798e33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007996c0,TextureConstants,16
+007996d1,TextureMatrix,13
+00799778,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079a1e8,TextureConstants,16
+0079a23b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079ab80,TextureConstants,16
+0079ab91,TextureMatrix,13
+0079ac28,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079b6e8,TextureConstants,16
+0079b73b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079c171,TextureConstants,16
+0079c182,TextureMatrix,13
+0079c239,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079cf41,TextureConstants,16
+0079cfb0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079db98,TextureConstants,16
+0079dba9,TextureMatrix,13
+0079dc5d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079e9b0,TextureConstants,16
+0079ea20,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079f4e0,TextureConstants,16
+0079f504,TextureMatrix,13
+0079f5ac,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0079fd78,TextureConstants,16
+0079fddb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a0570,TextureConstants,16
+007a0594,TextureMatrix,13
+007a062c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a0e48,TextureConstants,16
+007a0eab,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a16bf,TextureConstants,16
+007a16d0,TextureMatrix,13
+007a178c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a20b0,TextureConstants,16
+007a2113,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a29f8,TextureConstants,16
+007a2a09,TextureMatrix,13
+007a2ab0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a3420,TextureConstants,16
+007a3483,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a3d10,TextureConstants,16
+007a3d21,TextureMatrix,13
+007a3dc8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a4748,TextureConstants,16
+007a479b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a50e0,TextureConstants,16
+007a50f1,TextureMatrix,13
+007a5188,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a5b58,TextureConstants,16
+007a5bab,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a65e1,TextureConstants,16
+007a65f2,TextureMatrix,13
+007a66a9,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a72d1,TextureConstants,16
+007a7340,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a7f28,TextureConstants,16
+007a7f39,TextureMatrix,13
+007a7fed,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a8c60,TextureConstants,16
+007a8cd0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007a9790,TextureConstants,16
+007a97b4,TextureMatrix,13
+007a985c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007aa050,TextureConstants,16
+007aa0b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007aa870,TextureConstants,16
+007aa894,TextureMatrix,13
+007aa92c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ab170,TextureConstants,16
+007ab1d3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007aba0f,TextureConstants,16
+007aba20,TextureMatrix,13
+007abadc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ac428,TextureConstants,16
+007ac48b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007acd98,TextureConstants,16
+007acda9,TextureMatrix,13
+007ace50,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ad7e8,TextureConstants,16
+007ad84b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ae100,TextureConstants,16
+007ae111,TextureMatrix,13
+007ae1b8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007aec50,TextureConstants,16
+007aeca3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007af610,TextureConstants,16
+007af621,TextureMatrix,13
+007af6b8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b01a0,TextureConstants,16
+007b01f3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b0c51,TextureConstants,16
+007b0c62,TextureMatrix,13
+007b0d19,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b1a49,TextureConstants,16
+007b1ab8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b26c8,TextureConstants,16
+007b26d9,TextureMatrix,13
+007b278d,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b3508,TextureConstants,16
+007b3578,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b401c,TextureConstants,16
+007b4040,TextureMatrix,13
+007b40d4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b433c,TextureConstants,16
+007b437b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b4594,TextureConstants,16
+007b45b8,TextureMatrix,13
+007b463c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b48f4,TextureConstants,16
+007b4933,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b4bcb,TextureConstants,16
+007b4bdc,TextureMatrix,13
+007b4c84,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b4fec,TextureConstants,16
+007b503b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b5354,TextureConstants,16
+007b5365,TextureMatrix,13
+007b53f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b57ac,TextureConstants,16
+007b57fb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b5abc,TextureConstants,16
+007b5acd,TextureMatrix,13
+007b5b60,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b5ed4,TextureConstants,16
+007b5f00,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b6194,TextureConstants,16
+007b61a5,TextureMatrix,13
+007b6228,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b65e4,TextureConstants,16
+007b6610,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b6a2c,TextureConstants,16
+007b6a3d,TextureMatrix,13
+007b6b13,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b72bc,TextureConstants,16
+007b734e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b7a13,TextureConstants,16
+007b7a24,TextureMatrix,13
+007b7afb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b82f3,TextureConstants,16
+007b8386,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b88c4,TextureConstants,16
+007b88e8,TextureMatrix,13
+007b897c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b8c0c,TextureConstants,16
+007b8c4b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b8e8c,TextureConstants,16
+007b8eb0,TextureMatrix,13
+007b8f34,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b9214,TextureConstants,16
+007b9253,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b9513,TextureConstants,16
+007b9524,TextureMatrix,13
+007b95cc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b995c,TextureConstants,16
+007b99ab,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007b9cec,TextureConstants,16
+007b9cfd,TextureMatrix,13
+007b9d90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ba16c,TextureConstants,16
+007ba1bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ba4a4,TextureConstants,16
+007ba4b5,TextureMatrix,13
+007ba548,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ba8e4,TextureConstants,16
+007ba910,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007babcc,TextureConstants,16
+007babdd,TextureMatrix,13
+007bac60,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bb044,TextureConstants,16
+007bb070,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bb47c,TextureConstants,16
+007bb48d,TextureMatrix,13
+007bb563,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bbd34,TextureConstants,16
+007bbdc6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bc4b3,TextureConstants,16
+007bc4c4,TextureMatrix,13
+007bc59b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bcdbb,TextureConstants,16
+007bce4e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bd3b4,TextureConstants,16
+007bd3d8,TextureMatrix,13
+007bd46c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bd6fc,TextureConstants,16
+007bd73b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bd97c,TextureConstants,16
+007bd9a0,TextureMatrix,13
+007bda24,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bdd04,TextureConstants,16
+007bdd43,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007be003,TextureConstants,16
+007be014,TextureMatrix,13
+007be0bc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007be44c,TextureConstants,16
+007be49b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007be7dc,TextureConstants,16
+007be7ed,TextureMatrix,13
+007be880,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bec5c,TextureConstants,16
+007becab,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bef94,TextureConstants,16
+007befa5,TextureMatrix,13
+007bf038,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bf3d4,TextureConstants,16
+007bf400,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bf6bc,TextureConstants,16
+007bf6cd,TextureMatrix,13
+007bf750,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bfb34,TextureConstants,16
+007bfb60,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007bff84,TextureConstants,16
+007bff95,TextureMatrix,13
+007c006b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c083c,TextureConstants,16
+007c08ce,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c0fbb,TextureConstants,16
+007c0fcc,TextureMatrix,13
+007c10a3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c18d3,TextureConstants,16
+007c1966,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c1ecc,TextureConstants,16
+007c1ef0,TextureMatrix,13
+007c1f84,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c223c,TextureConstants,16
+007c227b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c24e4,TextureConstants,16
+007c2508,TextureMatrix,13
+007c258c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c28a4,TextureConstants,16
+007c28e3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c2bcb,TextureConstants,16
+007c2bdc,TextureMatrix,13
+007c2c84,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c303c,TextureConstants,16
+007c308b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c33f4,TextureConstants,16
+007c3405,TextureMatrix,13
+007c3498,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c389c,TextureConstants,16
+007c38eb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c3bfc,TextureConstants,16
+007c3c0d,TextureMatrix,13
+007c3ca0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c4064,TextureConstants,16
+007c4090,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c4374,TextureConstants,16
+007c4385,TextureMatrix,13
+007c4408,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c4814,TextureConstants,16
+007c4840,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c4c74,TextureConstants,16
+007c4c85,TextureMatrix,13
+007c4d5b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c5554,TextureConstants,16
+007c55e6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c5cfb,TextureConstants,16
+007c5d0c,TextureMatrix,13
+007c5de3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c662b,TextureConstants,16
+007c66be,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c6c4c,TextureConstants,16
+007c6c70,TextureMatrix,13
+007c6d04,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c6f94,TextureConstants,16
+007c6fd3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c7214,TextureConstants,16
+007c7238,TextureMatrix,13
+007c72bc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c759c,TextureConstants,16
+007c75db,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c789b,TextureConstants,16
+007c78ac,TextureMatrix,13
+007c7954,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c7ce4,TextureConstants,16
+007c7d33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c8074,TextureConstants,16
+007c8085,TextureMatrix,13
+007c8118,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c84f4,TextureConstants,16
+007c8543,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c882c,TextureConstants,16
+007c883d,TextureMatrix,13
+007c88d0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c8c6c,TextureConstants,16
+007c8c98,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c8f54,TextureConstants,16
+007c8f65,TextureMatrix,13
+007c8fe8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c93cc,TextureConstants,16
+007c93f8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007c9804,TextureConstants,16
+007c9815,TextureMatrix,13
+007c98eb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ca0bc,TextureConstants,16
+007ca14e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ca83b,TextureConstants,16
+007ca84c,TextureMatrix,13
+007ca923,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cb143,TextureConstants,16
+007cb1d6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cb73c,TextureConstants,16
+007cb760,TextureMatrix,13
+007cb7f4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cbaac,TextureConstants,16
+007cbaeb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cbd54,TextureConstants,16
+007cbd78,TextureMatrix,13
+007cbdfc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cc104,TextureConstants,16
+007cc143,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cc42b,TextureConstants,16
+007cc43c,TextureMatrix,13
+007cc4e4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cc89c,TextureConstants,16
+007cc8eb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ccc54,TextureConstants,16
+007ccc65,TextureMatrix,13
+007cccf8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cd0fc,TextureConstants,16
+007cd14b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cd45c,TextureConstants,16
+007cd46d,TextureMatrix,13
+007cd500,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cd8c4,TextureConstants,16
+007cd8f0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cdbd4,TextureConstants,16
+007cdbe5,TextureMatrix,13
+007cdc68,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ce074,TextureConstants,16
+007ce0a0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ce4d4,TextureConstants,16
+007ce4e5,TextureMatrix,13
+007ce5bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cedb4,TextureConstants,16
+007cee46,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cf55b,TextureConstants,16
+007cf56c,TextureMatrix,13
+007cf643,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007cfe8b,TextureConstants,16
+007cff1e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d04ac,TextureConstants,16
+007d04d0,TextureMatrix,13
+007d0564,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d081c,TextureConstants,16
+007d085b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d0ac4,TextureConstants,16
+007d0ae8,TextureMatrix,13
+007d0b6c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d0e74,TextureConstants,16
+007d0eb3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d119b,TextureConstants,16
+007d11ac,TextureMatrix,13
+007d1254,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d160c,TextureConstants,16
+007d165b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d19c4,TextureConstants,16
+007d19d5,TextureMatrix,13
+007d1a68,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d1e6c,TextureConstants,16
+007d1ebb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d21cc,TextureConstants,16
+007d21dd,TextureMatrix,13
+007d2270,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d2634,TextureConstants,16
+007d2660,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d2944,TextureConstants,16
+007d2955,TextureMatrix,13
+007d29d8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d2de4,TextureConstants,16
+007d2e10,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d3244,TextureConstants,16
+007d3255,TextureMatrix,13
+007d332b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d3b24,TextureConstants,16
+007d3bb6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d42cb,TextureConstants,16
+007d42dc,TextureMatrix,13
+007d43b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d4bfb,TextureConstants,16
+007d4c8e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d521c,TextureConstants,16
+007d5240,TextureMatrix,13
+007d52d4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d55b4,TextureConstants,16
+007d55f3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d5884,TextureConstants,16
+007d58a8,TextureMatrix,13
+007d592c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d5c5c,TextureConstants,16
+007d5c9b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d5fab,TextureConstants,16
+007d5fbc,TextureMatrix,13
+007d6064,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d6444,TextureConstants,16
+007d6493,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d6824,TextureConstants,16
+007d6835,TextureMatrix,13
+007d68c8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d6cf4,TextureConstants,16
+007d6d43,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d707c,TextureConstants,16
+007d708d,TextureMatrix,13
+007d7120,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d750c,TextureConstants,16
+007d7538,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d7844,TextureConstants,16
+007d7855,TextureMatrix,13
+007d78d8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d7d0c,TextureConstants,16
+007d7d38,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d8194,TextureConstants,16
+007d81a5,TextureMatrix,13
+007d827b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d8a9c,TextureConstants,16
+007d8b2e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d926b,TextureConstants,16
+007d927c,TextureMatrix,13
+007d9353,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007d9bc3,TextureConstants,16
+007d9c56,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007da20c,TextureConstants,16
+007da230,TextureMatrix,13
+007da2c4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007da574,TextureConstants,16
+007da5b3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007da814,TextureConstants,16
+007da838,TextureMatrix,13
+007da8bc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dabbc,TextureConstants,16
+007dabfb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007daedb,TextureConstants,16
+007daeec,TextureMatrix,13
+007daf94,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007db344,TextureConstants,16
+007db393,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007db6f4,TextureConstants,16
+007db705,TextureMatrix,13
+007db798,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dbb94,TextureConstants,16
+007dbbe3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dbeec,TextureConstants,16
+007dbefd,TextureMatrix,13
+007dbf90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dc34c,TextureConstants,16
+007dc378,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dc654,TextureConstants,16
+007dc665,TextureMatrix,13
+007dc6e8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dcaec,TextureConstants,16
+007dcb18,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dcf44,TextureConstants,16
+007dcf55,TextureMatrix,13
+007dd02b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dd81c,TextureConstants,16
+007dd8ae,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ddfbb,TextureConstants,16
+007ddfcc,TextureMatrix,13
+007de0a3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007de8e3,TextureConstants,16
+007de976,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007deefc,TextureConstants,16
+007def20,TextureMatrix,13
+007defb4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007df28c,TextureConstants,16
+007df2cb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007df554,TextureConstants,16
+007df578,TextureMatrix,13
+007df5fc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007df924,TextureConstants,16
+007df963,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007dfc6b,TextureConstants,16
+007dfc7c,TextureMatrix,13
+007dfd24,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e00fc,TextureConstants,16
+007e014b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e04d4,TextureConstants,16
+007e04e5,TextureMatrix,13
+007e0578,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e099c,TextureConstants,16
+007e09eb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e0d1c,TextureConstants,16
+007e0d2d,TextureMatrix,13
+007e0dc0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e11a4,TextureConstants,16
+007e11d0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e14d4,TextureConstants,16
+007e14e5,TextureMatrix,13
+007e1568,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e1994,TextureConstants,16
+007e19c0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e1e14,TextureConstants,16
+007e1e25,TextureMatrix,13
+007e1efb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e2714,TextureConstants,16
+007e27a6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e2edb,TextureConstants,16
+007e2eec,TextureMatrix,13
+007e2fc3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e382b,TextureConstants,16
+007e38be,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e3e6c,TextureConstants,16
+007e3e90,TextureMatrix,13
+007e3f24,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e41fc,TextureConstants,16
+007e423b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e44c4,TextureConstants,16
+007e44e8,TextureMatrix,13
+007e456c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e4894,TextureConstants,16
+007e48d3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e4bdb,TextureConstants,16
+007e4bec,TextureMatrix,13
+007e4c94,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e506c,TextureConstants,16
+007e50bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e5444,TextureConstants,16
+007e5455,TextureMatrix,13
+007e54e8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e590c,TextureConstants,16
+007e595b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e5c8c,TextureConstants,16
+007e5c9d,TextureMatrix,13
+007e5d30,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e6114,TextureConstants,16
+007e6140,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e6444,TextureConstants,16
+007e6455,TextureMatrix,13
+007e64d8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e6904,TextureConstants,16
+007e6930,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e6d84,TextureConstants,16
+007e6d95,TextureMatrix,13
+007e6e6b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e7684,TextureConstants,16
+007e7716,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e7e4b,TextureConstants,16
+007e7e5c,TextureMatrix,13
+007e7f33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e879b,TextureConstants,16
+007e882e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e8ddc,TextureConstants,16
+007e8e00,TextureMatrix,13
+007e8e94,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e9194,TextureConstants,16
+007e91d3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e9484,TextureConstants,16
+007e94a8,TextureMatrix,13
+007e952c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e987c,TextureConstants,16
+007e98bb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007e9beb,TextureConstants,16
+007e9bfc,TextureMatrix,13
+007e9ca4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ea0a4,TextureConstants,16
+007ea0f3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ea4a4,TextureConstants,16
+007ea4b5,TextureMatrix,13
+007ea548,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ea994,TextureConstants,16
+007ea9e3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ead3c,TextureConstants,16
+007ead4d,TextureMatrix,13
+007eade0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007eb1ec,TextureConstants,16
+007eb218,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007eb544,TextureConstants,16
+007eb555,TextureMatrix,13
+007eb5d8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007eba2c,TextureConstants,16
+007eba58,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ebed4,TextureConstants,16
+007ebee5,TextureMatrix,13
+007ebfbb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ec7fc,TextureConstants,16
+007ec88e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ecfeb,TextureConstants,16
+007ecffc,TextureMatrix,13
+007ed0d3,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ed963,TextureConstants,16
+007ed9f6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007edfcc,TextureConstants,16
+007edff0,TextureMatrix,13
+007ee084,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ee35c,TextureConstants,16
+007ee39b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ee624,TextureConstants,16
+007ee648,TextureMatrix,13
+007ee6cc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ee9f4,TextureConstants,16
+007eea33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007eed3b,TextureConstants,16
+007eed4c,TextureMatrix,13
+007eedf4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ef1cc,TextureConstants,16
+007ef21b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ef5a4,TextureConstants,16
+007ef5b5,TextureMatrix,13
+007ef648,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007efa6c,TextureConstants,16
+007efabb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007efdec,TextureConstants,16
+007efdfd,TextureMatrix,13
+007efe90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f0274,TextureConstants,16
+007f02a0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f05a4,TextureConstants,16
+007f05b5,TextureMatrix,13
+007f0638,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f0a64,TextureConstants,16
+007f0a90,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f0ee4,TextureConstants,16
+007f0ef5,TextureMatrix,13
+007f0fcb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f17e4,TextureConstants,16
+007f1876,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f1fab,TextureConstants,16
+007f1fbc,TextureMatrix,13
+007f2093,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f28fb,TextureConstants,16
+007f298e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f2f3c,TextureConstants,16
+007f2f60,TextureMatrix,13
+007f2ff4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f32f4,TextureConstants,16
+007f3333,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f35e4,TextureConstants,16
+007f3608,TextureMatrix,13
+007f368c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f39dc,TextureConstants,16
+007f3a1b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f3d4b,TextureConstants,16
+007f3d5c,TextureMatrix,13
+007f3e04,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f4204,TextureConstants,16
+007f4253,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f4604,TextureConstants,16
+007f4615,TextureMatrix,13
+007f46a8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f4af4,TextureConstants,16
+007f4b43,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f4e9c,TextureConstants,16
+007f4ead,TextureMatrix,13
+007f4f40,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f534c,TextureConstants,16
+007f5378,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f56a4,TextureConstants,16
+007f56b5,TextureMatrix,13
+007f5738,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f5b8c,TextureConstants,16
+007f5bb8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f6034,TextureConstants,16
+007f6045,TextureMatrix,13
+007f611b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f695c,TextureConstants,16
+007f69ee,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f714b,TextureConstants,16
+007f715c,TextureMatrix,13
+007f7233,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f7ac3,TextureConstants,16
+007f7b56,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f812c,TextureConstants,16
+007f8150,TextureMatrix,13
+007f81e4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f84e4,TextureConstants,16
+007f8523,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f87d4,TextureConstants,16
+007f87f8,TextureMatrix,13
+007f887c,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f8bcc,TextureConstants,16
+007f8c0b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f8f3b,TextureConstants,16
+007f8f4c,TextureMatrix,13
+007f8ff4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f93f4,TextureConstants,16
+007f9443,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f97f4,TextureConstants,16
+007f9805,TextureMatrix,13
+007f9898,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007f9ce4,TextureConstants,16
+007f9d33,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fa08c,TextureConstants,16
+007fa09d,TextureMatrix,13
+007fa130,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fa53c,TextureConstants,16
+007fa568,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fa894,TextureConstants,16
+007fa8a5,TextureMatrix,13
+007fa928,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fad7c,TextureConstants,16
+007fada8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fb224,TextureConstants,16
+007fb235,TextureMatrix,13
+007fb30b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fbb4c,TextureConstants,16
+007fbbde,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fc33b,TextureConstants,16
+007fc34c,TextureMatrix,13
+007fc423,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fccb3,TextureConstants,16
+007fcd46,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fd31c,TextureConstants,16
+007fd340,TextureMatrix,13
+007fd3d4,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fd6fc,TextureConstants,16
+007fd73b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fda14,TextureConstants,16
+007fda38,TextureMatrix,13
+007fdabc,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fde34,TextureConstants,16
+007fde73,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fe1cb,TextureConstants,16
+007fe1dc,TextureMatrix,13
+007fe284,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fe6ac,TextureConstants,16
+007fe6fb,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fead4,TextureConstants,16
+007feae5,TextureMatrix,13
+007feb78,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007fefec,TextureConstants,16
+007ff03b,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ff3bc,TextureConstants,16
+007ff3cd,TextureMatrix,13
+007ff460,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ff894,TextureConstants,16
+007ff8c0,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+007ffc14,TextureConstants,16
+007ffc25,TextureMatrix,13
+007ffca8,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00800124,TextureConstants,16
+00800150,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+008005f4,TextureConstants,16
+00800605,TextureMatrix,13
+008006db,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00800f44,TextureConstants,16
+00800fd6,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0080175b,TextureConstants,16
+0080176c,TextureMatrix,13
+00801843,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+008020fb,TextureConstants,16
+0080218e,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+0080273f,Microsoft (R) D3DX9 Shader Compiler 9.11.519.0000,49
+00802834,iMsgDeleteEventHandler,22
+0080c6cc,SET_CAMERA_SPLINE,17
+0080c6f4,SET_CAMERA_POSITION_WORLD,25
+0080c748,FULL_CAMERA_CUT,15
+0080c7b0,SET_CAMERA_POSITION,19
+0080c7e4,AUDIO_TRIGGER_AMBIENCE,22
+0080d53c,SpellUnlock_StupefyUpgrade4,27
+0080d558,SpellUnlock_StupefyUpgrade3,27
+0080d574,SpellUnlock_StupefyUpgrade2,27
+0080d590,SpellUnlock_StupefyUpgrade1,27
+0080d5c4,SpellUnlock_ChargedStupefy,26
+0080d5e0,SpellUnlock_Petrificus,22
+0080d5f8,SpellUnlock_LeviCorpus,22
+0080d610,SpellUnlock_Stupefy,19
+0080d624,SpellUnlock_Expelliarmus,24
+0080d640,SpellUnlock_Protego,19
+0080d654,SpellUnlock_Lumos,17
+0080d668,SpellUnlock_Reparo,18
+0080d67c,SpellUnlock_Incendio,20
+0080d694,SpellUnlock_LeviosaThrow,24
+0080d6b0,SpellUnlock_Leviosa,19
+0080d6c4,SpellUnlock_Accio,17
+0080d6d8,SpellUnlock_Depulso,19
+0080f760,Hogwarts3_ChaseOfTheHalfBloodPrince_BellatrixCombatAnimationLoad,64
+0080fa6c,Hogwarts3_ChaseOfTheHalfBloodPrince_FenrirCombatAnimationLoad,61
+00810fc4,Hogwarts2_PensieveSlughornsMissingMemory_Limit,46
+00810ff4,Hogwarts2_PensieveSlughornsMissingMemory_TeleportFromOffice,59
+00811030,Hogwarts2_PensieveSlughornsMissingMemory_Horcruxes,50
+00811064,Hogwarts2_PensieveSlughornsMissingMemory_View,45
+00811094,Hogwarts2_PensieveSlughornsMissingMemory_DeliveringTheMemory,60
+008110d4,Hogwarts2_PensieveSlughornsMissingMemory_TeleportToOffice,57
+00811110,Hogwarts2_PensieveSlughornsMissingMemory_DumbledoreConversationAnimationLoad,76
+00811160,Hogwarts2_PensieveSlughornsMissingMemory_PreloadOffice,54
+00811198,Hogwarts2_PensieveSlughornsMissingMemory_CombatSuccess,54
+008111d0,Hogwarts2_PensieveSlughornsMissingMemory_CombatFailure,54
+00811208,Hogwarts2_PensieveSlughornsMissingMemory_Combat,47
+00811238,Hogwarts2_PensieveSlughornsMissingMemory_Ambush,47
+00811268,Hogwarts2_PensieveSlughornsMissingMemory_CombatEventSlotLoad,60
+008112a8,Hogwarts2_PensieveSlughornsMissingMemory_CombatCarrouselClamp,61
+008112e8,Hogwarts2_PensieveSlughornsMissingMemory_AmbushCheckpointTrigger,64
+0081132c,Hogwarts2_PensieveSlughornsMissingMemory_Prompt,47
+0081135c,Hogwarts2_PensieveSlughornsMissingMemory_AragogsGraveActivator,62
+0081139c,Hogwarts2_PensieveSlughornsMissingMemory_DumbledoreActivator,60
+008113dc,Hogwarts2_PensieveSlughornsMissingMemory_CrabbeActivator,56
+00811418,Hogwarts2_PensieveSlughornsMissingMemory_GoyleActivator,55
+00811450,Hogwarts2_PensieveSlughornsMissingMemory_SlughornActivator,58
+0081148c,Hogwarts2_PensieveSlughornsMissingMemory,40
+008114b8,Hogwarts2_GettingSlughornsMemory_HeadLoadSlughorn,49
+008114ec,Hogwarts2_GettingSlughornsMemory_Limit,38
+00811514,Hogwarts2_GettingSlughornsMemory_GettingTheMemory,49
+00811548,Hogwarts2_GettingSlughornsMemory_EulogyToAragog,47
+00811578,Hogwarts2_GettingSlughornsMemory_TeleportToHagrids,50
+008115ac,Hogwarts2_GettingSlughornsMemory_PreloadHagrids,47
+008115dc,Hogwarts2_GettingSlughornsMemory_BrewSuccess,44
+0081160c,Hogwarts2_GettingSlughornsMemory_BrewFertiliser,47
+0081163c,Hogwarts2_GettingSlughornsMemory_GreetSlughorn,46
+0081166c,Hogwarts2_GettingSlughornsMemory_HebologyArrivalTrigger,55
+008116a4,Hogwarts2_GettingSlughornsMemory_LuckyMusicAfterFight,53
+008116dc,Hogwarts2_GettingSlughornsMemory_DuelSuccess,44
+0081170c,Hogwarts2_GettingSlughornsMemory_DuelCrabbe,43
+00811738,Hogwarts2_GettingSlughornsMemory_TagTeam,40
+00811764,Hogwarts2_GettingSlughornsMemory_DuelGoyle,42
+00811790,Hogwarts2_GettingSlughornsMemory_AmbushConversation,51
+008117c4,Hogwarts2_GettingSlughornsMemory_FSBloomEffect_DuelToSlughorn,61
+00811804,Hogwarts2_GettingSlughornsMemory_VignetteControl_AmbushToDuel,61
+00811844,Hogwarts2_GettingSlughornsMemory_AmbushTrigger,46
+00811874,Hogwarts2_GettingSlughornsMemory_FSBloomEffect_PromptToAmbush,61
+008118b8,Hogwarts2_GettingSlughornsMemory_VignetteControl_PromptToAmbush,63
+008118f8,Hogwarts2_GettingSlughornsMemory_Ride_Two,41
+00811924,Hogwarts2_GettingSlughornsMemory_Ride_One,41
+00811950,Hogwarts2_GettingSlughornsMemory_FelixControl,45
+00811980,Hogwarts2_GettingSlughornsMemory_CarryFelix,43
+008119ac,Hogwarts2_GettingSlughornsMemory_HarryGetsLucky,47
+008119dc,Hogwarts2_GettingSlughornsMemory_AragogsGraveActivator,54
+00811a14,Hogwarts2_GettingSlughornsMemory_StairCase_Swing_G31,52
+00811a4c,Hogwarts2_GettingSlughornsMemory_StairCase_Swing_D31,52
+00811a84,Hogwarts2_GettingSlughornsMemory_StairCase_Trigger_G31,54
+00811abc,Hogwarts2_GettingSlughornsMemory_StairCase_Trigger_D31,54
+00811af4,Hogwarts2_GettingSlughornsMemory_StairCase_PreLock_I31,54
+00811b2c,Hogwarts2_GettingSlughornsMemory_StairCase_PreLock_G31,54
+00811b64,Hogwarts2_GettingSlughornsMemory_StairCase_PreLock_F31,54
+00811b9c,Hogwarts2_GettingSlughornsMemory_StairCase_PreLock_D31,54
+00811bd4,Hogwarts2_GettingSlughornsMemory_HagridActivator,48
+00811c08,Hogwarts2_GettingSlughornsMemory_SlughornActivator2,51
+00811c3c,Hogwarts2_GettingSlughornsMemory_SlughornActivator1,51
+00811c70,Hogwarts2_GettingSlughornsMemory_GoyleActivator,47
+00811ca0,Hogwarts2_GettingSlughornsMemory_CrabbeActivator,48
+00811cd4,Hogwarts2_GettingSlughornsMemory_HermioneActivator,50
+00811d08,Hogwarts2_GettingSlughornsMemory_RonActivator,45
+00811d38,Hogwarts2_GettingSlughornsMemory,32
+00814b28,Hogwarts2_PensieveSlughornsBrokenMemory_Limit,45
+00814b58,Hogwarts2_PensieveSlughornsBrokenMemory_TeleportFromOffice,58
+00814b94,Hogwarts2_PensieveSlughornsBrokenMemory_AfterTheMemory,54
+00814bcc,Hogwarts2_PensieveSlughornsBrokenMemory_MemoryView,50
+00814c00,Hogwarts2_PensieveSlughornsBrokenMemory_DumbledoreGreeting,58
+00814c3c,Hogwarts2_PensieveSlughornsBrokenMemory_ResetGargoyle,53
+00814c74,Hogwarts2_PensieveSlughornsBrokenMemory_TeleportToOffice,56
+00814cb0,Hogwarts2_PensieveSlughornsBrokenMemory_DumbledoreConversationAnimationLoad,75
+00814cfc,Hogwarts2_PensieveSlughornsBrokenMemory_GiveGobstone,52
+00814d34,Hogwarts2_PensieveSlughornsBrokenMemory_PreloadOffice,53
+00814d6c,Hogwarts2_PensieveSlughornsBrokenMemory_GiveGobstoneTrigger,59
+00814da8,Hogwarts2_PensieveSlughornsBrokenMemory_GobstonesSuccess,56
+00814de4,Hogwarts2_PensieveSlughornsBrokenMemory_GobstonesFailure,56
+00814e20,Hogwarts2_PensieveSlughornsBrokenMemory_NoisyGobstonesCombat,60
+00814e60,Hogwarts2_PensieveSlughornsBrokenMemory_ChallengeTheSlytherin,61
+00814ea0,Hogwarts2_PensieveSlughornsBrokenMemory_ChallengeTheSlytherin_Trigger,69
+00814ee8,Hogwarts2_PensieveSlughornsBrokenMemory_GobstonesGreifPlead,59
+00814f24,Hogwarts2_PensieveSlughornsBrokenMemory_TurnOffStudents,55
+00814f5c,Hogwarts2_PensieveSlughornsBrokenMemory_GobstonesGreif,54
+00814f94,Hogwarts2_PensieveSlughornsBrokenMemory_GobstonesGreifTrigger,61
+00814fd4,Hogwarts2_PensieveSlughornsBrokenMemory_HermioneAdvice,54
+0081500c,Hogwarts2_PensieveSlughornsBrokenMemory_Prompt,46
+0081503c,Hogwarts2_PensieveSlughornsBrokenMemory_DumbledoreActivator,59
+00815078,Hogwarts2_PensieveSlughornsBrokenMemory_SlytherinBoyBarrierActivator,68
+008150c0,Hogwarts2_PensieveSlughornsBrokenMemory_SlytherinBoyActivator,61
+00815100,Hogwarts2_PensieveSlughornsBrokenMemory_GriffindorGirlActivator,63
+00815140,Hogwarts2_PensieveSlughornsBrokenMemory_HermioneCommonRoomActivator,67
+00815184,Hogwarts2_PensieveSlughornsBrokenMemory_CombatEventSlotLoad,59
+008151c0,Hogwarts2_PensieveSlughornsBrokenMemory_CombatCarrouselClamp,60
+00815200,Hogwarts2_PensieveSlughornsBrokenMemory,39
+00815cc4,BurrowXmas_DeathEaterAttack2_BellatrixCombatAnimationLoad,57
+00815e68,BurrowXmas_DeathEaterAttack2_FenrirCombatAnimationLoad,54
+00816f00,Hogwarts1_TakeLunaToTheParty_LightFireworkTutorialCamera,56
+00818e24,Tutorial_CharmsReparo_TutorialCamera,36
+00819728,Hogwarts1_PensieveTheOrphanage_MemoryOutro,42
+00819754,Hogwarts1_PensieveTheOrphanage_MemoryView,41
+00819780,Hogwarts1_PensieveTheOrphanage_MemoryIntro,42
+008197e0,Hogwarts1_PensieveTheOrphanage_DumbledoreConversationAnimationLoad,66
+0081ab14,Tutorial_MiniCrest_Tutorial_Camera,34
+0081b144,BurrowIntro_WizardingWheezes_ThrowingCamera,43
+0081b170,BurrowIntro_WizardingWheezes_ThrowingTutorialCamera,51
+0081bc44,AUDIO_SANDBOX,13
+0081bcf0,IN_GAME_PROMPTS_ID_FOR_PROMPTS_WITH_NO_SCRIPT,45
+0081c210,PLAYER_CONTROLLED_CHARACTER,27
+0081d004,SCRIPT,6
+0081d1f8,AudioMospAttract,16
+0081d258,AudioMospAttackStop,19
+0081d26c,AudioMospAttackStart,20
+0081d2d4,GameCameraCut,13
+0081d31c,AudioCarpeStretch,17
+0081d3b8,CameraFocus,11
+0081d408,FindEntityPool,14
+0081d43c,AudioCarpeDragStop,18
+0081d450,AudioCarpeDragStart,19
+0081d464,AudioCarpeImpact,16
+0081d478,AudioWingardiumImpact,21
+0081d500,AudioWingardiumSwing,20
+0081d518,AudioWingardiumBuildUp,22
+0081d530,AudioWingardiumDrop,19
+0081d544,AudioWingardiumLift,19
+0081d558,AudioWingardiumBreak,20
+0081d570,AudioWingardiumCast,19
+0081d584,AudioCarpeTension,17
+0081d598,AudioCarpeBreak,15
+0081d5a8,AudioCarpeCast,14
+0081d6b0,OnPhysicsCollideScenery,23
+0081d6c8,OnPhysicsCollideThing,21
+0081d858,TickAnimation,13
+0081d868,UpdateCameras,13
+0081da60,CameraName,10
+0081dec0,SpellStatsProfile,17
+0081e228,Script Id,9
+0081e26c,CharacterId,11
+0081e328,main memory,11
+0081e54c,SSGAudio,8
+0081e590,"DebugAudioDiscStreaming: SNDSpeechEmitter::Update - Speech timed out,%d%,%d,%d,%s,%s,%s
+",89
+0081e5f0,"DebugAudioDiscStreaming: SNDSpeechEmitter::Update - Speech stream started,%d%,%d,%d,%s,%s,%s
+",94
+0081e650,Entity,6
+0081e770,HybridScriptPotionsGame,23
+0081e7d4,HybridScriptRoomClocktower,26
+0081e7f0,HybridScriptRoomFloor1Corridor,30
+0081e810,HybridScriptRoomLibrary,23
+0081e83c,Library_SeatedCharacter01,25
+0081e86c,HybridScriptRoomRorCorridor,27
+0081e888,HybridScriptCrestAttachedToBone,31
+0081e8a8,HybridScriptVolatileObjectGenerator,35
+0081e938,HybridPotionScriptStirringTutorial,34
+0081ead8,HybridPresentationCameraGame,28
+0081ee30,PluginAudio,11
+0081ef9c,PluginBaseCamera,16
+0081f38c,GAME_OPTIONS_CAMERA_CONTROLS_Y_INVERTED,39
+0081f3b4,GAME_OPTIONS_CAMERA_CONTROLS_X_INVERTED,39
+0081f50c,HELP_COUNT_HOW_TO_USE_CAMERA,28
+0081f7c8,COMBAT_FINISHING_SPELLS_USED,28
+0081f800,COMBAT_SPELLS_RESISTED,22
+008217ac,ObjectMaterial,14
+008217c4,Texture,7
+00821ed0,HybridFacialAnimation,21
+00822108,HybridScriptTrigger,19
+00822158,HybridScriptRoomClocktowerCourtyard,35
+0082217c,HybridScriptRoomFloor2Corridor,30
+0082219c,HybridScriptRoomMoaningMyrtlesBathroom,38
+008221c4,HybridScriptRoomSnapesClass,27
+008221e0,HybridScriptCrestBehindCobweb,29
+00822320,HybridAudioTrigger,18
+00822334,AudioSFX,8
+00822348,AudioReverb,11
+00822360,AudioMixer,10
+00822628,PluginCollisionAudio,20
+0082296c,PluginCameraCommon,18
+00822a2c,CameraPauseMenu,15
+00822a6c,Events/Presentation/ControllerAnimations.str,44
+00823d64,PhysicsMotion,13
+00823fac,Physics Option,14
+00823fbc,C: Audio EventName,18
+00823fd0,C: Audio Loop CatName,21
+00824048,B: Audio EventName,18
+0082405c,B: Audio Loop CatName,21
+008240d4,A: Audio EventName,18
+008240e8,A: Audio Loop CatName,21
+00824178,State Descriptor,16
+008242bc,CameraAttach,12
+0082449c,Spells To React With,20
+008244c4,OtherCharacter,14
+008245f0,Character,9
+00824630,ResultCamera,12
+00824640,IntroCamera,11
+0082478c,2PlayerCharacter,16
+00824968,Sitting Clone we clone animations from,38
+00824b48,GameCameraTrigger_AllHogwartsFirstPerson,40
+00824ce0,HybridScriptRoomCommonRoom,26
+00824cfc,HybridScriptRoomFloor3CorridorCurved,36
+00824d24,HybridScriptRoomMyrtlesCorridor,31
+00824d44,HybridScriptRoomStoneBridge,27
+00824d60,HybridScriptCrestBehindGrate,28
+00824dec,HybridSpellStatsProfile,23
+00824e4c,PluginPresentationButtonAudio,29
+0082509c,PluginPresentationButtonAnimation,33
+00825368,HybridMissionPatrollingCharacterActivator,41
+0082542c,PluginCharacterAI,17
+00825580,PluginGenericCamera,19
+008258b0,camera_look_at,14
+00825a10,Cutscene_Camera,15
+00825ce4,Audio.PlayMusicEvent,20
+00825e24,Presentation.ToggleCameraControlsX,34
+00825e48,Presentation.ToggleCameraControlsY,34
+0082613c,SetPlayerCharacter,18
+0082641c,TransitionCamera,16
+00826450,Presentation.Screens.ActivateScreenWithFocus ScreenMainMenuCameraPos,68
+00826b44,Audio.PlayMusicEvent HBPMusic frontend,38
+00826df4,Menu_PauseSpellCharms,21
+00826e0c,Menu_PauseSpellDuel,19
+00826e20,GUI_MEMORYCARD_REMOVED_DISABLE_AUTOSAVE,39
+00829024,FocusAnimationObjectName,24
+00829040,FocusAnimation,14
+00829960,AnimationName,13
+00829c08,SpellColourDeflectedHostile,27
+00829c24,SpellColourDeflectedFriendly,28
+00829c44,SpellColourHostile,18
+00829c58,SpellColourFriendly,19
+0082a818,HybridScriptWanderMusicActions,30
+0082a850,HybridGameCamera,16
+0082a864,CameraBlur,10
+0082a872,u>PluginPresentationCameraReference,35
+0082a994,"Scripted Pos: %.2f, %.2f, %.2f",30
+0082a9c0,HybridSpellEffectsProfile,25
+0082aa1c,HybridScriptRoomDADACorridorB,29
+0082aa3c,HybridScriptRoomFloor3Staircase,31
+0082aa5c,HybridScriptRoomOwleryExterior,30
+0082aa7c,HybridScriptRoomStoneCircle,27
+0082aa98,HybridScriptCrestBurnableBush,29
+0082ad1c,PluginPhysicsRepairable,23
+0082adc4,GameCameraTrigger_AllHogwartsSprint,35
+0082ae83,?9Ew?PluginInteractableCamera,29
+0082aef8,PluginPresentationCameraAnim,28
+0082af28,PluginPresentationCameraAnim::PresentationInterface::OnStateEnter,65
+0082b09c,Menu_PauseSpellList,19
+0082b158,EntityHash,10
+0082ca84,SpellId,7
+0082ccb8,TutorialScript,14
+0082ce4c,Follow Character Teleport To Locator,36
+0082ce90,Pause Character,15
+0082cf27,BHybridSimpleCharacter,22
+0082cf40,HybridNamedCharacter,20
+0082cf58,HybridStudentCharacter,22
+0082cf70,HybridPlayerCharacter,21
+0082cf88,HybridTurretFighterCharacter,28
+0082cfa8,HybridCameraDragReset,21
+0082cfe8,HybridSpellShot,15
+0082cff8,cHybridSpellShotManager_Shot,28
+0082d02c,spell_whizz_bys,15
+0082d04c,spell_impacts,13
+0082d0a8,HybridSpellShotManager,22
+0082d0f8,HybridScriptAudioSandbox,24
+0082d148,ScriptTrigger,13
+0082d16c,HybridScriptRoomDADAStaircase,29
+0082d18c,HybridScriptRoomFloor5Corridor,30
+0082d1ac,HybridScriptRoomOwleryInterior,30
+0082d1cc,HybridScriptRoomSuspensionBridge,32
+0082d1f0,HybridScriptCrestBurnablePlant,30
+0082d340,HybridPotionsCamera,19
+0082d3f8,HybridQuidditchAudioTrigger,27
+0082d548,HybridMissionSpellCast,22
+0082d668,PluginQuidditchCamera,21
+0082d758,PluginPresentationCameraFixed,29
+0082db5c,SPELL_RESIST,12
+0082de84,KEYBOARD_SPELL_RESIST,21
+0082e214,ScreenPauseSpellList,20
+0082e22c,ScreenPauseSpellDuelling,24
+0082e248,ScreenPauseSpellCharms,22
+00830864,CameraHybridReference,21
+00830a30,Characters,10
+00830b10,ResultsCamera,13
+00830b20,ObjectCamera,12
+00830b30,StirCamera,10
+00830b3c,FlameCamera,11
+00830b48,DefaultCamera,13
+00830ea8,CameraType,10
+00830f54,CameraManager,13
+008310d4,unexpected character encountered,32
+008310f8,unexpected escaped character encountered,40
+0083119c,Manager::CameraManager::Director,32
+008311c0,Manager::CameraManager::Initialise::Shots,41
+008311ec,AudioMailMessage,16
+00831308,HybridGameCameraTrigger,23
+008313b4,PluginPresentationButtonTextAnimation,37
+008313f4,HybridScriptExteriorAndForests,30
+008314c0,HybridScriptRoomDungeonCorridor,31
+008314e0,HybridScriptRoomGrandStaircase,30
+00831664,HybridScriptRoomPavedCourtyard,30
+00831684,HybridScriptRoomTapestryCorridor,32
+008316a8,HybridScriptCrestFireworks,26
+0083171c,HybridPotionScriptAddingTutorial,32
+00831764,HybridPotionsCameraCoordinator,30
+00831a6c,HybridMissionCharacterActivator,31
+00831c8b,>PluginSpellEffects,19
+00831e90,Trinity should not be allocating memory dynamically. HPTrinityCore::TrinityMalloc(void* block) should never be called.If you see this assert please let Ciara know.,163
+00831f38,Trinity should not be allocating memory dynamically. HPTrinityCore::TrinityFree(void* block) should never be called.If you see this assert please let Ciara know.,161
+0083204c,GlobalPresentationCamera,24
+00832090,13_SlughornsMissingMemory,25
+00832184,10_SlughornsBrokenMemory,24
+0083229c,4_OrphanageMemory,17
+00833a74,RaiseCameraOnOpen?,18
+00833cf4,PlayerCharacter,15
+00833d5c,Player Character,16
+00833d70,AlignToCamera,13
+0083465c,ScriptManager,13
+0083466c,AudioManager,12
+0083467c,seed:audio,10
+00834720,anim:character_in_air,21
+00834738,anim:spell_cast,15
+008347ec,cctaudio,8
+00834808,AudioMain,9
+00834818,Z:\HBP\code\release_hbp_pc\game\libraries\hp_gamesystems\src\audio/AudioManager.cpp,83
+0083486c,AudioDebug,10
+00834878,AudioStats,10
+00834894,AudioListener,13
+008348a4,CCTAudioManager,15
+00834934,CCTAudioMailMessage,19
+008349bc,HybridQuidditchCamera,21
+008349d4,HybridSplineCamera,18
+00834a1c,HybridScriptRoomBoathouse,25
+00834a38,HybridScriptRoomEntranceCourtyard,33
+00834a5c,HybridScriptRoomHagridsHut,26
+00834a78,HybridScriptRoomPrefectsBathroomCorridor,40
+00834aa4,HybridScriptRoomTransfigurationClass,36
+00834acc,HybridScriptCrestFromBully,26
+00834b34,HybridPotionScriptHeatingTutorial,33
+00834d7c,HybridMissionCharacterControl,29
+00834f1a,.>PluginSpellStats,18
+00834f40,PluginPhysics,13
+00835074,CHARACTER_UNIFORM,17
+00835088,CHARACTER_HANDS,15
+00835098,CHARACTER_FACE,14
+008350a8,CHARACTER_HAIR,14
+00835138,ScriptId,8
+00835228,InvertCameraControlsX,21
+00835240,InvertCameraControlsY,21
+00835404,CHARACTER_%d,12
+00836880,ScreenSpaceCamera,17
+00836894,CurrentInWorldCamera,20
+00837168,AnimationDataFrameDuration,26
+00837184,AnimationDataFrameID,20
+00837314,CameraMoveOffset,16
+00837328,CameraOffset,12
+00837364,Character that carries this crest,33
+00837920,Z:\HBP\code\release_hbp_pc\game\libraries\hp_gamesystems\src\audio/music/MusicCombatHandler.cpp,95
+008379b0,Game-specific version of BeginUpdate (TrinityCamera) function needs to be implemented.,86
+00837a08,Game-specific version of EndUpdate (TrinityCamera) function needs to be implemented.,84
+00837a60,Game-specific version of StopCamera (TrinityCamera) function needs to be implemented.,85
+00837ab8,Game-specific version of StopInterpolation (TrinityCamera) function needs to be implemented.,92
+00837b70,HybridStaticCamera,18
+00837bd4,HybridScriptRoomBoysDorm,24
+00837bf0,HybridScriptRoomEntranceHall,28
+00837c10,HybridScriptRoomHerbology,25
+00837c2c,HybridScriptRoomQuidditch,25
+00837c48,HybridScriptRoomTransfigurationCourtyard,40
+00837c74,HybridScriptCrestFromPotion,27
+00837cb4,HybridPotionScriptShakingTutorial,33
+00837dc0,HybridPresentationCameraAnim,28
+00837fac,PluginSpellCasting,18
+0083807c,SpellFailureEffect,18
+00838090,spell_power_loop,16
+00838170,PluginPhysicsFake,17
+008381b4,PluginPresentationBitmapUVAnimation,35
+008386c8,SSGShaders,10
+0083a7b0,Potions Camera Coordinator,26
+0083aa98,CombatCamera01,14
+0083aac0,RWPhysicsManager_Open,21
+0083aad8,LocalAllocator::RWPhysics,25
+0083aaf4,RWPhysicsHeap,13
+0083ab20,"DebugAudioDiscStreaming: StreamEmitter::Update - stream timed out,%d%,%d,%s,%s,%s,%s
+",86
+0083ab78,"DebugAudioDiscStreaming: StreamEmitter::Update - stream started,%d%,%d,%s,%s,%s,%s
+",84
+0083aca0,HybridScriptGlobal,18
+0083acd4,HybridScriptRoomCharms,22
+0083acec,HybridScriptRoomExteriorWalkway,31
+0083ad0c,HybridScriptRoomHospitalWing,28
+0083ad2c,HybridScriptRoomQuidditchGate,29
+0083ad4c,HybridScriptRoomViaductEntrance,31
+0083ad6c,HybridScriptCrestInCabinet,26
+0083b267,@spell_wrong,12
+0083b298,HybridPotionScriptSolidsTutorial,32
+0083b2bc,HybridLocatorCamera,19
+0083b374,HybridPresentationCameraFixed,29
+0083b7a8,GameCameraTrigger_Combat2player,31
+0083b7c8,GameCameraTrigger_Combat,24
+0083b7ec,Combat_SpellResistManager,25
+0083b808,Combat_SpellWaggleManager,25
+0083b9b4,Events/CombatCharacters.str,27
+0083b9e0,cSpellEffectsManager,20
+0083ba8c,Camera2PlayerControllerConfig,29
+0083d320,GOF::GameServicesCreate::PresentationEventHandler,49
+0083d584,GOF::GameServicesCreate::CameraManager,38
+0083d5ac,GOF::LevelServicesOpen::GameCameraManager,41
+0083d6b0,GOF::LevelServicesOpen::CharacterIdentifierManager,50
+0083d714,GOF::GameServicesCreate::TrinityGameCamera,42
+0083d740,Shaders.str,11
+0083d9cc,MaxTextureSize,14
+0083d9dc,MaxShadowTextureSize,20
+0083da3c,PC_AUDIO_ERROR,14
+0083da4c,PC_AUDIO_SUGGEST,16
+0083e0d8,Trace memory exhaustion.,24
+0083e0f4,Snapshot memory exhaustion.,27
+0083e230,RenderWare::EventHandler::LinkedMsg,35
+0083e254,RenderWare::EventHandler::MsgNameString,39
+0083e27c,RenderWare::EventHandler::RegisteredMsgsHashTable,49
+0083e2b0,CEventHandler*,14
+0083e378,"GlobalAllocator: Allocated extra core Memory Block size %d
+",59
+0083e3d0,"LocalAllocator %s: Failed to Allocate Memory Block size %d
+",59
+0083e48c,"LocalAllocator %s: Allocated extra core Memory Block size %d
+",61
+0083e4f8,RwCamera*,9
+0083f5a0,Audio,5
+0083fbc8,Camera%d,8
+0083fbd4,sCameraUpdate,13
+0083fbe4,RFW_Cameras,11
+0083fcb0,"cRealFont::Load() WARNING - failed to load resource!
+",53
+0083fe98,"BuildModel: ERROR model %s data 0%08X invalid stream -- PlatformResource::GetCurrentContext(%d)
+",96
+0083fefc,RFW::ModelRender::TextureGroper::Handle,39
+0083ffcc,SHADERTYPE_HQDownSample,23
+00840040,SHADERTYPE_MOTIONBLUR,21
+00840084,Lion_DistortTexture,19
+00840098,Lion_DistortDebugTexture,24
+008400b4,SHADERTYPE_LION,15
+00840b30,Audio/Music/,12
+00840b44,audio/patch/,12
+00840b5c,Audio::AudioMain::Init::AudioServicesHandlerInstance,52
+00840b94,Audio::AudioMain::Init::DefaultDebugInstance,44
+00840bd0,Audio::AudioMain::Init::SFXHandlerInstance,42
+00840bfc,Audio::AudioMain::Init::MixerHandlerInstance,44
+00840c2c,Audio::AudioMain::Init::ListenerHandlerInstance,47
+00840c5c,Audio::AudioMain::Init::MusicHandlerInstance,44
+00840c8c,Audio::AudioMain::Init::ReverbHandlerInstance,45
+00840cbc,Audio::AudioMain::Init::GUIMusicHandlerInstance,47
+00840cec,Audio::AudioMain::Init::GUISFXHandlerInstance,45
+00840d1c,Audio::AudioMain::Init::GUISpeechHandlerInstance,48
+00840d50,Audio::AudioMain::Init::GUIMixerHandlerInstance,47
+00840d80,Audio::AudioMain::Init::GUIAudioEventHandlerInstance,52
+00840db8,Audio::AudioMain::Init::SpeechResourceHandlerInstance,53
+00840df8,Audio::AudioMain::Init::ReverbResourceHandlerInstance,53
+00840e30,Audio::AudioMain::Init::MixerResourceHandlerInstance,52
+00840e6c,Audio::AudioMain::Init::MusicResourceHandlerInstance,52
+00840ea8,Audio::AudioMain::Init::AudioBankResourceHandlerInstance,56
+00840ee8,Audio::AudioMain::Init::BankHeaderResourceHandlerInstance,57
+00840f28,Audio::AudioMain::Init::AudioResourceHandlerInstance,52
+00840f64,Audio::AudioServicesHandler::Init::DataPathString,49
+00840f98,Audio::AudioServicesHandler::InitSnd::SndHeap,45
+00840fc8,Audio::AudioServicesHandler::InitSeed::SharedBuffer,51
+00840ffc,Audio::AudioServicesHandler::InitSeed::TbSysStreamingDebug,58
+00841038,Audio::AudioServicesHandler::InitSeed::GameInfo,47
+00841068,Audio::Pathfinder::something,28
+00841088,Audio::AudioServicesHandler::InitServices::ResourceManagerInstance,66
+008410d0,Audio::AudioServicesHandler::InitServices::EmitterManagerInstance,65
+00841118,Audio::AudioServicesHandler::InitServices::MixerManagerInstance,63
+00841158,Audio::MixerControl::MixerControl::MixerControlObject,53
+00841190,Audio::AudioServicesHandler::MakeHash::AudioHashItem,52
+008411fc,"Audio Debug Break - Halting program
+
+
+",38
+00841424,"
+
+
+AUDIO ASSERT !!! ... 
+",25
+008414c8,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_audio\dev\src\..\..\..\SeedRT\Dev\source\DDLayer\Dev\MapStreamer.cpp,120
+008415d0,TbMapStreamer::RegisterMemoryBankData(): Bank already registered! [%s],70
+008416c8,Audio Category (%s) data is incorrect version. Rebuild data with latest tools.,78
+008417d8,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_audio\dev\src\..\..\..\SeedRT\Dev\source\DDLayer\Dev\TbSoundManager.cpp,123
+008418a0,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_audio\dev\src\..\..\..\SeedRT\Dev\source\Engine\Dev\Bank\CBank.cpp,118
+00841b98,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_audio\dev\src\..\..\..\SeedRT\Dev\source\Modules\Real\Dev\RealModule.cpp,124
+00841e90,"Stream::FlagError : Audio stream file does not exist
+",53
+008422a0,Audio::SeedRT::PlaceHolderAllocator::Init::PlaceholderMemory,60
+00842360,audio::SeedRT::PacketStream::PktOverhead,40
+0084238c,Audio::CPagedBlockAllocator::AddPage::PageBlock,47
+00842a8c,SHADERTYPE_MSAA_DS,18
+00842aa0,SHADERTYPE_HQDOWNSAMPLE,23
+00842ab8,SHADERTYPE_DEPTHOFFIELD,23
+00842ad0,SHADERTYPE_ZPREPASS,19
+00842ae4,SHADERTYPE_PSAA,15
+00842af4,SHADERTYPE_YUV,14
+00842b04,SHADERTYPE_FOLIAGE,18
+00842b18,SHADERTYPE_HAIR,15
+00842b28,SHADERTYPE_WORLD,16
+00842b3c,SHADERTYPE_SKIN,15
+00842b4c,SHADERTYPE_CLOTH,16
+00842b60,SHADERTYPE_BASE,15
+00842b70,SHADERTYPE_VLIT_ADD_ENVALPHA,28
+00842b90,SHADERTYPE_VLIT_ADD_BASEALPHA,29
+00842bb0,SHADERTYPE_BLEND_LIGHTMAP,25
+00842bcc,SHADERTYPE_BLEND_VLIT,21
+00842be4,SHADERTYPE_LIGHTMAP,19
+00842bf8,SHADERTYPE_VLIT,15
+00842c08,SHADERTYPE_NONE,15
+00842c18,"FONT::Load() WARNING - failed to load resource!
+",48
+00842c50,"EngineMaterialManager::Init() called when already initialised!
+",63
+00842c90,"EngineMaterialManager::Close() called before Init() !
+",54
+00842da8,"cSHAPE::Load : ERROR : Tag is outside of ShapeData - texture is most likely corrupt
+",84
+00842ee0,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_shadercore\dev\src\targa.cpp,80
+00842f38,"EngineTextureManager::AllocateTextureID - MAXIMUM number of textures exceeded!
+",79
+00842f88,"EngineTextureManager::FreeTextureID - WARNING - ID wasn't allocated - %d?!
+",75
+00842fd8,"EngineTextureManager::Init() management heap passed was NULL...
+",64
+0084301c,"EngineTextureManager::Init() texture heap passed was NULL...
+",61
+0084305c,"EngineTextureManager::Init() called when already initialised!
+",62
+008430a0,"EngineTextureManager::Clean() - FATAL materials still exist! (call MaterialManager::Clean() First!)
+",100
+00843108,ShaderCore::EngineTextureManager::Reset::NoneTextureFreeData,60
+00843148,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_shadercore\dev\src\texturemanager.cpp,89
+008431a4,ShaderCore::EngineTextureManager::Reset::NullTextureFreeData,60
+008431e4,ShaderCore::EngineTextureManager::Reset::BadTextureFreeData,59
+00843220,ShaderCore::EngineTextureManager::Reset::NoTextureFreeData,58
+00843260,ShaderCore::EngineTextureManager::Reset::InvalidTextureFreeData,63
+008432a0,InternalNoTexture,17
+008432b4,InternalNullTexture,19
+008432c8,InternalInvalidTexture,22
+008432e0,InternalBadTexture,18
+008432f4,InternalNoneTexture,19
+00843308,"EngineTextureManager::Close() - FATAL you must call EngineMaterialManager::Close() first! 
+",91
+00843364,"EngineTextureManager::Close() called before Init() !
+",53
+008433a0,"EngineTextureManager::On_Register_Texture_UnLoad - texture is corrupt!
+",71
+008433e8,"EngineTextureManager::On_Register_Texture_Load : Texture Was Not Found? %s
+",75
+00843438,"EngineTextureManager::On_Register_Texture_Load : %s Resource.GetpBuffer returned NULL
+",86
+00843490,"EngineTextureManager::On_Register_Texture_Load : Texture Seems to be Corrupt (filesize too small!) %s
+",102
+008434f8,"EngineTextureManager:: On_Register_Texture_Load WARNING - %s has bad size(%d x %d) - replaced with NULL
+",104
+00843564,ShaderCore::,12
+008435a8,z:\hbp\code\release_hbp_pc\x-platform\packages\eauk_shadercore\dev\src\PC/scene.cpp,83
+00843628,"MAXZ variant requested on a shader which has no support for this yet
+",69
+00843670,"Scene::End - material (%x) with SHADER_HANDLE_INVALID encountered!
+",67
+0084379c,"Reset: Out of video memory
+",27
+008437b8,"Reset: Out of memory
+",21
+00843890,"Out of vid memory
+",18
+008438a4,"Out of memory
+",14
+008438b4,ShaderCore::TempDynamicVertexBuffer,35
+008438d8,ShaderCore::TempDynamicIndexBuffer,34
+00843900,"ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!
+",70
+00843948,"ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!
+",82
+00843c00,"SLOT BUDGET buffer memory exceeded for %s! Stream cancelled!!
+Actual:%d Budget:%d
+",82
+00844414,TEXTURE7,8
+00844420,TEXTURE6,8
+0084442c,TEXTURE5,8
+00844438,TEXTURE4,8
+00844444,TEXTURE3,8
+00844450,TEXTURE2,8
+0084445c,TEXTURE1,8
+00844468,TEXTURE0,8
+00844474,TEXTURECOUNT,12
+00844508,FLAG_TEXTURE7_BASE,18
+0084451c,FLAG_TEXTURE6_BASE,18
+00844530,FLAG_TEXTURE5_BASE,18
+00844544,FLAG_TEXTURE4_BASE,18
+00844558,FLAG_TEXTURE3_BASE,18
+0084456c,FLAG_TEXTURE2_BASE,18
+00844580,FLAG_TEXTURE1_BASE,18
+00844594,FLAG_TEXTURE0_BASE,18
+008446b4,SHADERTYPE,10
+008446d8,TEXTUREMODE,11
+00844734,BASE_TEXTURE,12
+00844744,FLAG_BASEMATERIAL,17
+00844a38,LION_POSTPRO_DESCRIPTOR,23
+00844a94,TEXTURENAME,11
+00844ab8,LION_LIGHT_DESCRIPTOR,21
+00844c3c,LION_GEOM_DESCRIPTOR,20
+00846288,ORIENT_TO_CAMERA_FLAG,21
+00846660,GEOM_DESCRIPTOR,15
+0084673c,LIGHT_DESCRIPTOR,16
+00846760,POSTPRO_DESCRIPTOR,18
+008467cc,MATERIAL,8
+008467e4,DESCRIPTOR,10
+008468ec,TEXTURE,7
+00846e40,CAMERASHAKE,11
+00846e58,TEXTURETINT,11
+0084770c,ERROR : Sequence::cameraCreate : Unable to create camera,56
+00847748,ERROR : Sequence::cameraTransformSampled : camera has not been created,70
+00847790,ERROR : Sequence::cameraTransform : camera has not been created,63
+008478f8,TrinitySequencer::adjustTimeScale found two sequences trying to sync with audio,79
+00847948,ERROR: TrinitySequencer::parseResource : sequence binary resource isn't valid,77
+00847ac8,TrinityCreationInterface::CreateTrinityActor() : memory allocation failed,73
+00847b18,TrinityCreationInterface::CreateTrinityCamera() : memory allocation failed,74
+00847b68,TrinityCreationInterface::CreateTrinityVfx() : memory allocation failed,71
+00847d98,CCT::Character_Init,19
+00847ec0,CCT::Character_Alloc,20
+00847f6c,CCT::Data::Character,20
+00848018,RCMP::AV::AudioStreamBuffer,27
+00848034,RCMP::AUDIO_PLAYER,18
+00848140,RCMP::AV::audiobuff,19
+00848154,RCMP::VIDEO_DRIVER::SHADERCORE_VD_ONE_TEXTURE,45
+00848188,RCMP::SHADERCORE_VD_ONE_TEXTURE::SHADERCORE_SINGLEDRAW_YUV_RENDERER,67
+008481d0,RCMP::SHADERCORE_SINGLEDRAW_YUV_RENDERER::SHADERCORE_SINGLEDRAW_YUV_RENDERER,76
+00848220,movietexture%d_%d,17
+00fd3ca8,"<assembly xmlns=""urn:schemas-microsoft-com:asm.v1"" manifestVersion=""1.0"">
+  <dependency>
+    <dependentAssembly>
+      <assemblyIdentity type=""win32"" name=""Microsoft.VC80.CRT"" version=""8.0.50727.762"" processorArchitecture=""x86"" publicKeyToken=""1fc8b3b9a1e18e3b""></assemblyIdentity>
+    </dependentAssembly>
+  </dependency>
+</assembly>PADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDINGPADDINGXXPADDING",855

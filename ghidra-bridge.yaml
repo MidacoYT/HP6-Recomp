@@ -1,0 +1,8 @@
+ghidra:
+  install_dir: C:\Users\trist\Desktop\ghidra_12.1.2_PUBLIC
+  project_dir: C:\Users\trist
+  project_name: HarryPotter6
+  program_name: hp6.exe
+paths:
+  export_dir: .ghidra-exports
+  address_map: .ghidra-exports\address_map.json

@@ -1,0 +1,264 @@
+address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
+00401000,,,,deferred,not_run,unverified
+00401020,float10 __cdecl FUN_00401020(float param_1),hp6::math::sqrt_x87,src/math/Scalar.cpp,integrated,passed,unverified
+00401270,,,,deferred,not_run,unverified
+004013a0,,,,deferred,not_run,unverified
+00401da0,,,,deferred,not_run,unverified
+00403190,,,,deferred,not_run,unverified
+00404660,float10 __cdecl FUN_00404660(float param_1),hp6::math::abs_x87,src/math/Scalar.cpp,integrated,passed,unverified
+00404670,"undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)",hp6::math::different_xyz,src/math/Vector.cpp,integrated,passed,unverified
+00404be0,"undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)",hp6::math::transform_translated_xyz,src/math/Transform.cpp,integrated,passed,unverified
+00405390,"undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)",hp6::math::subtract_xyzw,src/math/Vector.cpp,integrated,passed,unverified
+004301c0,float10 __fastcall FUN_004301c0(undefined4 * param_1),hp6::math::component0,src/math/FloatAccess.cpp,integrated,passed,unverified
+004301e0,float10 __fastcall FUN_004301e0(int * param_1),hp6::math::component1,src/math/FloatAccess.cpp,integrated,passed,unverified
+00430200,float10 __fastcall FUN_00430200(int * param_1),hp6::math::component2,src/math/FloatAccess.cpp,integrated,passed,unverified
+0050cc10,float10 __fastcall FUN_0050cc10(float * param_1),hp6::math::first_float,src/math/FloatAccess.cpp,integrated,passed,unverified
+005d1580,"undefined __stdcall FUN_005d1580(float * param_1, float * param_2)",hp6::math::normalize_xyz_preserve_w,src/math/VectorWithGlobal.cpp,integrated,compiled_only,unverified
+005d1680,"undefined __stdcall FUN_005d1680(float * param_1, float * param_2)",hp6::math::normalize_xyzw,src/math/Vector.cpp,integrated,passed,unverified
+005d16f0,"undefined __stdcall FUN_005d16f0(float * param_1, float * param_2, float * param_3)",hp6::math::cross_xyz,src/math/Vector.cpp,integrated,passed,unverified
+005d1770,"float10 __stdcall FUN_005d1770(float * param_1, float * param_2)",hp6::math::dot_xyz,src/math/Vector.cpp,integrated,passed,unverified
+005d8a30,"LRESULT __stdcall FUN_005d8a30(HWND param_1, uint param_2, uint param_3, LPARAM param_4)",,,deferred,not_run,unverified
+005d8e30,bool __stdcall thunk_FUN_00ff8380(void),hp6::platform::register_game_window_class,src/platform/GameWindow.cpp,integrated,passed,unverified
+005d8ed0,"HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)",hp6::platform::create_game_window,src/platform/GameWindow.cpp,integrated,passed,unverified
+005d9210,undefined __cdecl FUN_005d9210(char param_1),hp6::platform::apply_system_parameters,src/platform/StartupSupport.cpp,integrated,passed,unverified
+005db920,,hp6::platform::service_holder,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+005dc710,,hp6::platform::release_through_service,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+005dcae0,undefined __stdcall thunk_FUN_0100ea00(void),,,deferred,not_run,unverified
+005e8b50,undefined4 __fastcall FUN_005e8b50(float * param_1),hp6::math::any_nonzero_xyz,src/math/Scalar.cpp,integrated,passed,unverified
+00688550,"undefined __thiscall FUN_00688550(void * this, int param_1, undefined4 param_2)",hp6::projection::set_relative_payload,src/projection/RecordDecode.cpp,integrated,passed,unverified
+0068c0a0,"undefined4 __cdecl FUN_0068c0a0(float * param_1, float * param_2)",hp6::math::slope_greater,src/math/Scalar.cpp,integrated,passed,unverified
+006b175b,,create_and_wait_bounded_path_node (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b1783,,create_and_wait_repeat_node (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b17e5,,create_and_wait_node (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b183a,,create_and_wait_named_node (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b18df,,hp6::runtime::pool_slot_address,src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b1910,uint __stdcall FUN_006b1910(int param_1),hp6::runtime::allocate_slot_token,src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b1968,,attach_node_path (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b1a2e,,hp6::runtime::read_virtual_pair,src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b1d53,undefined4 __stdcall FUN_006b1d53(void),hp6::runtime::detach_first_locked,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b1ffc,"uint __thiscall FUN_006b1ffc(void * this, int param_1, char param_2)",hp6::runtime::find_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b203a,,bootstrap_engine (hp6::runtime),src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b20e8,,attach_engine (hp6::runtime),src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b2147,"undefined __thiscall FUN_006b2147(void * this, int param_1, undefined4 * param_2)",hp6::runtime::find_pool_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2199,undefined __fastcall FUN_006b2199(int param_1),hp6::runtime::schedule_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2223,int __cdecl FUN_006b2223(uint param_1),hp6::runtime::pool_node_status,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b227b,undefined __cdecl FUN_006b227b(uint param_1),hp6::runtime::notify_pool_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b22c3,int __cdecl FUN_006b22c3(uint param_1),wait_pool_node (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b2359,undefined8 __cdecl FUN_006b2359(uint param_1),hp6::runtime::take_completed_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b23a9,,completed_state (hp6::runtime),src/runtime/PoolWait.cpp,integrated,passed,unverified
+006b23b2,"undefined __cdecl FUN_006b23b2(uint param_1, undefined * param_2)",hp6::runtime::set_pool_callback,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2408,"undefined __cdecl FUN_006b2408(uint param_1, undefined1 param_2)",hp6::runtime::update_node_priority,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2456,,create_node_from_record (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2482,,create_signed_node_from_record (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b24b7,,create_repeat_node_from_record (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2527,,create_plain_node_from_record (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2553,,run_reserved_callback (hp6::runtime),src/runtime/PoolAccess.cpp,integrated,passed,unverified
+006b25b8,,find_volume_by_name (hp6::runtime),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b289e,,create_named_node_a_from_record (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b28d4,,create_named_node_b_from_volume (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b2990,,create_bounded_path_node_from_record (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b2c65,"undefined __thiscall FUN_006b2c65(void * this, int param_1)",hp6::runtime::insert_first,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2cbd,undefined __fastcall FUN_006b2cbd(int * param_1),hp6::runtime::detach_first,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2ce9,"undefined __thiscall FUN_006b2ce9(void * this, int param_1, int param_2)",hp6::runtime::insert_after,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2d1d,"undefined4 __thiscall FUN_006b2d1d(void * this, uint param_1, uint param_2)",hp6::runtime::detach_node,src/runtime/PoolList.cpp,integrated,passed,unverified
+006b2e49,,hp6::platform::construct_vtable_007159b0,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006b2ef3,,construct_named_node_00715a90 (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b2f40,,construct_named_node_00715aa0 (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b2fbd,,construct_bounded_path_node (hp6::runtime),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b3032,,construct_timer_node (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b3094,,construct_signed_node (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b318b,,construct_repeat_node (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b335c,,construct_plain_node (hp6::runtime),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b3b04,,std::memcpy (CRT external),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b3b0e,,clear_buffer (hp6::runtime),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b3b24,,CRT copy dispatch init (CRT external),src/runtime/PoolList.cpp,integrated,passed,unverified
+006b3c8c,,std::memset (CRT external),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b454a,,wrap_noop_006b454a (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b4555,,wrap_noop_006b4555 (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b4560,,wrap_noop_006b4560 (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b492b,"undefined __cdecl FUN_006b492b(undefined4 param_1, undefined4 param_2)",hp6::platform::release_block,src/platform/ServiceLifecycle.cpp,integrated,passed,unverified
+006b4a02,,hp6::platform::construct_vtable_00715d0c,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006b54b8,,wrap_true_006b54b8 (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b54bb,,wrap_noop_006b54bb (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b54be,,wrap_noop_006b54be (hp6::runtime),src/runtime/WrapperStubs.cpp,integrated,passed,unverified
+006b7bcb,undefined __fastcall FUN_006b7bcb(undefined4 * param_1),hp6::platform::destroy_components_variant,src/platform/ServiceLifecycle.cpp,integrated,passed,unverified
+006b7cca,"undefined4 * __thiscall FUN_006b7cca(void * this, byte param_1)",hp6::platform::destroy_record_0x84,src/platform/ServiceLifecycle.cpp,integrated,passed,unverified
+006b7cef,,hp6::platform::construct_vtable_00715da8,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006b7d0f,undefined __fastcall FUN_006b7d0f(undefined4 * param_1),hp6::platform::destroy_components,src/platform/ServiceLifecycle.cpp,integrated,passed,unverified
+006b7dcb,"undefined4 * __thiscall FUN_006b7dcb(void * this, byte param_1)",hp6::platform::destroy_record_0x1c,src/platform/ServiceLifecycle.cpp,integrated,passed,unverified
+006b92aa,,vsprintf (CRT external),records/crt,integrated,passed,unverified
+006b92bc,,std::strncpy (CRT external),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b92c2,,printf (CRT external),records/crt,integrated,passed,unverified
+006b92c8,_onexit_t __cdecl __onexit(_onexit_t param_1),std::atexit (CRT external),src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006b936d,,hp6::platform::atexit_register,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006b9386,"char * __cdecl strchr(char * _Str, int _Val)",std::strchr (CRT external),src/archive/Entry.cpp,integrated,passed,unverified
+006b938c,"int __cdecl sprintf(char * _Dest, char * _Format, ...)",std::sprintf (CRT external),,integrated,n/a,unverified
+006b9392,,std::strncmp (CRT external),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b93a4,,::_stricmp (CRT external),src/runtime/VolumeRegistry.cpp,integrated,passed,unverified
+006b93f4,,_vsnprintf (CRT external),records/crt,integrated,passed,unverified
+006b9730,,std::memcpy (CRT external),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b9740,,__allmul (CRT external),records/crt,integrated,passed,unverified
+006b9774,int __cdecl tolower(int _C),std::tolower (CRT external),src/archive/Entry.cpp,integrated,passed,unverified
+006b9790,,__alloca_probe (CRT external),records/crt,integrated,passed,unverified
+006b97bc,,std::memset (CRT external),src/runtime/PoolPath.cpp,integrated,passed,unverified
+006b9a10,,_ftol2 fastcall sibling (CRT external),records/crt,integrated,passed,unverified
+006b9a46,,_ftol2 (CRT external),records/crt,integrated,passed,unverified
+006b9b36,,_CIpow (CRT external),records/crt,integrated,passed,unverified
+006b9b3c,,_CIsqrt (CRT external),records/crt,integrated,passed,unverified
+006b9b48,,getenv (CRT external),records/crt,integrated,passed,unverified
+006b9b9c,,__SEH_prolog4 (CRT external),records/crt,integrated,passed,unverified
+006b9be1,,__SEH_epilog4 (CRT external),records/crt,integrated,passed,unverified
+006d6ab6,"undefined __cdecl FUN_006d6ab6(undefined4 param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, undefined4 param_5, undefined4 param_6, undefined4 param_7)",hp6::projection::dispatch_allocation,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d6b3f,undefined __cdecl FUN_006d6b3f(undefined4 param_1),hp6::projection::release_projection_memory,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d6b7f,undefined1 __cdecl FUN_006d6b7f(int param_1),hp6::projection::is_projection_code,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d6ba4,undefined4 __cdecl FUN_006d6ba4(uint param_1),hp6::projection::is_table_projection_code,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d6bce,"undefined __thiscall FUN_006d6bce(void * this, int param_1)",hp6::projection::set_flag_10,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d6bf1,"undefined __thiscall FUN_006d6bf1(void * this, int param_1)",hp6::projection::link_next_record,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d6c09,byte __fastcall FUN_006d6c09(uint * param_1),hp6::projection::classify_record,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d6c5c,"uint * __thiscall FUN_006d6c5c(void * this, int param_1)",hp6::projection::find_record_by_kind,src/projection/RecordLookup.cpp,integrated,passed,unverified
+006d6d39,"undefined4 __thiscall FUN_006d6d39(void * this, undefined4 param_1, uint * param_2)",,,deferred,not_run,unverified
+006d6ec3,"int __thiscall FUN_006d6ec3(void * this, uint * param_1, int param_2)",hp6::projection::measure_record_replacement,src/projection/CollectionSizing.cpp,integrated,passed,unverified
+006d700a,"undefined4 __thiscall FUN_006d700a(void * this, int param_1)",hp6::projection::remove_record_by_kind,src/projection/RecordChainEdit.cpp,integrated,passed,unverified
+006d707c,"undefined4 __thiscall FUN_006d707c(void * this, uint * param_1)",hp6::projection::insert_record_after_kind,src/projection/RecordChainEdit.cpp,integrated,passed,unverified
+006d70e4,undefined __fastcall FUN_006d70e4(void * param_1),hp6::projection::find_variant_02,src/projection/RecordLookup.cpp,integrated,passed,unverified
+006d70ec,undefined __fastcall FUN_006d70ec(void * param_1),hp6::projection::find_variant_04,src/projection/RecordLookup.cpp,integrated,passed,unverified
+006d70ff,undefined __fastcall FUN_006d70ff(void * param_1),hp6::projection::find_variant_10,src/projection/RecordLookup.cpp,integrated,passed,unverified
+006d7112,undefined __fastcall FUN_006d7112(void * param_1),hp6::projection::find_variant_20,src/projection/RecordLookup.cpp,integrated,passed,unverified
+006d7170,undefined1 __cdecl FUN_006d7170(int param_1),hp6::projection::is_block_code,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7187,undefined1 __cdecl FUN_006d7187(undefined4 param_1),hp6::projection::is_block_format_code,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d71db,"undefined __thiscall FUN_006d71db(void * this, int param_1)",hp6::projection::set_flag_9,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d71fd,"undefined __thiscall FUN_006d71fd(void * this, int param_1)",hp6::projection::set_flag_11,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7220,"undefined __thiscall FUN_006d7220(void * this, int param_1)",hp6::projection::set_flag_16,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7249,"undefined __thiscall FUN_006d7249(void * this, int param_1)",hp6::projection::set_flag_17,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7272,"undefined __thiscall FUN_006d7272(void * this, int param_1)",hp6::projection::set_flag_18,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d729b,"undefined __thiscall FUN_006d729b(void * this, int param_1)",hp6::projection::set_flag_19,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d72c4,"undefined __thiscall FUN_006d72c4(void * this, int param_1)",hp6::projection::set_flag_20,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d72ed,"undefined __thiscall FUN_006d72ed(void * this, int param_1)",hp6::projection::set_flag_21,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7316,"undefined __thiscall FUN_006d7316(void * this, int param_1)",hp6::projection::set_flag_23,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d733f,"undefined __thiscall FUN_006d733f(void * this, int param_1)",hp6::projection::set_flag_24,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7368,"undefined __thiscall FUN_006d7368(void * this, int param_1)",hp6::projection::set_flag_22,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d7391,"undefined __thiscall FUN_006d7391(void * this, undefined4 * param_1, undefined4 * param_2, undefined4 * param_3, undefined4 * param_4)",hp6::projection::copy_four_fields,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d73b8,undefined __fastcall FUN_006d73b8(undefined4 * param_1),hp6::projection::initialize_record,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d744b,undefined4 * __fastcall FUN_006d744b(undefined4 * param_1),hp6::projection::initialize_record_and_return,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d74af,undefined4 __cdecl FUN_006d74af(int param_1),hp6::projection::map_format_unit,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d74ce,int __cdecl FUN_006d74ce(int param_1),hp6::projection::estimate_record_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d760a,int __cdecl FUN_006d760a(int param_1),hp6::projection::estimate_variant_04_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d7667,undefined4 __stdcall FUN_006d7667(void),hp6::projection::fixed_clip_storage_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d766b,int __cdecl FUN_006d766b(int param_1),hp6::projection::comment_storage_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d767c,int __cdecl FUN_006d767c(int param_1),hp6::projection::eagl_storage_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d768d,int __cdecl FUN_006d768d(int param_1),hp6::projection::estimate_variant_10_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d76a6,uint __cdecl FUN_006d76a6(int param_1),hp6::projection::estimate_collection_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d7745,"undefined __thiscall FUN_006d7745(void * this, int param_1)",hp6::projection::initialize_record_header,src/projection/RecordFlags.cpp,integrated,passed,unverified
+006d778a,"undefined __thiscall FUN_006d778a(void * this, int param_1)",hp6::projection::decode_variant_04,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d77dc,"uint * __cdecl FUN_006d77dc(int param_1, undefined4 param_2)",hp6::projection::create_clut_variant_04,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d7827,"undefined __thiscall FUN_006d7827(void * this, int param_1)",hp6::projection::decode_variant_100,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d7865,"uint * __cdecl FUN_006d7865(int param_1, undefined4 param_2)",hp6::projection::create_clip_variant_100,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d78a8,"undefined __thiscall FUN_006d78a8(void * this, int param_1)",hp6::projection::decode_variant_10,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d78f2,"uint * __cdecl FUN_006d78f2(int param_1, undefined4 param_2)",hp6::projection::create_hots_variant_10,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d793d,"undefined __thiscall FUN_006d793d(void * this, int param_1)",hp6::projection::decode_variant_80,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d7980,"uint * __cdecl FUN_006d7980(int param_1, undefined4 param_2)",hp6::projection::create_clut_element,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d79ce,"undefined __thiscall FUN_006d79ce(void * this, int param_1)",hp6::projection::decode_variant_20,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d79fa,"uint * __cdecl FUN_006d79fa(int param_1, undefined4 param_2)",hp6::projection::create_shp_record_variant_20,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d7a48,"undefined __thiscall FUN_006d7a48(void * this, int param_1)",hp6::projection::write_common_flags,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7a73,"undefined __thiscall FUN_006d7a73(void * this, int param_1)",hp6::projection::write_variant_02,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7b14,"undefined __thiscall FUN_006d7b14(void * this, int param_1)",hp6::projection::write_variant_04,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7b49,"undefined __thiscall FUN_006d7b49(void * this, int param_1)",hp6::projection::write_variant_100,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7b7a,"undefined __thiscall FUN_006d7b7a(void * this, int param_1)",hp6::projection::write_variant_10,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7baf,"undefined __thiscall FUN_006d7baf(void * this, int param_1)",hp6::projection::write_variant_80,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7bd2,"undefined __thiscall FUN_006d7bd2(void * this, int param_1)",hp6::projection::write_variant_20,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7c07,"undefined __thiscall FUN_006d7c07(void * this, undefined4 * param_1)",hp6::projection::write_projection_list,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d7cd2,"undefined __thiscall FUN_006d7cd2(void * this, int param_1)",hp6::projection::decode_variant_02,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d7d9c,"uint * __cdecl FUN_006d7d9c(int param_1, undefined4 param_2)",hp6::projection::create_shp_record_variant_02,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d7dea,"undefined __cdecl FUN_006d7dea(void * param_1, int param_2)",hp6::projection::assemble_projection_records,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d7f49,"uint * __cdecl FUN_006d7f49(int param_1, undefined4 param_2)",hp6::projection::create_projection_collection,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d81a4,uint __cdecl FUN_006d81a4(uint param_1),hp6::projection::is_selected_format_code,src/projection/RecordFields.cpp,integrated,passed,unverified
+006d81e5,undefined __cdecl FUN_006d81e5(int param_1),hp6::projection::release_record_chain,src/projection/RecordChainEdit.cpp,integrated,passed,unverified
+006d822a,"undefined __thiscall FUN_006d822a(void * this, void * param_1)",hp6::projection::clone_variant_02,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d829c,"uint * __thiscall FUN_006d829c(void * this, undefined4 param_1)",hp6::projection::clone_variant_02_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d82ec,"undefined __thiscall FUN_006d82ec(void * this, void * param_1)",hp6::projection::clone_variant_04,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d835e,"uint * __thiscall FUN_006d835e(void * this, undefined4 param_1)",hp6::projection::clone_variant_04_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d83ab,"undefined __thiscall FUN_006d83ab(void * this, void * param_1)",hp6::projection::clone_variant_100,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d8417,"uint * __thiscall FUN_006d8417(void * this, undefined4 param_1)",hp6::projection::clone_variant_100_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d8466,"undefined __thiscall FUN_006d8466(void * this, void * param_1)",hp6::projection::clone_variant_10,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d84de,"uint * __thiscall FUN_006d84de(void * this, undefined4 param_1)",hp6::projection::clone_variant_10_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d852e,"undefined __thiscall FUN_006d852e(void * this, void * param_1)",hp6::projection::clone_variant_80,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d85c9,"uint * __thiscall FUN_006d85c9(void * this, undefined4 param_1)",hp6::projection::clone_variant_80_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d8619,"undefined __thiscall FUN_006d8619(void * this, void * param_1)",hp6::projection::clone_variant_20,src/projection/RecordDecode.cpp,integrated,passed,unverified
+006d8685,"uint * __thiscall FUN_006d8685(void * this, undefined4 param_1)",hp6::projection::clone_variant_20_allocated,src/projection/AllocationDispatch.cpp,integrated,passed,unverified
+006d86d5,"undefined __thiscall FUN_006d86d5(void * this, int param_1)",hp6::projection::clone_record_chain_into,src/projection/ChainClone.cpp,integrated,passed,unverified
+006d8816,"uint * __thiscall FUN_006d8816(void * this, undefined4 param_1)",hp6::projection::clone_record_chain_allocated,src/projection/ChainClone.cpp,integrated,passed,unverified
+006d8864,int __fastcall FUN_006d8864(uint * param_1),hp6::projection::record_storage_size,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d88d2,uint __fastcall FUN_006d88d2(uint * param_1),hp6::projection::measure_clone_chain,src/projection/ChainClone.cpp,integrated,passed,unverified
+006d896e,"uint __thiscall FUN_006d896e(void * this, int param_1, int param_2)",hp6::projection::measure_collection_update,src/projection/CollectionSizing.cpp,integrated,passed,unverified
+006d8c7d,"undefined __cdecl FUN_006d8c7d(undefined4 param_1, undefined4 * param_2)",hp6::projection::format_geometry,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d8d62,"int __cdecl FUN_006d8d62(undefined4 param_1, int param_2, int param_3)",hp6::projection::extra_block_count,src/projection/FormatSize.cpp,integrated,passed,unverified
+006d91f0,,hp6::platform::close_handle,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006d928b,undefined __fastcall FUN_006d928b(int param_1),hp6::platform::initialize_lock,src/platform/Sync.cpp,integrated,passed,unverified
+006d92a1,,hp6::platform::enter_lock,src/platform/Sync.cpp,integrated,passed,unverified
+006d92ac,,hp6::platform::leave_lock,src/platform/Sync.cpp,integrated,passed,unverified
+006d92b7,undefined4 __cdecl FUN_006d92b7(int param_1),hp6::platform::create_event,src/platform/Sync.cpp,integrated,passed,unverified
+006d92da,undefined __cdecl FUN_006d92da(int param_1),hp6::platform::signal_event,src/platform/Sync.cpp,integrated,passed,unverified
+006d9351,,thread_trampoline_006d9351 (hp6::platform),src/platform/Sync.cpp,integrated,passed,unverified
+006d9416,,hp6::platform::sleep_alertable,src/platform/Sync.cpp,integrated,passed,unverified
+006d944e,,hp6::platform::thread_owns,src/platform/Sync.cpp,integrated,passed,unverified
+006d94f5,"undefined4 __cdecl FUN_006d94f5(int param_1, int param_2)",hp6::platform::set_thread_priority,src/platform/ThreadPriority.cpp,integrated,passed,unverified
+006d95d0,"undefined4 __cdecl FUN_006d95d0(undefined1 * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4, uint param_5, int param_6)",launch_thread (hp6::platform),src/platform/Sync.cpp,integrated,passed,unverified
+006d971d,,pump_timer_slots (hp6::platform),src/platform/TimerWheel.cpp,integrated,passed,unverified
+006dadb9,"int __cdecl FUN_006dadb9(int param_1, int param_2)",hp6::platform::startup_resource_size,src/platform/StartupSupport.cpp,integrated,passed,unverified
+006db315,"undefined __thiscall FUN_006db315(void * this, undefined4 * param_1)",queue_push_006db315 (hp6::runtime),src/runtime/ListQueue.cpp,integrated,passed,unverified
+006db335,undefined __fastcall FUN_006db335(undefined4 * param_1),queue_pop_006db335 (hp6::runtime),src/runtime/ListQueue.cpp,integrated,passed,unverified
+006db3f9,"undefined4 __fastcall FUN_006db3f9(undefined4 * param_1, undefined4 * param_2, undefined4 * param_3)",hp6::stream::locate_header,src/stream/Metadata.cpp,integrated,passed,unverified
+006db50a,"uint __fastcall FUN_006db50a(int param_1, uint param_2)",hp6::stream::find_entry,src/stream/Metadata.cpp,integrated,passed,unverified
+006dba7f,"undefined __cdecl FUN_006dba7f(undefined4 * param_1, int param_2, int param_3, int param_4, int param_5)",hp6::stream::set_descriptor,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbaed,"undefined __cdecl FUN_006dbaed(undefined4 * param_1, undefined4 param_2, undefined4 param_3)",hp6::stream::set_header_words_48_4c,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbb55,"int __cdecl FUN_006dbb55(undefined4 * param_1, int param_2)",hp6::stream::indexed_record_10,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbb8e,undefined4 __cdecl FUN_006dbb8e(undefined4 * param_1),hp6::stream::slot_word_04,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbda1,undefined4 __cdecl FUN_006dbda1(undefined4 * param_1),hp6::stream::slot_word_08,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbdc6,undefined4 __cdecl FUN_006dbdc6(undefined4 * param_1),hp6::stream::header_word_44,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbdeb,uint __cdecl FUN_006dbdeb(undefined4 * param_1),hp6::stream::is_header_inactive,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbe1d,int __cdecl FUN_006dbe1d(undefined4 * param_1),hp6::stream::header_delta_40_38,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbe45,undefined4 __cdecl FUN_006dbe45(undefined4 * param_1),hp6::stream::header_word_58,src/stream/Metadata.cpp,integrated,passed,unverified
+006dbee7,"undefined4 __cdecl FUN_006dbee7(undefined4 * param_1, uint param_2)",hp6::stream::entry_value,src/stream/Metadata.cpp,integrated,passed,unverified
+006dc532,"uint __cdecl FUN_006dc532(byte * param_1, int param_2)",hp6::archive::read_partial_uint,src/archive/Header.cpp,integrated,passed,unverified
+006dc594,"undefined8 __cdecl FUN_006dc594(int param_1, int param_2)",hp6::archive::pack_bytes_be,src/archive/Header.cpp,integrated,passed,unverified
+006dc5c9,,hp6::archive::case_insensitive_compare,src/archive/Entry.cpp,integrated,passed,unverified
+006dc5f9,undefined4 __cdecl FUN_006dc5f9(byte * param_1),hp6::archive::classify_container,src/archive/Header.cpp,integrated,passed,unverified
+006dc664,uint __cdecl FUN_006dc664(byte * param_1),hp6::archive::header_payload_offset,src/archive/Header.cpp,integrated,passed,unverified
+006dc6a3,"undefined4 __cdecl FUN_006dc6a3(byte * param_1, int * param_2, uint * param_3)",hp6::archive::extract_numeric_tag,src/archive/Header.cpp,integrated,passed,unverified
+006dc733,,hp6::archive::tag_digits_value,src/archive/Entry.cpp,integrated,passed,unverified
+006dc751,,hp6::archive::find_entry,src/archive/Entry.cpp,integrated,passed,unverified
+006dc86f,,hp6::archive::entry_field_by_name,src/archive/Entry.cpp,integrated,passed,unverified
+006dc896,,hp6::archive::entry_pointer_by_index,src/archive/Entry.cpp,integrated,passed,unverified
+006dc8c2,,hp6::archive::entry_pointer_by_name,src/archive/Entry.cpp,integrated,passed,unverified
+006dc8e4,,hp6::archive::header_field_32,src/archive/Entry.cpp,integrated,passed,unverified
+006dc920,,hp6::archive::copy_entry_string,src/archive/Entry.cpp,integrated,passed,unverified
+006dc959,,hp6::archive::entry_forward,src/archive/Entry.cpp,integrated,passed,unverified
+006dc962,,hp6::archive::entry_field_by_name_twin,src/archive/Entry.cpp,integrated,passed,unverified
+006dc989,,hp6::archive::entry_pointer_by_name_twin,src/archive/Entry.cpp,integrated,passed,unverified
+006dc9ab,,hp6::archive::resolve_entry_list,src/archive/Entry.cpp,integrated,passed,unverified
+006dc9eb,,hp6::archive::copy_entry_string_twin,src/archive/Entry.cpp,integrated,passed,unverified
+006dcbc7,"undefined __cdecl FUN_006dcbc7(undefined4 param_1, undefined4 param_2)",hp6::platform::release_secondary_block,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dcc40,undefined __fastcall FUN_006dcc40(undefined4 * param_1),hp6::platform::destroy_layer_with_children,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dce80,"undefined4 * __thiscall FUN_006dce80(void * this, byte param_1)",hp6::platform::destroy_layer_0xc0,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dcef4,,hp6::platform::construct_vtable_0071b520,src/platform/HandleRegistry.cpp,integrated,passed,unverified
+006dcf14,undefined __fastcall FUN_006dcf14(undefined4 * param_1),hp6::platform::destroy_layer_core,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd00c,"uint __thiscall FUN_006dd00c(void * this, int param_1)",hp6::platform::remove_entry_pointer,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd111,"undefined4 * __thiscall FUN_006dd111(void * this, byte param_1)",hp6::platform::destroy_layer_0xb4,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd188,undefined __fastcall FUN_006dd188(undefined4 * param_1),hp6::platform::finalize_record_0071b560,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd2c9,"undefined4 * __thiscall FUN_006dd2c9(void * this, byte param_1)",hp6::platform::destroy_entry_record_0071b560,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd354,undefined __fastcall FUN_006dd354(undefined4 * param_1),hp6::platform::finalize_record_0071b580,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dd894,"undefined4 * __thiscall FUN_006dd894(void * this, byte param_1)",hp6::platform::destroy_entry_record_0071b580,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006ddb15,undefined __fastcall FUN_006ddb15(undefined4 * param_1),hp6::platform::finalize_record_0071b5a0,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006dddf6,"undefined4 * __thiscall FUN_006dddf6(void * this, byte param_1)",hp6::platform::destroy_entry_record_0071b5a0,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de449,"undefined4 * __thiscall FUN_006de449(void * this, byte param_1)",hp6::platform::destroy_record_0x464_two_stage,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de5b0,undefined4 __fastcall FUN_006de5b0(int param_1),hp6::platform::release_member_0x468,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de5e1,undefined __fastcall FUN_006de5e1(undefined4 * param_1),hp6::platform::destroy_record_with_member,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de615,"undefined4 * __thiscall FUN_006de615(void * this, byte param_1)",hp6::platform::destroy_record_0x46c,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de65f,"undefined4 * __thiscall FUN_006de65f(void * this, byte param_1)",hp6::platform::destroy_record_0x24,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de70d,"undefined4 * __thiscall FUN_006de70d(void * this, byte param_1)",hp6::platform::destroy_record_0x78,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de735,undefined __fastcall FUN_006de735(undefined4 * param_1),hp6::platform::set_vtable_0071b650,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de7a1,"undefined4 * __thiscall FUN_006de7a1(void * this, byte param_1)",hp6::platform::destroy_record_0x464,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de7d0,undefined __fastcall FUN_006de7d0(undefined4 * param_1),hp6::platform::reset_record_vtable_0071b670,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006de7e5,"undefined4 * __thiscall FUN_006de7e5(void * this, byte param_1)",hp6::platform::destroy_record_0x04,src/platform/ServiceLifecycleExtra.cpp,integrated,passed,unverified
+006f363c,"uintptr_t __cdecl _beginthreadex(void * _Security, uint _StackSize, _StartAddress * _StartAddress, void * _ArgList, uint _InitFlag, uint * _ThrdAddr)",_beginthreadex (CRT external),src/platform/Sync.cpp,integrated,passed,unverified
+00ff8380,bool __stdcall FUN_00ff8380(void),hp6::platform::register_game_window_class,src/platform/GameWindow.cpp,integrated,passed,unverified

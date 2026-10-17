@@ -1,0 +1,11 @@
+{
+  "function_count": 12758,
+  "call_edges": 21770,
+  "global_count": 9594,
+  "structure_count": 84,
+  "vtable_count": 2,
+  "global_references": 10726,
+  "string_references": 3116,
+  "source": ".ghidra-exports",
+  "caveat": "Names, signatures, and references are Ghidra evidence, not verified source types."
+}
