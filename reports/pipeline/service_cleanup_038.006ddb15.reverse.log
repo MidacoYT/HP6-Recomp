@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006ddb15",
+      "run_id": "e23a4525a5b2405fa9c3d4ae650fe7fe",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006ddb15",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_006ddb15(std::uint32_t* self)\n{\n    self[0] = reinterpret_cast<std::uint32_t>(&PTR_FUN_0071b5a0);\n\n    // The member at 0x498 has no evidence-backed name.\n    auto* field_0498 = reinterpret_cast<void*>(self[0x126]);\n    if (field_0498 != nullptr) {\n        auto* vtable = *reinterpret_cast<std::uint8_t**>(field_0498);\n        auto method = *reinterpret_cast<void (__thiscall **)(void*)>(vtable + 0x20);\n        method(field_0498);\n    }\n\n    FUN_006de5b0(reinterpret_cast<int>(self));\n    FUN_006dd00c(reinterpret_cast<void*>(self[0x119]), reinterpret_cast<int>(self));\n    FUN_006de5e1(self);\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code does not fully match the supplied binary evidence.",
+      "issues": [
+        "The binary loads the pointer at offset 0x498 before writing the vtable pointer at offset 0; the reversed code writes first.",
+        "The indirect call is shown with only a call target. Passing field_0498 as a __thiscall receiver is not established by the supplied evidence.",
+        "Offsets 0x498 and 0x464 are accessed by array index rather than mapped to named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006ddb15\\_FUN_006ddb15.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

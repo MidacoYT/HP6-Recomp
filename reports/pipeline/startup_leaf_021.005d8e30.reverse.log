@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "005d8e30",
+      "run_id": "257f32c5d574421da94483bd6ed35667",
+      "error": null,
+      "class_name": "",
+      "function_name": "thunk_FUN_00ff8380",
+      "success": true,
+      "rounds_used": 1,
+      "code": "bool __stdcall thunk_FUN_00ff8380()\n{\n    // The binary takes this argument from the incoming ESI register.\n    HINSTANCE unaff_ESI;\n    __asm mov unaff_ESI, esi\n\n    UnregisterClassA(\"HalfBloodPrinceMainWndClass\", unaff_ESI);\n\n    WNDCLASSA wndClass; // The evidence identifies writes to only the first four fields.\n    if (DAT_00866e2a == '\\0') {\n        wndClass.style = 0x2000;\n        LoadCursorA(nullptr, MAKEINTRESOURCEA(0x7f00));\n    } else {\n        wndClass.style = 0x2020;\n    }\n\n    wndClass.lpfnWndProc = FUN_005d8a30;\n    wndClass.cbClsExtra = 0;\n    wndClass.cbWndExtra = 0;\n\n    LoadImageA(nullptr, \".\\\\..\\\\hbp_icon.ico\", 1, 0x20, 0x20, 0x10);\n    GetStockObject(4);\n\n    return RegisterClassA(&wndClass) != 0;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d8e30\\_thunk_FUN_00ff8380.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 0 calls, source has 6 calls (diff: 6)"
+        }
+      ]
+    }
+  ]
+}

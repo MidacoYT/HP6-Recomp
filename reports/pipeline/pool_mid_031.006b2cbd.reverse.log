@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b2cbd",
+      "run_id": "f850ca204d594a2ba35c043fcdfa8fab",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2cbd",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_006b2cbd(int* param_1)\n{\n    const int node = param_1[0];\n    if (node == 0) {\n        return;\n    }\n\n    if (node == param_1[1]) {\n        param_1[1] = 0;\n        param_1[0] = 0;\n    } else {\n        const int link = *reinterpret_cast<int*>(node + 8);\n        param_1[0] = (link == 0) ? 0 : link - 8;\n    }\n\n    param_1[2] = param_1[2] - 1;\n    *reinterpret_cast<int*>(node + 8) = 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The logic largely matches the decompilation, but the final store has conflicting evidence and the offsets lack named members.",
+      "issues": [
+        "The code uses param_1[0], param_1[1], param_1[2], and node + 8 instead of named struct members.",
+        "The decompilation clears node + 8, while the supplied P-code appears to overwrite its base value with the link before the final store. The final store target cannot be verified from these conflicting representations."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2cbd\\_FUN_006b2cbd.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

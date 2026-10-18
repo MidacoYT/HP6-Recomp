@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dc664",
+      "run_id": "eab47eece5394bf399a4740eaf28d6d8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc664",
+      "success": true,
+      "rounds_used": 1,
+      "code": "unsigned int __cdecl FUN_006dc664(unsigned char* param_1)\n{\n    unsigned int result = 0;\n    const int value = static_cast<int>(FUN_006dc5f9(param_1));\n\n    if (value == 1) {\n        result = ((static_cast<unsigned int>(param_1[2]) << 8)\n                | static_cast<unsigned int>(param_1[3])) + 4;\n    } else if (1 < value && value < 4) {\n        result = FUN_006dc532(param_1 + 0x0c, 4);\n    }\n\n    return result;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompiled function\u2019s calls, byte offsets, branches, and expression order.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc664\\_FUN_006dc664.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

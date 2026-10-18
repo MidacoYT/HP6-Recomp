@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006b2673",
+      "run_id": "a573f50eca4e4d7f8834c091eca959eb",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2673",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t* __cdecl FUN_006b25b8(char* param_1);\n\nvoid __stdcall FUN_006b2673(char* param_1)\n{\n    std::uint32_t* puVar1 = FUN_006b25b8(param_1);\n    void* object = reinterpret_cast<void*>(puVar1[0x21]); // Offset 0x84; member name unresolved.\n    void** vtable = *reinterpret_cast<void***>(object);\n\n    using Method = void (__thiscall*)(void*);\n    reinterpret_cast<Method>(vtable[0x2c / sizeof(void*)])(object);\n}",
+      "verdict": "FAIL",
+      "summary": "The pointer chain matches, but the member and indirect transfer are not verified exactly.",
+      "issues": [
+        "Offset 0x84 is left as an unnamed member.",
+        "The binary uses an indirect jump at 0x006b2688; the reversed code uses a call followed by a return.",
+        "The vtable index depends on sizeof(void*), so it reaches byte offset 0x2c only in a 32-bit build."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2673\\_FUN_006b2673.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006db3f9",
+      "run_id": "a890b5a72ea8412db29acf74364e115a",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db3f9",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3)\n{\n    if (param_1 != nullptr) {\n        auto* piVar1 =\n            reinterpret_cast<std::uint32_t*>(static_cast<std::uintptr_t>(*param_1));\n\n        if (*piVar1 == 0x4D525453u) {\n            *param_2 = static_cast<std::uint32_t>(\n                reinterpret_cast<std::uintptr_t>(param_1));\n            *param_3 = static_cast<std::uint32_t>(\n                reinterpret_cast<std::uintptr_t>(piVar1));\n            return 0;\n        }\n    }\n\n    return 1;\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code matches the decompilation, but the supplied P-code conflicts on the value written to param_3.",
+      "issues": [
+        "At 0x006db414, the P-code stores the temporary overwritten by the dereference at 0x006db402, while the decompilation and reversed code store piVar1, the pointer loaded from *param_1. The evidence does not establish which value the binary writes."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006db3f9\\_FUN_006db3f9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

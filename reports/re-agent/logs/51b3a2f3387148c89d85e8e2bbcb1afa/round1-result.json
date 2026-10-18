@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "01002890",
+      "run_id": "51b3a2f3387148c89d85e8e2bbcb1afa",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01002890",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n#include <cstring>\n\n// The call site uses EAX as a pointer after this call, although the\n// existing reversal of FUN_0063b850 declares a void return.\nextern std::uint32_t* __fastcall FUN_0063b850(\n    std::uint32_t param_1, std::int32_t param_2);\n\nextern std::uint32_t* DAT_00cf1920;\nextern std::uint32_t DAT_00866368;\nextern std::uint32_t DAT_00cf1918;\nextern std::uint32_t DAT_00cf191c;\nextern std::byte _Dst_00bb0a70[];\nextern std::byte _Dst_0096b490[];\n\nstd::uint32_t __thiscall FUN_01002890(\n    void* self, const std::uint32_t* param_1, char param_2, char param_3)\n{\n    DAT_00cf1920 = FUN_0063b850(\n        static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(self)),\n        0x30);\n\n    for (int i = 0; i != 12; ++i) {\n        DAT_00cf1920[i] = param_1[i];\n    }\n\n    if (param_2 != 0) {\n        DAT_00cf1920[4] = DAT_00866368;\n        DAT_00cf1918 =\n            static_cast<std::uint32_t>(\n                *reinterpret_cast<const std::uint8_t*>(param_1 + 9)) *\n            static_cast<std::uint32_t>(\n                *reinterpret_cast<const std::uint16_t*>(\n                    reinterpret_cast<const std::byte*>(param_1) + 0x26));\n        std::memcpy(\n            _Dst_00bb0a70,\n            reinterpret_cast<const void*>(\n                static_cast<std::uintptr_t>(param_1[10])),\n            DAT_00cf1918);\n    }\n\n    void* copy_result = nullptr;\n    if (param_3 != 0) {\n        DAT_00cf1920[5] = DAT_00866368;\n        DAT_00cf191c =\n            static_cast<std::uint32_t>(\n                *reinterpret_cast<const std::uint16_t*>(\n                    reinterpret_cast<const std::byte*>(param_1) + 0x22))\n            << 1;\n        copy_result = std::memcpy(\n            _Dst_0096b490,\n            reinterpret_cast<const void*>(\n                static_cast<std::uintptr_t>(param_1[11])),\n            DAT_00cf191c);\n    }\n\n    return (static_cast<std::uint32_t>(\n                reinterpret_cast<std::uintptr_t>(copy_result)) &\n            0xffffff00U) | 1U;\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and operations match, but record offsets lack named members.",
+      "issues": [
+        "The source accesses fields through param_1 indices and byte offsets instead of named members, so the offsets cannot be verified against a declared layout."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01002890\\_FUN_01002890.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

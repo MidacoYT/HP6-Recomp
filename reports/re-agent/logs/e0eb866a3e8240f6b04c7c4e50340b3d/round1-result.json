@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "004301e0",
+      "run_id": "e0eb866a3e8240f6b04c7c4e50340b3d",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_004301e0",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cfloat>\n\nstatic_assert(LDBL_MANT_DIG == 64 && LDBL_MAX_EXP == 16384,\n              \"This function requires an 80-bit x87 long double.\");\n\nlong double __fastcall FUN_004301e0(float** param_1)\n{\n    // The float at offset 4 has no evidence-backed member name.\n    return static_cast<long double>((*param_1)[1]);\n}",
+      "verdict": "PASS",
+      "summary": "The code matches the observed load from offset 4 and float-to-80-bit conversion.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\004301e0\\_FUN_004301e0.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (4 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

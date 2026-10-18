@@ -1,0 +1,29 @@
+Candidate validation failed for 006db315: Candidate must contain exactly one complete function body
+Candidate validation failed for 006db315: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006db315",
+      "run_id": "723a166131ea4d4596cc80c0f055af65",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db315",
+      "success": false,
+      "rounds_used": 3,
+      "code": "#include <cstdint>\n\nstruct Node_006db315 {\n    Node_006db315* field_0x0;\n};\n\nstruct Context_006db315 {\n    Node_006db315* field_0x0;\n    Node_006db315* field_0x4;\n    std::uint32_t field_0x8;\n};\n\nvoid __thiscall FUN_006db315(void* self, Node_006db315* param_1)\n{\n    auto* const context = static_cast<Context_006db315*>(self);\n    Node_006db315* const previous = context->field_0x4;\n\n    param_1->field_0x0 = nullptr;\n    ++context->field_0x8;\n    context->field_0x4 = param_1;\n\n    if (previous == nullptr) {\n        context->field_0x0 = param_1;\n    } else {\n        previous->field_0x0 = param_1;\n    }\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

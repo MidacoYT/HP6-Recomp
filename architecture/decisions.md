@@ -1,5 +1,97 @@
 # Décisions et limites de reconstruction
 
+## Lot 052 — opérateurs fichiers réservés (file_ops_052), 2026-10-18
+
+- **Résolution du blocage « blocked »** : les 5 wrappers de
+  `mixed_deps_060` étaient bloqués parce que le chaînage confondait
+  *token* et *record*. L'asm tranche : les créateurs renvoient le **token
+  compacté** (`index | (compteur+1)<<8`, confirmé octet par octet dans
+  `006b1910`), mais les workers de fichier passent à l'étage suivant le
+  **pair_lo** d'une étape précédente (paire lue par 006b2359), et le
+  binaire déréférence `word(record+0xc)` pour trouver le slot moteur.
+  `006b175b`/`006b1815`/`006b1783`/`006b17b7` renvoient la **paire
+  64 bits**, le token n'entre en jeu que comme clef d'attente.
+- `006b329a` → `construct_probe_node_00715af0` (`PoolList.cpp`) :
+  thiscall RET 0x1c, vtable brute 0x715af0 ; attach moteur d'abord
+  (006b20e8), record à +0x14, paires signées CDQ +0x28/+0x2c et
+  +0x20/+0x24 entrelacées avec l'écriture de vtable, mot non signé +0x30
+  en dernier, ordonnancement (006b2199) à la fin.
+- `006b24f2` → `create_probe_node_from_record` (`PoolList.cpp`) : cdecl ;
+  slot 0x40 (006b1d53) puis entonnoir décompilé
+  `329a(slot, p1, p4, p2, p3, p5, p6, [p1+0xc])` ; pas de garde
+  pool-vide ; répond `[slot+0xc]`.
+- `006b17b7` → `create_and_wait_probe_node` (`PoolWait.cpp`) : paire
+  finale (006b2359), comme 006b1815.
+- Nouveau module `src/runtime/FileOps.{h,cpp}` (11 fonctions du lot) :
+  - workers (cdecl, rappelés par 006b2553 avec réserve 0x64 et pointeur
+    de contexte) :
+    - `006d9f47` `open_file_reserved` : chaîne 175b(champ 1) → 1815 →
+      descripteur 18 dwords hlsfile (6, 0xac, 5, chaîne 0x71b358, 7,
+      &ctx[4], 1, chemin, drapeaux `(ctx4>>9)&2` et `(ctx4>>6)&4`,
+      DAT_008513ac, …) → vcall thiscall callee-clean slot 0 de
+      DAT_00851384 ; réponse ≠ 0 ⇒ 006b1783(réponse, rec2) puis 006b17e5,
+      `ctx[2] = rec2`, retour de la réponse ; sinon 006b17e5 et 0.
+    - `006da0c0` `write_file_reserved` : 175b(champ 1) →
+      1783(0, ctx[1], ctx[2], mode réserve−1) → 17e5 ignoré ; retourne le
+      pair_lo du repeat.
+    - `006da462` `check_file_reserved` : 175b(champ **6**) → 17b7(0,
+      ctx[1], ctx[2], mode réserve−1) → 17e5 ignoré ; SETZ sur
+      `pair_lo == ctx[2]`.
+  - wrappers (contexte pile EBP−0x14) : `006da081`
+    `open_file_from_path` ({chemin, −, sortie, 0, arg} puis
+    `*out = ctx[2]`), `006da10c`/`006da14e` `write_file_flagged/plain`
+    (drapeau 1 / `AND [EBP-8],0`), `006da4b1`/`006da4f3`
+    `check_file_flagged/plain` (idome DEC/NEG/SBB/INC = `résultat==1`).
+- **Modèle du harnais étendu** : `fire_drain` passe en mode balayage
+  quand `drain_node == nullptr` (complète la tête de la première liste
+  pending vivante, se ré-arme à chaque pump via
+  `wheel[5] = {callback, 96, période 0, échéance 0}`) — les chaînes
+  multi-étages se drainent ainsi sans connaître les tokens à l'avance ;
+  un `PathAllocator` à résultat forcé sert la réponse du rapport
+  d'erreur. Piège à mémoire : le descripteur vit dans la frame *morte*
+  du worker — il est copié **pendant** l'appel d'allocation (repéré par
+  la longueur), tout accès depuis main après retour lit une mémoire
+  écrasée par la machinerie d'appel.
+- mixed_deps_060 marqué superseded (ses 5 adresses vivent désormais en
+  file_ops_052, leurs dépendances externes 006b2553/006b25b8 intégrées).
+
+## Lot 051 — franges du pool (pool_fringes_051), 2026-10-18
+
+- `006b1815` → `create_and_wait_plain_node` (`src/runtime/PoolWait.cpp`) :
+  chaîne créer (006b2527, sans mots d'attach) → attendre (006b22c3) →
+  paire finale (006b2359) ; **retourne la paire elle-même** (contrairement
+  à 006b17e5 qui répond un booléen) — entonnoir vérifié dans l'asm
+  (`PUSH 0; PUSH [EBP+0xc]; PUSH [EBP+8]`).
+- `006b2dde` → `queue_remove_006b2dde` (`src/runtime/ListQueue.cpp`) :
+  retrait thiscall (RET 8) d'un nœud précis de la FIFO
+  { tête +0, queue +4, compteur +8, lien à node+0 } — complète la famille
+  push/pop du complément lot 039. Piège asm : la marche ne re-déréférence
+  **jamais** null — `[previous]==0` est testé AVANT (2e15 / 2e21) ; une
+  première écriture avec `previous = next` puis read crashait (voir test).
+  La queue/l'info de précédent peut venir de `param_2` (hint) ou de la
+  tête si le hint est nul.
+- `006b45ae` → `reset_wrapper_block_006b45ae` (`src/runtime/WrapperStubs.cpp`)
+  : fastcall, reset octet-exact du bandeau d'état 0x16 octets de la
+  famille wrapper : `OR [ECX],-1; OR [ECX+4],-1`, dwords +8/+0xc/+0x10 et
+  octets +0x14/+0x15 à zéro.
+- `006b1a59` → `set_game_search_paths` (`src/runtime/PoolPath.cpp`) :
+  installe la liste `;`-séparée des chemins — `clear_buffer` (006b3b0e, le
+  **raz** une fois pour la table `root+0x88` (DAT_00851390<<2) et une fois
+  pour le tampon `root+0x8c` (DAT_00851394)) ; copie la chaîne, pose
+  `array[0] = tampon`, découpe au thunk strchr CRT (006b9386) : chaque `;`
+  devient un terminateur (slash/barre antérieure effacée) et le jeton
+  suivant est posé dans le slot suivant ; le dernier jeton reçoit le même
+  traitement. Les globales de comptage ne sont jamais écrites.
+- **Découverte d'enregistrement** : `006b3b0e` avec 2 arguments dans cet
+  export est bien `clear_buffer(ptr, size)` (déjà intégré en
+  volume_registry_044) et non memcpy — l'hypothèse « 2 pushes = memcpy »
+  était fausse et corrigée avant l'intégration.
+- Couverture : `queue_remove` (médiat/tête/queue/clef absente),
+  reset wrapper (32-bit + stérilité des octets 0x16+), lot d'attente plain
+  via le drain unique de la roue, et le splitter de chemins (têtes,
+  jetons, stérilité au-delà de la zone utilisée), avec restauration de
+  `root+0x88` pour le jeu de tests 047.
+
 ## Lot 050 — miettes CRT (crt_crumbs_050), 2026-10-17
 
 - Douze adresses de la bande `006b92xx–006b9bxx` enregistrées comme
@@ -788,3 +880,1117 @@ sont expos?s par leur octet bas, seul garanti par le d?sassemblage. Le test
 couvre l?insertion, le retrait du dernier ?l?ment et le marquage du premier
 ?l?ment ; la suppression d?un ?l?ment suivi de descendants demande encore
 une v?rification des contrats d?appel et d?ownership.
+
+## Lot stream_priority_051
+
+Les sept adresses du lot sont desormais integrees dans src/stream. 006dc17c
+et 006dbb17 forment l'enchainement de niveau d'un en-tete STRM : le premier
+ecrit le mot +0x50 et declenche le second quand la comparaison au seuil
++0x58 change de cote ; le second ecrit la cible de franchissement +0x54 et,
+si l'en-tete est actif (+0x44 == 1), fait remonter la priorite du noeud de
+file +0x184 a l'octet +0x4c via hp6::runtime::update_node_priority. ReAgent
+a rejete ces deux candidats (score FAIL malgre un verdict objectif PASS) sur
+deux points : l'usage de decalages bruts au lieu de membres nommes, deja le
+style etabli de ce fichier pour cette structure non resolue, et un ordre
+d'evaluation non garanti entre deux lectures independantes et sans effet de
+bord (+0x4c et +0x184) qui ne change pas le resultat observable. Les deux
+candidats sont retenus apres cette revue.
+
+006f4ffd et 006f4eb9 sont des cibles de saut de queue (PUSH EBP; MOV
+EBP,ESP; POP EBP; JMP) qui transmettent leurs deux arguments sans
+modification vers 006dc17c ; elles sont integrees comme de simples
+redirections nommees par adresse, a l'image des bouchons de
+src/runtime/WrapperStubs.cpp.
+
+006e0778, 006e3f71 et 006e71e1 forment un nouveau module,
+src/stream/ChannelRegistry.cpp : une table de 256 entrees (DAT_0089b200,
+bornee par l'octet DAT_0089b2fe) resolue par index, une recherche de noeud
+par identifiant complet dans la liste chainee du compartiment selectionne
+par l'octet bas de l'identifiant (entree+0x120), et une application de
+niveau qui resout l'entree de table vers son emplacement de flux (entree+0)
+avant d'appeler la chaine 006f4eb9/006dc17c. Le candidat ReAgent de 006e3f71
+a ete rejete pour sa chaine de reinterpret_cast sur des decalages bruts ; le
+candidat est retenu car la lecture de pointeurs correspond exactement a
+l'assembleur exporte (006e3f90-006e3fa6).
+
+Le nouveau test stream_priority_smoke couvre le franchissement de seuil
+actif et inactif, les deux bouchons de redirection, et la chaine complete du
+registre de canaux. L'ajout de l'appel a update_node_priority depuis
+Metadata.cpp tire desormais PoolList.obj/PoolAccess.obj (et, par leur
+intermediaire, Sync.obj et ThreadPriority.obj) dans tout binaire qui
+reference stream::Metadata ; tests/core_smoke.cpp recoit le meme jeu de
+definitions inertes que tests/pool_list_smoke.cpp pour rester linké.
+Compilation Win32 et les 22 tests CTest reussissent ; l'equivalence au
+binaire en execution reste non verifiee. Les 262 fonctions suivies sont
+desormais integrees (0 bloquee, 0 en attente de revue, 8 differees).
+
+## Lot pool_deps_052
+
+006b2673 est integre dans src/runtime/VolumeRegistry.cpp : il resout le
+volume servant un chemin (find_volume_by_name), puis saute sur le slot
++0x2c de la table virtuelle de l'objet du record (record+0x84), en
+thiscall sans argument de pile. L'assembleur exporte montre un JMP
+[EAX+0x2c] precede d'un POP EBP, donc un veritable appel terminal dont
+l'epilogue de la cible renvoie directement a l'appelant de 006b2673 ; le
+candidat ReAgent a ete rejete pour avoir rendu cela par un appel suivi
+d'un retour et pour avoir indexe la table par sizeof(void*). Les deux
+points sont evites en reprenant le style d'acces par decalage d'octet deja
+en usage dans ce fichier. Aucune verification de nullite sur le record
+resolu, comme dans le binaire. Le test volume_registry_smoke reutilise la
+fixture VolumeNode existante (slot vb() a +0x2c) pour verifier l'appel.
+
+Les cinq autres candidats du lot (006d9eea, 006d9f1a, 006da03f, 006da3f9,
+006da42f) restent differes. Ce sont des wrappers cdecl qui resolvent un
+volume puis lancent hp6::runtime::run_reserved_callback (valeur reservee
+100) avec un pointeur de fonction de rappel passe par adresse plutot
+qu'appele directement ; cette reference n'apparait donc pas dans les
+callees suivis par function_map.jsonl et n'a pas ete detectee par
+select_batch.py. Le rappel de 006d9eea/006d9f1a (006d9eac) est une
+composition simple de fonctions deja integrees
+(create_and_wait_bounded_path_node -> create_and_wait_plain_node ->
+create_and_wait_node), mais verifier cette chaine demanderait un drainage
+generique sur plusieurs attentes imbriquees au sein d'un seul appel, ce que
+le harnais de test actuel (lot pool_wait_043, mecanisme a un seul coup) ne
+permet pas sans extension disproportionnee. Les rappels de 006da03f/
+006da3f9/006da42f (006d9f47 et 006da296) tirent en plus un mecanisme
+d'assertion/rapport non resolu (table virtuelle DAT_00851384, enregistrement
+source fixe hlsfile.cpp) qui merite sa propre investigation. Les deux
+paires (006d9eea/006d9f1a et 006da3f9/006da42f) sont par ailleurs
+observablement identiques entre elles : le seul mot de pile qui les
+distingue n'est jamais lu par leur rappel commun.
+
+Compilation Win32 et les 22 tests CTest reussissent. 263 des 276 fonctions
+suivies sont integrees (0 bloquee, 0 en attente de revue, 13 differees).
+
+## Lot mixed_deps_053
+
+select_batch.py a regroupe ces six adresses sur le seul critere d'un
+callee partage, ici memcpy (006b9730) ; le lot n'est donc pas une unite
+fonctionnelle, contrairement aux lots precedents groupes par structure
+reelle. Les six sont neanmoins integrees dans le nouveau fichier
+src/runtime/ScratchBuffers.cpp : quatre allocateurs/copieurs de tampon
+independants et une fonction qui compose deux d'entre eux.
+
+ReAgent a obtenu un verdict FAIL sur quatre candidats malgre un
+objective_verdict PASS et un parity_status green sur les quatre :
+- 00422e20 (store_payload) : le reviseur n'a pas pu confirmer
+  independamment la polarite des deux branches signees a partir du
+  P-code/CFG seul. La relecture directe de l'assembleur expose (JGE
+  0x00422e34 sur taille>=0x800, JGE 0x00422e62 sur taille>=0x2400)
+  confirme la polarite du candidat.
+- 006e77cb (advance_cursor_copy) : reproche purement cosmetique (l'ordre
+  de calcul de param_2*4 avant plutot qu'apres le memcpy, sans effet de
+  bord entre les deux lectures).
+- 01003ca0 (append_to_cursor) : le reviseur a juge le double
+  dereferencement de pointeur superflu ; l'assembleur expose (MOV
+  EAX,[DAT_00cf1a08] ; CMP [EAX],0) effectue exactement ces deux lectures.
+- 01002890 (init_payload_record) : seul reproche, les decalages de
+  l'enregistrement source ne sont pas nommes (deja le style etabli de ce
+  fichier pour une structure non resolue).
+
+bump_allocate (0063b850, PASS) est un allocateur lineaire sur l'arene
+pointee par DAT_00cf18e4 ([0]=base,[1]=capacite,[2]=courant) : le champ
+courant est toujours avance avant la verification de depassement, et un
+depassement ecrit a l'adresse 0 sans recuperation (piege fatal de
+depassement de capacite). Cette ecriture est reproduite fidelement ;
+scratch_buffers_smoke declare _DAT_00000000 comme une variable globale
+ordinaire (la reconstruction ne peut pas placer de variable a l'adresse
+litterale 0) et verifie que le piege s'est bien declenche plutot que de
+l'eviter. init_payload_record compose bump_allocate avec deux copies
+conditionnelles vers des tampons fixes (_Dst_00bb0a70, _Dst_0096b490) ;
+seul l'octet bas du retour expose par l'assembleur est defini (AL=1), le
+reste etant un residu non garanti d'EAX, reproduit ici par un simple 1.
+
+Compilation Win32 et les 23 tests CTest reussissent du premier coup.
+269 des 282 fonctions suivies sont integrees (0 bloquee, 0 en attente de
+revue, 13 differees).
+
+## Lot mixed_deps_054 : premier module de rendu
+
+Ce lot ouvre src/render/, le premier module touchant le moteur de rendu
+(les chaines D3DX9 Shader Compiler confirment un moteur Direct3D 9 dans
+le binaire). RenderRegionManager.cpp integre assert_region_capacity
+(0063cd60, garde sans effet observable propre) et
+set_active_render_region (0063d0f0, FAIL ReAgent leve : le reviseur
+reprochait l'absence de [[noreturn]] sur le diagnostic, sans consequence
+puisque rien ne suit l'appel dans aucune des deux fonctions).
+ShaderManager.cpp integre allocate_shader_id (01003ea0, PASS) et
+free_shader_id (01003f20). Le candidat ReAgent de ce dernier laissait la
+branche fatale retomber dans la comptabilite de la pile de liberation,
+contrairement a l'assembleur expose (les deux chemins convergent sur la
+meme epilogue unique) ; le verificateur objectif l'a releve
+independamment ("P-code has 2 returns, candidate has no explicit
+return"). La fonction a ete reconstruite directement depuis l'assembleur
+avec le retour anticipe correct.
+
+DisplayMode.cpp integre report_mode_option (01003650), seule fonction du
+lot qui n'est pas un garde-fou fatal : son message
+"ModeOption:%d:%d by %d (%d bit)" est une ligne de journal
+d'enumeration de mode d'affichage, plafonnee aux dix premiers. Ghidra
+sous-compte ses parametres (signature void(void) alors que la branche lit
+[EBP+8]/[EBP+0xc]), le meme defaut que 01002890 ; les deux mots sont
+restitues comme largeur et hauteur.
+
+hp6::platform::format_diagnostic_message (0063ccf0, nouveau fichier
+src/platform/Diagnostics.cpp) formate ses arguments dans un tampon de
+2048 octets local puis l'abandonne ; Ghidra le marque noreturn mais son
+assembleur expose est un RET ordinaire sans appel d'arret. Chaque
+appelant integre ici n'a aucun code apres l'appel, donc l'ecart avec
+l'etiquette noreturn n'a aucun effet observable.
+
+Ce lot corrige aussi une speculation erronee de l'integration precedente
+(mixed_deps_053) : le commentaire de DAT_00866368 dans
+src/runtime/ScratchBuffers.cpp le decrivait comme "shared table/vtable
+constant" ; report_mode_option l'imprime avec %d, confirmant une simple
+valeur entiere plutot qu'un pointeur de table virtuelle. Le commentaire
+est corrige ; aucun comportement ne change.
+
+Compilation Win32 et les 24 tests CTest reussissent. 275 des 288
+fonctions suivies sont integrees (0 bloquee, 0 en attente de revue, 13
+differees).
+
+## Lot registry_settings_055 : bascule vers le chemin critique de demarrage
+
+A partir de cette session, la selection de lots cesse de suivre l'heuristique
+de select_batch.py (callee partage) : elle suit desormais la chaine d'appels
+reelle de demarrage, documentee en detail dans architecture/startup_path.md.
+005d9300 est identifiee comme WinMain ; sa decompilation complete montre
+qu'elle lit une vingtaine de reglages depuis le registre
+(HKCU\...\Harry Potter and the Half Blood Prince\GameSettings) avant de
+creer la fenetre et le device.
+
+Le lot cible les six fonctions de lecture/ecriture de registre
+(005d7d40, 005d7810, 005d7ae0, 005d73c0, 005d7650, 005d6d80) plus un thunk
+simple (005d7d00). Trois nouvelles dependances externes ont ete necessaires
+pour que le plan se resolve : _CxxThrowException (006f51a2, mecanisme de
+lancement d'exception C++ MSVC) et deux fonctions internes de
+std::basic_string (reservation/croissance, 005da7c0/005da820) ; les trois
+sont enregistrees comme dependances externes au meme titre que sprintf/
+memcpy/tolower/strchr.
+
+Seul 005d7d00 (read_registry_value, nouveau fichier
+src/platform/RegistryConfig.cpp) est integre : un RegQueryValueExA plafonne
+a 0xff octets, verifie par un aller-retour reel sous une sous-cle HKCU
+jetable. Les six autres sont differees : le verificateur objectif de
+ReAgent a releve de vrais ecarts de flux de controle et de nombre d'appels
+(par exemple 10 branches contre 5, 22 appels contre 18 pour 005d7d40 ; 12
+branches contre 6 pour 005d7650), pas de simples remarques stylistiques
+comme dans les lots precedents. Ces fonctions combinent le mecanisme SEH
+des exceptions C++ MSVC 2008 et la disposition interne de std::basic_string
+(28 octets, tampon court integre) ; leur reconstruction fidele demandera une
+lecture directe de l'assembleur plutot qu'une nouvelle tentative ReAgent.
+
+En descendant la chaine de 005d9300, deux decouvertes importantes sans
+nouvelle integration de code : FUN_005d8fc0 est la vraie boucle de messages
+Win32 (PeekMessageA/TranslateMessage/DispatchMessageA, detection WM_QUIT,
+limitation de frequence), et chaque iteration commence par FUN_0064aa60,
+confirme comme le gestionnaire standard de device Direct3D 9 perdu/
+reinitialise (DAT_00cf1944 est un IDirect3DDevice9*, les appels aux slots
++0xc et +0x40 sont TestCooperativeLevel et Reset, les codes de retour
+compares correspondent exactement aux HRESULT D3DERR_DEVICELOST/
+D3DERR_DEVICENOTRESET/etc.). FUN_0064a810, appelee quand le device est
+valide, est la piste la plus probable vers le rendu d'une frame et donc
+l'affichage de l'intro et du menu ; elle n'a pas encore ete examinee.
+
+Compilation Win32 et les 25 tests CTest reussissent. 279 des 298 fonctions
+suivies sont integrees (0 bloquee, 0 en attente de revue, 19 differees).
+
+## Lot render_reset_056b : recreation des shaders apres reset du device, et
+## une correction systematique de convention d'appel COM
+
+Huit fonctions integrees dans src/render/DeviceReset.cpp : deux triviales
+(00650d80 no-op, 0063b4a0 calcul arithmetique pur) et six formant la chaine
+de recreation des ressources Direct3D 9 apres un device reset, toutes
+appelees depuis FUN_0064a810/FUN_0064aa60 documentees dans
+architecture/startup_path.md.
+
+Six des huit candidats ReAgent ont ete rejetes ou invalides, mais pour deux
+raisons differentes cette fois :
+
+1. **Une vraie erreur de convention d'appel, systematique.** Chaque appel
+   virtuel Direct3D 9 observe dans ce lot (00648e10, 006525d0, 00653430)
+   pousse explicitement le pointeur device/objet sur la pile juste avant
+   l'appel indirect, au lieu de le garder dans ECX — confirme a chaque fois
+   dans l'assembleur expose. C'est la convention STDMETHODCALLTYPE standard
+   des interfaces COM (__stdcall sur x86), differente du __thiscall que ce
+   projet utilise partout ailleurs pour les tables virtuelles internes au
+   jeu (ServiceLifecycle, PoolList, VolumeRegistry). Les trois candidats
+   ReAgent avaient declare ces appels en __thiscall ; les trois ont ete
+   corriges en __stdcall.
+
+2. **Un vrai bug dans le candidat de 006534a0** (release_shader_if_present) :
+   ReAgent avait caste l'appel via void(***)(int*), lisant un niveau de
+   pointeur de trop. Son propre reviseur objectif l'a signale
+   independamment ("the P-code reads the function pointer directly from
+   *param_2+8, candidate added one more deref"). Reconstruit directement
+   depuis l'assembleur avec les deux lectures exactes (vtable puis
+   methode).
+
+Les offsets de table virtuelle se confirment mutuellement : +0xc et +0x40
+(deja vus sur le device dans FUN_0064aa60) restent TestCooperativeLevel et
+Reset ; +0x68 correspond a CreateVertexBuffer (index 26), +0x16c a
+CreateVertexShader (index 91), +0x1a8 a CreatePixelShader (index 106), et
++8 sur un objet quelconque reste Release (index 2) — coherent avec la
+disposition standard de IDirect3DDevice9 et confirme par les arguments
+passes a chaque appel (ex. Length/Usage/FVF/Pool/ppVertexBuffer/
+pSharedHandle pour CreateVertexBuffer).
+
+reset_dynamic_resources (00642420) recree toujours les shaders de la petite
+table DAT_00a68820, et recree en plus la table de 0x600 entrees
+(DAT_00f38b10, 0xc4 octets/entree) quand DAT_00cf19bc > 2. Le test
+device_reset_smoke a d'abord echoue par segfault : il reutilisait les
+memes emplacements DAT_00a68820 entre deux appels sans les re-semer avec de
+vrais objets valides, alors que recreate_vertex_shaders libere
+inconditionnellement (sans verification de nullite, fidele au binaire) ce
+qui s'y trouve — corrige en re-semant les emplacements avant chaque appel.
+
+Compilation Win32 et les 26 tests CTest reussissent. 287 des 306 fonctions
+suivies sont integrees (0 bloquee, 0 en attente de revue, 19 differees).
+
+## Lot caps_table_057b : profil de render states par defaut, et une
+## convention d'appel non standard (parametre passe par ESI)
+
+Huit fonctions integrees dans src/render/RenderStateCache.cpp (nouveau
+fichier) et deux de plus ajoutees a src/render/DeviceReset.cpp.
+
+set_render_state_cached (0064c300, SetRenderState, device vtable+0xe4,
+index 57) et set_texture_stage_state_cached (0064c3b0,
+SetTextureStageState, vtable+0x10c, index 67) suivent le meme schema de
+cache deja vu : un tableau indexe par etat (ou par stage*0x20+type) evite
+l'appel D3D9 quand la valeur ne change pas. Les deux candidats ReAgent
+etaient corrects sauf la meme erreur de convention d'appel que le lot
+precedent (__thiscall au lieu de __stdcall).
+
+initialize_default_render_state (00640fb0) est la plus grosse fonction
+integree a ce jour par nombre de lignes : 143 affectations litterales
+remplissant un profil de render/texture-stage states par defaut, verifiees
+une a une par comparaison programmatique avec le decompile expose avant
+toute integration (script jetable, pas de relecture a l'oeil sur un bloc
+de cette taille). Son appel final a "thunk_FUN_010021f0()" sans argument
+visible cachait en realite un parametre transmis par ESI (non une
+pile) : 00640fb0 charge explicitement ESI avec l'adresse de son propre
+tampon de 19 mots (&_Dst_00881370, rempli par le memset 0xcd puis par les
+affectations qui precedent l'appel) juste avant l'appel, confirme par
+l'assembleur expose (aucune autre ecriture dans ESI entre les deux). Cette
+fonction est rendue explicite comme apply_render_state_profile(const
+uint32_t* settings) plutot que de dependre d'un registre non documente.
+
+apply_render_state_profile (010021f0, thunk 006406a0) applique 12 render
+states et 6 texture-stage states (stage 0) depuis le tampon recu, puis
+copie ses 19 mots dans des globals fixes qui, pour cet unique appelant
+reconstruit, sont exactement le meme tampon qu'il vient de lire —
+confirme sans effet observable pour ce site d'appel, et fidelement
+reproduit pour tout autre appelant qui serait decouvert plus tard avec un
+tampon different.
+
+cache_available_texture_memory (0064aa30, GetAvailableTextureMem, device
+vtable+0x10, index 4) et adjust_texture_quality_for_memory (0063b4c0,
+thunk vers 01011a50) completent la chaine d'adaptation qualite/memoire
+amorcee par FUN_0064aa60. Le candidat ReAgent de 0064aa30 inversait la
+seconde moitie de sa condition de garde ; la relecture directe de
+l'assembleur expose (JZ puis JA 0x20) confirme que l'appel a lieu pour
+0 < valeur <= 0x20, comme le decompile d'origine et non comme le
+candidat rejete.
+
+Compilation Win32 et les 27 tests CTest reussissent. 295 des 314 fonctions
+suivies sont integrees (0 bloquee, 0 en attente de revue, 19 differees).
+
+## Lot strncpy_leaves_058
+
+Six petites fonctions de construction/effacement d'enregistrement
+integrees dans un nouveau fichier, src/runtime/RecordDescriptor.cpp,
+sans lien identifie avec le chemin de demarrage. clear_quad_word,
+clear_full_record/construct_full_record et clear_named_record/
+construct_named_record forment une famille coherente (deux variantes
+d'enregistrement, l'une avec quatre champs entiers supplementaires et un
+octet terminal, l'autre sans) ; initialize_object_name_header est non
+liee, operant sur des decalages differents (+0xb4 et +0x4xx) d'un
+enregistrement non identifie. Les cinq candidats rejetes ne l'etaient
+que pour des decalages bruts (style etabli pour ces structures non
+resolues) ; le candidat de 006b6833 a echoue a la validation et a ete
+reconstruit directement depuis l'assembleur expose.
+
+Compilation Win32 et les 28 tests CTest reussissent. 301 des 320
+fonctions suivies sont integrees (0 bloquee, 0 en attente de revue, 19
+differees).
+
+## FUN_0064a810 : resolution complete, hors pipeline ReAgent
+
+Reconstruite directement depuis l'assembleur expose (pas de lot ReAgent,
+adresse ajoutee manuellement a reports/pipeline/state.json), integree
+dans un nouveau fichier src/render/RenderTargetSetup.cpp separe de
+DeviceReset.cpp. L'hypothese initiale documentee dans
+architecture/startup_path.md (DAT_00cf1948 = IDirect3D9*, +0x14 =
+GetAdapterIdentifier) etait fausse : la correspondance sur le nombre
+d'arguments etait une coincidence. La bonne lecture, confirmee par
+recoupement systematique contre le d3d9.h reel (Wine, ordre de
+declaration COM standard) : DAT_00cf1948 = IDirect3DSwapChain9*, et la
+chaine d'appels est GetBackBuffer -> GetDesc -> CreateDepthStencilSurface
+-> [CreateTexture -> Release -> GetSurfaceLevel] -> SetRenderTarget ->
+SetDepthStencilSurface -> initialize_default_render_state. Chaque offset
+(+0x14, +0x30, +8, +0x74, +0x5c, +0x48, +0x94, +0x9c) correspond
+exactement a l'index de methode et au nombre d'arguments de la vraie
+interface. Place dans son propre fichier pour eviter qu'un test qui
+n'exerce pas cette fonction precise doive fournir les ~130 globals du
+profil de render states par defaut (RenderStateCache.obj) qu'elle tire
+transitivement via initialize_default_render_state.
+
+Compilation Win32 et les 28 tests CTest reussissent (render_state_cache_smoke
+couvre trois scenarios : rendu-vers-texture desactive, chemin normal avec
+creation de texture, et blocage par bit de capacite). 302 des 321
+fonctions suivies sont integrees (0 bloquee, 0 en attente de revue, 19
+differees).
+
+## Lecteurs/ecrivains de registre : disposition std::basic_string MSVC 2008
+## confirmee, cinq fonctions differees integrees
+
+Les six fonctions differees du lot registry_settings_055 sont resolues
+(src/platform/RegistryConfig.cpp), hors pipeline ReAgent (reconstruction
+directe depuis l'assembleur expose). 005d6d80 n'a plus de contrepartie :
+remplacee par un simple `throw std::runtime_error`.
+
+Disposition confirmee de std::basic_string<char> sous VC2008 : en-tete de
+debogage d'iterateur de 4 octets (_Container_base, ignorable dans la
+reconstruction), puis union _Bx de 16 octets (tampon SSO ou pointeur
+heap), _Mysize a +0x14, _Myres a +0x18 ; taille totale 0x1c = 28 octets,
+exactement ce qui est observe partout dans ce binaire pour les
+basic_string locaux. Le decalage de +4 par rapport a la disposition
+"manuel" s'explique par cet en-tete de debogage, present par defaut sous
+VC 2005/2008 meme en Release. Cette disposition n'a pas besoin d'etre
+reproduite : un std::string moderne (.c_str(), .empty(), +=, affectation)
+est comportementalement equivalent partout.
+
+005d7650 manipule l'allocateur interne de la STL pour agrandir son
+tampon sur ERROR_MORE_DATA ; remplace par un std::vector<char>
+redimensionne de la meme facon. 005d7ae0 recoit la valeur a ecrire via
+un argument de pile cache que Ghidra n'a pas nomme comme parametre
+formel, retrouve en tracant le site d'appel dans la branche de
+promotion HKLM->HKCU de 005d7d40.
+
+Compilation Win32 et les 28 tests CTest reussissent (registry_config_smoke
+couvre l'aller-retour lecture/ecriture, le defaut sur absence, l'agrandissement
+de tampon et l'exception sur cle vide). 307 des 321 fonctions suivies
+sont integrees (0 bloquee, 0 en attente de revue, 14 differees). Voir
+architecture/startup_path.md pour le detail complet.
+
+## thunk_FUN_0100e6e0 : bien plus simple que redoute
+
+Contrairement a l'hypothese initiale ("init/desinit D3D"), 0x0100e6e0
+(atteinte via le thunk 0x005d8080) se limite a trois ecritures de
+reglages d'affichage au registre, maintenant accessibles grace a
+write_int_setting (lot precedent). Integree comme
+hp6::platform::save_display_options (src/platform/RegistryConfig.cpp) :
+ecrit OptionResolution=DAT_00cf19a4, OptionLOD=(DAT_008663bc!=-1 ?
+DAT_008663bc : DAT_008663b8), OptionBrightness=DAT_008663c0, dans
+HKCU\Software\Electronic Arts\Harry Potter and the Half Blood
+Prince\GameSettings.
+
+Cette fonction ecrit sous le vrai chemin de registre du jeu (le nom de
+l'application est compile en dur, pas un parametre) ; le test enregistre
+et restaure les valeurs OptionResolution/OptionLOD/OptionBrightness deja
+presentes avant de s'executer, sans effet net sur une installation
+reelle. Verifie en pratique : la machine de developpement avait une
+cle GameSettings existante avec des valeurs reelles (OptionResolution=2,
+OptionLOD=2, OptionBrightness=5, SizeX/SizeY=1920x1080), intactes apres
+le test.
+
+Compilation Win32 et les 28 tests CTest reussissent. 309 des 323
+fonctions suivies sont integrees (0 bloquee, 0 en attente de revue, 14
+differees).
+
+## Le "frame pump" du message loop (0x005e0cc0) et ses helpers
+
+Suite logique vers l'intro/menu depuis le message loop (0x005d8fc0, pas
+encore reconstruite) : la fonction appelee a chaque iteration ou
+PeekMessageA ne rapporte aucun message en attente. Resolue entierement
+par trace de l'assembleur brut (pas seulement du C decompile), ce qui a
+permis de clarifier plusieurs astuces du decompilateur :
+
+- Les acrobaties SBORROW4/CARRY4 pour le delta de temps et son
+  accumulateur 64 bits ne sont que la facon dont Ghidra decompose une
+  soustraction/addition 64 bits en morceaux de 32 bits ; traduites en
+  arithmetique native `int64_t`, elles deviennent une simple
+  comparaison/clamp (`if (delta > 0x640000) delta = 0x640000;`), sans
+  risque de mal interpreter les cas de bord signes.
+- `extraout_ST0` dans FUN_005e0a30 n'est PAS un parametre cache transmis
+  par l'appelant (contrairement a `unaff_EDI`, qui lui est un vrai
+  parametre cache confirme par `LEA EDI,[ESP+0x18]` juste avant l'appel) :
+  c'est un artefact du decompilateur qui n'a pas su suivre un FILD local.
+  Le FNSTCW/OR 0xc00/FLDCW autour du FISTP force explicitement la
+  troncature (RC=11, round toward zero) pour cette seule conversion, pas
+  l'arrondi au plus proche : traduit simplement par un cast C++
+  (`static_cast<int>(...)`, qui tronque deja vers zero).
+- FUN_005e0b10's boucle do-while dont la condition compare un pointeur a
+  l'adresse litterale de DAT_00d644f8 est un artefact de layout (ces
+  globales sont adjacentes en memoire dans le binaire original) : la
+  boucle fait en realite exactement 2 iterations fixes, reconstruites
+  comme telles plutot que via une comparaison de pointeurs qui n'a plus
+  aucun sens dans une reconstruction moderne.
+- DAT_0089eb0c (l'objet "simulate"/"render" actif) est confirme
+  **__thiscall** par l'assembleur brut : `MOV ECX,[0x89eb0c]` juste avant
+  chaque `CALL`, ECX jamais pousse sur la pile. Son type concret n'est
+  pas identifie ; traite comme une interface opaque (style maison deja
+  utilise pour les vtables non resolues), a affiner plus tard — decision
+  prise explicitement avec l'utilisateur, qui a choisi de continuer sur
+  cette base plutot que d'arreter la session.
+- DAT_00fc7f90 (l'objet de repli, appele quand ni simulate ni render ne
+  s'est declenche) est un objet a adresse fixe (pas un pointeur vers un
+  objet) : sa propre valeur EST son pointeur de vtable, et son `this` est
+  `&DAT_00fc7f90` lui-meme — confirme par `MOV ECX,0xfc7f90` (l'adresse
+  litterale, pas sa valeur) juste avant l'appel.
+
+Integrees dans `src/runtime/FrameClock.cpp` :
+- `multimedia_timer_elapsed_ms` (0x005e0b90)
+- `accumulate_simulation_time_sample` (0x005e0a30, parametre EDI rendu
+  explicite)
+- `interpolate_render_time` (0x005e0b10)
+- `drain_pending_visual_effects` (0x005ff790)
+- `run_frame_tick` (0x005e0cc0)
+
+**Decouverte separee, non resolue** : `drain_pending_visual_effects`
+depend de 0x00606b00, un sous-systeme de declenchement d'effets visuels
+("BLOOM"/"GLASS"/"BACKDROP", bit-manipulation profondement dependante de
+structures non identifiees, ~100 lignes). Ampleur comparable aux deux
+blocages precedents (objet COM, ABI std::basic_string). Non reconstruite ;
+tracee "differee" dans reports/pipeline/state.json. Elle est injoignable
+dans la couverture actuelle du projet : rien dans `src/` n'ecrit encore
+DAT_00cef790 (la tete de la file d'effets en attente), donc le corps de
+`drain_pending_visual_effects` qui en depend reste du code mort — verifie
+par recherche exhaustive dans `src/` avant integration.
+
+Nouveau test `tests/frame_clock_smoke.cpp` (29e test CTest) : verifie le
+minuteur multimedia (monotone), l'accumulation + interpolation (deux
+echantillons synthetiques, interpolation exacte a mi-chemin), et le
+dispatcher complet (etat initial a zero declenche simulate ET render des
+le premier appel, jamais le repli).
+
+Compilation Win32 et les 29 tests CTest reussissent. 314 des 329
+fonctions suivies sont integrees (0 bloquee, 0 en attente de revue, 15
+differees).
+
+## DAT_0089eb0c et DAT_00fc7f90 identifies : ni l'un ni l'autre ne mene a l'intro
+
+Recherche de xrefs en direct sur le projet Ghidra existant (pyghidra,
+lecture seule) pour resoudre les deux objets diffuses par
+`run_frame_tick`. Resultat concret mais negatif pour la piste de
+l'intro/menu : voir `architecture/startup_path.md` pour le detail
+complet (adresses, assembleur, raisonnement). En resume :
+
+- `DAT_0089eb0c` est ecrit une seule fois dans `FUN_005dcdf0` (appelee
+  depuis WinMain) et ne change plus jamais. Sa table virtuelle (3
+  methodes, jamais detectees comme fonctions par l'analyse automatique
+  de Ghidra car atteintes uniquement par cet appel indirect) est un
+  compteur de delai + overlay de diagnostic ("Build: FINAL on ... at
+  ..."), pas la logique du jeu.
+- `DAT_00fc7f90` (repli de `run_frame_tick`) pointe vers un sous-systeme
+  lie a l'audio (meme symbole `PTR_PTR_008813c8` que la fonction qui
+  hash la chaine "SSGAudio").
+- Le focus-change dans la boucle de messages ne gere que
+  l'acquisition/desacquisition DirectInput/XInput.
+
+La vraie machine a etats intro/menu/jeu n'est pas visible depuis le
+voisinage immediat de la boucle de messages. Trois chantiers ouverts de
+taille comparable aux blocages precedents, sans signal fort pour
+departager : les 8 sous-systemes encore inexplores appeles depuis
+`FUN_005dcdf0`, le systeme de gestionnaires de messages nommes
+(`FUN_005dae30`, "iMsgStartSystem"/"iMsgStopSystem"), et `0x00606b00`
+(effets visuels, deja differee). Aucune integration de code cette
+section ; exploration documentaire uniquement.
+
+## Le framework "GOF" et sa machine a etats (piste intro/menu, non resolue)
+
+Exploration en direct du projet Ghidra (pyghidra, lecture seule) a
+l'interieur de `FUN_005d6140` (= `GameServicesCreate`, appelee depuis
+`FUN_005dcdf0`/WinMain) : une vingtaine de singletons moteur "GOF::"
+(Game Object Framework, confirme par EASTLLocalAllocatorModule) sont
+alloues puis construits a la main, dont `FMVDataManager` et toute la
+famille `Presentation*`. `GameFlowStateController` est une machine a
+etats finis avec 5 etats de demarrage identifies directement via leurs
+tables virtuelles (Idle/GuiControlGamePaused/GameRunning/
+EnterLoadingState/LoadLevelState) : aucun n'est "Intro"/"Menu". Piste
+la plus concrete trouvee : la chaine de commande de script
+"Presentation.Screens.ActivateScreenWithFocus ScreenMainMenuCameraPos",
+referencee une seule fois a 0x0048b005, dans une fonction jamais
+detectee par l'analyse automatique de Ghidra (atteinte uniquement par
+appel indirect), qui manipule `PresentationTaskHandler`
+(`DAT_00fcadf0`). Detail complet, tableau des etats et adresses dans
+`architecture/startup_path.md`. Aucune integration de code cette
+section ; exploration documentaire uniquement, avec une nouvelle
+methode (lecture de chaines + xrefs en direct via pyghidra plutot que
+les seuls exports Ghidra deja generes).
+
+## La table des 93 commandes de presentation (carte complete, pas encore de code)
+
+Poursuite en direct (pyghidra, lecture seule) de la piste
+PresentationTaskHandler jusqu'a l'interpreteur central de commandes de
+script : `FUN_0048ab90` decoupe une commande ("Namespace.Verbe Arg") et
+cherche le verbe dans une table de 93 entrees a `0x00876ab0`
+(pointeurs vers des structs {nom, gestionnaire}). Les 93 entrees sont
+sauvegardees dans `architecture/presentation_commands.csv` (table de
+reference reutilisable). Deux taches liees au demarrage identifiees et
+tracees via leurs vtables (meme la ou Ghidra n'avait jamais detecte de
+fonction, atteintes uniquement par appel indirect) :
+
+- `Storage.Bootup` -> tache `Task_Bootup` (vtable 0x828338), machine a
+  9 etats entierement cartographiee (dispatch par table de sauts a
+  0x59f7c0) ; l'etat final execute deux commandes de script
+  ("Presentation.StorageTRCPopupActive" puis
+  "Presentation.Screens.ActivateScreenWithFocus
+  ScreenAutosaveWarningMessage") et pose DAT_00cef63f=1.
+- `TriggerBootupFlow` -> tache `Task_BootupFlowControl` (vtable
+  0x828360), dont le slot "Update" n'est PAS une machine a etats comme
+  `Task_Bootup` ; role encore a elucider.
+
+Candidats directs pour l'intro/menu, non encore traces : `FMVPlayback`
+(#79), `Presentation.LeaveTitlePage` (#81), `OnActivateFrontEndChapter`
+(#75). Detail complet (adresses, etats, raisonnement) dans
+`architecture/startup_path.md`. Aucune integration de code cette
+section ; exploration documentaire + un nouveau fichier de reference
+(presentation_commands.csv).
+
+## Point de depart confirme de la sequence intro/menu : WinMain -> TriggerBootupFlow
+
+Dernier maillon de cette section d'exploration : recherche des xrefs
+(pyghidra, lecture seule) vers la chaine de commande
+"TriggerBootupFlow" remonte a `FUN_00ff7fa0` (deja exportee par
+ReAgent), elle-meme appelee une seule fois, directement depuis
+`WinMain` (`FUN_005d9300`), juste apres `FUN_005dcdf0()` (bootstrap
+moteur + GameServicesCreate) et derriere un garde-fou materiel
+(`thunk_FUN_00ff8ce0`, inconditionnellement vrai en configuration PC de
+detail normale). La chaine complete WinMain -> bootstrap ->
+TriggerBootupFlow -> Task_BootupFlowControl/Task_Bootup -> ecran
+d'avertissement de sauvegarde est donc confirmee de bout en bout par
+lecture directe de l'assembleur. Detail complet (sequence exacte,
+adresses) dans `architecture/startup_path.md`. Aucune integration de
+code cette section.
+
+## FMVPlayback / OnActivateFrontEndChapter : la limite code/donnees est atteinte
+
+Dernieres deux commandes tracees cette session : `FMVPlayback`
+(0x0048cd90, deja exportee) parse "nom_fichier flag_skippable" et
+declenche la lecture video via `thunk_FUN_00fec210`.
+`OnActivateFrontEndChapter` (0x0048c9e0, deja exportee) cree une tache
+`Task_FrontEndChapter` dont le slot "Update" est un stub trivial (pas
+de machine a etats comme Task_Bootup) ; son seul travail reel observe
+est d'emettre "Presentation.VignetteEffect 0".
+
+Conclusion de cette branche d'exploration (detail dans
+`architecture/startup_path.md`) : la chaine de controle C++ est
+cartographiee jusqu'au point ou elle active des ecrans nommes par
+chaine. Le contenu reel des ecrans (menu, boutons) est tres
+probablement pilote par des DONNEES (fichiers de ressources UI), pas du
+code visible en desassemblage. Continuer necessiterait une methode
+differente (localiser le format des fichiers de definition d'ecran)
+plutot que la poursuite des xrefs assembleur utilisee dans toute cette
+section. Aucune integration de code cette section.
+
+## Integration des primitives generiques : allocate_tagged, submit_task, dispatcher de commandes
+
+Quatre fonctions deja exportees par ReAgent, identifiees au cours de
+l'exploration precedente, integrees et testees dans
+`src/presentation/` :
+
+- `allocate_tagged` (0x005dc750) reutilise directement
+  `hp6::platform::service_holder` (meme bloc d'init paresseux que
+  0x005db920, deja integre) via son second slot de fonction
+  (`DAT_00fcdd78`), qui est le service d'allocation nommee global.
+- `submit_task` (0x005d2b30) ajoute une tache a la file propre d'un
+  PresentationTaskHandler, via un allocateur DIFFERENT et imbrique a
+  son champ +0x8 (pas allocate_tagged) : deux mecanismes d'allocation
+  distincts coexistent dans le moteur (service nomme global pour les
+  singletons, allocateurs locaux par sous-systeme pour les objets
+  frequents). Appelle ensuite la methode "IsReady" de la tache
+  (thiscall confirme).
+- `dispatch_presentation_command`/`find_and_invoke_command`
+  (0x0048ab90/0x0048abf0) : l'interpreteur central des 93 commandes de
+  script (architecture/presentation_commands.csv).
+
+Deux pieges rencontres en testant (detail complet dans
+architecture/startup_path.md) : une table factice incomplete en C++
+laisse des nullptr par initialisation de valeur (deref -> segfault,
+corrige en remplissant les 93 emplacements) ; un `const` a portee
+espace de noms a une liaison interne par defaut en C++, necessitant un
+second mot-cle `extern` explicite cote test pour resoudre l'`extern`
+cote production au lien.
+
+318 des 333 fonctions suivies sont integrees (15 differees). 31 tests
+CTest, tous verts.
+
+## FMVPlayback/AttractMode : bonus (15 cinematiques), confirme la limite code/donnees
+
+`thunk_FUN_00fec210` (declencheur reel de FMVPlayback) recherche son
+argument dans une table de 16 entrees (`architecture/startup_path.md`)
+: la table complete des cinematiques du jeu par nom (AttractMode,
+AttractModeNoText, 3_DumbledoresSpeech ... 17_Credits). Aucune fonction
+du code n'emet litteralement la chaine "FMVPlayback" ailleurs que dans
+sa propre entree de la table de commandes : confirme que la sequence
+reelle (quelles videos, dans quel ordre, au premier lancement) est tres
+probablement definie dans un fichier de script/chapitre de donnees, pas
+dans le binaire. Aucune integration de code cette section.
+
+## Decouverte de projets voisins (knowledge/hp6, reconstruction/) et validation croisee
+
+L'utilisateur a signale que `D:\HP` (le repertoire parent) contient les
+archives extraites du jeu (`D:\HP\extract\`) ainsi que deux projets
+voisins bien plus avances portant sur le MEME binaire :
+
+- `D:\HP\reconstruction\` : un frontend "authored" (ecrit a la main,
+  pas une recompilation binaire) qui reutilise les assets extraits du
+  jeu mais reimplemente la logique du menu de facon nouvelle. Objectif
+  different de HP6_Reconstructed (qui vise une reconstruction fidele,
+  fonction par fonction, du binaire original) ; a ne pas melanger.
+- `D:\HP\knowledge\hp6\` : une base de connaissances IDA Pro (14177
+  fonctions, 7913 symboles de donnees, 309 classes "Hybrid", outil CLI
+  `D:\HP\tools\re_kb.py`) construite independamment sur le meme binaire
+  (SHA256 identique). Contient de vrais noms de symboles (probablement
+  issus d'une base de symboles de debug) absents de notre projet
+  Ghidra.
+
+Verification croisee via `re_kb.py` sur nos propres decouvertes de la
+veille : concordance totale. `FUN_005dcdf0` = `Engine_InitCoreSystemsAndMessages` ;
+`FUN_005dae30` = `MessageId_GetOrRegister` ; `FUN_005dd020` =
+`DebugOverlay_RefreshAndBroadcastRender` (confirme notre hypothese
+"overlay de diagnostic/build string") ; `FUN_005d2b30` =
+`PresentationTaskHandler_RegisterTask` (= notre `submit_task`,
+deja integre) ; `DAT_0089eb0c` = `g_pMainTickInterface` (confirme notre
+interpretation "simulate/render" du frame pump) ; notre table de 93
+commandes a `0x00876ab0` concorde entree par entree avec
+`ui_commands.json` de cette base. `GameFlowStateController` et sa
+machine a etats (`thunk_FUN_00fdfe00`/`FUN_00492b60`) restent non
+documentees la-bas : contribution reellement nouvelle de ce projet.
+
+**Decouverte cle, qui boucle la piste intro/menu** : la base liste 24
+fonctions `ScreenTask_Screen<Nom>_Enqueue` (adresses consecutives,
+0x50b8b0 a 0x50c330), dont `ScreenTask_ScreenMainMenu_Enqueue`
+(0x50b920) et `ScreenTask_ScreenTitlePage_Enqueue` (0x50ba70) ; chacune
+appelle `PresentationTaskHandler_RegisterTask` (notre `submit_task`).
+Recherche de xrefs en direct (pyghidra) sur ces adresses confirme
+qu'elles forment une table de donnees a `0x0082fbbc` (26 entrees x 16
+octets : {Enqueue, Dequeue_commun, fn3_commun, fn4_commun}), elle-meme
+lue par `FUN_0048ce30` ("HybridScreenActivateMappedTask", indice 4 de
+notre table de 93 commandes) via une AUTRE table de 26 pointeurs vers
+des objets de type "tache" a `0x00870948`, cherchee par nom exact. Ceci
+est **le resolveur derriere `Presentation.Screens.ActivateScreenWithFocus
+<nom_ecran>`**. Integre et teste comme
+`hp6::presentation::activate_mapped_screen_task` (thiscall confirme par
+l'assembleur brut).
+
+Chaine complete desormais confirmee de bout en bout : WinMain ->
+bootstrap moteur -> TriggerBootupFlow -> Task_BootupFlowControl/
+Task_Bootup -> `ActivateScreenWithFocus <nom>` -> resolution par nom
+dans la table de 26 ecrans -> `ScreenTask_Screen<Nom>_Enqueue` ->
+`PresentationTaskHandler_RegisterTask`. Reste non resolu : le contenu
+exact de chaque tache d'ecran (son veritable travail d'affichage), et
+quelle commande precise est emise juste apres `TriggerBootupFlow` (vu
+hier : probablement pilote par des donnees/scripts, pas du code).
+
+## Lot ReAgent mixed_deps_059 integre (StorageInit)
+
+5 fonctions du lot generique `mixed_deps_059` (PASS ReAgent), verifiees
+individuellement contre le decompile Ghidra original avant integration,
+plus les deux utilitaires partages (`FUN_006b3b0e` memset generique,
+`FUN_006b3b04` hook generique) : integrees dans
+`src/platform/StorageInit.cpp`. `enumerate_logical_drives_into_table`
+(GetLogicalDrives) et `schedule_autosave_timer` (minuteur Windows
+attendable) sont toutes deux appelees depuis `FUN_00688130`, une des
+inits non explorees de WinMain — coherent avec les commandes
+"Storage.Autosave"/"Storage.CreateTimedAutosaveTrigger" deja tracees.
+`0x006d95d0` (enregistrement de completion de minuteur) reste une
+dependance externe non reconstruite.
+
+324 des 339 fonctions suivies sont integrees (0 bloquee, 0 en attente
+de revue, 15 differees). Compilation Win32 et les 32 tests CTest
+reussissent.
+
+## La tache ScreenMainMenu declenche elle-meme ScreenTitlePage
+
+Decompilation directe (assembleur brut) de `ScreenTask_ScreenMainMenu_Enqueue`
+(0x50b920) et de l'objet tache qu'elle construit (vtable 0x82f91c) :
+sa machine a etats (slot "Update" +0xc) emet elle-meme
+"Presentation.Screens.ActivateScreenWithFocus ScreenTitlePage" a son
+premier update (sous conditions sur DAT_00cef67a/DAT_00868814, non
+resolues), puis passe a l'etat 2. Donc ScreenTitlePage, pas
+ScreenMainMenu, est tres probablement le premier ecran visuel reel ; le
+menu principal se prepare en arriere-plan. Recherche du veritable
+declencheur initial ("ActivateScreenWithFocus ScreenMainMenu" ou
+equivalent) : seule reference directe a la chaine "ScreenMainMenu"
+trouvee est liee a la commande "QuitGame" (retour menu apres partie),
+pas un point d'entree initial. L'objet "ScreenTaskListener_ScreenMainMenu"
+s'avere etre un abonne au mecanisme de notification GENERIQUE du
+framework (liste chainee, FUN_005d2c10), pas une piste specifique.
+Declencheur initial toujours insaisissable malgre plusieurs angles
+d'attaque ; coherent avec la limite deja documentee (probablement
+pilote par des donnees de script). Detail complet dans
+architecture/startup_path.md. Aucune integration de code cette
+section.
+
+## DAT_00cef67a identifie : drapeau "dialogue modal actif"
+
+Suite de l'investigation sur la tache ScreenMainMenu : `DAT_00cef67a`
+est pose a 1 par `FUN_005d3070`, une fonction d'affichage de boite de
+dialogue modale (DIALOG_MAIN/DIALOG_RESPONSE_0/DIALOG_RESPONSE_1, liee
+aux commandes "Storage.AskSetAutosave"/"Storage.OnResponseSelect0/1"
+deja tracees). Confirme l'hypothese : la tache ScreenMainMenu n'avance
+vers ScreenTitlePage que si aucun dialogue modal n'est actif.
+`DAT_00868814` reste non resolu (plusieurs lecteurs/ecrivains, dont un
+qui le pose a -1 comme sentinelle "non defini") ; rendement marginal
+decroissant sur ce fil precis, mis en pause ici.
+
+## Lot ReAgent mixed_deps_060 : echec technique (CLI codex absent)
+
+Le lot generique suivant a echoue entierement : le CLI `codex` (LLM
+utilise par ReAgent, configure dans re-agent.yaml) n'est plus installe
+a l'emplacement attendu (`npm list -g` ne le liste pas). Ce n'est PAS
+une limite d'usage (contrairement au 16 oct) mais une dependance
+d'environnement manquante. Pas corrige sans l'accord de l'utilisateur
+(installation logicielle). Pipeline ReAgent generique indisponible
+jusqu'a reinstallation de `codex`.
+
+## DAT_00868814 identifie : reponse utilisateur a un dialogue de confirmation
+
+`DAT_00868814` est lu dans une immense machine a etats
+(`FUN_0042a1e0`, 9655 caracteres decompiles, >24 etats, liee a
+`DAT_00fcae18` comme Task_Bootup) juste apres l'affichage d'un
+dialogue "GUI_CONFIRMSAVE" via `FUN_005d3070("GUI_CONFIRMSAVE",...)`
+(la meme fonction qui pose `DAT_00cef67a`) : `DAT_00868814==0` ->
+reponse "non", `==1` -> reponse "oui". Cette grosse machine a etats
+est tres probablement le flux complet "verifier carte memoire/profil
+de sauvegarde, demander confirmation avant ecrasement" evoque par
+"ScreenBootupMemcardCheck"/"Storage.CreateNewProfile" (deja trouves) ;
+hors de portee d'une integration ponctuelle (ampleur d'un sous-systeme
+a part entiere). Les deux globales qui bloquaient l'integration de la
+tache ScreenMainMenu sont maintenant comprises au niveau conceptuel.
+
+## La tache ScreenMainMenu integree et testee (premiere vtable fabriquee par nous)
+
+`enqueue_main_menu_screen_task` (0x0050b920) et les trois methodes de
+son objet tache (destructeur 0x0050c440, IsReady 0x0053e9f0, Update
+0x0053ea00) sont integrees dans `src/presentation/ScreenTasks.cpp`.
+Point technique notable : `submit_task` appelle reellement
+`vtable_of(task)[1]` en **thiscall reel** sur l'objet que nous
+construisons nous-memes — premiere fois dans ce projet qu'une vtable
+fabriquee par nous (pas une vtable du jeu qu'on se contente d'appeler)
+doit etre compatible ABI thiscall avec nos propres fonctions C++. MSVC
+interdisant `__thiscall` sur une fonction libre, les methodes sont des
+methodes non-statiques normales d'une petite classe locale sans base,
+leurs adresses brutes extraites via union pointeur-membre/pointeur-brut
+(fait d'implementation MSVC stable pour ce cas simple).
+
+Piege rencontre en testant (meme categorie qu'hier) : une table
+factice de 93 entrees comptee a la main n'en contenait que 91,
+provoquant un segfault. Corrige avec des macros de repetition dont le
+compte est verifiable par arithmetique.
+
+328 des 348 fonctions suivies sont integrees (5 bloquees : lot ReAgent
+mixed_deps_060, CLI codex manquant ; 15 differees). 33 tests CTest,
+tous verts.
+
+## ScreenTitlePage integree : confirme le mecanisme d'inactivite -> AttractMode
+
+`ScreenTask_ScreenTitlePage_Enqueue` (0x0050ba70) suit le meme schema
+que ScreenMainMenu (objet tache de 24 octets cette fois). Son "IsReady"
+(0x00451ec0) construit et soumet une sous-tache
+"Presentation:TaskHandler::Task_IdleInputTimer" (vtable 0x00821508) :
+un minuteur d'inactivite minimal dont le champ+8 memorise le tick
+courant (DAT_00d644f8, desormais expose via
+hp6::runtime::current_tick_value()) a chaque entree detectee
+(0x004ccca0, dependance externe non reconstruite). C'est le mecanisme
+exact derriere le minuteur d'inactivite -> AttractMode trace il y a
+deux sessions. Integre et teste dans src/presentation/ScreenTasks.cpp.
+Les slots "liste"/"Update" de ScreenTitlePage elle-meme restent non
+reconstruits (hors de portee, rien ne les appelle encore).
+
+334 des 354 fonctions suivies sont integrees (5 bloquees, 15
+differees). 33 tests CTest, tous verts.
+
+## ScreenAutosaveWarningMessage integree : revele ScreenTitlePageCut_PC
+
+L'Update de cette tache (0x00429de0, entierement reconstruit) :
+apres >=2000 (tick/3) unites, active ScreenAutosaveWarningMessagePrompt
+sans focus si pas deja actif ; apres >=8000 unites sans aucune entree
+detectee, emet "Presentation.Screens.ActivateScreenWithFocus
+ScreenTitlePageCut_PC" — la cinematique d'intro se declenche
+automatiquement si le joueur ne fait rien. dispatch_presentation_command
+corrigee pour retourner son resultat (un appelant reel en depend,
+decouvert ici). Piege de test : un pointeur `args` stocke au lieu
+d'etre copie pointait dans la pile locale de dispatch_presentation_command
+(use-after-return), corrige par une copie.
+
+339 des 359 fonctions suivies sont integrees (5 bloquees, 15
+differees). 33 tests CTest, tous verts.
+
+## ScreenFMV : confirme le lien vers la table AttractMode, trop vaste pour integration complete
+
+ScreenTask_ScreenFMV_Enqueue (0x0050bcd0, 44 octets, le plus gros objet
+tache a ce jour) : seuls constructeur/destructeur integres. Son slot 2
+(0x0053df20) indexe directement la table de 16 cinematiques AttractMode
+(0x008923e8) via DAT_00cef5b8 — la MEME table lue par FMVPlayback —
+confirmant que ScreenFMV est l'ecran reel derriere la lecture video.
+Son slot 3 (Update, 0x0053e000) est un dispatcheur a 12 etats avec
+368 octets de pile locale : hors de portee, trace "differee"
+explicitement dans le registre plutot que laissee implicite.
+
+341 des 364 fonctions suivies sont integrees (5 bloquees, 18
+differees). 33 tests CTest, tous verts.
+
+## ScreenAttractMode : resout l'appartenance de la machine a etats 0x0048d2a0
+
+ScreenTask_ScreenAttractMode_Enqueue (0x0050bc60, 48 octets) : seuls
+constructeur/destructeur integres. Son vtable slot 1 ("IsReady",
+0x0048d2a0) est confirme etre exactement la grosse machine a etats
+DAT_00cef7b0 partiellement tracee il y a plusieurs sessions (branche
+"case 7" -> "QuitGame ScreenMainMenu"). Resout a QUI appartient cette
+machine (le IsReady du mode attraction), sans la reconstruire
+entierement. Slots 2/3 egalement differes.
+
+343 des 369 fonctions suivies sont integrees (5 bloquees, 21
+differees). 33 tests CTest, tous verts.
+
+## ScreenLanguageSelect integree ; bilan de la serie de 6 taches d'ecran
+
+ScreenTask_ScreenLanguageSelect_Enqueue (0x0050b8b0, 24 octets) :
+constructeur/destructeur integres. Update (slot3, 0x00429890, gros
+buffer local) differe. Bilan de cette serie (ScreenMainMenu,
+ScreenTitlePage, ScreenAutosaveWarningMessage, ScreenFMV,
+ScreenAttractMode, ScreenLanguageSelect — 6 sur 24 taches d'ecran) : le
+schema construction/destruction est maintenant entierement compris et
+repetitif ; les 18 restantes suivraient probablement le meme schema,
+avec des Update individuellement specifiques a evaluer au cas par cas.
+
+345 des 374 fonctions suivies sont integrees (5 bloquees, 24
+differees). 33 tests CTest, tous verts.
+
+## Tentative de construction d'un executable "en mode normal", corrigee
+
+Pour faire progresser vers un executable testable, j'ai d'abord ecrit
+src/app/GameMain.cpp : WinMain, creation de device D3D9 et allocateur
+de PresentationTaskHandler tous ecrits a la main (operator new, objets
+"debug tick"/"fallback" invente pour DAT_0089eb0c/DAT_00fc7f90) plutot
+que reconstruits depuis le binaire. L'utilisateur a corrige
+immediatement : « Construit pas ca en mode normal tu recupere les
+truc du jeu decompiler pour le reconstruire ». src/app/GameMain.cpp et
+le bloc CMake associe ont ete entierement retires (verifie par git
+diff propre, 33/33 tests toujours verts). Le reste de cette session
+suit la methode normale du projet (xrefs/assembleur en direct, pas
+d'invention) pour la meme question.
+
+## Vrai site IDirect3D9::CreateDevice localise et integre (006498e0)
+
+Voir architecture/startup_path.md ("18 oct 2026") pour le detail
+complet. Resume : FUN_006498e0 (create_d3d9_device,
+src/render/DeviceCreate.cpp) est le vrai appel CreateDevice de WinMain,
+trouve par xref sur DAT_00cf1944 (deux PUSH de son ADRESSE, signe
+classique d'un parametre de sortie) et confirme independamment par la
+base de connaissances IDA (CreateD3DDeviceAndSwapchains). Toute sa
+chaine de dependances necessaire au chemin de succes par defaut est
+integree (12 fonctions/thunks : enumerate_display_modes et son
+comparateur qsort, 4 fonctions triviales, 2 tables de render states par
+defaut extraites mecaniquement via un script Python jetable plutot que
+transcrites a la main — risque de coquille elimine sur 73+61 champs).
+Deux branches reelles mais non prioritaires restent deliberement
+differees avec un corps abort() (jamais executees par le chemin
+teste) : build_resolution_option_list_hard_cap (0x0064c8c0, custom
+resolution list, morte tant que DAT_00cf1950 reste a 0) et
+fatal_display_error (0x005da4b0, chemin d'echec CreateDevice).
+tests/device_create_smoke.cpp fournit un IDirect3D9/IDirect3DDevice9
+factice complet et confirme le chemin de succes. Prochaine etape :
+FUN_006194a0 (init d'un tas ~13,4 Mio, "RenderFrameworkMainHeap"),
+seul bloquant restant avant d'integrer FUN_005dca10 lui-meme (le vrai
+appelant direct depuis WinMain).
+
+361 des 392 fonctions suivies sont integrees (5 bloquees, 26
+differees : 24 anciennes + build_resolution_option_list_hard_cap et
+fatal_display_error). 34 tests CTest, tous verts.
+
+## FUN_006194a0 et FUN_005dca10 integrees : WinMain -> creation du device
+## est maintenant une chaine testee de bout en bout
+
+Voir architecture/startup_path.md ("18 oct 2026, suite") pour le detail.
+Resume : FUN_006194a0(0xd71250) initialise le tas "RenderFrameworkMainHeap"
+(0xd71250 est une ADRESSE, pas une taille) en reutilisant
+hp6::platform::service_holder() plutot que de dupliquer son bloc d'init
+paresseuse (meme effet observable que l'original, qui le duplique en
+ligne), et en reutilisant le meme pointeur DAT_00fcdd78 qu'allocate_tagged.
+FUN_005dca10 (l'appelant direct reel de WinMain) est integree en entier :
+reset du frame pump (nouvelle fonction FrameClock.cpp), init du tas,
+creation du device, puis un appel virtuel sur un objet encore non
+identifie (DAT_00d6af14, necessite FUN_005dcdf0). Deux stubs sur cette
+chaine (create_local_allocator_register, invoke_engine_service_hook)
+sont volontairement des no-op/toujours-succes plutot que des abort(),
+parce qu'ils sont sur le chemin de succes SANS CONDITION -- contrairement
+a fatal_display_error/build_resolution_option_list_hard_cap qui restent
+abort() car confirmes morts par construction. tests/device_create_smoke.cpp
+exerce desormais toute la chaine WinMain -> FUN_005dca10 -> create_d3d9_device.
+
+364 des 396 fonctions suivies sont integrees (5 bloquees, 27
+differees). 34 tests CTest, tous verts.
+
+## FUN_005dcdf0 (bootstrap moteur) integre : decouverte du bus de
+## messages nommes et du TimeManager
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 2") pour le
+detail. Resume : FUN_005dcdf0 (Engine_InitCoreSystemsAndMessages, le
+second appel direct de WinMain apres FUN_005dca10) revele un bus de
+messages nommes interne au moteur (~30 messages "iMsg*" enregistres
+dans ce seul bootstrap, via une table de hachage non tracee) ; stub
+honnete qui produit un handle stable sans implementer le vrai registre,
+puisque rien n'emet encore ces messages. Deux identifications
+importantes : DAT_00cef730 (deja lu par FrameClock.cpp) EST le
+singleton TimeManager::Instance ; FUN_005e0bf0 initialise le pas de
+simulation fixe du frame pump (toujours 40.0 en Q16.16, independant de
+l'argument) et un second accumulateur avec le meme idiome de precision
+flottant->fixe deja vu ailleurs. DAT_00d6af14 (l'objet moteur utilise
+par FUN_005dca10 ET FUN_005dcdf0) est trace jusqu'a sa vraie
+construction : un initialiseur statique C++ global a 0x0070f720,
+exécuté avant WinMain par le runtime CRT -- pas FUN_005dcdf0 lui-meme.
+Sa reconstruction comme vrai singleton C++ reste a faire ; les deux
+appels vtable dessus restent des no-op documentes.
+tests/engine_bootstrap_smoke.cpp exerce tout le bootstrap de bout en
+bout.
+
+375 des 411 fonctions suivies sont integrees (5 bloquees, 31
+differees). 35 tests CTest, tous verts.
+
+## FUN_00ff1430 integree : la commande exacte d'activation de
+## ScreenLanguageSelect, et correction d'une hypothese
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 3" et la note de
+cloture) pour le detail. Resume : trouve par recherche directe de la
+chaine "...ActivateScreenWithFocus ScreenLanguageSelect" (un seul site,
+FUN_00ff1430) ; integree et testee pour ses 3 branches certaines
+(chapitre 8=FrontEnd, chapitre 9=LanguageSelect, autre=ScreenMainOSD).
+Correction importante : mon hypothese precedente ("Global" resout vers
+LANGUAGE_SELECT) etait fausse -- la table reelle (0x892300) ne contient
+aucune entree nommee "Global", donc DAT_00d472dc n'est PAS mis a 9 par
+cette voie. Qui le met reellement a 9 sur un premier lancement reste
+non resolu (FUN_00576f30/FUN_0053eb40, differees). ChapterLoadStateMachine_Update
+(0x4da7b0, confirmee par la base IDA independante comme etant la
+machine a etats dont l'etat final appelle FUN_00ff1430) reste differee
+dans son ensemble : une vingtaine de sous-fonctions non tracees,
+ampleur comparable a FUN_005dcdf0.
+
+377 des 415 fonctions suivies sont integrees (5 bloquees, 33
+differees). 36 tests CTest, tous verts.
+
+## resolve_and_load_chapter / advance_to_next_chapter integrees :
+## LanguageSelect est structurellement le premier chapitre du jeu
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 4"). Resume :
+FUN_00576f30 et FUN_00ff1390 integrees (src/presentation/ChapterFlow.cpp).
+FUN_00ff1390 revele l'ordre reel de progression de la campagne via la
+table 0x892300 : LanguageSelect(9) -> FrontEnd(8) -> BurrowIntro(1) ->
+Hogwarts(2) -> BurrowXmas(3) -> ... -- LanguageSelect est
+structurellement LE PREMIER chapitre de toute la sequence, preuve
+indirecte forte (pas encore une confirmation directe) de l'hypothese de
+depart. Reste non trouve : le site exact qui ecrit DAT_00d472dc=9 au
+tout premier lancement.
+
+381 des 419 fonctions suivies sont integrees (5 bloquees, 33
+differees). 36 tests CTest, tous verts.
+
+## ChapterLoadStateMachine_Update integree : squelette complet des 20
+## etats, pas juste l'etat critique
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 6"). Tous les 20
+etats et leurs conditions de transition transcrits fidelement
+(y compris une subtilite confirmee sur l'assembleur : le switch
+original n'a aucun case pour l'etat 18, reproduit a l'identique). Les
+~30 sous-fonctions feuilles restent differees (3 stubs generiques par
+forme de retour). L'etat 19 (celui qui declenche
+emit_chapter_entry_screen_command) est transcrit et teste avec
+precision. L'execution complete etat1->etat19 n'est pas exercee de
+bout en bout (depend des vraies valeurs de retour des sous-systemes
+differes).
+
+382 des 419 fonctions suivies sont integrees (5 bloquees, 32
+differees). 37 tests CTest, tous verts.
+
+## TriggerBootupFlow integree de bout en bout
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 7"). FUN_0048c970
+(handler de la commande, #73) et FUN_00ff7fa0 (la fonction qui l'emet
+depuis WinMain) integrees dans src/presentation/BootupFlow.cpp, sans
+nouvelle primitive (reutilise allocate_via_task_handler/submit_task/
+resolve_and_load_chapter deja integrees). Teste bout en bout, y
+compris la re-entrance reelle du dispatch de commande. La chaine
+complete WinMain -> device D3D9 -> bootstrap moteur -> TriggerBootupFlow
+-> resolution de chapitre est maintenant integree et testee de bout en
+bout, modulo les sous-systemes de chargement de ressources deja
+differes.
+
+385 des 422 fonctions suivies sont integrees (5 bloquees, 32
+differees). 38 tests CTest, tous verts.
+
+## Gestionnaire de device perdu integre + vraie correction de fidelite
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 8"). FUN_0064aa60
+(handle_device_lost) integree, reutilise cache_available_texture_memory
+et prepare_render_target_texture deja en place. Deux corrections
+importantes faites en ecrivant le test (pas juste pour le test) :
+(1) create_d3d9_device utilisait un tableau LOCAL pour les
+D3DPRESENT_PARAMETERS, alors que le vrai Reset() reutilise le meme
+bloc PERSISTANT -- corrige en un vrai global partage DAT_00c75538 ;
+(2) release_if_present appelait le slot 0 de la vtable au lieu du
+slot +8 (Release) -- une vraie faute de frappe dans le code de
+production, detectee seulement parce que le test utilisait un objet
+factice complet (vraie vtable) plutot qu'un pointeur arbitraire comme
+certains tests precedents. Lecon retenue : faire des objets factices
+complets vaut l'effort, un pointeur arbitraire masque ce genre
+d'erreur.
+
+388 des 425 fonctions suivies sont integrees (5 bloquees, 32
+differees). 39 tests CTest, tous verts.
+
+## La vraie boucle de messages Win32 integree
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 9"). FUN_005d8fc0
+(hp6::platform::run_message_loop, src/platform/MessageLoop.cpp) est
+l'appel unique que WinMain fait apres ShowWindow/UpdateWindow. Reutilise
+handle_device_lost, copy_gsc_message_handles et run_frame_tick, deja
+integrees ; applique le meme idiome Q16.16 entier/fraction que
+initialize_frame_pump_timing pour calculer le budget de frame. Verrou
+WM_QUIT a usage unique et dispatch Translate/DispatchMessage reproduits
+fidelement. Quatre sous-fonctions restent differees en no-op documente
+(bloc de nettoyage "erreur fatale deja affichee", traqueur de plancher
+de performance, FUN_00689180, FUN_00545f30) -- aucune n'est sur un
+chemin dont le code deja integre depend.
+
+389 des 426 fonctions suivies sont integrees (5 bloquees, 32
+differees). 40 tests CTest, tous verts. La chaine complete WinMain ->
+creation du device D3D9 -> bootstrap moteur -> TriggerBootupFlow ->
+resolution de chapitre -> boucle de messages est maintenant
+reconstruite et testee piece par piece ; il ne reste plus qu'a
+assembler WinMain lui-meme comme une vraie fonction C++ appelable, en
+reliant les morceaux deja valides.
+
+## WinMain assemblee, integree et testee de bout en bout
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 10"). FUN_005d9300
+(hp6::platform::run_win_main, src/platform/WinMain.cpp) relie toutes
+les pieces deja integrees : SystemParametersInfoA save/restore,
+verification mono-instance, ~27 lectures de reglages GameSettings,
+creation de fenetre et de device D3D9, bootstrap moteur,
+TriggerBootupFlow, boucle de messages reelle, et toute la sequence
+d'arret (demontage du device, restauration SystemParametersInfoA,
+TerminateProcess injectable pour rester testable). Cinq fonctions
+supplementaires integrees pour de vrai sur ce chemin :
+initialize_file_system_storage (FUN_00688130), is_platform_compatible
+(FUN_00ff8ce0, dont le chemin interne est confirme mort car
+initialize_file_system_storage vient de remettre son drapeau a zero
+juste avant), shutdown_render_device (FUN_00648e70, le vrai demontage
+du device avec verification de compteur de reference),
+parse_setting_string_to_int (FUN_00ff8300), plus six no-op documentes
+repartis entre DeviceCreate.cpp et un nouveau fichier
+EngineSubsystems.cpp (sous-systemes de developpement pur ou objets de
+service non traces, chacun avec sa propre justification documentee).
+
+tests/winmain_smoke.cpp exerce la fonction entiere contre une chaine
+complete de faux objets Direct3D9, avec le verrou de la boucle de
+messages pre-arme pour eviter toute boucle infinie dans le test.
+
+394 des 438 fonctions suivies sont integrees (5 bloquees, 39
+differees). 41 tests CTest, tous verts. **L'objectif directeur de
+cette reconstruction est atteint : un executable reel et testable,
+assemble piece par piece depuis WinMain, qui cree une vraie fenetre,
+un vrai device Direct3D 9, demarre le vrai moteur, et declenche
+TriggerBootupFlow -> resolution de chapitre -> ScreenLanguageSelect.**

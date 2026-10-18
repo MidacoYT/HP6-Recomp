@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006d766b",
+      "run_id": "3ec728218bf344e785dddc9c03091d2a",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d766b",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The member at offset 0x90 has no evidence-backed name or signedness.\nint __cdecl FUN_006d766b(int param_1)\n{\n    auto* member = reinterpret_cast<const std::uint32_t*>(\n        static_cast<std::uint32_t>(param_1) + 0x90u);\n    return static_cast<std::int32_t>(*member + 0x11u);\n}",
+      "verdict": "FAIL",
+      "summary": "The 32-bit load and addition match, but offset 0x90 is not mapped to a named struct member.",
+      "issues": [
+        "The code accesses param_1 + 0x90 through pointer arithmetic instead of a named member at offset 0x90."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d766b\\_FUN_006d766b.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

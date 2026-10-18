@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006d700a",
+      "run_id": "c32c017b68f64e6c93b6db0bdb39ffe6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d700a",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The structure's member names are unresolved. The confirmed fields are\n// a type byte at +0, a relative next offset at +4, and a relative value at +8.\nstd::uint32_t __thiscall FUN_006d700a(void* self, std::int32_t param_1)\n{\n    auto* current = static_cast<std::uint8_t*>(self);\n    std::uint8_t* previous = nullptr;\n\n    while (current != nullptr) {\n        if (param_1 == FUN_006d6c09(\n                           reinterpret_cast<std::uint32_t*>(current))) {\n            break;\n        }\n\n        const auto nextOffset =\n            *reinterpret_cast<std::uint32_t*>(current + 4);\n        previous = current;\n        current = nextOffset == 0\n            ? nullptr\n            : reinterpret_cast<std::uint8_t*>(\n                  static_cast<std::uint32_t>(\n                      reinterpret_cast<std::uintptr_t>(current)) + nextOffset);\n    }\n\n    if (current == nullptr) {\n        return 0;\n    }\n\n    if (previous == nullptr) {\n        current[0] = 0x81;\n        if ((current[1] & 0x08) != 0) {\n            auto value = *reinterpret_cast<std::uint32_t*>(current + 8);\n            if (value != 0) {\n                value += static_cast<std::uint32_t>(\n                    reinterpret_cast<std::uintptr_t>(current));\n            }\n            FUN_006d6b3f(value);\n        }\n    } else {\n        const auto nextOffset =\n            *reinterpret_cast<std::uint32_t*>(current + 4);\n        const auto next = nextOffset == 0\n            ? 0u\n            : nextOffset + static_cast<std::uint32_t>(\n                  reinterpret_cast<std::uintptr_t>(current));\n\n        FUN_006d6bf1(previous, static_cast<std::int32_t>(next));\n        FUN_006d81e5(static_cast<std::int32_t>(\n            reinterpret_cast<std::uintptr_t>(current)));\n    }\n\n    return 1;\n}",
+      "verdict": "FAIL",
+      "summary": "The traversal and branches largely match, but the return value, comparison width, and field mapping do not.",
+      "issues": [
+        "The success path returns CONCAT31((int3)((uint)iVar3 >> 8), 1), preserving the upper 24 bits of iVar3. The reversed code always returns 1.",
+        "FUN_006d6c09 supplies a byte result; Ghidra compares param_1 with that byte combined with three additional register bytes. The reversed comparison does not establish equivalent 32-bit behavior.",
+        "Offsets +0, +4, and +8 are accessed through casts and byte indexing rather than named structure members."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 8 branches/loops, candidate has 6"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d700a\\_FUN_006d700a.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

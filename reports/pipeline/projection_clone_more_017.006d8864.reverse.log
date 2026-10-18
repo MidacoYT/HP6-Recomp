@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d8864",
+      "run_id": "7665d53cfa1d4913b4302365b4acd5a9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8864",
+      "success": false,
+      "rounds_used": 1,
+      "code": "int __fastcall FUN_006d8864(unsigned int* param_1)\n{\n    for (;;) {\n        const unsigned int result = FUN_006d6c09(param_1);\n\n        if (result == 1) {\n            return 0;\n        }\n        if (result == 2 || result == 4 || result == 0x10) {\n            return param_1[3] + 0x20;\n        }\n        if (result == 0x20 || result == 0x80) {\n            return param_1[3] + 0x10;\n        }\n        if (result != 0x100) {\n            return 0;\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The branches match, but the call result and field mapping do not meet exact verification.",
+      "issues": [
+        "Ghidra models FUN_006d6c09 as returning one byte, then compares that byte combined with three unspecified upper bytes. The reversed code treats the call as returning a full unsigned int. This matters for the 0x100 loop condition.",
+        "param_1[3] accesses the value at offset 0x0c without mapping it to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d8864\\_FUN_006d8864.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

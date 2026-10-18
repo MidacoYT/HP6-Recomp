@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006b3b04",
+      "run_id": "691ab3aa25d847848e32a1a061438833",
+      "error": null,
+      "class_name": "",
+      "function_name": "006b3b04",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __stdcall FUN_006b3b04()\n{\n    (*_DAT_008516ac)();\n}",
+      "verdict": "FAIL",
+      "summary": "The indirect target matches, but the control transfer is not verified as equivalent.",
+      "issues": [
+        "Ghidra warns that the instruction at 0x006b3b08 is an indirect jump treated as a call. The reversed code expresses an ordinary call followed by a return, which may generate different control flow."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b3b04\\_006b3b04.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

@@ -46,4 +46,14 @@ std::int64_t create_and_wait_repeat_node(std::uintptr_t record,
 std::int64_t create_and_wait_plain_node(std::uintptr_t record,
                                         std::uint8_t mode);
 
+// 006b17b7 (cdecl): same chain over the probe creator (006b24f2) with no
+// attach words; returns the pair itself. The caller's argument word feeds
+// the funnel of 006b24f2 unchanged; the CDQ sign extensions happen inside
+// 006b329a. Used by the reserved file-op probes (006da462 machinery).
+std::int64_t create_and_wait_probe_node(std::uintptr_t record,
+                                        std::int32_t value_0x20,
+                                        std::uint32_t field_0x30,
+                                        std::int32_t value_0x28,
+                                        std::uint8_t mode);
+
 } // namespace hp6::runtime

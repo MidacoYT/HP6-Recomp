@@ -1,0 +1,37 @@
+{
+  "results": [
+    {
+      "address": "006d6d39",
+      "run_id": "3e17bbfbaab54a3ea2bbfa5e5ad9b3f3",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d6d39",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t __thiscall FUN_006d6d39(\n    void* this_,\n    std::uint32_t param_1,\n    std::uint32_t* param_2)\n{\n    // The structures at this_ and param_2 are unresolved. Their fields\n    // at +0x04 and +0x0c are therefore accessed by offset.\n    auto field = [](void* object, std::uint32_t offset) -> std::uint32_t& {\n        return *reinterpret_cast<std::uint32_t*>(\n            static_cast<std::uint32_t>(\n                reinterpret_cast<std::uintptr_t>(object) + offset));\n    };\n\n    const std::uint32_t requested_type = FUN_006d6c09(param_2);\n    auto cursor = static_cast<std::uint32_t>(\n        reinterpret_cast<std::uintptr_t>(&param_1));\n    std::uint32_t previous = 0;\n    void* selected = nullptr;\n    void* current = this_;\n\n    for (;;) {\n        if (current == nullptr) {\n            *reinterpret_cast<std::uint32_t*>(previous + 4) = 0;\n            return 1;\n        }\n\n        const std::uint32_t type = FUN_006d6c09(\n            reinterpret_cast<std::uint32_t*>(current));\n\n        void* source = current;\n        if (type == requested_type) {\n            source = param_2;\n            selected = current;\n        }\n\n        std::uint32_t destination = previous;\n\n        if (type != 1) {\n            if (type == 2) {\n                destination = ((cursor + 0x9fu) & 0xffffff80u) - 0x20u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d822a(source, reinterpret_cast<void*>(destination));\n                cursor = destination + field(source, 0x0c) + 0x20u;\n            } else if (type == 4) {\n                destination = ((cursor + 0x2fu) & 0xfffffff0u) - 0x20u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d82ec(source, reinterpret_cast<void*>(destination));\n                cursor = destination + field(source, 0x0c) + 0x20u;\n            } else if (type == 16) {\n                destination = ((cursor + 0x2fu) & 0xfffffff0u) - 0x20u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d8466(source, reinterpret_cast<void*>(destination));\n                cursor = destination + field(source, 0x0c) + 0x20u;\n            } else if (type == 32) {\n                destination = ((cursor + 0x1fu) & 0xfffffff0u) - 0x10u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d8619(source, reinterpret_cast<void*>(destination));\n                cursor = destination + field(source, 0x0c) + 0x10u;\n            } else if (type == 128) {\n                destination = ((cursor + 0x1fu) & 0xfffffff0u) - 0x10u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d852e(source, reinterpret_cast<void*>(destination));\n                cursor = destination + field(source, 0x0c) + 0x10u;\n            } else {\n                // Ghidra's pointer subtraction by 0x40 is a byte\n                // subtraction by 0x100; its comparison is with zero.\n                if (type != 0x100u)\n                    return (type - 0x100u) & 0xffffff00u;\n\n                destination = ((cursor + 0x2fu) & 0xfffffff0u) - 0x20u;\n                if (previous != 0)\n                    FUN_006d6bf1(reinterpret_cast<void*>(previous), destination);\n                FUN_006d83ab(source, reinterpret_cast<void*>(destination));\n                const int size = FUN_006d8864(source);\n                cursor = destination + static_cast<std::uint32_t>(size);\n            }\n        }\n\n        previous = destination;\n\n        if (type == requested_type) {\n            const std::uint32_t next = field(selected, 0x04);\n            current = next == 0\n                ? nullptr\n                : reinterpret_cast<void*>(\n                    static_cast<std::uint32_t>(\n                        reinterpret_cast<std::uintptr_t>(selected)) + next);\n            selected = nullptr;\n        } else {\n            const std::uint32_t next = field(source, 0x04);\n            current = next == 0\n                ? nullptr\n                : reinterpret_cast<void*>(\n                    static_cast<std::uint32_t>(\n                        reinterpret_cast<std::uintptr_t>(source)) + next);\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The return value and field representation do not fully match the decompilation.",
+      "issues": [
+        "On the null-current path, Ghidra returns `(puVar5 & 0xffffff00) | 1`; the reversed code always returns `1`. `puVar5` can hold the prior iteration's pointer or next-offset value.",
+        "The +0x04 and +0x0c fields are accessed by raw offsets rather than mapped to named struct members."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 22 branches/loops, candidate has 17"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d6d39\\_FUN_006d6d39.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 15 calls, source has 22 calls (diff: 7)"
+        }
+      ]
+    }
+  ]
+}

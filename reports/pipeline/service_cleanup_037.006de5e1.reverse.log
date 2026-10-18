@@ -1,0 +1,28 @@
+Candidate validation failed for 006de5e1: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006de5e1",
+      "run_id": "0fc6ea36dd7549898108af8116b28e24",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de5e1",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006de5e1_Object {\n    void* vtable;\n    std::byte unresolved_004[0x464];\n    std::int32_t field_468; // Member name and concrete type remain unresolved.\n};\n\nvoid __fastcall FUN_006de5e1(FUN_006de5e1_Object* self)\n{\n    self->vtable = &PTR_FUN_0071b608;\n    FUN_006de5b0(reinterpret_cast<std::int32_t>(self));\n\n    const std::int32_t value = self->field_468;\n    if (value != 0) {\n        FUN_005dc710(value);\n        self->field_468 = 0;\n    }\n\n    self->vtable = &PTR_FUN_0071b5e8;\n    FUN_006de735(self);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent P-code evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

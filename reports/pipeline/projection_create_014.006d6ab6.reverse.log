@@ -1,0 +1,28 @@
+Candidate validation failed for 006d6ab6: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006d6ab6",
+      "run_id": "915402380b594148997cac2e55214827",
+      "error": null,
+      "class_name": "",
+      "function_name": "006d6ab6",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstruct Entry_006d6ab6 {\n    std::uint32_t index;\n    std::uint32_t value;\n    Entry_006d6ab6* next;\n};\n\nstatic_assert(sizeof(Entry_006d6ab6) == 12); // 32-bit target\n\n// The type behind this global is unresolved; its first word points to the callback.\nextern void** DAT_00895c84;\n\nvoid __cdecl FUN_006d6ab6(\n    std::uint32_t param_1, std::uint32_t param_2,\n    std::uint32_t param_3, std::uint32_t param_4,\n    std::uint32_t param_5, std::uint32_t param_6,\n    std::uint32_t param_7)\n{\n    Entry_006d6ab6 entries[6] = {\n        {6, param_7, &entries[1]},\n        {5, param_6, &entries[2]},\n        {4, param_5, &entries[3]},\n        {3, param_4, &entries[4]},\n        {2, param_3, &entries[5]},\n        {1, param_1, nullptr}\n    };\n\n    using Callback = void (__cdecl *)(std::uint32_t, Entry_006d6ab6*);\n    (*reinterpret_cast<Callback*>(*DAT_00895c84))(param_2, entries);\n}",
+      "verdict": "PASS",
+      "summary": "All six entry records, links, values, and the indirect callback call match the supplied evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

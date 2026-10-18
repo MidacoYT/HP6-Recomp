@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d7b7a",
+      "run_id": "1ba07351932a4fd8a0803bba976b87d2",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7b7a",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The supplied evidence does not identify the owning type or member names.\n// The address-based offsets are retained rather than assigned speculative names.\nvoid __thiscall FUN_006d7b7a(void* this_, std::uint8_t* param_1)\n{\n    FUN_006d7a48(this_, param_1);\n\n    *reinterpret_cast<std::uint32_t*>(param_1 + 0x04) |= 0x10u;\n    *reinterpret_cast<std::uint32_t*>(param_1 + 0x74) =\n        *reinterpret_cast<std::uint32_t*>(static_cast<std::uint8_t*>(this_) + 0x10);\n    *reinterpret_cast<std::uint32_t*>(param_1 + 0x78) =\n        *reinterpret_cast<std::uint32_t*>(static_cast<std::uint8_t*>(this_) + 0x14);\n    *reinterpret_cast<std::uint32_t*>(param_1 + 0x7c) =\n        *reinterpret_cast<std::uint32_t*>(static_cast<std::uint8_t*>(this_) + 0x18);\n    *reinterpret_cast<std::uint32_t*>(param_1 + 0x80) =\n        *reinterpret_cast<std::uint32_t*>(static_cast<std::uint8_t*>(this_) + 0x1c);\n}",
+      "verdict": "FAIL",
+      "summary": "The call and operations match the binary evidence, but the struct offsets lack named members.",
+      "issues": [
+        "Raw offsets remain for param_1 + 0x04, 0x74, 0x78, 0x7c, 0x80 and this + 0x10, 0x14, 0x18, 0x1c, violating the required member mapping."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7b7a\\_FUN_006d7b7a.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

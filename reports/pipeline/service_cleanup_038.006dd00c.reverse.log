@@ -1,0 +1,32 @@
+Candidate validation failed for 006dd00c: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006dd00c",
+      "run_id": "d6368e809c964f8c842c0d72b14208a4",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dd00c",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006dd00c_layout {\n    std::byte unknown_0x00[0x20];\n    std::int32_t entry_0x20[32];\n    std::uint32_t count_0xA0;\n    std::int32_t field_0xA4;\n    std::int32_t field_0xA8;\n    std::int32_t field_0xAC;\n};\n\nstatic_assert(offsetof(FUN_006dd00c_layout, count_0xA0) == 0xA0);\nstatic_assert(offsetof(FUN_006dd00c_layout, field_0xAC) == 0xAC);\n\nstd::uint32_t __thiscall FUN_006dd00c(void* this_, std::int32_t param_1)\n{\n    auto* object = static_cast<FUN_006dd00c_layout*>(this_);\n    std::uint32_t eax; // Incoming EAX is unspecified when param_1 is zero.\n\n    if (param_1 != 0) {\n        eax = object->count_0xA0;\n        std::int32_t index = 0;\n        auto* entry = object->entry_0x20;\n\n        if (static_cast<std::int32_t>(eax) > 0) {\n            do {\n                eax = static_cast<std::uint32_t>(*entry);\n                if (*entry == param_1) {\n                    eax = object->count_0xA0 - 1;\n                    object->count_0xA0 = eax;\n                    *entry = object->entry_0x20[eax];\n\n                    if (object->field_0xAC == param_1)\n                        object->field_0xAC = 0;\n                    if (object->field_0xA8 == param_1)\n                        object->field_0xA8 = 0;\n                    if (object->field_0xA4 == param_1)\n                        object->field_0xA4 = 0;\n\n                    const auto address = reinterpret_cast<std::uintptr_t>(\n                        &object->field_0xA4);\n                    return (static_cast<std::uint32_t>(address) & 0xFFFFFF00u) | 1u;\n                }\n\n                ++index;\n                ++entry;\n            } while (index < static_cast<std::int32_t>(object->count_0xA0));\n        }\n    }\n\n    return eax & 0xFFFFFF00u;\n}",
+      "verdict": "FAIL",
+      "summary": "The removal path conflicts with the independent P-code, and two edge cases are not faithfully modeled.",
+      "issues": [
+        "At 0x006dd043, the P-code subtracts 1 from the value loaded from *entry at 0x006dd02b. The reversed code instead subtracts 1 from count_0xA0. This conflicts with the supplied Ghidra decompilation; the independent P-code supports the entry value.",
+        "When param_1 is zero, the binary masks incoming EAX. Reading uninitialized eax in C++ is undefined behavior.",
+        "The binary has no 32-entry bounds check. Indexing entry_0x20[32] is undefined in C++ if the computed index exceeds 31."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

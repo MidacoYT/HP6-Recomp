@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006e77cb",
+      "run_id": "358a5163c9a64a8f883824820f09a47c",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006e77cb",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\nstd::int32_t __cdecl FUN_006e77cb(\n    std::int32_t param_1,\n    std::int32_t param_2,\n    std::uint32_t param_3,\n    void* param_4)\n{\n    // The 32-bit pointer stored at offset 0x1c has no evidenced member name.\n    auto* cursor = reinterpret_cast<std::uint32_t*>(\n        static_cast<std::uintptr_t>(static_cast<std::uint32_t>(param_1)) + 0x1c);\n\n    const std::uint32_t byte_count =\n        static_cast<std::uint32_t>(param_2) << 2;\n\n    std::memcpy(\n        param_4,\n        reinterpret_cast<const void*>(static_cast<std::uintptr_t>(*cursor)),\n        byte_count);\n\n    *cursor += byte_count;\n    return param_2;\n}",
+      "verdict": "FAIL",
+      "summary": "The copy and cursor update match in value, but the offset and operation order do not meet the stated verification standard.",
+      "issues": [
+        "Offset 0x1c is accessed through a raw pointer instead of a named struct member.",
+        "The reversed code computes byte_count before memcpy and reuses it for the cursor update. The P-code computes param_2 * 4 after the memcpy call."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006e77cb\\_FUN_006e77cb.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

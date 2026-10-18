@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d9eea",
+      "run_id": "7bb6b6090e3941869f193a3f171b1b76",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d9eea",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __cdecl FUN_006d9eea(char* param_1)\n{\n    char* local_18[3];\n    std::uint32_t local_c;\n\n    char** ppcVar3 = local_18;\n    std::uint32_t uVar2 = 100;\n    local_18[0] = param_1;\n    local_c = 1;\n\n    std::uint32_t* puVar1 = FUN_006b25b8(param_1);\n    FUN_006b2553(FUN_006d9eac, reinterpret_cast<int>(puVar1), uVar2, ppcVar3);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent binary evidence for the 32-bit target.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d9eea\\_FUN_006d9eea.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

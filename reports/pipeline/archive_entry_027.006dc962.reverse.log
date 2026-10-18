@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dc962",
+      "run_id": "2e1574dbf18940d48605b144f2209950",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc962",
+      "success": true,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006dc962(unsigned char* param_1, int param_2)\n{\n    int local_8 = 0;\n\n    if (param_2 != 0) {\n        FUN_006dc751(param_1, param_2, 0, &local_8, nullptr);\n    }\n\n    return local_8;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent control-flow and call evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc962\\_FUN_006dc962.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

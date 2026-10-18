@@ -107,4 +107,24 @@ std::uint8_t* construct_plain_node(std::uint8_t* receiver, std::uint32_t id,
                                    std::uint32_t attach_words,
                                    std::uintptr_t engine);
 
+// 006b329a (thiscall in the binary). Engine attach first, record word at
+// +0x14, one signed argument per pair at +0x28/+0x2c and +0x20/+0x24 (the
+// sign words come from the CDQ of the int32 argument), vtable 00715af0 and
+// the unsigned word at +0x30 last, then scheduling.
+std::uint8_t* construct_probe_node_00715af0(
+    std::uint8_t* receiver, std::uint32_t record, std::int32_t value_0x28,
+    std::int32_t value_0x20, std::uint32_t field_0x30, std::uint8_t mode,
+    std::uint32_t attach_words, std::uintptr_t engine);
+
+// 006b24f2 (cdecl). Pooled 0x40-byte slot + 006b329a, decompiled argument
+// funnel: 006b329a(slot, param_1, param_4, param_2, param_3, param_5,
+// param_6, *(param_1 + 0xc)); returns the node's +0xc word; 0 when the
+// pool is empty.
+std::uint32_t create_probe_node_from_record(std::uintptr_t record,
+                                            std::int32_t value_0x20,
+                                            std::uint32_t field_0x30,
+                                            std::int32_t value_0x28,
+                                            std::uint8_t mode,
+                                            std::uint32_t attach_words);
+
 } // namespace hp6::runtime

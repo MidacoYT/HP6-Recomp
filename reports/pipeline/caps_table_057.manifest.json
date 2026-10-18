@@ -1,0 +1,1052 @@
+{
+  "schema_version": 1,
+  "identity": "114d7eddd6a35fb985bef8f1e9348de0e2446fc14076cbf7eadf5c621fd25a38",
+  "seeds": [
+    "00640fb0",
+    "0064aa30",
+    "0064c300",
+    "0064c3b0",
+    "010021f0",
+    "01011a50"
+  ],
+  "functions": [
+    {
+      "address": "00640fb0",
+      "class_name": "",
+      "function_name": "00640fb0",
+      "caller_count": 2
+    },
+    {
+      "address": "0064aa30",
+      "class_name": "",
+      "function_name": "FUN_0064aa30",
+      "caller_count": 2
+    },
+    {
+      "address": "0064c300",
+      "class_name": "",
+      "function_name": "FUN_0064c300",
+      "caller_count": 68
+    },
+    {
+      "address": "0064c3b0",
+      "class_name": "",
+      "function_name": "FUN_0064c3b0",
+      "caller_count": 20
+    },
+    {
+      "address": "010021f0",
+      "class_name": "",
+      "function_name": "010021f0",
+      "caller_count": 1
+    },
+    {
+      "address": "01011a50",
+      "class_name": "",
+      "function_name": "FUN_01011a50",
+      "caller_count": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "00640fb0",
+      "target": "006406a0"
+    },
+    {
+      "source": "00640fb0",
+      "target": "0064c300"
+    },
+    {
+      "source": "00640fb0",
+      "target": "006b97bc"
+    },
+    {
+      "source": "0064aa30",
+      "target": "0063b4c0"
+    },
+    {
+      "source": "010021f0",
+      "target": "0064c300"
+    },
+    {
+      "source": "010021f0",
+      "target": "0064c3b0"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "00640fb0",
+      "reason": "Dependency 006406a0 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "00640fb0",
+      "reason": "Dependency 006b97bc outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "0064aa30",
+      "reason": "Dependency 0063b4c0 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "00640fb0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "00640fb0",
+        "name": "00640fb0",
+        "signature": "undefined __stdcall FUN_00640fb0(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_00640fb0\n// Address:   0x00640fb0\n// Signature: undefined __stdcall FUN_00640fb0(void)\n// Callers:   2  |  Callees: 3\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_00640fb0(void)\n\n\n\n{\n\n  _DAT_00cf18c4 = 0;\n\n  _DAT_00cf18c8 = 0;\n\n  DAT_00cf18cc = 0;\n\n  DAT_00cf18e0 = 0;\n\n  memset(&_Dst_00881370,0xcd,0x4c);\n\n  _DAT_00f82c90 = 6;\n\n  _DAT_00f82cdc = 6;\n\n  _DAT_00f82d74 = 8;\n\n  _DAT_00f82dc0 = 8;\n\n  _DAT_00f83068 = 6;\n\n  _DAT_00f830b4 = 6;\n\n  _DAT_00f83100 = 8;\n\n  _DAT_00f8314c = 8;\n\n  _DAT_00f82c48 = 0;\n\n  _DAT_00f82c40 = 2;\n\n  _DAT_00f82c44 = 1;\n\n  _DAT_00f82c94 = 1;\n\n  _DAT_00f82c8c = 5;\n\n  _DAT_00f82ce0 = 1;\n\n  _DAT_00f82cd8 = 5;\n\n  _DAT_00f82d24 = 2;\n\n  _DAT_00f82d28 = 1;\n\n  _DAT_00f82d70 = 7;\n\n  _DAT_00f82dbc = 7;\n\n  _DAT_00f82e10 = 1;\n\n  _DAT_00f82e08 = 5;\n\n  _DAT_00f82e0c = 2;\n\n  _DAT_00f82e54 = 7;\n\n  _DAT_00f82ea8 = 1;\n\n  _DAT_00f82ea0 = 5;\n\n  _DAT_00f82ea4 = 2;\n\n  _DAT_00f82ecc = 3;\n\n  _DAT_00f82eec = 7;\n\n  _DAT_00f82ef0 = 1;\n\n  _DAT_00f82f40 = 1;\n\n  _DAT_00f82f38 = 5;\n\n  _DAT_00f82f3c = 7;\n\n  _DAT_00f82f8c = 1;\n\n  _DAT_00f82f84 = 5;\n\n  _DAT_00f82f88 = 2;\n\n  _DAT_00f82fd0 = 7;\n\n  _DAT_00f83024 = 0;\n\n  _DAT_00f8301c = 2;\n\n  _DAT_00f83020 = 1;\n\n  _DAT_00f83070 = 1;\n\n  _DAT_00f8306c = 5;\n\n  _DAT_00f830bc = 1;\n\n  _DAT_00f830b8 = 5;\n\n  _DAT_00f83104 = 7;\n\n  _DAT_00f83150 = 7;\n\n  _DAT_00f831a0 = 0;\n\n  _DAT_00f83198 = 9;\n\n  _DAT_00f8319c = 3;\n\n  _DAT_00f831ec = 0;\n\n  _DAT_00f831e8 = 3;\n\n  _DAT_00f8338c = 3;\n\n  _DAT_00f831e4 = 9;\n\n  _DAT_00f83238 = 1;\n\n  _DAT_00f83230 = 2;\n\n  _DAT_00f83234 = 5;\n\n  _DAT_00f83284 = 1;\n\n  _DAT_00f8327c = 2;\n\n  _DAT_00f83280 = 5;\n\n  _DAT_00f832d0 = 1;\n\n  _DAT_00f832c8 = 1;\n\n  _DAT_00f832cc = 2;\n\n  _DAT_00f8331c = 0;\n\n  _DAT_00f83314 = 2;\n\n  _DAT_00f83318 = 2;\n\n  _DAT_00f83340 = 2;\n\n  _DAT_00f83368 = 0;\n\n  _DAT_00f83360 = 2;\n\n  _DAT_00f83364 = 2;\n\n  _DAT_00f833b4 = 0;\n\n  _DAT_00f833ac = 2;\n\n  _DAT_00f833b0 = 2;\n\n  _DAT_00f833d8 = 1;\n\n  if (((*(byte *)(DAT_008663d8 * 0x584 + 0x474 + DAT_00cf19d0) & 0x80) == 0) ||\n\n     (DAT_00cf19a8 == 0x10)) {\n\n    _DAT_00f82d24 = 1;\n\n    _DAT_00f82d28 = 2;\n\n    _DAT_00f82d70 = 1;\n\n    _DAT_00f82d74 = 2;\n\n    _DAT_00f82dbc = 1;\n\n    _DAT_00f82dc0 = 2;\n\n    _DAT_00f82e54 = 1;\n\n    _DAT_00f82eec = 1;\n\n    _DAT_00f82ef0 = 2;\n\n    _DAT_00f82fd0 = 1;\n\n    _DAT_00f83100 = 1;\n\n    _DAT_00f83104 = 2;\n\n    _DAT_00f8314c = 1;\n\n    _DAT_00f83150 = 2;\n\n  }\n\n  _DAT_00f83154 = 1;\n\n  _DAT_00f83108 = 1;\n\n  _DAT_00f82fd8 = 1;\n\n  _DAT_00f82fd4 = 2;\n\n  _DAT_00f82ef4 = 1;\n\n  _DAT_00f82e5c = 1;\n\n  _DAT_00f82e58 = 2;\n\n  _DAT_00f82dc4 = 1;\n\n  _DAT_00f82d78 = 1;\n\n  _DAT_00f82d2c = 1;\n\n  _DAT_008813bc = 0xcdcdcdcd;\n\n  _DAT_008813c0 = 0xcdcdcdcd;\n\n  _DAT_008813c4 = 0xcdcdcdcd;\n\n  _DAT_00f834e0 = 5;\n\n  _DAT_008813a4 = 5;\n\n  _DAT_00f83494 = 0;\n\n  _DAT_00f83498 = 8;\n\n  _DAT_00f834a0 = 1;\n\n  _DAT_00f834a4 = 8;\n\n  _DAT_00f834ac = 1;\n\n  _DAT_00f834b0 = 2;\n\n  _DAT_00f834b8 = 1;\n\n  _DAT_00f834bc = 4;\n\n  _DAT_00f834c4 = 1;\n\n  _DAT_00f834c8 = 3;\n\n  _DAT_00f834d0 = 1;\n\n  _DAT_00f834d4 = 7;\n\n  _DAT_00f834dc = 1;\n\n  _DAT_00f834e8 = 1;\n\n  _DAT_00f834ec = 6;\n\n  _DAT_00f834f4 = 1;\n\n  _DAT_00f834f8 = 7;\n\n  _DAT_00f83500 = 1;\n\n  _DAT_00f83504 = 7;\n\n  _DAT_00f8350c = 1;\n\n  _DAT_00f83510 = 7;\n\n  _DAT_00881374 = 2;\n\n  _DAT_00881378 = 1;\n\n  _DAT_0088137c = 0;\n\n  _DAT_00881380 = 0;\n\n  _DAT_00881384 = 0;\n\n  _DAT_00881388 = 0;\n\n  _DAT_0088138c = 0;\n\n  _DAT_008813a0 = 1;\n\n  _DAT_008813ac = 2;\n\n  _DAT_008813a8 = 0;\n\n  _DAT_008813b0 = 4;\n\n  _DAT_008813b8 = 2;\n\n  _DAT_008813b4 = 0;\n\n  thunk_FUN_010021f0();\n\n  _DAT_008813c0 = 0;\n\n  _DAT_008813c4 = 8;\n\n  FUN_0064c300(0x19,8);\n\n  DAT_0086527c = 0xfffffff8;\n\n  DAT_00865280 = 0xfffffff7;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_00640fb0\n// Address:   0x00640fb0\n// Signature: undefined __stdcall FUN_00640fb0(void)\n// Callers:   2  |  Callees: 3\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_00640fb0(void)\n\n\n\n{\n\n  _DAT_00cf18c4 = 0;\n\n  _DAT_00cf18c8 = 0;\n\n  DAT_00cf18cc = 0;\n\n  DAT_00cf18e0 = 0;\n\n  memset(&_Dst_00881370,0xcd,0x4c);\n\n  _DAT_00f82c90 = 6;\n\n  _DAT_00f82cdc = 6;\n\n  _DAT_00f82d74 = 8;\n\n  _DAT_00f82dc0 = 8;\n\n  _DAT_00f83068 = 6;\n\n  _DAT_00f830b4 = 6;\n\n  _DAT_00f83100 = 8;\n\n  _DAT_00f8314c = 8;\n\n  _DAT_00f82c48 = 0;\n\n  _DAT_00f82c40 = 2;\n\n  _DAT_00f82c44 = 1;\n\n  _DAT_00f82c94 = 1;\n\n  _DAT_00f82c8c = 5;\n\n  _DAT_00f82ce0 = 1;\n\n  _DAT_00f82cd8 = 5;\n\n  _DAT_00f82d24 = 2;\n\n  _DAT_00f82d28 = 1;\n\n  _DAT_00f82d70 = 7;\n\n  _DAT_00f82dbc = 7;\n\n  _DAT_00f82e10 = 1;\n\n  _DAT_00f82e08 = 5;\n\n  _DAT_00f82e0c = 2;\n\n  _DAT_00f82e54 = 7;\n\n  _DAT_00f82ea8 = 1;\n\n  _DAT_00f82ea0 = 5;\n\n  _DAT_00f82ea4 = 2;\n\n  _DAT_00f82ecc = 3;\n\n  _DAT_00f82eec = 7;\n\n  _DAT_00f82ef0 = 1;\n\n  _DAT_00f82f40 = 1;\n\n  _DAT_00f82f38 = 5;\n\n  _DAT_00f82f3c = 7;\n\n  _DAT_00f82f8c = 1;\n\n  _DAT_00f82f84 = 5;\n\n  _DAT_00f82f88 = 2;\n\n  _DAT_00f82fd0 = 7;\n\n  _DAT_00f83024 = 0;\n\n  _DAT_00f8301c = 2;\n\n  _DAT_00f83020 = 1;\n\n  _DAT_00f83070 = 1;\n\n  _DAT_00f8306c = 5;\n\n  _DAT_00f830bc = 1;\n\n  _DAT_00f830b8 = 5;\n\n  _DAT_00f83104 = 7;\n\n  _DAT_00f83150 = 7;\n\n  _DAT_00f831a0 = 0;\n\n  _DAT_00f83198 = 9;\n\n  _DAT_00f8319c = 3;\n\n  _DAT_00f831ec = 0;\n\n  _DAT_00f831e8 = 3;\n\n  _DAT_00f8338c = 3;\n\n  _DAT_00f831e4 = 9;\n\n  _DAT_00f83238 = 1;\n\n  _DAT_00f83230 = 2;\n\n  _DAT_00f83234 = 5;\n\n  _DAT_00f83284 = 1;\n\n  _DAT_00f8327c = 2;\n\n  _DAT_00f83280 = 5;\n\n  _DAT_00f832d0 = 1;\n\n  _DAT_00f832c8 = 1;\n\n  _DAT_00f832cc = 2;\n\n  _DAT_00f8331c = 0;\n\n  _DAT_00f83314 = 2;\n\n  _DAT_00f83318 = 2;\n\n  _DAT_00f83340 = 2;\n\n  _DAT_00f83368 = 0;\n\n  _DAT_00f83360 = 2;\n\n  _DAT_00f83364 = 2;\n\n  _DAT_00f833b4 = 0;\n\n  _DAT_00f833ac = 2;\n\n  _DAT_00f833b0 = 2;\n\n  _DAT_00f833d8 = 1;\n\n  if (((*(byte *)(DAT_008663d8 * 0x584 + 0x474 + DAT_00cf19d0) & 0x80) == 0) ||\n\n     (DAT_00cf19a8 == 0x10)) {\n\n    _DAT_00f82d24 = 1;\n\n    _DAT_00f82d28 = 2;\n\n    _DAT_00f82d70 = 1;\n\n    _DAT_00f82d74 = 2;\n\n    _DAT_00f82dbc = 1;\n\n    _DAT_00f82dc0 = 2;\n\n    _DAT_00f82e54 = 1;\n\n    _DAT_00f82eec = 1;\n\n    _DAT_00f82ef0 = 2;\n\n    _DAT_00f82fd0 = 1;\n\n    _DAT_00f83100 = 1;\n\n    _DAT_00f83104 = 2;\n\n    _DAT_00f8314c = 1;\n\n    _DAT_00f83150 = 2;\n\n  }\n\n  _DAT_00f83154 = 1;\n\n  _DAT_00f83108 = 1;\n\n  _DAT_00f82fd8 = 1;\n\n  _DAT_00f82fd4 = 2;\n\n  _DAT_00f82ef4 = 1;\n\n  _DAT_00f82e5c = 1;\n\n  _DAT_00f82e58 = 2;\n\n  _DAT_00f82dc4 = 1;\n\n  _DAT_00f82d78 = 1;\n\n  _DAT_00f82d2c = 1;\n\n  _DAT_008813bc = 0xcdcdcdcd;\n\n  _DAT_008813c0 = 0xcdcdcdcd;\n\n  _DAT_008813c4 = 0xcdcdcdcd;\n\n  _DAT_00f834e0 = 5;\n\n  _DAT_008813a4 = 5;\n\n  _DAT_00f83494 = 0;\n\n  _DAT_00f83498 = 8;\n\n  _DAT_00f834a0 = 1;\n\n  _DAT_00f834a4 = 8;\n\n  _DAT_00f834ac = 1;\n\n  _DAT_00f834b0 = 2;\n\n  _DAT_00f834b8 = 1;\n\n  _DAT_00f834bc = 4;\n\n  _DAT_00f834c4 = 1;\n\n  _DAT_00f834c8 = 3;\n\n  _DAT_00f834d0 = 1;\n\n  _DAT_00f834d4 = 7;\n\n  _DAT_00f834dc = 1;\n\n  _DAT_00f834e8 = 1;\n\n  _DAT_00f834ec = 6;\n\n  _DAT_00f834f4 = 1;\n\n  _DAT_00f834f8 = 7;\n\n  _DAT_00f83500 = 1;\n\n  _DAT_00f83504 = 7;\n\n  _DAT_00f8350c = 1;\n\n  _DAT_00f83510 = 7;\n\n  _DAT_00881374 = 2;\n\n  _DAT_00881378 = 1;\n\n  _DAT_0088137c = 0;\n\n  _DAT_00881380 = 0;\n\n  _DAT_00881384 = 0;\n\n  _DAT_00881388 = 0;\n\n  _DAT_0088138c = 0;\n\n  _DAT_008813a0 = 1;\n\n  _DAT_008813ac = 2;\n\n  _DAT_008813a8 = 0;\n\n  _DAT_008813b0 = 4;\n\n  _DAT_008813b8 = 2;\n\n  _DAT_008813b4 = 0;\n\n  thunk_FUN_010021f0();\n\n  _DAT_008813c0 = 0;\n\n  _DAT_008813c4 = 8;\n\n  FUN_0064c300(0x19,8);\n\n  DAT_0086527c = 0xfffffff8;\n\n  DAT_00865280 = 0xfffffff7;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "00640fb0",
+        "function": {
+          "address": "00640fb0",
+          "name": "FUN_00640fb0",
+          "signature": "undefined __stdcall FUN_00640fb0(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "0064a810",
+              "name": "FUN_0064a810",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063c190",
+              "name": "FUN_0063c190",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b97bc",
+              "name": "memset"
+            },
+            {
+              "addr": "006406a0",
+              "name": "thunk_FUN_010021f0"
+            },
+            {
+              "addr": "0064c300",
+              "name": "FUN_0064c300"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "00881370",
+            "name": "_Dst_00881370",
+            "type": "void *",
+            "size": 4,
+            "value": "00000000",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "00640fb0",
+                "func_name": "FUN_00640fb0"
+              },
+              {
+                "func_addr": "00640fb0",
+                "func_name": "FUN_00640fb0"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "00640fb0",
+            "stop": "006411fc",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006411fe",
+            "stop": "00641205",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0064120b",
+            "stop": "00641285",
+            "out": [
+              3
+            ],
+            "in": [
+              0,
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "0064128b",
+            "stop": "006413b9",
+            "out": [],
+            "in": [
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "0064aa30": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0064aa30",
+        "name": "FUN_0064aa30",
+        "signature": "undefined __stdcall FUN_0064aa30(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0064aa30\n// Address:   0x0064aa30\n// Signature: undefined __stdcall FUN_0064aa30(void)\n// Callers:   2  |  Callees: 1\n// ===========================================\n\n\n\nvoid FUN_0064aa30(void)\n\n\n\n{\n\n  uint uVar1;\n\n  \n\n  uVar1 = (**(code **)(*DAT_00cf1944 + 0x10))(DAT_00cf1944);\n\n  DAT_00cf1964 = uVar1 >> 0x14;\n\n  if ((DAT_00cf1964 != 0) && (DAT_00cf1964 < 0x21)) {\n\n    thunk_FUN_01011a50();\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0064aa30\n// Address:   0x0064aa30\n// Signature: undefined __stdcall FUN_0064aa30(void)\n// Callers:   2  |  Callees: 1\n// ===========================================\n\n\n\nvoid FUN_0064aa30(void)\n\n\n\n{\n\n  uint uVar1;\n\n  \n\n  uVar1 = (**(code **)(*DAT_00cf1944 + 0x10))(DAT_00cf1944);\n\n  DAT_00cf1964 = uVar1 >> 0x14;\n\n  if ((DAT_00cf1964 != 0) && (DAT_00cf1964 < 0x21)) {\n\n    thunk_FUN_01011a50();\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0064aa30",
+        "function": {
+          "address": "0064aa30",
+          "name": "FUN_0064aa30",
+          "signature": "undefined __stdcall FUN_0064aa30(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "0064a9e0",
+              "name": "FUN_0064a9e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063b4c0",
+              "name": "thunk_FUN_01011a50"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0064aa30",
+            "stop": "0064aa4e",
+            "out": [
+              1,
+              3
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0064aa50",
+            "stop": "0064aa57",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0064aa59",
+            "stop": "0064aa59",
+            "out": [
+              3
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "0064aa5e",
+            "stop": "0064aa5f",
+            "out": [],
+            "in": [
+              0,
+              1,
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "0064c300": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0064c300",
+        "name": "FUN_0064c300",
+        "signature": "undefined4 __cdecl FUN_0064c300(int param_1, int param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0064c300\n// Address:   0x0064c300\n// Signature: undefined4 __cdecl FUN_0064c300(int param_1, int param_2)\n// Callers:   68  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0064c300(int param_1,int param_2)\n\n\n\n{\n\n  undefined4 local_8;\n\n  \n\n  local_8 = 0;\n\n  if (*(int *)(&DAT_00c75188 + param_1 * 4) != param_2) {\n\n    local_8 = (**(code **)(*DAT_00cf1944 + 0xe4))(DAT_00cf1944,param_1,param_2);\n\n    *(int *)(&DAT_00c75188 + param_1 * 4) = param_2;\n\n  }\n\n  return local_8;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0064c300\n// Address:   0x0064c300\n// Signature: undefined4 __cdecl FUN_0064c300(int param_1, int param_2)\n// Callers:   68  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0064c300(int param_1,int param_2)\n\n\n\n{\n\n  undefined4 local_8;\n\n  \n\n  local_8 = 0;\n\n  if (*(int *)(&DAT_00c75188 + param_1 * 4) != param_2) {\n\n    local_8 = (**(code **)(*DAT_00cf1944 + 0xe4))(DAT_00cf1944,param_1,param_2);\n\n    *(int *)(&DAT_00c75188 + param_1 * 4) = param_2;\n\n  }\n\n  return local_8;\n\n}\n\n\n\n\n",
+        "callers": 68,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0064c300",
+        "function": {
+          "address": "0064c300",
+          "name": "FUN_0064c300",
+          "signature": "undefined4 __cdecl FUN_0064c300(int param_1, int param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640df0",
+              "name": "FUN_00640df0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640bc0",
+              "name": "FUN_00640bc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006455c0",
+              "name": "FUN_006455c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006455c0",
+              "name": "FUN_006455c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006455c0",
+              "name": "FUN_006455c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002c30",
+              "name": "FUN_01002c30",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002c30",
+              "name": "FUN_01002c30",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002c30",
+              "name": "FUN_01002c30",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00640fb0",
+              "name": "FUN_00640fb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0064c300",
+            "stop": "0064c318",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0064c31a",
+            "stop": "0064c341",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0064c348",
+            "stop": "0064c34e",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "0064c3b0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0064c3b0",
+        "name": "FUN_0064c3b0",
+        "signature": "undefined4 __cdecl FUN_0064c3b0(int param_1, int param_2, int param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0064c3b0\n// Address:   0x0064c3b0\n// Signature: undefined4 __cdecl FUN_0064c3b0(int param_1, int param_2, int param_3)\n// Callers:   20  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0064c3b0(int param_1,int param_2,int param_3)\n\n\n\n{\n\n  undefined4 local_8;\n\n  \n\n  local_8 = 0;\n\n  if (*(int *)(&DAT_009968d8 + param_2 * 4 + param_1 * 0x80) != param_3) {\n\n    local_8 = (**(code **)(*DAT_00cf1944 + 0x10c))(DAT_00cf1944,param_1,param_2,param_3);\n\n    *(int *)(&DAT_009968d8 + param_2 * 4 + param_1 * 0x80) = param_3;\n\n  }\n\n  return local_8;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0064c3b0\n// Address:   0x0064c3b0\n// Signature: undefined4 __cdecl FUN_0064c3b0(int param_1, int param_2, int param_3)\n// Callers:   20  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0064c3b0(int param_1,int param_2,int param_3)\n\n\n\n{\n\n  undefined4 local_8;\n\n  \n\n  local_8 = 0;\n\n  if (*(int *)(&DAT_009968d8 + param_2 * 4 + param_1 * 0x80) != param_3) {\n\n    local_8 = (**(code **)(*DAT_00cf1944 + 0x10c))(DAT_00cf1944,param_1,param_2,param_3);\n\n    *(int *)(&DAT_009968d8 + param_2 * 4 + param_1 * 0x80) = param_3;\n\n  }\n\n  return local_8;\n\n}\n\n\n\n\n",
+        "callers": 20,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0064c3b0",
+        "function": {
+          "address": "0064c3b0",
+          "name": "FUN_0064c3b0",
+          "signature": "undefined4 __cdecl FUN_0064c3b0(int param_1, int param_2, int param_3)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "010021f0",
+              "name": "FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002390",
+              "name": "FUN_01002390",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00647980",
+              "name": "FUN_00647980",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064abd0",
+              "name": "FUN_0064abd0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0064c3b0",
+            "stop": "0064c3ce",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0064c3d0",
+            "stop": "0064c401",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0064c408",
+            "stop": "0064c40e",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "010021f0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "010021f0",
+        "name": "010021f0",
+        "signature": "undefined __stdcall FUN_010021f0(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_010021f0\n// Address:   0x010021f0\n// Signature: undefined __stdcall FUN_010021f0(void)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_010021f0(void)\n\n\n\n{\n\n  undefined4 *unaff_ESI;\n\n  \n\n  FUN_0064c300(0x13,unaff_ESI[1]);\n\n  FUN_0064c300(0x14,unaff_ESI[2]);\n\n  FUN_0064c300(0x1b,unaff_ESI[3]);\n\n  FUN_0064c300(0x80,unaff_ESI[4]);\n\n  FUN_0064c300(0x81,unaff_ESI[5]);\n\n  FUN_0064c300(0x82,unaff_ESI[6]);\n\n  FUN_0064c300(0x83,unaff_ESI[7]);\n\n  FUN_0064c300(0x84,unaff_ESI[8]);\n\n  FUN_0064c300(0x85,unaff_ESI[9]);\n\n  FUN_0064c300(0x86,unaff_ESI[10]);\n\n  FUN_0064c300(0x87,unaff_ESI[0xb]);\n\n  FUN_0064c300(0xab,unaff_ESI[0xc]);\n\n  FUN_0064c3b0(0,1,unaff_ESI[0xd]);\n\n  FUN_0064c3b0(0,2,unaff_ESI[0xe]);\n\n  FUN_0064c3b0(0,3,unaff_ESI[0xf]);\n\n  FUN_0064c3b0(0,4,unaff_ESI[0x10]);\n\n  FUN_0064c3b0(0,5,unaff_ESI[0x11]);\n\n  FUN_0064c3b0(0,6,unaff_ESI[0x12]);\n\n  _DAT_008813a4 = unaff_ESI[0xd];\n\n  _DAT_008813a8 = unaff_ESI[0xe];\n\n  _DAT_008813ac = unaff_ESI[0xf];\n\n  _DAT_008813b0 = unaff_ESI[0x10];\n\n  _DAT_008813b4 = unaff_ESI[0x11];\n\n  _DAT_008813b8 = unaff_ESI[0x12];\n\n  _DAT_00881374 = unaff_ESI[1];\n\n  _DAT_00881378 = unaff_ESI[2];\n\n  _DAT_0088137c = unaff_ESI[3];\n\n  _DAT_00881380 = unaff_ESI[4];\n\n  _DAT_00881384 = unaff_ESI[5];\n\n  _DAT_00881388 = unaff_ESI[6];\n\n  _DAT_0088138c = unaff_ESI[7];\n\n  _DAT_00881390 = unaff_ESI[8];\n\n  _DAT_00881394 = unaff_ESI[9];\n\n  _DAT_00881398 = unaff_ESI[10];\n\n  _DAT_0088139c = unaff_ESI[0xb];\n\n  _DAT_008813a0 = unaff_ESI[0xc];\n\n  DAT_0086527c = *unaff_ESI;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_010021f0\n// Address:   0x010021f0\n// Signature: undefined __stdcall FUN_010021f0(void)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_010021f0(void)\n\n\n\n{\n\n  undefined4 *unaff_ESI;\n\n  \n\n  FUN_0064c300(0x13,unaff_ESI[1]);\n\n  FUN_0064c300(0x14,unaff_ESI[2]);\n\n  FUN_0064c300(0x1b,unaff_ESI[3]);\n\n  FUN_0064c300(0x80,unaff_ESI[4]);\n\n  FUN_0064c300(0x81,unaff_ESI[5]);\n\n  FUN_0064c300(0x82,unaff_ESI[6]);\n\n  FUN_0064c300(0x83,unaff_ESI[7]);\n\n  FUN_0064c300(0x84,unaff_ESI[8]);\n\n  FUN_0064c300(0x85,unaff_ESI[9]);\n\n  FUN_0064c300(0x86,unaff_ESI[10]);\n\n  FUN_0064c300(0x87,unaff_ESI[0xb]);\n\n  FUN_0064c300(0xab,unaff_ESI[0xc]);\n\n  FUN_0064c3b0(0,1,unaff_ESI[0xd]);\n\n  FUN_0064c3b0(0,2,unaff_ESI[0xe]);\n\n  FUN_0064c3b0(0,3,unaff_ESI[0xf]);\n\n  FUN_0064c3b0(0,4,unaff_ESI[0x10]);\n\n  FUN_0064c3b0(0,5,unaff_ESI[0x11]);\n\n  FUN_0064c3b0(0,6,unaff_ESI[0x12]);\n\n  _DAT_008813a4 = unaff_ESI[0xd];\n\n  _DAT_008813a8 = unaff_ESI[0xe];\n\n  _DAT_008813ac = unaff_ESI[0xf];\n\n  _DAT_008813b0 = unaff_ESI[0x10];\n\n  _DAT_008813b4 = unaff_ESI[0x11];\n\n  _DAT_008813b8 = unaff_ESI[0x12];\n\n  _DAT_00881374 = unaff_ESI[1];\n\n  _DAT_00881378 = unaff_ESI[2];\n\n  _DAT_0088137c = unaff_ESI[3];\n\n  _DAT_00881380 = unaff_ESI[4];\n\n  _DAT_00881384 = unaff_ESI[5];\n\n  _DAT_00881388 = unaff_ESI[6];\n\n  _DAT_0088138c = unaff_ESI[7];\n\n  _DAT_00881390 = unaff_ESI[8];\n\n  _DAT_00881394 = unaff_ESI[9];\n\n  _DAT_00881398 = unaff_ESI[10];\n\n  _DAT_0088139c = unaff_ESI[0xb];\n\n  _DAT_008813a0 = unaff_ESI[0xc];\n\n  DAT_0086527c = *unaff_ESI;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "010021f0",
+        "function": {
+          "address": "010021f0",
+          "name": "FUN_010021f0",
+          "signature": "undefined __stdcall FUN_010021f0(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "006406a0",
+              "name": "thunk_FUN_010021f0",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0064c300",
+              "name": "FUN_0064c300"
+            },
+            {
+              "addr": "0064c3b0",
+              "name": "FUN_0064c3b0"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "010021f0",
+            "stop": "01002389",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "01011a50": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "01011a50",
+        "name": "FUN_01011a50",
+        "signature": "undefined __stdcall FUN_01011a50(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_01011a50\n// Address:   0x01011a50\n// Signature: undefined __stdcall FUN_01011a50(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nvoid FUN_01011a50(void)\n\n\n\n{\n\n  int iVar1;\n\n  byte bVar2;\n\n  \n\n  if (DAT_008663d5 == '\\0') {\n\n    iVar1 = *(int *)(DAT_008663b8 * 4 + 0x8928c0) << (1U - (DAT_00cf1964 < 0x180) & 0x1f);\n\n    bVar2 = 1 - (DAT_00cf1964 < 0x200);\n\n  }\n\n  else {\n\n    iVar1 = (-(uint)((*(uint *)(DAT_008663d8 * 0x584 + 0x474 + DAT_00cf19d0) & 0x800) != 0) & 0x20)\n\n            + 0x20;\n\n    if (1 < DAT_00cf19bc) {\n\n      iVar1 = 0x80;\n\n    }\n\n    bVar2 = (byte)DAT_008663b8;\n\n  }\n\n  DAT_008663dc = (uint)(iVar1 << (bVar2 & 0x1f)) >> (1U - (0x40 < DAT_00cf1964) & 0x1f);\n\n  if (DAT_00cf1974 != 0) {\n\n    DAT_008663dc = DAT_00cf1974;\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_01011a50\n// Address:   0x01011a50\n// Signature: undefined __stdcall FUN_01011a50(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nvoid FUN_01011a50(void)\n\n\n\n{\n\n  int iVar1;\n\n  byte bVar2;\n\n  \n\n  if (DAT_008663d5 == '\\0') {\n\n    iVar1 = *(int *)(DAT_008663b8 * 4 + 0x8928c0) << (1U - (DAT_00cf1964 < 0x180) & 0x1f);\n\n    bVar2 = 1 - (DAT_00cf1964 < 0x200);\n\n  }\n\n  else {\n\n    iVar1 = (-(uint)((*(uint *)(DAT_008663d8 * 0x584 + 0x474 + DAT_00cf19d0) & 0x800) != 0) & 0x20)\n\n            + 0x20;\n\n    if (1 < DAT_00cf19bc) {\n\n      iVar1 = 0x80;\n\n    }\n\n    bVar2 = (byte)DAT_008663b8;\n\n  }\n\n  DAT_008663dc = (uint)(iVar1 << (bVar2 & 0x1f)) >> (1U - (0x40 < DAT_00cf1964) & 0x1f);\n\n  if (DAT_00cf1974 != 0) {\n\n    DAT_008663dc = DAT_00cf1974;\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "01011a50",
+        "function": {
+          "address": "01011a50",
+          "name": "FUN_01011a50",
+          "signature": "undefined __stdcall FUN_01011a50(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "0063b4c0",
+              "name": "thunk_FUN_01011a50",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "01011a50",
+            "stop": "01011a5d",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "01011a9c",
+            "stop": "01011abd",
+            "out": [
+              5
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "01011a5f",
+            "stop": "01011a8d",
+            "out": [
+              3,
+              4
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "01011a8f",
+            "stop": "01011a8f",
+            "out": [
+              4
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "01011a94",
+            "stop": "01011a9a",
+            "out": [
+              5
+            ],
+            "in": [
+              2,
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "01011ac0",
+            "stop": "01011adc",
+            "out": [
+              6,
+              7
+            ],
+            "in": [
+              4,
+              1
+            ]
+          },
+          {
+            "index": 6,
+            "start": "01011ade",
+            "stop": "01011ade",
+            "out": [
+              7
+            ],
+            "in": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "start": "01011ae3",
+            "stop": "01011ae3",
+            "out": [],
+            "in": [
+              5,
+              6
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 6
+}

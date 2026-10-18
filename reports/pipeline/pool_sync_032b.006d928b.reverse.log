@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006d928b",
+      "run_id": "78e70863ae3843649d28a2e901f77900",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d928b",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_006d928b(int param_1)\n{\n    // The member name at offset 4 is unresolved in the supplied evidence.\n    InitializeCriticalSection(\n        reinterpret_cast<LPCRITICAL_SECTION>(param_1 + 4));\n}",
+      "verdict": "FAIL",
+      "summary": "The call and control flow match, but offset 4 lacks a named member.",
+      "issues": [
+        "The raw param_1 + 4 expression does not map the critical section at offset 4 to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d928b\\_FUN_006d928b.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

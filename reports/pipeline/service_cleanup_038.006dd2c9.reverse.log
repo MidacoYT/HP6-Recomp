@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dd2c9",
+      "run_id": "1d7c92ab1d5749df8176b5e67d12b291",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dd2c9",
+      "success": true,
+      "rounds_used": 1,
+      "code": "std::uint32_t* __thiscall FUN_006dd2c9(void* self, std::uint8_t param_1)\n{\n    FUN_006dd188(self);\n\n    if ((param_1 & 1) != 0) {\n        FUN_006dcbc7(self, 0x46c);\n    }\n\n    return static_cast<std::uint32_t*>(self);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent P-code evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dd2c9\\_FUN_006dd2c9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

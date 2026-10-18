@@ -1,0 +1,28 @@
+Candidate validation failed for 006dba7f: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006dba7f",
+      "run_id": "00c8b4f45d8846858703b8c36b24b653",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dba7f",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstatic_assert(sizeof(void*) == 4);\n\nstruct UnknownRecord {\n    std::byte unknown_00[0x28];\n    std::uint32_t field_28;  // Address of 12-byte entries; member name unresolved\n    std::int32_t field_2c;   // Member name unresolved\n    std::byte unknown_30[4];\n    std::int32_t field_34;   // Member name unresolved\n    std::byte unknown_38[12];\n    std::int32_t field_44;   // Member name unresolved\n};\n\nextern std::int32_t __fastcall FUN_006db3f9(\n    std::uint32_t*, std::uint32_t*, std::uint32_t*);\n\nvoid __cdecl FUN_006dba7f(\n    std::uint32_t* param_1,\n    std::int32_t param_2,\n    std::int32_t param_3,\n    std::int32_t param_4,\n    std::int32_t param_5)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    const std::int32_t result = FUN_006db3f9(param_1, &local_c, &local_8);\n    if (result != 0) return;\n\n    auto* record = reinterpret_cast<UnknownRecord*>(local_8);\n    if (param_2 <= 0 || param_2 > record->field_2c) return;\n    if (param_2 == record->field_2c &&\n        (param_3 != 0 || param_4 != 0)) return;\n    if (param_5 <= 0 && param_5 != -1 && param_5 != -2) return;\n    if (param_5 > record->field_34 || record->field_44 != 0) return;\n\n    const std::uint32_t entry_address =\n        record->field_28 - 0xc +\n        static_cast<std::uint32_t>(param_2) * 0xc;\n    auto* entry = reinterpret_cast<std::int32_t*>(entry_address);\n    entry[0] = param_3;\n    entry[1] = param_4;\n    entry[2] = param_5;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the supplied decompilation's call, guards, offsets, address calculation, and writes.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

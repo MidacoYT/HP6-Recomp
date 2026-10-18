@@ -1,0 +1,33 @@
+Candidate validation failed for 005d73c0: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "005d73c0",
+      "run_id": "71891be247404cc592eb15e4d9f1000d",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d73c0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The owning class and the exception type are unresolved. The string arguments\n// use the 32-bit MSVC std::string layout: size at +0x14 and capacity at +0x18.\nstruct Class_005d73c0 {\n    void __thiscall FUN_005d73c0(\n        const std::string& section,\n        const std::string& entry,\n        const std::string& value);\n};\n\nvoid __thiscall Class_005d73c0::FUN_005d73c0(\n    const std::string& section,\n    const std::string& entry,\n    const std::string& value)\n{\n    HKEY key = nullptr;\n    DWORD disposition = 0;\n\n    if (entry.empty()) {\n        const std::string message =\n            std::string(\"Bad data to write to registry - section '\")\n            + section + \"'; entry '\" + entry\n            + \"' value '\" + value + \"'\";\n\n        throw Exception_005d6d80(message); // Type/vtable at 0x0083e024.\n    }\n\n    std::string path(\"Software\\\\Electronic Arts\\\\\");\n    path += section;\n\n    // The object at ECX is used as an MSVC std::string; its owning type is unknown.\n    const auto& suffix = *reinterpret_cast<const std::string*>(this);\n    if (!suffix.empty()) {\n        path += std::string(\"\\\\\") + suffix;\n    }\n\n    if (RegCreateKeyExA(\n            HKEY_CURRENT_USER, path.c_str(), 0, \"\", 0, 0x1f,\n            nullptr, &key, &disposition) == ERROR_SUCCESS) {\n        RegSetValueExA(\n            key, entry.c_str(), 0, REG_SZ,\n            reinterpret_cast<const BYTE*>(value.c_str()),\n            static_cast<DWORD>(value.size() + 1));\n    }\n\n    if (key != nullptr) {\n        RegCloseKey(key);\n    }\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompiled control flow, string operations, registry calls, and cleanup.",
+      "issues": [],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 7 branches/loops, candidate has 4",
+        "ASM call mismatch: disassembly has 21 calls, candidate has 15",
+        "P-code call mismatch: normalized IR has 21 calls, candidate has 15",
+        "P-code return mismatch: normalized IR has 2 returns, candidate has no explicit return"
+      ],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

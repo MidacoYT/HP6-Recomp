@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006e71e1",
+      "run_id": "6923fa57d4eb4d698988620383d43e86",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006e71e1",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint8_t DAT_0089b438;\nextern std::uint32_t __cdecl FUN_006e0778(std::int32_t param_1);\nextern void __cdecl FUN_006f4eb9(std::uint32_t* param_1, std::int32_t param_2);\n\nstd::int32_t __cdecl FUN_006e71e1(std::int32_t param_1, std::int32_t param_2)\n{\n    if (DAT_0089b438 == 0) {\n        return -10;\n    }\n\n    const std::uint32_t entryAddress = FUN_006e0778(param_1);\n    if (entryAddress == 0) {\n        return -8;\n    }\n\n    const auto* entry = reinterpret_cast<const std::uint32_t*>(\n        static_cast<std::uintptr_t>(entryAddress));\n    auto* value = reinterpret_cast<std::uint32_t*>(\n        static_cast<std::uintptr_t>(*entry));\n    FUN_006f4eb9(value, param_2);\n    return 0;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent P-code evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006e71e1\\_FUN_006e71e1.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

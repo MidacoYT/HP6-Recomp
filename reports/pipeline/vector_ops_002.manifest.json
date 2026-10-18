@@ -1,0 +1,464 @@
+{
+  "schema_version": 1,
+  "identity": "280a20cf4dc42836f89805d1e7f35cc64901cee72028b3bcc0ea56a0778f34b2",
+  "seeds": [
+    "00404670",
+    "00404be0",
+    "00405390",
+    "005e8b50",
+    "0068c0a0"
+  ],
+  "functions": [
+    {
+      "address": "00404670",
+      "class_name": "",
+      "function_name": "FUN_00404670",
+      "caller_count": 1
+    },
+    {
+      "address": "00404be0",
+      "class_name": "",
+      "function_name": "FUN_00404be0",
+      "caller_count": 14
+    },
+    {
+      "address": "00405390",
+      "class_name": "",
+      "function_name": "FUN_00405390",
+      "caller_count": 1
+    },
+    {
+      "address": "005e8b50",
+      "class_name": "",
+      "function_name": "FUN_005e8b50",
+      "caller_count": 2
+    },
+    {
+      "address": "0068c0a0",
+      "class_name": "",
+      "function_name": "FUN_0068c0a0",
+      "caller_count": 4
+    }
+  ],
+  "edges": [],
+  "gaps": [],
+  "evidence": {
+    "00404670": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "00404670",
+        "name": "FUN_00404670",
+        "signature": "undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_00404670\n// Address:   0x00404670\n// Signature: undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_00404670(float *param_1,float *param_2)\n\n\n\n{\n\n  if (((*param_2 == *param_1) && (param_2[1] == param_1[1])) && (param_2[2] == param_1[2])) {\n\n    return 0;\n\n  }\n\n  return 1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_00404670\n// Address:   0x00404670\n// Signature: undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_00404670(float *param_1,float *param_2)\n\n\n\n{\n\n  if (((*param_2 == *param_1) && (param_2[1] == param_1[1])) && (param_2[2] == param_1[2])) {\n\n    return 0;\n\n  }\n\n  return 1;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "00404670",
+        "function": {
+          "address": "00404670",
+          "name": "FUN_00404670",
+          "signature": "undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "004f9520",
+              "name": "FUN_004f9520",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "00404670",
+            "stop": "0040467b",
+            "out": [
+              3,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0040467d",
+            "stop": "0040468a",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0040468c",
+            "stop": "00404699",
+            "out": [
+              3,
+              4
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "0040469e",
+            "stop": "004046a3",
+            "out": [],
+            "in": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "0040469b",
+            "stop": "0040469d",
+            "out": [],
+            "in": [
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "00404be0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "00404be0",
+        "name": "FUN_00404be0",
+        "signature": "undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_00404be0\n// Address:   0x00404be0\n// Signature: undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)\n// Callers:   14  |  Callees: 0\n// ===========================================\n\n\n\nvoid __fastcall FUN_00404be0(float *param_1,float *param_2,float *param_3)\n\n\n\n{\n\n  float fVar1;\n\n  float fVar2;\n\n  float fVar3;\n\n  \n\n  fVar1 = *param_2 - param_3[0xc];\n\n  fVar2 = param_2[1] - param_3[0xd];\n\n  fVar3 = param_2[2] - param_3[0xe];\n\n  *param_1 = param_3[1] * fVar2 + param_3[2] * fVar3 + param_3[3] * 0.0 + *param_3 * fVar1;\n\n  param_1[1] = param_3[5] * fVar2 + param_3[6] * fVar3 + param_3[7] * 0.0 + param_3[4] * fVar1;\n\n  param_1[2] = param_3[9] * fVar2 + param_3[10] * fVar3 + param_3[0xb] * 0.0 + param_3[8] * fVar1;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_00404be0\n// Address:   0x00404be0\n// Signature: undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)\n// Callers:   14  |  Callees: 0\n// ===========================================\n\n\n\nvoid __fastcall FUN_00404be0(float *param_1,float *param_2,float *param_3)\n\n\n\n{\n\n  float fVar1;\n\n  float fVar2;\n\n  float fVar3;\n\n  \n\n  fVar1 = *param_2 - param_3[0xc];\n\n  fVar2 = param_2[1] - param_3[0xd];\n\n  fVar3 = param_2[2] - param_3[0xe];\n\n  *param_1 = param_3[1] * fVar2 + param_3[2] * fVar3 + param_3[3] * 0.0 + *param_3 * fVar1;\n\n  param_1[1] = param_3[5] * fVar2 + param_3[6] * fVar3 + param_3[7] * 0.0 + param_3[4] * fVar1;\n\n  param_1[2] = param_3[9] * fVar2 + param_3[10] * fVar3 + param_3[0xb] * 0.0 + param_3[8] * fVar1;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 14,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "00404be0",
+        "function": {
+          "address": "00404be0",
+          "name": "FUN_00404be0",
+          "signature": "undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "00485ee0",
+              "name": "FUN_00485ee0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00485ee0",
+              "name": "FUN_00485ee0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00413000",
+              "name": "FUN_00413000",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "004866d0",
+              "name": "FUN_004866d0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0052f0e0",
+              "name": "FUN_0052f0e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0052f0e0",
+              "name": "FUN_0052f0e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0052f0e0",
+              "name": "FUN_0052f0e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005330c0",
+              "name": "FUN_005330c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "004c2290",
+              "name": "FUN_004c2290",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "004c2290",
+              "name": "FUN_004c2290",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "004fe510",
+              "name": "FUN_004fe510",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00561560",
+              "name": "FUN_00561560",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00561560",
+              "name": "FUN_00561560",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005678e0",
+              "name": "FUN_005678e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "00404be0",
+            "stop": "00404ce2",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "00405390": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "00405390",
+        "name": "FUN_00405390",
+        "signature": "undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_00405390\n// Address:   0x00405390\n// Signature: undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nvoid __cdecl FUN_00405390(float *param_1,float *param_2,float *param_3)\n\n\n\n{\n\n  float fVar1;\n\n  float fVar2;\n\n  float fVar3;\n\n  float fVar4;\n\n  float fVar5;\n\n  float fVar6;\n\n  \n\n  fVar1 = param_2[1];\n\n  fVar2 = param_2[2];\n\n  fVar3 = param_2[3];\n\n  fVar4 = param_3[1];\n\n  fVar5 = param_3[2];\n\n  fVar6 = param_3[3];\n\n  *param_1 = *param_2 - *param_3;\n\n  param_1[1] = fVar1 - fVar4;\n\n  param_1[2] = fVar2 - fVar5;\n\n  param_1[3] = fVar3 - fVar6;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_00405390\n// Address:   0x00405390\n// Signature: undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nvoid __cdecl FUN_00405390(float *param_1,float *param_2,float *param_3)\n\n\n\n{\n\n  float fVar1;\n\n  float fVar2;\n\n  float fVar3;\n\n  float fVar4;\n\n  float fVar5;\n\n  float fVar6;\n\n  \n\n  fVar1 = param_2[1];\n\n  fVar2 = param_2[2];\n\n  fVar3 = param_2[3];\n\n  fVar4 = param_3[1];\n\n  fVar5 = param_3[2];\n\n  fVar6 = param_3[3];\n\n  *param_1 = *param_2 - *param_3;\n\n  param_1[1] = fVar1 - fVar4;\n\n  param_1[2] = fVar2 - fVar5;\n\n  param_1[3] = fVar3 - fVar6;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "00405390",
+        "function": {
+          "address": "00405390",
+          "name": "FUN_00405390",
+          "signature": "undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "005404c0",
+              "name": "FUN_005404c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "00405390",
+            "stop": "004053ae",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "005e8b50": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005e8b50",
+        "name": "FUN_005e8b50",
+        "signature": "undefined4 __fastcall FUN_005e8b50(float * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005e8b50\n// Address:   0x005e8b50\n// Signature: undefined4 __fastcall FUN_005e8b50(float * param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_005e8b50(float *param_1)\n\n\n\n{\n\n  if (((*param_1 == 0.0) && (param_1[1] == 0.0)) && (param_1[2] == 0.0)) {\n\n    return 0;\n\n  }\n\n  return 1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005e8b50\n// Address:   0x005e8b50\n// Signature: undefined4 __fastcall FUN_005e8b50(float * param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_005e8b50(float *param_1)\n\n\n\n{\n\n  if (((*param_1 == 0.0) && (param_1[1] == 0.0)) && (param_1[2] == 0.0)) {\n\n    return 0;\n\n  }\n\n  return 1;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005e8b50",
+        "function": {
+          "address": "005e8b50",
+          "name": "FUN_005e8b50",
+          "signature": "undefined4 __fastcall FUN_005e8b50(float * param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "005f2910",
+              "name": "FUN_005f2910",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f2910",
+              "name": "FUN_005f2910",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005e8b50",
+            "stop": "005e8b5e",
+            "out": [
+              3,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005e8b60",
+            "stop": "005e8b6c",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005e8b6e",
+            "stop": "005e8b7a",
+            "out": [
+              3,
+              4
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005e8b7f",
+            "stop": "005e8b84",
+            "out": [],
+            "in": [
+              0,
+              1,
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005e8b7c",
+            "stop": "005e8b7e",
+            "out": [],
+            "in": [
+              2
+            ]
+          }
+        ]
+      }
+    },
+    "0068c0a0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0068c0a0",
+        "name": "FUN_0068c0a0",
+        "signature": "undefined4 __cdecl FUN_0068c0a0(float * param_1, float * param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0068c0a0\n// Address:   0x0068c0a0\n// Signature: undefined4 __cdecl FUN_0068c0a0(float * param_1, float * param_2)\n// Callers:   4  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0068c0a0(float *param_1,float *param_2)\n\n\n\n{\n\n  if (param_2[1] * *param_1 < param_1[1] * *param_2) {\n\n    return 1;\n\n  }\n\n  return 0;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0068c0a0\n// Address:   0x0068c0a0\n// Signature: undefined4 __cdecl FUN_0068c0a0(float * param_1, float * param_2)\n// Callers:   4  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 __cdecl FUN_0068c0a0(float *param_1,float *param_2)\n\n\n\n{\n\n  if (param_2[1] * *param_1 < param_1[1] * *param_2) {\n\n    return 1;\n\n  }\n\n  return 0;\n\n}\n\n\n\n\n",
+        "callers": 4,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0068c0a0",
+        "function": {
+          "address": "0068c0a0",
+          "name": "FUN_0068c0a0",
+          "signature": "undefined4 __cdecl FUN_0068c0a0(float * param_1, float * param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "0069ebb0",
+              "name": "FUN_0069ebb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0069ebb0",
+              "name": "FUN_0069ebb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0069ebb0",
+              "name": "FUN_0069ebb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0069ebb0",
+              "name": "FUN_0069ebb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0068c0a0",
+            "stop": "0068c0b9",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0068c0c1",
+            "stop": "0068c0c3",
+            "out": [],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0068c0bb",
+            "stop": "0068c0c0",
+            "out": [],
+            "in": [
+              0
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

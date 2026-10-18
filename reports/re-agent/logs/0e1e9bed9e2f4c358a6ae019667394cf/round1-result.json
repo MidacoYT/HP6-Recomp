@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "address": "005d7810",
+      "run_id": "0e1e9bed9e2f4c358a6ae019667394cf",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d7810",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::string* __thiscall FUN_005d7810(\n    void* self,\n    std::string* result,\n    const std::string* section,\n    void* subsection,\n    const std::string* defaultValue)\n{\n    // Both void* arguments have the observed 32-bit std::string layout:\n    // size is at +0x14. Their concrete declared types remain unresolved.\n    const auto* entry = static_cast<const std::string*>(self);\n    const auto* subkey = static_cast<const std::string*>(subsection);\n\n    if (entry->size() == 0) {\n        const std::string sectionAndEntry =\n            *section + \"'; entry '\" + *entry;\n        const std::string message =\n            std::string(\"Bad registry location - section '\") +\n            sectionAndEntry + \"'\";\n\n        // The thrown class is unresolved. The binary constructs it with\n        // FUN_005d6d80, installs its vtable, then calls _CxxThrowException\n        // with pThrowInfo_00848b60.\n        alignas(4) std::byte exceptionStorage[40];\n        FUN_005d6d80(\n            reinterpret_cast<exception*>(exceptionStorage), &message);\n        *reinterpret_cast<void**>(exceptionStorage) =\n            &PTR_FUN_0083e024;\n        _CxxThrowException(\n            exceptionStorage,\n            reinterpret_cast<ThrowInfo*>(&pThrowInfo_00848b60));\n    }\n\n    std::string path(\"Software\\\\Electronic Arts\\\\\");\n    path += *section;\n    if (subkey->size() != 0) {\n        const std::string separator(\"\\\\\");\n        const std::string suffix = separator + *subkey;\n        path += suffix;\n    }\n\n    new (result) std::string(*defaultValue);\n\n    HKEY key = nullptr;\n    if (RegOpenKeyExA(\n            HKEY_CURRENT_USER, path.c_str(), 0, 0x20019, &key) == ERROR_SUCCESS) {\n        // FUN_005d7650 also reads the entry name through EDI; that implicit\n        // register argument is absent from its recovered signature.\n        FUN_005d7650(result, key);\n    } else if (RegOpenKeyExA(\n                   HKEY_LOCAL_MACHINE, path.c_str(), 0, 0x20019, &key)\n               == ERROR_SUCCESS) {\n        FUN_005d7650(result, key);\n        FUN_005d73c0(subsection, section, self, result);\n    } else {\n        DWORD disposition = 0;\n        RegCreateKeyExA(\n            HKEY_CURRENT_USER, path.c_str(), 0, \"\", 0, 0x1f,\n            nullptr, &key, &disposition);\n    }\n\n    if (key != nullptr)\n        RegCloseKey(key);\n\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The registry branches match, but the value-reading calls do not preserve a required register argument.",
+      "issues": [
+        "FUN_005d7650 reads the entry name through EDI. The reversed code calls it with only result and key, so neither call guarantees that EDI contains self."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 8 branches/loops, candidate has 5",
+        "ASM call mismatch: disassembly has 23 calls, candidate has 19",
+        "P-code call mismatch: normalized IR has 23 calls, candidate has 19"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d7810\\_005d7810.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 23 calls, source has 19 calls (diff: 4)"
+        }
+      ]
+    }
+  ]
+}

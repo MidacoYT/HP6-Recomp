@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006dd188",
+      "run_id": "d0e5f00450ef404a8a78c66a57d7c1d5",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dd188",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t PTR_FUN_0071b560;\n\nstd::uint32_t __fastcall FUN_006de5b0(std::int32_t);\nstd::uint32_t __thiscall FUN_006dd00c(void*, std::int32_t);\nvoid __fastcall FUN_006de5e1(std::uint32_t*);\n\nvoid __fastcall FUN_006dd188(std::uint32_t* param_1)\n{\n    *param_1 = reinterpret_cast<std::uint32_t>(&PTR_FUN_0071b560);\n    FUN_006de5b0(reinterpret_cast<std::int32_t>(param_1));\n\n    // The member at offset 0x464 has no evidence-backed name.\n    FUN_006dd00c(\n        reinterpret_cast<void*>(param_1[0x119]),\n        reinterpret_cast<std::int32_t>(param_1));\n\n    FUN_006de5e1(param_1);\n}",
+      "verdict": "FAIL",
+      "summary": "The operations match the binary evidence, but the field at offset 0x464 is not mapped to a named member.",
+      "issues": [
+        "param_1[0x119] accesses offset 0x464 without a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dd188\\_FUN_006dd188.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

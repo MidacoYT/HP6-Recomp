@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "00404670",
+      "run_id": "2fdd9278f9364cec984b624210db4c4d",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00404670",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_00404670(float* param_1, float* param_2)\n{\n    if (param_2[0] == param_1[0] &&\n        param_2[1] == param_1[1] &&\n        param_2[2] == param_1[2]) {\n        return 0;\n    }\n\n    return 1;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent control-flow evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00404670\\_FUN_00404670.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

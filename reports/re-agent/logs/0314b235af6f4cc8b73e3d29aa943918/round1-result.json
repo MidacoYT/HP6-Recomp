@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006525d0",
+      "run_id": "0314b235af6f4cc8b73e3d29aa943918",
+      "error": null,
+      "class_name": "",
+      "function_name": "block",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstatic_assert(sizeof(void*) == 4);\n\nstruct Entry_00a68820 {\n    std::uint32_t field_0;\n    std::uint32_t field_4;\n};\nstatic_assert(sizeof(Entry_00a68820) == 8);\n\nextern Entry_00a68820 DAT_00a68820[];\nextern std::uint32_t DAT_00cf1a30;\nextern void* DAT_00cf1944;\n\nvoid __stdcall FUN_006525d0()\n{\n    for (std::uint32_t i = 0; i < DAT_00cf1a30; ++i) {\n        void* object = reinterpret_cast<void*>(DAT_00a68820[i].field_4);\n        auto vtable = *reinterpret_cast<std::uintptr_t**>(object);\n        auto call = reinterpret_cast<void (__thiscall *)(void*)>(vtable[2]);\n        call(object);\n    }\n\n    for (std::uint32_t i = 0; i < DAT_00cf1a30; ++i) {\n        void* object = DAT_00cf1944;\n        auto vtable = *reinterpret_cast<std::uintptr_t**>(object);\n        auto call = reinterpret_cast<void (__thiscall *)(void*, std::uint32_t, std::uint32_t*)>(\n            vtable[0x16c / 4]);\n        call(object, DAT_00a68820[i].field_0, &DAT_00a68820[i].field_4);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The loops and offsets match, but the code omits separate pointer loads used for the calls.",
+      "issues": [
+        "The first loop loads field_4 once and reuses it as the call argument. The P-code loads field_4 separately for vtable lookup and for the argument.",
+        "The second loop similarly caches DAT_00cf1944, while the decompilation reads it for the vtable lookup and again as the call argument."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

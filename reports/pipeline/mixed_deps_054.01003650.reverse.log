@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "01003650",
+      "run_id": "0e6477dd7201474596f2e6fa76750049",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01003650",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t DAT_00cf19a0;\nvoid __cdecl FUN_0063ccf0(char* format, ...);\n\nvoid __stdcall FUN_01003650()\n{\n    if (DAT_00cf19a0 > 10) {\n        return;\n    }\n\n    FUN_0063ccf0(const_cast<char*>(\"ModeOption:%d:%d by %d (%d bit)\\n\"));\n}",
+      "verdict": "PASS",
+      "summary": "The branch, signed comparison, string argument, call, and returns match the supplied evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01003650\\_FUN_01003650.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

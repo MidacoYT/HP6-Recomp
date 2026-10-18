@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006b936d",
+      "run_id": "e723155a347b4617a7aa5543c55befa8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b936d",
+      "success": true,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006b936d(_onexit_t param_1)\n{\n    return (__onexit(param_1) != nullptr) - 1;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent P-code evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b936d\\_FUN_006b936d.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

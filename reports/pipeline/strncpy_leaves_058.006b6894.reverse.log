@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b6894",
+      "run_id": "fd3812a340f34442bbc53ebb49d01a7f",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b6894",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\nvoid __fastcall FUN_006b687f(std::uint32_t* param_1);\n\n// The supplied evidence does not identify member names for offsets 0x40\u20130x4c.\nvoid __thiscall FUN_006b6894(\n    void* self, char* param_1, std::uint32_t* param_2)\n{\n    FUN_006b687f(static_cast<std::uint32_t*>(self));\n    std::strncpy(static_cast<char*>(self), param_1, 0x40);\n\n    if (param_2 != nullptr) {\n        auto* fields = reinterpret_cast<std::uint32_t*>(\n            static_cast<char*>(self) + 0x40);\n        fields[0] = param_2[0];\n        fields[1] = param_2[1];\n        fields[2] = param_2[2];\n        fields[3] = param_2[3];\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, branch, copy order, and offsets match, but the four object fields lack named members.",
+      "issues": [
+        "Offsets 0x40, 0x44, 0x48, and 0x4c are accessed through an unnamed uint32_t array, contrary to the required named-member mapping."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b6894\\_FUN_006b6894.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

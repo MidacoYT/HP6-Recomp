@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d7c07",
+      "run_id": "26182ecfad9d4dee8be3f87bfd7d064b",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7c07",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006d7c07(std::uint32_t* self, std::uint32_t* param_1)\n{\n    std::uint32_t local_c4[48];\n    FUN_006d73b8(local_c4);\n\n    while (self != nullptr) {\n        const std::uint32_t category = FUN_006d6c09(self);\n\n        if (category == 2) {\n            FUN_006d7a73(self, reinterpret_cast<int>(local_c4));\n        } else if (category == 4) {\n            FUN_006d7b14(self, reinterpret_cast<int>(local_c4));\n        } else if (category == 0x10) {\n            FUN_006d7b7a(self, reinterpret_cast<int>(local_c4));\n        } else if (category == 0x20) {\n            FUN_006d7bd2(self, reinterpret_cast<int>(local_c4));\n        } else if (category == 0x80) {\n            FUN_006d7baf(self, reinterpret_cast<int>(local_c4));\n        } else if (category == 0x100) {\n            FUN_006d7b49(self, reinterpret_cast<int>(local_c4));\n        }\n\n        const std::uint32_t next_offset = self[1]; // Unresolved field at +0x04.\n        self = next_offset == 0\n            ? nullptr\n            : reinterpret_cast<std::uint32_t*>(\n                  reinterpret_cast<std::uint8_t*>(self) + next_offset);\n    }\n\n    for (int i = 0; i < 48; ++i) {\n        param_1[i] = local_c4[i];\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, branches, traversal, and 48-word copy match, but the +0x04 field is unnamed.",
+      "issues": [
+        "self[1] accesses the field at +0x04 without mapping it to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7c07\\_FUN_006d7c07.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

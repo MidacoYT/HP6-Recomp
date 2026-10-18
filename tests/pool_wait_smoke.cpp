@@ -9,6 +9,7 @@
 #include "runtime/PoolList.h"
 #include "runtime/PoolPath.h"
 #include "runtime/PoolWait.h"
+#include "runtime/FileOps.h"
 #include "runtime/ListQueue.h"
 #include "runtime/WrapperStubs.h"
 
@@ -41,11 +42,16 @@ void* PTR_FUN_00715b00 = nullptr;
 void* PTR_FUN_00715a90 = nullptr;
 void* PTR_FUN_00715aa0 = nullptr;
 void* PTR_FUN_00715ab0 = nullptr;
+void* PTR_FUN_00715af0 = nullptr;
 void* DAT_00851384 = nullptr;
+std::int32_t DAT_008513ac = 0;
 extern const char empty_string_007278d3[1] = "";
 extern const char node_source_path_00715a30[96] =
     "Z:\\hbp\\code\\0707_graphics\\x-platform\\packages\\realcore\\6.27.01"
     "\\source\\file\\cmn\\filesys.cpp";
+extern const char hlsfile_source_0071b358[] =
+    "Z:\\hbp\\code\\0707_graphics\\x-platform\\packages\\realcore\\6.27.01"
+    "\\source\\file\\cmn\\hlsfile.cpp";
 hp6::platform::TimerSlot hp6::platform::timer_slots_00899ad8[16] = {};
 
 namespace {
@@ -83,9 +89,32 @@ void fire(std::int32_t argument, std::int32_t overdue) {
 struct PathAllocator {
     std::uint32_t got_length = 0;
     const void* got_request = nullptr;
+    // Lot 052: the reserved workers hand an arbitrary request word (the
+    // second-stage record); when set, the call answers with this pointer
+    // instead of a fresh malloc (the binary's session object allocation is
+    // opaque here).
+    void* forced_result = nullptr;
+    int calls = 0;
+    // Lot 052: the 18-dword error-report descriptor lives on the live
+    // worker stack; copy the words during the call, because the frame is
+    // dead (and overwritten by the caller's own call machinery) as soon
+    // as the op returns. The length word identifies the call.
+    bool want_save = false;
+    std::int32_t save_length = -1;
+    const void* saved_request = nullptr;
+    std::uint32_t saved_words[18] = {};
     virtual void* allocate(std::uint32_t length, void* request) {
         got_length = length;
         got_request = request;
+        ++calls;
+        if (want_save &&
+            static_cast<std::int32_t>(length) == save_length &&
+            request != nullptr) {
+            saved_request = request;
+            std::memcpy(saved_words, request, sizeof saved_words);
+            want_save = false;
+        }
+        if (forced_result != nullptr) return forced_result;
         return std::malloc(length);
     }
 };
@@ -116,20 +145,33 @@ std::uint32_t reserved_callback(std::uint32_t value, std::int32_t extra) {
 
 // Scheduled on the same wheel: completes the node being waited for while
 // the owning thread pumps (detach from the frame's pending list, install
-// the stub vtable + result code, park in the completed list).
+// the stub vtable + result code, park in the completed list). Lot 052:
+// with `drain_node` empty the sweep completes the head of whichever
+// alive frame's pending list is non-empty, which drives the multi-stage
+// reserved file-op chains; the always-due wheel registration
+// {callback, id, period 0, due 0} keeps it armed between pumps.
 void fire_drain(std::int32_t argument, std::int32_t overdue) {
     (void)argument;
     (void)overdue;
-    if (drain_node == nullptr) return;
     auto* root = reinterpret_cast<std::uint8_t*>(DAT_00892b60);
-    const std::uint32_t token = *reinterpret_cast<std::uint32_t*>(drain_node + 0xc);
+    auto* target = drain_node;
+    if (target == nullptr) {
+        const auto* bases = reinterpret_cast<std::uint32_t*>(root + 0x98);
+        for (std::uint32_t index = 0; index < 8 && target == nullptr; ++index) {
+            auto* frame = reinterpret_cast<std::uint8_t*>(*bases + index * 0x88);
+            target = reinterpret_cast<std::uint8_t*>(
+                *reinterpret_cast<std::uint32_t*>(frame + 0x10));
+        }
+    }
+    if (target == nullptr) return;
+    const std::uint32_t token = *reinterpret_cast<std::uint32_t*>(target + 0xc);
     auto* frame = reinterpret_cast<std::uint8_t*>(
         (*reinterpret_cast<std::uint32_t*>(root + 0x98)) +
         (token & 0xff) * 0x88);
     auto* list = frame + 0x10;
     std::uint8_t* previous = nullptr;
     std::uint8_t* current = reinterpret_cast<std::uint8_t*>(*reinterpret_cast<std::uint32_t*>(list));
-    while (current != nullptr && current != drain_node) {
+    while (current != nullptr && current != target) {
         previous = current;
         const std::uint32_t link =
             *reinterpret_cast<std::uint32_t*>(current + 8);
@@ -151,14 +193,16 @@ void fire_drain(std::int32_t argument, std::int32_t overdue) {
             *reinterpret_cast<std::uint32_t*>(list + 4) = address(previous);
         }
     }
-    *reinterpret_cast<std::uint32_t*>(drain_node + 8) = 0;
+    *reinterpret_cast<std::uint32_t*>(target + 8) = 0;
     DoneNodeMethods methods;
-    *reinterpret_cast<void**>(drain_node) = *reinterpret_cast<void**>(&methods);
-    *reinterpret_cast<std::uint8_t*>(drain_node + 0x11) = 7;
-    hp6::runtime::insert_after(frame + 0x1c, nullptr, drain_node);
-    drain_node = nullptr;
-    // One-shot: the wheel slot clears itself.
-    hp6::platform::timer_slots_00899ad8[5] = {};
+    *reinterpret_cast<void**>(target) = *reinterpret_cast<void**>(&methods);
+    *reinterpret_cast<std::uint8_t*>(target + 0x11) = 7;
+    hp6::runtime::insert_after(frame + 0x1c, nullptr, target);
+    if (drain_node != nullptr) {
+        drain_node = nullptr;
+        // One-shot in explicit-target mode: the wheel slot clears itself.
+        hp6::platform::timer_slots_00899ad8[5] = {};
+    }
 }
 
 // Volume object for the lot-047 creators: vtable slot +0x30 (index 12)
@@ -722,6 +766,122 @@ int main() {
            std::strcmp(path_slots_1a59[2], "models") == 0);
     expect("search_path_sterile", path_buffer1a59[0x30] == 0);
     word(root, 0x88) = address(game_path_slot);
+
+    // ---- lot 052: reserved file operators (mixed_deps_060) ---------------
+    // The wrappers park a 0x64-reserved context on their stack and hand it
+    // to the reserved callback; the workers chain the bounded-path record
+    // (pair low word) through plain/repeat/probe stages whose completion
+    // pairs all read `done_pair_value`, so the pair-low is a real record
+    // the following stages deref at +0xc (the engine word).
+    DAT_00899acc = GetCurrentThreadId();
+    DAT_008513ac = 77;
+    alignas(16) std::uint8_t fake_file_record[0x20];
+    std::memset(fake_file_record, 0, sizeof fake_file_record);
+    word(fake_file_record, 0xc) = address(frame3);
+    const std::uint32_t fake_record_addr = address(fake_file_record);
+    done_pair_value = static_cast<std::uint64_t>(fake_record_addr);
+
+    // Fresh pending/done lists for the two engine frames: the sweep then
+    // only dislodges freshly created nodes.
+    for (std::uint32_t offset = 0; offset <= 0xc; offset += 4) {
+        word(frame3, 0x10 + offset) = 0;
+        word(frame3, 0x1c + offset) = 0;
+        word(record4, 0x10 + offset) = 0;
+        word(record4, 0x1c + offset) = 0;
+    }
+
+    // Thirteen fresh 0x40 slots: open chain 4 stages, write chain 3,
+    // probe chain 3, probe-miss chain 3. Detach pops the last inserted
+    // first, so stage 1 of the first op takes fops[12], and so on.
+    alignas(16) std::uint8_t fops[13][0x40];
+    for (auto& slot : fops) {
+        std::memset(slot, 0, sizeof slot);
+        insert_first(root, slot);
+    }
+
+    // Always-due sweep registration (period 0): re-arms after every pump
+    // and drives each stage completion of the chains below.
+    wheel[5] = {&fire_drain, 96, 0, 0, 0};
+
+    const auto calls_before_fops = allocator.calls;
+    // A real mapped buffer: the same allocator object also serves the
+    // path attachments inside the chains (their memcpy targets it).
+    alignas(16) static std::uint8_t forced_buffer[0x40];
+    std::memset(forced_buffer, 0, sizeof forced_buffer);
+    allocator.forced_result = forced_buffer;
+    static const char open_path[] = "C:\\fop1";
+    std::uint32_t open_out = 0;
+    // The error-report call is identified by its length (the second-stage
+    // record): the allocator copies the descriptor while the worker's
+    // stack is still alive.
+    allocator.save_length = static_cast<std::int32_t>(fake_record_addr);
+    allocator.want_save = true;
+    open_file_from_path(open_path, &open_out, 0x51);
+    expect("fops_open_stage1",
+           word(fops[12], 0x20) == 1 && fops[12][0x12] == 100);
+    expect("fops_open_stage2",
+           word(fops[11], 0x14) == fake_record_addr && fops[11][0x12] == 99);
+    expect("fops_open_repeat",
+           word(fops[10], 0x14) == fake_record_addr &&
+               word(fops[10], 0x20) == address(forced_buffer) &&
+               word(fops[10], 0x28) == 0 &&
+               word(fops[10], 0x24) == fake_record_addr &&
+               fops[10][0x12] == 99);
+    expect("fops_open_out", open_out == fake_record_addr);
+    // Two allocations in the open chain: the stage-1 path attach, then
+    // the error-report call whose request is the descriptor itself and
+    // whose length is the second-stage record.
+    expect("fops_open_alloc",
+           allocator.calls == calls_before_fops + 2 &&
+               allocator.got_length == fake_record_addr &&
+               allocator.got_request != nullptr);
+    {
+        const auto* req = allocator.saved_words;
+        const auto descriptor_base =
+            reinterpret_cast<std::uintptr_t>(allocator.saved_request);
+        expect("fops_open_record",
+               req[0] == 6 && req[1] == 0xac && req[3] == 5 && req[6] == 7 &&
+                   req[9] == 1 && req[16] == 1 && req[17] == 0 &&
+                   req[10] == address(open_path) &&
+                   req[4] == address(&hlsfile_source_0071b358) &&
+                   req[13] == 77u &&
+                   req[2] == descriptor_base + 12 &&
+                   req[5] == descriptor_base + 24 &&
+                   req[8] == descriptor_base + 36 &&
+                   req[11] == descriptor_base + 48);
+        expect("fops_open_record_ptr", req[14] == descriptor_base + 60);
+    }
+
+    static const char write_path[] = "C:\\fop2";
+    write_file_flagged(write_path, 0x15, 0x16, 0x17);
+    expect("fops_write_stage1",
+           word(fops[8], 0x20) == 1 && fops[8][0x12] == 100);
+    expect("fops_write_repeat",
+           word(fops[7], 0x14) == fake_record_addr &&
+               word(fops[7], 0x20) == 0x15 &&
+               static_cast<std::int32_t>(word(fops[7], 0x24)) == 0x16 &&
+               word(fops[7], 0x28) == 0 && word(fops[7], 0x2c) == 0 &&
+               word(fops[7], 0x30) == 0 && fops[7][0x12] == 99);
+    expect("fops_write_plain",
+           word(fops[6], 0x14) == fake_record_addr && fops[6][0x12] == 99);
+    // The write chain allocates once: its stage-1 path attach.
+    expect("fops_write_alloc", allocator.calls == calls_before_fops + 3);
+
+    static const char probe_path[] = "C:\\fop3";
+    expect("fops_check_hit",
+           check_file_flagged(probe_path, 0x25, fake_record_addr) == true);
+    expect("fops_check_stage1",
+           word(fops[5], 0x20) == 6 && fops[5][0x12] == 100);
+    expect("fops_check_probe",
+           word(fops[4], 0x14) == fake_record_addr && fops[4][0x12] == 99 &&
+               word(fops[4], 0x20) == 0 && word(fops[4], 0x24) == 0 &&
+               word(fops[4], 0x30) == 0x25 &&
+               word(fops[4], 0x28) == fake_record_addr &&
+               word(fops[4], 0x2c) == 0);
+    expect("fops_check_miss",
+           check_file_plain(write_path, 0x25, 0x99) == false);
+    allocator.forced_result = nullptr;
+    wheel[5] = {};
 
     if (failures != 0) {
         std::printf("pool_wait_smoke: %d failure(s)\n", failures);

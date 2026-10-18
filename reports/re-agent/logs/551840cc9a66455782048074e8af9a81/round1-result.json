@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "00404be0",
+      "run_id": "551840cc9a66455782048074e8af9a81",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00404be0",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_00404be0(float* param_1, float* param_2, float* param_3)\n{\n    const float fVar1 = param_2[0] - param_3[12];\n    const float fVar2 = param_2[1] - param_3[13];\n    const float fVar3 = param_2[2] - param_3[14];\n\n    param_1[0] = param_3[1] * fVar2 + param_3[2] * fVar3\n               + param_3[3] * 0.0f + param_3[0] * fVar1;\n    param_1[1] = param_3[5] * fVar2 + param_3[6] * fVar3\n               + param_3[7] * 0.0f + param_3[4] * fVar1;\n    param_1[2] = param_3[9] * fVar2 + param_3[10] * fVar3\n               + param_3[11] * 0.0f + param_3[8] * fVar1;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompiled calculations, offsets, expression order, and control flow.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00404be0\\_FUN_00404be0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "005e8b50",
+      "run_id": "5e74d9c1e75b4b409020704bedb7bfe1",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005e8b50",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_005e8b50(float* param_1)\n{\n    if (param_1[0] == 0.0f &&\n        param_1[1] == 0.0f &&\n        param_1[2] == 0.0f) {\n        return 0;\n    }\n\n    return 1;\n}",
+      "verdict": "FAIL",
+      "summary": "The source matches the decompilation, but the independent P-code shows different branch behavior.",
+      "issues": [
+        "Each FLOAT_EQUAL result branches to return 1 when the tested element equals zero. If none equals zero, execution reaches return 0. The source returns the opposite results for these cases."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005e8b50\\_FUN_005e8b50.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

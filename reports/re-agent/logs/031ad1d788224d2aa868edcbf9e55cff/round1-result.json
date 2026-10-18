@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b2408",
+      "run_id": "031ad1d788224d2aa868edcbf9e55cff",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2408",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_006b2408(uint32_t param_1, uint8_t param_2)\n{\n    int32_t iVar1 = FUN_006b18df(param_1, 1);\n    if (iVar1 == 0) {\n        return;\n    }\n\n    // Member names for offsets 0x28, 0x10, and 0x12 are unresolved.\n    FUN_006d92a1(iVar1 + 0x28);\n    uint32_t uVar2 = FUN_006b1ffc(\n        reinterpret_cast<void*>(iVar1 + 0x10), param_1, 1);\n    FUN_006d92ac(iVar1 + 0x28);\n\n    if (uVar2 != 0) {\n        *reinterpret_cast<uint8_t*>(uVar2 + 0x12) = param_2;\n        FUN_006b2199(uVar2);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and calls match the decompilation, but offset mapping is incomplete and the unlock argument has conflicting evidence.",
+      "issues": [
+        "Offsets 0x28, 0x10, and 0x12 use raw arithmetic instead of named struct members.",
+        "The decompilation passes iVar1 + 0x28 to FUN_006d92ac, as the reversed code does, but the supplied high P-code appears to pass the temporary last assigned iVar1 + 0x10. The bundle does not resolve this conflict."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2408\\_FUN_006b2408.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

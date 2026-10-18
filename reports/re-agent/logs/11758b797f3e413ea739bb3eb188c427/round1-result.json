@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "005dc750",
+      "run_id": "11758b797f3e413ea739bb3eb188c427",
+      "error": null,
+      "class_name": "",
+      "function_name": "005dc750",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_005dc750(std::uint32_t param_1, std::uint32_t param_2)\n{\n    // The P-code branches past initialization when bit 0 is clear.\n    if ((_DAT_00fd1254 & 1u) != 0) {\n        _DAT_00fd1254 |= 1u;\n        DAT_00fcdd74 = &PTR_FUN_0083e55c;\n        DAT_00fcdd78 = &PTR_FUN_0083e56c;\n        _DAT_00cef6bc = &DAT_00fcdd74;\n        FUN_006b936d((_onexit_t)&LAB_00711e60);\n    }\n\n    std::uint32_t arguments[3];\n    arguments[1] = param_2;\n    arguments[0] = 1u;\n    arguments[2] = 0u;\n\n    using Function = void (__cdecl *)(std::uint32_t, void*);\n    reinterpret_cast<Function>(*DAT_00fcdd78)(param_1, arguments);\n}",
+      "verdict": "PASS",
+      "summary": "Reversed code matches the independent P-code evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005dc750\\_005dc750.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -12,6 +12,7 @@ extern void* PTR_FUN_00715ac0;
 extern void* PTR_FUN_00715ae0;
 extern void* PTR_FUN_00715ad0;
 extern void* PTR_FUN_00715b00;
+extern void* PTR_FUN_00715af0;
 
 namespace hp6::runtime {
 namespace {
@@ -374,6 +375,48 @@ std::uint32_t create_plain_node_from_record(std::uintptr_t record,
     const auto* source = reinterpret_cast<const std::uint8_t*>(record);
     construct_plain_node(
         slot, static_cast<std::uint32_t>(record), mode, attach_words,
+        *reinterpret_cast<const std::uint32_t*>(source + 0xc));
+    return *reinterpret_cast<std::uint32_t*>(slot + 0xc);
+}
+
+// 006b329a (thiscall in the binary, callee-clean RET 0x1c). The exported
+// x86 pushes mode/words/engine, calls the engine attach (006b20e8), then
+// fills +0x14, the two signed CDQ pairs (+0x28/+0x2c and +0x20/+0x24,
+// interleaved with the vtable write), the unsigned +0x30, and schedules
+// last. The binary stores the vtable address 0x715af0 directly.
+std::uint8_t* construct_probe_node_00715af0(
+    std::uint8_t* receiver, std::uint32_t record, std::int32_t value_0x28,
+    std::int32_t value_0x20, std::uint32_t field_0x30, std::uint8_t mode,
+    std::uint32_t attach_words, std::uintptr_t engine) {
+    attach_engine(receiver, mode, attach_words, engine);
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x14) = record;
+    // CDQ of each signed argument becomes the pair's high word.
+    const std::uint32_t high_0x28 = value_0x28 < 0 ? 0xffffffffu : 0u;
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x28) =
+        static_cast<std::uint32_t>(value_0x28);
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x2c) = high_0x28;
+    const std::uint32_t high_0x20 = value_0x20 < 0 ? 0xffffffffu : 0u;
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x20) =
+        static_cast<std::uint32_t>(value_0x20);
+    *reinterpret_cast<void**>(receiver) = &PTR_FUN_00715af0;
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x24) = high_0x20;
+    *reinterpret_cast<std::uint32_t*>(receiver + 0x30) = field_0x30;
+    schedule_node(receiver);
+    return receiver;
+}
+
+// 006b24f2 (cdecl). 0x40 slot pull + 006b329a with the decompiled funnel
+// 329a(slot, param_1, param_4, param_2, param_3, param_5, param_6,
+// *(param_1 + 0xc)); null slot path reads [null+0xc] exactly like the
+// binary. Returns the node's +0xc token.
+std::uint32_t create_probe_node_from_record(
+    std::uintptr_t record, std::int32_t value_0x20, std::uint32_t field_0x30,
+    std::int32_t value_0x28, std::uint8_t mode, std::uint32_t attach_words) {
+    std::uint8_t* slot = detach_first_locked(0x40);
+    const auto* source = reinterpret_cast<const std::uint8_t*>(record);
+    construct_probe_node_00715af0(
+        slot, static_cast<std::uint32_t>(record), value_0x28, value_0x20,
+        field_0x30, mode, attach_words,
         *reinterpret_cast<const std::uint32_t*>(source + 0xc));
     return *reinterpret_cast<std::uint32_t*>(slot + 0xc);
 }

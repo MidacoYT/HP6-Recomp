@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006d6bf1",
+      "run_id": "e727ef951b4c44bfb68342220bf8a780",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d6bf1",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct Unresolved_006d6bf1 {\n    std::byte unknown_00[4];\n    std::uint32_t field_04; // Member name and enclosing type are unresolved.\n\n    void __thiscall FUN_006d6bf1(std::int32_t param_1);\n};\n\nvoid __thiscall Unresolved_006d6bf1::FUN_006d6bf1(std::int32_t param_1)\n{\n    if (param_1 == 0) {\n        field_04 = 0;\n    } else {\n        // The 32-bit subtraction wraps as it does in the target binary.\n        field_04 = static_cast<std::uint32_t>(param_1)\n                 - static_cast<std::uint32_t>(\n                       reinterpret_cast<std::uintptr_t>(this));\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code matches the decompilation, but the independent P-code shows the branches are reversed.",
+      "issues": [
+        "The P-code branches to the subtraction at 0x006d6c00 when param_1 == 0; the reversed code writes zero in that case.",
+        "When param_1 != 0, the P-code writes zero at 0x006d6bfb; the reversed code performs the subtraction."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

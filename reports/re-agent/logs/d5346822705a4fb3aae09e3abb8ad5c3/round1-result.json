@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "0063b4c0",
+      "run_id": "d5346822705a4fb3aae09e3abb8ad5c3",
+      "error": null,
+      "class_name": "",
+      "function_name": "thunk_FUN_01011a50",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t DAT_008663b8;\nextern std::uint8_t  DAT_008663d5;\nextern std::uint32_t DAT_008663d8;\nextern std::uint32_t DAT_008663dc;\nextern std::uint32_t DAT_00cf1964;\nextern std::uint32_t DAT_00cf1974;\nextern std::uint32_t DAT_00cf19bc;\nextern std::uint32_t DAT_00cf19d0;\n\nvoid __stdcall thunk_FUN_01011a50()\n{\n    std::uint32_t value;\n    std::uint8_t shift;\n\n    if (DAT_008663d5 == 0) {\n        value = *reinterpret_cast<const std::uint32_t*>(\n                    0x008928c0u + DAT_008663b8 * 4u)\n                << ((1u - (DAT_00cf1964 < 0x180u)) & 0x1fu);\n        shift = static_cast<std::uint8_t>(\n            1u - (DAT_00cf1964 < 0x200u));\n    } else {\n        value = (-static_cast<std::uint32_t>(\n                     (*reinterpret_cast<const std::uint32_t*>(\n                         DAT_008663d8 * 0x584u + 0x474u + DAT_00cf19d0)\n                      & 0x800u) != 0u)\n                 & 0x20u) + 0x20u;\n        if (DAT_00cf19bc > 1u) {\n            value = 0x80u;\n        }\n        shift = static_cast<std::uint8_t>(DAT_008663b8);\n    }\n\n    DAT_008663dc = (value << (shift & 0x1fu))\n                  >> ((1u - (0x40u < DAT_00cf1964)) & 0x1fu);\n\n    if (DAT_00cf1974 != 0u) {\n        DAT_008663dc = DAT_00cf1974;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and calculations match, but a struct offset remains unnamed.",
+      "issues": [
+        "The field at offset 0x474 in each 0x584-byte record is accessed through raw address arithmetic instead of a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0063b4c0\\_thunk_FUN_01011a50.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

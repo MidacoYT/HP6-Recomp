@@ -1,0 +1,814 @@
+{
+  "schema_version": 1,
+  "identity": "4b24b0e8dfb5fb5d275c93a0168ad2bd4b2d266a967ad1b96b995598520a6509",
+  "seeds": [
+    "005d8e30",
+    "005d8ed0",
+    "005d9210",
+    "005dcae0",
+    "006dadb9"
+  ],
+  "functions": [
+    {
+      "address": "005d8e30",
+      "class_name": "",
+      "function_name": "thunk_FUN_00ff8380",
+      "caller_count": 1
+    },
+    {
+      "address": "005d8ed0",
+      "class_name": "",
+      "function_name": "FUN_005d8ed0",
+      "caller_count": 1
+    },
+    {
+      "address": "005d9210",
+      "class_name": "",
+      "function_name": "FUN_005d9210",
+      "caller_count": 3
+    },
+    {
+      "address": "005dcae0",
+      "class_name": "",
+      "function_name": "thunk_FUN_0100ea00",
+      "caller_count": 3
+    },
+    {
+      "address": "006dadb9",
+      "class_name": "",
+      "function_name": "FUN_006dadb9",
+      "caller_count": 1
+    }
+  ],
+  "edges": [],
+  "gaps": [],
+  "evidence": {
+    "005d8e30": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d8e30",
+        "name": "thunk_FUN_00ff8380",
+        "signature": "bool __stdcall thunk_FUN_00ff8380(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    thunk_FUN_00ff8380\n// Address:   0x005d8e30\n// Signature: bool __stdcall thunk_FUN_00ff8380(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nbool thunk_FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT UStack_2c;\n\n  code *pcStack_28;\n\n  int iStack_24;\n\n  int iStack_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    UStack_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    UStack_2c = 0x2020;\n\n  }\n\n  pcStack_28 = FUN_005d8a30;\n\n  iStack_24 = 0;\n\n  iStack_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&UStack_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    thunk_FUN_00ff8380\n// Address:   0x005d8e30\n// Signature: bool __stdcall thunk_FUN_00ff8380(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nbool thunk_FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT UStack_2c;\n\n  code *pcStack_28;\n\n  int iStack_24;\n\n  int iStack_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    UStack_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    UStack_2c = 0x2020;\n\n  }\n\n  pcStack_28 = FUN_005d8a30;\n\n  iStack_24 = 0;\n\n  iStack_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&UStack_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d8e30",
+        "function": {
+          "address": "005d8e30",
+          "name": "thunk_FUN_00ff8380",
+          "signature": "bool __stdcall thunk_FUN_00ff8380(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d8e30",
+            "stop": "00ff839d",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "00ff83ad",
+            "stop": "00ff83c6",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "00ff839f",
+            "stop": "00ff83ab",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "00ff83ca",
+            "stop": "00ff8433",
+            "out": [],
+            "in": [
+              2,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "005d8ed0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d8ed0",
+        "name": "FUN_005d8ed0",
+        "signature": "HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005d8ed0\n// Address:   0x005d8ed0\n// Signature: HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)\n// Callers:   1  |  Callees: 6\n// ===========================================\n\n\n\nHWND __thiscall FUN_005d8ed0(void *this,HINSTANCE param_1,int param_2,int param_3)\n\n\n\n{\n\n  int in_EAX;\n\n  HWND hWnd;\n\n  UINT uFlags;\n\n  HWND hWndInsertAfter;\n\n  DWORD dwExStyle;\n\n  DWORD *dwStyle;\n\n  tagRECT local_10;\n\n  \n\n  local_10.right = (int)this + param_2;\n\n  local_10.bottom = in_EAX + param_3;\n\n  dwExStyle = 0;\n\n  hWndInsertAfter = (HWND)0x0;\n\n  if (DAT_00866e2a == '\\0') {\n\n    dwStyle = &dwStyle_00cf0000;\n\n    uFlags = 3;\n\n    local_10.left = (LONG)this;\n\n    local_10.top = in_EAX;\n\n  }\n\n  else {\n\n    dwStyle = (DWORD *)0x80000000;\n\n    uFlags = 0x2003;\n\n    local_10.left = 0;\n\n    local_10.top = 0;\n\n    hWndInsertAfter = (HWND)0xffffffff;\n\n    dwExStyle = 8;\n\n  }\n\n  AdjustWindowRectEx(&local_10,(DWORD)dwStyle,0,dwExStyle);\n\n  hWnd = CreateWindowExA(dwExStyle,\"HalfBloodPrinceMainWndClass\",(LPCSTR)&lpWindowName_0073a1cd,\n\n                         (DWORD)dwStyle,local_10.left,local_10.top,local_10.right - local_10.left,\n\n                         local_10.bottom - local_10.top,(HWND)0x0,(HMENU)0x0,param_1,(LPVOID)0x0);\n\n  ShowWindow(hWnd,0);\n\n  SetWindowPos(hWnd,hWndInsertAfter,0,0,0,0,uFlags);\n\n  if (DAT_00866e2a != '\\0') {\n\n    SetMenu(hWnd,(HMENU)0x0);\n\n    SetThreadExecutionState(0x80000002);\n\n  }\n\n  ShowWindow(hWnd,5);\n\n  return hWnd;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005d8ed0\n// Address:   0x005d8ed0\n// Signature: HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)\n// Callers:   1  |  Callees: 6\n// ===========================================\n\n\n\nHWND __thiscall FUN_005d8ed0(void *this,HINSTANCE param_1,int param_2,int param_3)\n\n\n\n{\n\n  int in_EAX;\n\n  HWND hWnd;\n\n  UINT uFlags;\n\n  HWND hWndInsertAfter;\n\n  DWORD dwExStyle;\n\n  DWORD *dwStyle;\n\n  tagRECT local_10;\n\n  \n\n  local_10.right = (int)this + param_2;\n\n  local_10.bottom = in_EAX + param_3;\n\n  dwExStyle = 0;\n\n  hWndInsertAfter = (HWND)0x0;\n\n  if (DAT_00866e2a == '\\0') {\n\n    dwStyle = &dwStyle_00cf0000;\n\n    uFlags = 3;\n\n    local_10.left = (LONG)this;\n\n    local_10.top = in_EAX;\n\n  }\n\n  else {\n\n    dwStyle = (DWORD *)0x80000000;\n\n    uFlags = 0x2003;\n\n    local_10.left = 0;\n\n    local_10.top = 0;\n\n    hWndInsertAfter = (HWND)0xffffffff;\n\n    dwExStyle = 8;\n\n  }\n\n  AdjustWindowRectEx(&local_10,(DWORD)dwStyle,0,dwExStyle);\n\n  hWnd = CreateWindowExA(dwExStyle,\"HalfBloodPrinceMainWndClass\",(LPCSTR)&lpWindowName_0073a1cd,\n\n                         (DWORD)dwStyle,local_10.left,local_10.top,local_10.right - local_10.left,\n\n                         local_10.bottom - local_10.top,(HWND)0x0,(HMENU)0x0,param_1,(LPVOID)0x0);\n\n  ShowWindow(hWnd,0);\n\n  SetWindowPos(hWnd,hWndInsertAfter,0,0,0,0,uFlags);\n\n  if (DAT_00866e2a != '\\0') {\n\n    SetMenu(hWnd,(HMENU)0x0);\n\n    SetThreadExecutionState(0x80000002);\n\n  }\n\n  ShowWindow(hWnd,5);\n\n  return hWnd;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 6
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d8ed0",
+        "function": {
+          "address": "005d8ed0",
+          "name": "FUN_005d8ed0",
+          "signature": "HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)",
+          "calling_convention": "__thiscall",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:00000071",
+              "name": "AdjustWindowRectEx"
+            },
+            {
+              "addr": "EXTERNAL:0000006e",
+              "name": "CreateWindowExA"
+            },
+            {
+              "addr": "EXTERNAL:00000060",
+              "name": "ShowWindow"
+            },
+            {
+              "addr": "EXTERNAL:00000070",
+              "name": "SetWindowPos"
+            },
+            {
+              "addr": "EXTERNAL:00000061",
+              "name": "SetMenu"
+            },
+            {
+              "addr": "EXTERNAL:0000000e",
+              "name": "SetThreadExecutionState"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00764574",
+            "value": "HalfBloodPrinceMainWndClass",
+            "length": 27,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300",
+                "ref_addr": "005d93f2"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0",
+                "ref_addr": "005d8f5b"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8385"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8415"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00713044",
+            "name": "PTR_SetThreadExecutionState_00713044",
+            "type": "pointer",
+            "size": 4,
+            "value": "7734be20",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133b4",
+            "name": "PTR_ShowWindow_007133b4",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbca10",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133b8",
+            "name": "PTR_SetMenu_007133b8",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fb6faa",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133ec",
+            "name": "PTR_CreateWindowExA_007133ec",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbdc2a",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133f4",
+            "name": "PTR_SetWindowPos_007133f4",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fc35e3",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133f8",
+            "name": "PTR_AdjustWindowRectEx_007133f8",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fc0e4a",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "0073a1cd",
+            "name": "lpWindowName_0073a1cd",
+            "type": "LPCSTR",
+            "size": 4,
+            "value": "00000000",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "00764574",
+            "name": "s_HalfBloodPrinceMainWndClass_00764574",
+            "type": "string",
+            "size": -1,
+            "value": "HalfBloodPrinceMainWndClass",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "00cf0000",
+            "name": "dwStyle_00cf0000",
+            "type": "DWORD",
+            "size": 4,
+            "value": "0x0",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              },
+              {
+                "func_addr": "005d82b0",
+                "func_name": "FUN_005d82b0"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d8ed0",
+            "stop": "005d8efe",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005d8f1a",
+            "stop": "005d8f1f",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005d8f00",
+            "stop": "005d8f18",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005d8f24",
+            "stop": "005d8f8c",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2,
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005d8f8e",
+            "stop": "005d8f9c",
+            "out": [
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "005d8fa2",
+            "stop": "005d8fb0",
+            "out": [],
+            "in": [
+              3,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    "005d9210": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d9210",
+        "name": "FUN_005d9210",
+        "signature": "undefined __cdecl FUN_005d9210(char param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005d9210\n// Address:   0x005d9210\n// Signature: undefined __cdecl FUN_005d9210(char param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005d9210(char param_1)\n\n\n\n{\n\n  PVOID local_30;\n\n  uint local_2c;\n\n  PVOID local_28;\n\n  uint local_24;\n\n  PVOID local_20;\n\n  uint local_1c;\n\n  undefined4 local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  if (param_1 != '\\0') {\n\n    SystemParametersInfoA(0x3b,8,&pvParam_00866f14,0);\n\n    SystemParametersInfoA(0x35,8,&pvParam_00866f1c,0);\n\n    SystemParametersInfoA(0x33,0x18,&pvParam_00866f24,0);\n\n    return;\n\n  }\n\n  local_30 = pvParam_00866f14;\n\n  local_2c = DAT_00866f18;\n\n  if ((DAT_00866f18 & 1) == 0) {\n\n    local_2c = DAT_00866f18 & 0xfffffff3;\n\n    SystemParametersInfoA(0x3b,8,&local_30,0);\n\n  }\n\n  local_28 = pvParam_00866f1c;\n\n  local_24 = DAT_00866f20;\n\n  if ((DAT_00866f20 & 1) == 0) {\n\n    local_24 = DAT_00866f20 & 0xfffffff3;\n\n    SystemParametersInfoA(0x35,8,&local_28,0);\n\n  }\n\n  local_20 = pvParam_00866f24;\n\n  local_18 = DAT_00866f2c;\n\n  local_14 = DAT_00866f30;\n\n  local_10 = DAT_00866f34;\n\n  local_c = DAT_00866f38;\n\n  if ((DAT_00866f28 & 1) == 0) {\n\n    local_1c = DAT_00866f28 & 0xfffffff3;\n\n    SystemParametersInfoA(0x33,0x18,&local_20,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005d9210\n// Address:   0x005d9210\n// Signature: undefined __cdecl FUN_005d9210(char param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005d9210(char param_1)\n\n\n\n{\n\n  PVOID local_30;\n\n  uint local_2c;\n\n  PVOID local_28;\n\n  uint local_24;\n\n  PVOID local_20;\n\n  uint local_1c;\n\n  undefined4 local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  if (param_1 != '\\0') {\n\n    SystemParametersInfoA(0x3b,8,&pvParam_00866f14,0);\n\n    SystemParametersInfoA(0x35,8,&pvParam_00866f1c,0);\n\n    SystemParametersInfoA(0x33,0x18,&pvParam_00866f24,0);\n\n    return;\n\n  }\n\n  local_30 = pvParam_00866f14;\n\n  local_2c = DAT_00866f18;\n\n  if ((DAT_00866f18 & 1) == 0) {\n\n    local_2c = DAT_00866f18 & 0xfffffff3;\n\n    SystemParametersInfoA(0x3b,8,&local_30,0);\n\n  }\n\n  local_28 = pvParam_00866f1c;\n\n  local_24 = DAT_00866f20;\n\n  if ((DAT_00866f20 & 1) == 0) {\n\n    local_24 = DAT_00866f20 & 0xfffffff3;\n\n    SystemParametersInfoA(0x35,8,&local_28,0);\n\n  }\n\n  local_20 = pvParam_00866f24;\n\n  local_18 = DAT_00866f2c;\n\n  local_14 = DAT_00866f30;\n\n  local_10 = DAT_00866f34;\n\n  local_c = DAT_00866f38;\n\n  if ((DAT_00866f28 & 1) == 0) {\n\n    local_1c = DAT_00866f28 & 0xfffffff3;\n\n    SystemParametersInfoA(0x33,0x18,&local_20,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d9210",
+        "function": {
+          "address": "005d9210",
+          "name": "FUN_005d9210",
+          "signature": "undefined __cdecl FUN_005d9210(char param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005da4b0",
+              "name": "FUN_005da4b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:0000005a",
+              "name": "SystemParametersInfoA"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071339c",
+            "name": "PTR_SystemParametersInfoA_0071339c",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fb82e1",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              }
+            ]
+          },
+          {
+            "address": "00866f14",
+            "name": "pvParam_00866f14",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000008",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          },
+          {
+            "address": "00866f1c",
+            "name": "pvParam_00866f1c",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000008",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          },
+          {
+            "address": "00866f24",
+            "name": "pvParam_00866f24",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000018",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d9210",
+            "stop": "005d9224",
+            "out": [
+              8,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005d9252",
+            "stop": "005d9266",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005d9268",
+            "stop": "005d927a",
+            "out": [
+              3
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005d927c",
+            "stop": "005d9291",
+            "out": [
+              5,
+              4
+            ],
+            "in": [
+              1,
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005d9293",
+            "stop": "005d92a5",
+            "out": [
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "005d92a7",
+            "stop": "005d92e0",
+            "out": [
+              7,
+              6
+            ],
+            "in": [
+              3,
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "005d92e2",
+            "stop": "005d92f4",
+            "out": [
+              7
+            ],
+            "in": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "start": "005d92f6",
+            "stop": "005d92fa",
+            "out": [],
+            "in": [
+              5,
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "005d9226",
+            "stop": "005d9251",
+            "out": [],
+            "in": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "005dcae0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005dcae0",
+        "name": "thunk_FUN_0100ea00",
+        "signature": "undefined __stdcall thunk_FUN_0100ea00(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    thunk_FUN_0100ea00\n// Address:   0x005dcae0\n// Signature: undefined __stdcall thunk_FUN_0100ea00(void)\n// Callers:   3  |  Callees: 0\n// ===========================================\n\n\n\nvoid thunk_FUN_0100ea00(void)\n\n\n\n{\n\n  int aiStack_c [3];\n\n  \n\n  if (DAT_00d63eb8 != DAT_00d63e80) {\n\n    aiStack_c[0] = DAT_00d63eb8;\n\n    aiStack_c[1] = 0;\n\n    FUN_005db240(aiStack_c);\n\n  }\n\n  DAT_00d63e10 = DAT_00d63e40;\n\n  DAT_00d63e00 = DAT_00d63e18;\n\n  DAT_00d63e08 = DAT_00d63e98;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    thunk_FUN_0100ea00\n// Address:   0x005dcae0\n// Signature: undefined __stdcall thunk_FUN_0100ea00(void)\n// Callers:   3  |  Callees: 0\n// ===========================================\n\n\n\nvoid thunk_FUN_0100ea00(void)\n\n\n\n{\n\n  int aiStack_c [3];\n\n  \n\n  if (DAT_00d63eb8 != DAT_00d63e80) {\n\n    aiStack_c[0] = DAT_00d63eb8;\n\n    aiStack_c[1] = 0;\n\n    FUN_005db240(aiStack_c);\n\n  }\n\n  DAT_00d63e10 = DAT_00d63e40;\n\n  DAT_00d63e00 = DAT_00d63e18;\n\n  DAT_00d63e08 = DAT_00d63e98;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005dcae0",
+        "function": {
+          "address": "005dcae0",
+          "name": "thunk_FUN_0100ea00",
+          "signature": "undefined __stdcall thunk_FUN_0100ea00(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005d8fc0",
+              "name": "FUN_005d8fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005da4b0",
+              "name": "FUN_005da4b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005dcae0",
+            "stop": "0100ea0e",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0100ea10",
+            "stop": "0100ea24",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0100ea27",
+            "stop": "0100ea4c",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006dadb9": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006dadb9",
+        "name": "FUN_006dadb9",
+        "signature": "int __cdecl FUN_006dadb9(int param_1, int param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006dadb9\n// Address:   0x006dadb9\n// Signature: int __cdecl FUN_006dadb9(int param_1, int param_2)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006dadb9(int param_1,int param_2)\n\n\n\n{\n\n  return param_2 * 0x20 + param_1 * 0x120 + 0x58;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006dadb9\n// Address:   0x006dadb9\n// Signature: int __cdecl FUN_006dadb9(int param_1, int param_2)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006dadb9(int param_1,int param_2)\n\n\n\n{\n\n  return param_2 * 0x20 + param_1 * 0x120 + 0x58;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006dadb9",
+        "function": {
+          "address": "006dadb9",
+          "name": "FUN_006dadb9",
+          "signature": "int __cdecl FUN_006dadb9(int param_1, int param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006dadb9",
+            "stop": "006dadce",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

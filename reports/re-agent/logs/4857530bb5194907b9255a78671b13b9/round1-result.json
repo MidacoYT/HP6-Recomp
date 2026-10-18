@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006b7cca",
+      "run_id": "4857530bb5194907b9255a78671b13b9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b7cca",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __fastcall FUN_006b7bcb(std::uint32_t* param_1);\nvoid __cdecl FUN_006b492b(std::uint32_t param_1, std::uint32_t param_2);\n\nstd::uint32_t* __thiscall FUN_006b7cca(void* self, std::uint8_t param_1)\n{\n    FUN_006b7bcb(static_cast<std::uint32_t*>(self));\n\n    if ((param_1 & 1) != 0) {\n        FUN_006b492b(reinterpret_cast<std::uint32_t>(self), 0x84);\n    }\n\n    return static_cast<std::uint32_t*>(self);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the supplied decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b7cca\\_FUN_006b7cca.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

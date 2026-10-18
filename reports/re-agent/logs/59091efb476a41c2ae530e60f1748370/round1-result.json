@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b7dcb",
+      "run_id": "59091efb476a41c2ae530e60f1748370",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b7dcb",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __fastcall FUN_006b7d0f(std::uint32_t* param_1);\nvoid __cdecl FUN_006b492b(std::uint32_t param_1, std::uint32_t param_2);\n\nstd::uint32_t* __thiscall FUN_006b7dcb(void* self, std::uint8_t param_1)\n{\n    FUN_006b7d0f(static_cast<std::uint32_t*>(self));\n\n    if ((param_1 & 1) != 0) {\n        FUN_006b492b(reinterpret_cast<std::uint32_t>(self), 0x1c);\n    }\n\n    return static_cast<std::uint32_t*>(self);\n}",
+      "verdict": "FAIL",
+      "summary": "The branch and return match, but the second call uses the wrong calling convention.",
+      "issues": [
+        "The P-code passes self in a register and 0x1c as the other argument to FUN_006b492b. Declaring it __cdecl would pass both arguments on the stack."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b7dcb\\_FUN_006b7dcb.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

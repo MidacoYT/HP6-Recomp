@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "005dcae0",
+      "run_id": "04bd4ad40cbe4b559b3d2678f8bab655",
+      "error": null,
+      "class_name": "",
+      "function_name": "thunk_FUN_0100ea00",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __stdcall thunk_FUN_0100ea00()\n{\n    if (DAT_00d63eb8 != DAT_00d63e80) {\n        int aiStack_c[3];\n        aiStack_c[0] = DAT_00d63eb8;\n        aiStack_c[1] = 0;\n        FUN_005db240(aiStack_c);\n    }\n\n    DAT_00d63e10 = DAT_00d63e40;\n    DAT_00d63e00 = DAT_00d63e18;\n    DAT_00d63e08 = DAT_00d63e98;\n}",
+      "verdict": "PASS",
+      "summary": "The branch, call, assignments, and expression order match the decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005dcae0\\_thunk_FUN_0100ea00.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dcef4",
+      "run_id": "875595b9bc6e4a7bbf626f1aee01a6f9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dcef4",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern void __cdecl FUN_005dc710(std::int32_t);\n\nstd::uint32_t* __thiscall FUN_006dcef4(void* self, std::uint8_t param_1)\n{\n    *reinterpret_cast<void***>(self) =\n        reinterpret_cast<void**>(0x0071b520);\n\n    if ((param_1 & 1) != 0) {\n        FUN_005dc710(reinterpret_cast<std::int32_t>(self));\n    }\n\n    return reinterpret_cast<std::uint32_t*>(self);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dcef4\\_FUN_006dcef4.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

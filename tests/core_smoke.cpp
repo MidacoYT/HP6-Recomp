@@ -8,6 +8,23 @@
 #include <cstring>
 #include <limits>
 
+// hp6::stream::apply_level_target calls hp6::runtime::update_node_priority,
+// which pulls PoolList.obj / PoolAccess.obj (and, through them, Sync.obj and
+// ThreadPriority.obj) into this link even though this test never exercises
+// the pool path. Same inert set as tests/pool_list_smoke.cpp.
+std::int32_t DAT_00892b60 = 0;
+std::uint32_t DAT_00899acc = 0;
+std::int32_t DAT_0085139c = 0;
+void* PTR_FUN_007159e8 = nullptr;
+void* DAT_006b18de = nullptr;
+void* PTR_FUN_00715ac0 = nullptr;
+void* PTR_FUN_00715ae0 = nullptr;
+void* PTR_FUN_00715ad0 = nullptr;
+void* PTR_FUN_00715b00 = nullptr;
+void* PTR_FUN_00715af0 = nullptr;
+std::int32_t engine_worker_006b1e32(std::int32_t engine) { (void)engine; return 0; }
+void* lpTargetHandle_00899ad0 = nullptr;
+
 int main() {
     const float vector[4] = {3.0f, 4.0f, 0.0f, 0.0f};
     float normalized[4] = {};

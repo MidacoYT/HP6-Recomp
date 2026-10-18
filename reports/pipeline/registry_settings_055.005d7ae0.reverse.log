@@ -1,0 +1,40 @@
+{
+  "results": [
+    {
+      "address": "005d7ae0",
+      "run_id": "5f44a7c6e31741e7a6c31d43c8a7d6fd",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d7ae0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The concrete class and exception type remain unresolved. This function uses\n// the binary's 32-bit std::string layout: length at +0x14, capacity at +0x18,\n// and character storage at +0x04.\nvoid __thiscall FUN_005d7ae0(\n    void* this_,\n    const std::string* section,\n    const std::string* entry,\n    DWORD value)\n{\n    const auto* entryBytes = reinterpret_cast<const std::byte*>(entry);\n    const auto entryLength =\n        *reinterpret_cast<const std::uint32_t*>(entryBytes + 0x14);\n\n    if (entryLength == 0) {\n        const std::string separator(\"'; entry '\");\n        const std::string prefix(\"Bad data to write to registry - section '\");\n        const std::string part1 = prefix + *section;\n        const std::string part2 = part1 + separator;\n        const std::string part3 = part2 + *entry;\n        const std::string message = part3 + \"'\";\n\n        alignas(4) std::byte exceptionStorage[40];\n        FUN_005d6d80(\n            reinterpret_cast<std::exception*>(exceptionStorage),\n            &message);\n        *reinterpret_cast<void**>(exceptionStorage) =\n            &PTR_FUN_0083e024;\n        _CxxThrowException(\n            exceptionStorage,\n            reinterpret_cast<ThrowInfo*>(&pThrowInfo_00848b60));\n    }\n\n    std::string key(\"Software\\\\Electronic Arts\\\\\");\n    key += *section;\n\n    const auto* thisBytes = reinterpret_cast<const std::byte*>(this_);\n    if (*reinterpret_cast<const std::uint32_t*>(thisBytes + 0x14) != 0) {\n        const std::string separator(\"\\\\\");\n        const std::string suffix =\n            separator + *reinterpret_cast<const std::string*>(this_);\n        key += suffix;\n    }\n\n    HKEY keyHandle = nullptr;\n    DWORD disposition = 0;\n    if (RegCreateKeyExA(\n            HKEY_CURRENT_USER, key.c_str(), 0, \"\", 0, 0x1f,\n            nullptr, &keyHandle, &disposition) == ERROR_SUCCESS) {\n        const char* valueName =\n            *reinterpret_cast<const std::uint32_t*>(entryBytes + 0x18) < 0x10\n                ? reinterpret_cast<const char*>(entryBytes + 4)\n                : *reinterpret_cast<const char* const*>(entryBytes + 4);\n\n        RegSetValueExA(\n            keyHandle, valueName, 0, REG_DWORD,\n            reinterpret_cast<const BYTE*>(&value), 4);\n    }\n\n    if (keyHandle != nullptr)\n        RegCloseKey(keyHandle);\n}",
+      "verdict": "FAIL",
+      "summary": "The main control flow and registry calls match, but required binary fields are left as raw offsets.",
+      "issues": [
+        "The reads at entry +0x14 and +0x18, this +0x14, and entry +0x04 are not mapped to named members.",
+        "Using std::string does not establish the stated 32-bit binary layout for section, entry, this, and the constructed key."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 6 branches/loops, candidate has 4",
+        "ASM call mismatch: disassembly has 19 calls, candidate has 11",
+        "P-code call mismatch: normalized IR has 19 calls, candidate has 11",
+        "P-code return mismatch: normalized IR has 2 returns, candidate has no explicit return"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d7ae0\\_005d7ae0.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 19 calls, source has 11 calls (diff: 8)"
+        }
+      ]
+    }
+  ]
+}

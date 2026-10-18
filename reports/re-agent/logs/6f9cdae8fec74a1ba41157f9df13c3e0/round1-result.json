@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "address": "005d7d40",
+      "run_id": "6f9cdae8fec74a1ba41157f9df13c3e0",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d7d40",
+      "success": false,
+      "rounds_used": 1,
+      "code": "DWORD __fastcall FUN_005d7d40(\n    std::string* param_1,\n    std::string* param_2,\n    std::string* param_3,\n    DWORD param_4)\n{\n    if (param_1->empty()) {\n        std::string sectionAndEntry = *param_2 + \"'; entry '\";\n        std::string withEntry = sectionAndEntry + *param_1;\n        std::string prefix(\"Bad registry location - section '\");\n        std::string withPrefix = prefix + withEntry;\n        std::string message = withPrefix + \"'\";\n\n        // The exception type is unresolved. Preserve its construction,\n        // vtable assignment, and throw helper by their known symbols.\n        void* exceptionStorage[10];\n        FUN_005d6d80(\n            reinterpret_cast<std::exception*>(exceptionStorage),\n            &message);\n        exceptionStorage[0] = reinterpret_cast<void*>(0x0083e024);\n        _CxxThrowException(\n            exceptionStorage,\n            reinterpret_cast<ThrowInfo*>(0x00848b60));\n    }\n\n    std::string path(\"Software\\\\Electronic Arts\\\\\");\n    path += *param_3;\n\n    if (!param_2->empty()) {\n        std::string separator = this_0082b204; // Contains \"\\\\\"\n        std::string suffix = separator + *param_2;\n        path += suffix;\n    }\n\n    HKEY key = nullptr;\n    DWORD result = param_4;\n\n    if (RegOpenKeyExA(\n            HKEY_CURRENT_USER, path.c_str(), 0, 0x20019, &key) == ERROR_SUCCESS) {\n        DWORD valueType = REG_SZ;\n        DWORD dataSize = 0xff;\n        RegQueryValueExA(\n            key, param_1->c_str(), nullptr, &valueType,\n            reinterpret_cast<LPBYTE>(&result), &dataSize);\n    } else if (RegOpenKeyExA(\n                   HKEY_LOCAL_MACHINE, path.c_str(), 0, 0x20019,\n                   &key) == ERROR_SUCCESS) {\n        thunk_FUN_0100e6a0(&result, key, param_1->c_str());\n        FUN_005d7ae0(param_2, param_3, param_1);\n    } else {\n        DWORD disposition = 0;\n        RegCreateKeyExA(\n            HKEY_CURRENT_USER, path.c_str(), 0, \"\", 0, 0x1f,\n            nullptr, &key, &disposition);\n    }\n\n    if (key != nullptr) {\n        RegCloseKey(key);\n    }\n\n    return result;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and control flow.",
+      "issues": [],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 10 branches/loops, candidate has 5",
+        "ASM call mismatch: disassembly has 22 calls, candidate has 18",
+        "P-code call mismatch: normalized IR has 22 calls, candidate has 18"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d7d40\\_005d7d40.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 22 calls, source has 18 calls (diff: 4)"
+        }
+      ]
+    }
+  ]
+}

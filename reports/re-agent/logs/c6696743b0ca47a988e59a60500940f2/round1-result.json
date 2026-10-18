@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d760a",
+      "run_id": "c6696743b0ca47a988e59a60500940f2",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d760a",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006d760a_record {\n    std::byte unknown_00[0x14];\n    std::uint32_t field_14;\n    std::byte unknown_18[0x3c];\n    std::uint32_t field_54;\n    std::byte unknown_58[0x04];\n    std::int32_t field_5c;\n    std::int32_t field_60;\n};\n\nstatic_assert(offsetof(FUN_006d760a_record, field_14) == 0x14);\nstatic_assert(offsetof(FUN_006d760a_record, field_54) == 0x54);\nstatic_assert(offsetof(FUN_006d760a_record, field_5c) == 0x5c);\nstatic_assert(offsetof(FUN_006d760a_record, field_60) == 0x60);\n\nextern std::uint8_t DAT_0071b150[];\nextern std::int32_t __cdecl FUN_006d74af(std::uint32_t);\n\nint __cdecl FUN_006d760a(int param_1)\n{\n    // The supplied evidence does not identify the record or its members.\n    const auto* record =\n        reinterpret_cast<const FUN_006d760a_record*>(param_1);\n\n    const std::uint32_t type = record->field_14;\n    const std::uint8_t scale = DAT_0071b150[record->field_54 & 0xff];\n    std::int32_t value = record->field_5c;\n    std::int32_t result = 0;\n\n    if (((value == 0) && (type == 0x79)) || (type == 0x7b)) {\n        value = FUN_006d74af(DAT_0071b150[type & 0xff]);\n    }\n\n    if (record->field_60 == 0) {\n        result = static_cast<std::int32_t>(\n            static_cast<std::uint32_t>(value) *\n            static_cast<std::uint32_t>(scale)) / 8;\n    }\n\n    return result + 0x20;\n}",
+      "verdict": "FAIL",
+      "summary": "The call path reads field_60 through a different pointer.",
+      "issues": [
+        "After FUN_006d74af, Ghidra assigns extraout_ECX to param_1. The P-code then reads offset 0x60 through that register. The reversed code always reads record->field_60 through the original pointer."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

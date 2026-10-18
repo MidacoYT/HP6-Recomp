@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dbe1d",
+      "run_id": "cd4542a6a3cb44f1801c3f21e9fd1969",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbe1d",
+      "success": false,
+      "rounds_used": 2,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006dbe1d_Overlay {\n    std::uint8_t unknown_00[0x38];\n    std::uint32_t field_38;\n    std::uint8_t unknown_3c[4];\n    std::uint32_t field_40;\n};\n\nstatic_assert(offsetof(FUN_006dbe1d_Overlay, field_38) == 0x38);\nstatic_assert(offsetof(FUN_006dbe1d_Overlay, field_40) == 0x40);\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::int32_t __cdecl FUN_006dbe1d(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c, &local_8) != 0) {\n        return 0;\n    }\n\n    const auto* value = reinterpret_cast<const FUN_006dbe1d_Overlay*>(\n        static_cast<std::uintptr_t>(local_8));\n    return static_cast<std::int32_t>(value->field_40 - value->field_38);\n}",
+      "verdict": "FAIL",
+      "summary": "The branch, offsets, and subtraction match, but the callee declaration uses the wrong calling convention.",
+      "issues": [
+        "FUN_006db3f9 is declared __fastcall, which passes arguments in registers. The supplied P-code shows all three arguments passed on the stack."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006db3f9",
+      "run_id": "a890b5a72ea8412db29acf74364e115a",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db3f9",
+      "success": true,
+      "rounds_used": 2,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3)\n{\n    if (param_1 != nullptr) {\n        auto* piVar1 =\n            reinterpret_cast<std::uint32_t*>(static_cast<std::uintptr_t>(*param_1));\n        const std::uint32_t value = *piVar1;\n\n        if (value == 0x4D525453u) {\n            *param_2 = static_cast<std::uint32_t>(\n                reinterpret_cast<std::uintptr_t>(param_1));\n            *param_3 = value;\n            return 0;\n        }\n    }\n\n    return 1;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the control flow and P-code; the decompilation incorrectly shows param_3 receiving piVar1.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006db3f9\\_FUN_006db3f9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

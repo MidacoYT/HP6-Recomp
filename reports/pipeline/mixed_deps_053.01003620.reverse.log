@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "01003620",
+      "run_id": "864e2c1add584283b6e1e96073aa4859",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01003620",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\nextern void* _Src_00c754d0;\nextern std::int32_t DAT_00cf19a0;\n\nint __cdecl FUN_01003620(void* param_1)\n{\n    const std::uint32_t byte_count =\n        static_cast<std::uint32_t>(DAT_00cf19a0) << 3;\n\n    std::memcpy(param_1, &_Src_00c754d0, byte_count);\n    return DAT_00cf19a0;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01003620\\_FUN_01003620.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

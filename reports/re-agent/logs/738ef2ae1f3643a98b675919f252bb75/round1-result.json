@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006dcc40",
+      "run_id": "738ef2ae1f3643a98b675919f252bb75",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dcc40",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The member types and class name are unresolved. These offset names preserve\n// the 32-bit layout shown by the decompile.\nvoid __fastcall FUN_006dcc40(std::uint32_t* param_1)\n{\n    auto* array_0xb8 =\n        reinterpret_cast<std::uint32_t*>(param_1[0x2e]);\n\n    param_1[0] = 0x0071b500;\n\n    if (array_0xb8 != nullptr) {\n        if (array_0xb8[-1] == 0) {\n            FUN_005dc710(reinterpret_cast<int>(array_0xb8 - 1));\n        } else {\n            auto* vtable = reinterpret_cast<std::uint32_t*>(array_0xb8[0]);\n            reinterpret_cast<void (*)(int)>(vtable[0])(3);\n        }\n    }\n\n    auto* direct_input_0xb4 =\n        reinterpret_cast<std::uint32_t*>(param_1[0x2d]);\n\n    if (direct_input_0xb4 != nullptr) {\n        auto* vtable = reinterpret_cast<std::uint32_t*>(direct_input_0xb4[0]);\n        reinterpret_cast<void (__stdcall*)(void*)>(vtable[2])(\n            direct_input_0xb4);\n        param_1[0x2d] = 0;\n    }\n\n    FUN_006dcf14(param_1);\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and calls match, but the object offsets lack named members.",
+      "issues": [
+        "Offsets 0x00, 0xb4, and 0xb8 are accessed through raw param_1 indices. Local aliases do not map these offsets to named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dcc40\\_FUN_006dcc40.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

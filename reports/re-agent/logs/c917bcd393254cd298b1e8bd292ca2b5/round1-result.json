@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d778a",
+      "run_id": "c917bcd393254cd298b1e8bd292ca2b5",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d778a",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// Member names and the concrete class type are unresolved in the supplied evidence.\nvoid __thiscall FUN_006d778a(void* self, std::int32_t param_1)\n{\n    auto* dst = static_cast<std::uint8_t*>(self);\n    auto* src = reinterpret_cast<const std::uint8_t*>(param_1);\n\n    FUN_006d7745(self, param_1);\n    dst[0] = src[0x54];\n    *reinterpret_cast<std::uint32_t*>(dst + 0x18) =\n        *reinterpret_cast<const std::uint16_t*>(src + 0x5c);\n    *reinterpret_cast<std::uint32_t*>(dst + 0x1c) = 1;\n\n    FUN_006d7368(self, *reinterpret_cast<const std::int32_t*>(src + 0x58));\n    *reinterpret_cast<std::uint32_t*>(dst) &= 0x0effffffu;\n\n    const std::int32_t value = FUN_006d760a(param_1);\n    FUN_00688550(self, reinterpret_cast<std::int32_t>(dst + 0x20), value - 0x20);\n}",
+      "verdict": "FAIL",
+      "summary": "The logic and call order match, but the struct offsets have no named members.",
+      "issues": [
+        "Source offsets 0x54, 0x58, and 0x5c and destination offsets 0x00, 0x18, 0x1c, and 0x20 are accessed through raw byte offsets."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d778a\\_FUN_006d778a.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

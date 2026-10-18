@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d835e",
+      "run_id": "1ae29136121f4b2eb4a2849258b10513",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d835e",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t* __thiscall FUN_006d835e(void* self, std::uint32_t param_1)\n{\n    // The member at +0x0C has no evidence-backed name.\n    const std::int32_t value = *reinterpret_cast<std::int32_t*>(\n        reinterpret_cast<std::uint8_t*>(self) + 0x0C);\n\n    auto* result = reinterpret_cast<std::uint32_t*>(\n        FUN_006d6ab6(\"cl_clut\", value + 0x20, 0x10, 0x20,\n                     param_1, \"shpclone.cpp\", 0x6F));\n\n    FUN_006d82ec(self, result);\n    result[1] = 0;\n    result[0] = (result[0] & 0xFFFFFBFFu) | 0x400u;\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and operations match, but the object offset is unnamed and signed addition can diverge.",
+      "issues": [
+        "The member at self +0x0C is accessed by a raw offset rather than a named member.",
+        "value + 0x20 has undefined behavior in C++ if the signed value overflows; the binary performs a 32-bit addition."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d835e\\_FUN_006d835e.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

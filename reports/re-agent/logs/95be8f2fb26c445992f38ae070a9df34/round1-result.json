@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d7dea",
+      "run_id": "95be8f2fb26c445992f38ae070a9df34",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7dea",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __cdecl FUN_006d7dea(void* param_1, std::int32_t param_2)\n{\n    // Field names for these offsets are unresolved in the supplied evidence.\n    const auto* data = reinterpret_cast<const std::uint8_t*>(param_2);\n    std::uint32_t cursor =\n        static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(param_1));\n    void* previous = nullptr;\n\n    if ((data[4] & 0x02) != 0) {\n        const std::uint32_t address =\n            (*reinterpret_cast<const std::int32_t*>(data + 0x50) == 0)\n                ? ((cursor + 0x9fU) & 0xffffff80U) - 0x20U\n                : cursor;\n        auto* node = reinterpret_cast<void*>(address);\n\n        FUN_006d7cd2(node, param_2);\n        cursor = address + FUN_006d74ce(param_2);\n        previous = node;\n    }\n\n    if ((data[4] & 0x04) != 0) {\n        std::uint32_t address = cursor;\n        if (*reinterpret_cast<const std::int32_t*>(data + 0x60) == 0) {\n            address = ((cursor + 0x2fU) & 0xfffffff0U) - 0x20U;\n            if (previous != nullptr) {\n                FUN_006d6bf1(previous, static_cast<std::int32_t>(address));\n            }\n        }\n        auto* node = reinterpret_cast<void*>(address);\n\n        FUN_006d778a(node, param_2);\n        cursor = address + FUN_006d760a(param_2);\n        previous = node;\n    }\n\n    if ((data[5] & 0x01) != 0) {\n        cursor = (cursor + 0x2fU) & 0xfffffff0U;\n        const std::uint32_t address = cursor - 0x20U;\n        auto* node = reinterpret_cast<void*>(address);\n\n        if (previous != nullptr) {\n            FUN_006d6bf1(previous, static_cast<std::int32_t>(address));\n        }\n        FUN_006d7827(node, param_2);\n        previous = node;\n    }\n\n    if ((data[4] & 0x10) != 0) {\n        const std::uint32_t address =\n            ((cursor + 0x2fU) & 0xfffffff0U) - 0x20U;\n        auto* node = reinterpret_cast<void*>(address);\n\n        if (previous != nullptr) {\n            FUN_006d6bf1(previous, static_cast<std::int32_t>(address));\n        }\n        FUN_006d78a8(node, param_2);\n        cursor = address + FUN_006d768d(param_2);\n        previous = node;\n    }\n\n    if ((data[4] & 0x80) != 0) {\n        const std::uint32_t aligned = (cursor + 0x1fU) & 0xfffffff0U;\n        const std::uint32_t address = aligned - 0x10U;\n        auto* node = reinterpret_cast<void*>(address);\n\n        if (previous != nullptr) {\n            FUN_006d6bf1(previous, static_cast<std::int32_t>(address));\n        }\n        FUN_006d793d(node, param_2);\n        cursor = aligned + *reinterpret_cast<const std::int32_t*>(data + 0x84);\n        previous = node;\n    }\n\n    if ((data[4] & 0x20) != 0) {\n        const std::uint32_t address =\n            ((cursor + 0x1fU) & 0xfffffff0U) - 0x10U;\n        auto* node = reinterpret_cast<void*>(address);\n\n        if (previous != nullptr) {\n            FUN_006d6bf1(previous, static_cast<std::int32_t>(address));\n        }\n        FUN_006d79ce(node, param_2);\n        previous = node;\n    }\n\n    if (previous != nullptr) {\n        *reinterpret_cast<std::uint32_t*>(\n            static_cast<std::uint8_t*>(previous) + 4) = 0;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and calls match, but struct offsets lack named members.",
+      "issues": [
+        "Raw accesses to param_2 offsets 0x04, 0x05, 0x50, 0x60, and 0x84 violate the named-member requirement.",
+        "The final write to node offset 0x04 also lacks a named member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7dea\\_FUN_006d7dea.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dcbc7",
+      "run_id": "4b4db8d052fa4117ba47d87a91c8bbe5",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dcbc7",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The type of the object referenced by this global remains unresolved.\n// Its first 32-bit word points to a table of function pointers.\nextern std::uint32_t* DAT_0089adcc;\n\nvoid __cdecl FUN_006dcbc7(std::uint32_t param_1, std::uint32_t param_2)\n{\n    using Function = void (__cdecl*)(std::uint32_t, std::uint32_t);\n\n    const auto table = *DAT_0089adcc;\n    const auto function = *reinterpret_cast<Function*>(table + 4);\n    function(param_1, param_2);\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code adds an extra dereference before the indirect call.",
+      "issues": [
+        "P-code reads the pointer stored at 0x0089adcc, then loads a function pointer at that address plus 4. `*DAT_0089adcc` reads an additional 32-bit word.",
+        "The function pointer at offset 4 has no named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dcbc7\\_FUN_006dcbc7.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

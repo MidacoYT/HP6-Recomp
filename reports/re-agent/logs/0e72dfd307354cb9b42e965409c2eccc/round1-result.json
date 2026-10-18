@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b227b",
+      "run_id": "0e72dfd307354cb9b42e965409c2eccc",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b227b",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_006b227b(unsigned int param_1)\n{\n    void* const object = reinterpret_cast<void*>(FUN_006b18df(param_1, 1));\n    const auto lock = reinterpret_cast<int>(object) + 0x28;\n    int local_8;\n\n    FUN_006d92a1(lock);\n\n    // FUN_006b2147's declared return type is unresolved; this caller uses EAX\n    // as a pointer, as do the neighboring callers.\n    int* const result = reinterpret_cast<int*>(\n        FUN_006b2147(object, param_1, &local_8));\n\n    if (result != nullptr && local_8 != 0) {\n        using Callback = void (__cdecl*)();\n        auto* const vtable = *reinterpret_cast<Callback**>(result);\n        vtable[3]();\n    }\n\n    FUN_006d92ac(lock);\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, branches, and expression order match, but two offsets lack named members.",
+      "issues": [
+        "The object offset +0x28 is represented by raw pointer arithmetic instead of a named member.",
+        "The callback at vtable offset +0x0c is represented by vtable[3] instead of a named member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b227b\\_FUN_006b227b.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

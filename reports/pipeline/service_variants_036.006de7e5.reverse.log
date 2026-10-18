@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006de7e5",
+      "run_id": "e8edbf8228b64f1893c7058c8894f9c7",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de7e5",
+      "success": false,
+      "rounds_used": 1,
+      "code": "extern void* PTR_FUN_0071b670;\nextern void __cdecl FUN_006dcbc7(void* param_1, unsigned int param_2);\n\nvoid* __thiscall FUN_006de7e5(void* self, unsigned char param_1)\n{\n    *static_cast<void**>(self) = &PTR_FUN_0071b670;\n\n    if ((param_1 & 1) != 0) {\n        FUN_006dcbc7(self, 4);\n    }\n\n    return self;\n}",
+      "verdict": "FAIL",
+      "summary": "The branch and call match, but the condition is evaluated in the wrong order.",
+      "issues": [
+        "The P-code evaluates (param_1 & 1) before storing to *self; the reversed code evaluates it afterward. This can change behavior if self aliases param_1.",
+        "The store at offset 0 uses a cast instead of a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006de7e5\\_FUN_006de7e5.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dbb17",
+      "run_id": "8506dcfc00b2424f9de45112b98db421",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbb17",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\nextern void __cdecl FUN_006b2408(std::uint32_t param_1, char param_2);\n\nvoid __cdecl FUN_006dbb17(std::uint32_t* param_1, std::int32_t param_2)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c, &local_8) == 0) {\n        *reinterpret_cast<std::int32_t*>(local_8 + 0x54) = param_2;\n\n        if (param_2 != 0 &&\n            *reinterpret_cast<std::int32_t*>(local_8 + 0x44) == 1) {\n            FUN_006b2408(\n                *reinterpret_cast<std::uint32_t*>(local_8 + 0x184),\n                static_cast<char>(\n                    *reinterpret_cast<std::uint32_t*>(local_8 + 0x4c)));\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The branches and calls match, but field mapping and load order do not meet the verification standard.",
+      "issues": [
+        "Offsets 0x44, 0x4c, 0x54, and 0x184 are used as raw addresses instead of named struct members.",
+        "The binary loads the 0x4c field before the 0x184 field. C++ does not guarantee that order when evaluating the two call arguments."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dbb17\\_FUN_006dbb17.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

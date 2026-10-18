@@ -1,0 +1,1816 @@
+{
+  "schema_version": 1,
+  "identity": "7291e7d44c820acf61504fe6a6b57448a9bb0552a2949485bf578c401b7863ae",
+  "seeds": [
+    "005d8a30",
+    "005d8e30",
+    "005d8ed0",
+    "005d9210",
+    "00ff8380"
+  ],
+  "functions": [
+    {
+      "address": "005d8a30",
+      "class_name": "",
+      "function_name": "FUN_005d8a30",
+      "caller_count": 1
+    },
+    {
+      "address": "005d8e30",
+      "class_name": "",
+      "function_name": "thunk_FUN_00ff8380",
+      "caller_count": 1
+    },
+    {
+      "address": "005d8ed0",
+      "class_name": "",
+      "function_name": "FUN_005d8ed0",
+      "caller_count": 1
+    },
+    {
+      "address": "005d9210",
+      "class_name": "",
+      "function_name": "FUN_005d9210",
+      "caller_count": 3
+    },
+    {
+      "address": "00ff8380",
+      "class_name": "",
+      "function_name": "FUN_00ff8380",
+      "caller_count": 1
+    }
+  ],
+  "edges": [],
+  "gaps": [],
+  "evidence": {
+    "005d8a30": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d8a30",
+        "name": "FUN_005d8a30",
+        "signature": "LRESULT __stdcall FUN_005d8a30(HWND param_1, uint param_2, uint param_3, LPARAM param_4)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005d8a30\n// Address:   0x005d8a30\n// Signature: LRESULT __stdcall FUN_005d8a30(HWND param_1, uint param_2, uint param_3, LPARAM param_4)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nLRESULT FUN_005d8a30(HWND param_1,uint param_2,uint param_3,LPARAM param_4)\n\n\n\n{\n\n  int *piVar1;\n\n  undefined4 uVar2;\n\n  HCURSOR hCursor;\n\n  uint uVar3;\n\n  int iVar4;\n\n  LRESULT LVar5;\n\n  tagPAINTSTRUCT tStack_48;\n\n  \n\n  if (param_2 < 0x113) {\n\n    if (param_2 == 0x112) {\n\n      if (DAT_00866e2a != '\\0') {\n\n        uVar3 = param_3 & 0xfff0;\n\n        if (uVar3 < 0xf031) {\n\n          if (uVar3 == 0xf030) {\n\n            return 0;\n\n          }\n\n          if (uVar3 == 0xf000) {\n\n            return 0;\n\n          }\n\n          iVar4 = uVar3 - 0xf010;\n\n        }\n\n        else {\n\n          if (uVar3 == 0xf100) {\n\n            return 0;\n\n          }\n\n          iVar4 = uVar3 - 0xf170;\n\n        }\n\n        if (iVar4 == 0) {\n\n          return 0;\n\n        }\n\n        return -1;\n\n      }\n\n    }\n\n    else {\n\n      switch(param_2) {\n\n      case 2:\n\n        if (DAT_00866e2a != '\\0') {\n\n          do {\n\n            iVar4 = ShowCursor(1);\n\n          } while (iVar4 < 1);\n\n        }\n\n        PostQuitMessage(0);\n\n        return 0;\n\n      case 5:\n\n      case 0x14:\n\n      case 0x1c:\n\n        return 0;\n\n      case 6:\n\n        if ((DAT_00866e2a != '\\0') && (DAT_00fcaf34 != 0)) {\n\n          if ((short)param_3 == 0) {\n\n            FUN_005e0490();\n\n            FUN_006599b0();\n\n            do {\n\n              iVar4 = ShowCursor(1);\n\n            } while (iVar4 < 1);\n\n            DAT_00cef68f = 1;\n\n            if (DAT_00cef55c == 0) {\n\n              thunk_FUN_0100ea00();\n\n            }\n\n            DAT_00cef55c = DAT_00cef55c + 1;\n\n            if (DAT_00cef6a0 == 0) {\n\n              piVar1 = *(int **)(DAT_00fcade0 + 4);\n\n              DAT_00cef69c = 1;\n\n              if ((piVar1 != (int *)0x0) && ((*piVar1 == 0 || (*(int *)(*piVar1 + 0xa0) == 0)))) {\n\n                DAT_00cef69c = 0;\n\n                if ((int *)*piVar1 != (int *)0x0) {\n\n                  FUN_00689110((int *)*piVar1);\n\n                }\n\n              }\n\n              DAT_00cef69d = '\\x01';\n\n              uVar2 = thunk_FUN_01007810();\n\n              if ((char)uVar2 == '\\0') {\n\n                DAT_00cef69d = (char)uVar2;\n\n                FUN_00545dc0('\\0');\n\n              }\n\n            }\n\n            DAT_00cef6a0 = 0;\n\n            return 0;\n\n          }\n\n          if (*(int *)(DAT_00fcaf34 + 0xc) != 0) {\n\n            iVar4 = (**(code **)(**(int **)(DAT_00fcaf34 + 0xc) + 0x10))();\n\n            piVar1 = *(int **)(iVar4 + 0x218);\n\n            if (piVar1 != (int *)0x0) {\n\n              (**(code **)(*piVar1 + 0x1c))(piVar1);\n\n            }\n\n          }\n\n          FUN_00659920();\n\n          do {\n\n            iVar4 = ShowCursor(0);\n\n          } while (0 < iVar4);\n\n          if ((DAT_00cef55c != 0) && (DAT_00cef55c = DAT_00cef55c + -1, DAT_00cef55c == 0)) {\n\n            thunk_FUN_0100e9b0();\n\n          }\n\n          DAT_00cef68f = '\\0';\n\n          DAT_00cef6a0 = 2000;\n\n        }\n\n        return 0;\n\n      case 7:\n\n      case 0x20:\n\n        if (DAT_00cef68f == '\\0') {\n\n          do {\n\n            iVar4 = ShowCursor(0);\n\n          } while (0 < iVar4);\n\n          if (DAT_00cf1944 != (int *)0x0) {\n\n            (**(code **)(*DAT_00cf1944 + 0x30))(DAT_00cf1944,0);\n\n            return 0;\n\n          }\n\n        }\n\n        else {\n\n          hCursor = LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n          SetCursor(hCursor);\n\n          FUN_005e0490();\n\n          FUN_006599b0();\n\n          do {\n\n            iVar4 = ShowCursor(1);\n\n          } while (iVar4 < 1);\n\n          if (DAT_00cef55c == 0) {\n\n            thunk_FUN_0100ea00();\n\n          }\n\n          DAT_00cef55c = DAT_00cef55c + 1;\n\n        }\n\n        return 0;\n\n      case 0xf:\n\n        if (DAT_00866e2a == '\\0') {\n\n          BeginPaint(param_1,&tStack_48);\n\n          EndPaint(param_1,&tStack_48);\n\n          return 0;\n\n        }\n\n        ValidateRect(param_1,(RECT *)0x0);\n\n        return 0;\n\n      case 0x10:\n\n        if (DAT_00866e2a == '\\0') {\n\n          FUN_005d82b0(param_1);\n\n        }\n\n        DestroyWindow(param_1);\n\n        return 0;\n\n      case 0x84:\n\n        if (DAT_00866e2a != '\\0') {\n\n          return 1;\n\n        }\n\n      }\n\n    }\n\n  }\n\n  else if (param_2 == 0x120) {\n\n    if (DAT_00866e2a != '\\0') {\n\n      return 0x10000;\n\n    }\n\n  }\n\n  else if (param_2 == 0x218) {\n\n    if ((param_3 != 0) && (param_3 != 7)) {\n\n      return -1;\n\n    }\n\n    return 1;\n\n  }\n\n  LVar5 = DefWindowProcA(param_1,param_2,param_3,param_4);\n\n  return LVar5;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005d8a30\n// Address:   0x005d8a30\n// Signature: LRESULT __stdcall FUN_005d8a30(HWND param_1, uint param_2, uint param_3, LPARAM param_4)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nLRESULT FUN_005d8a30(HWND param_1,uint param_2,uint param_3,LPARAM param_4)\n\n\n\n{\n\n  int *piVar1;\n\n  undefined4 uVar2;\n\n  HCURSOR hCursor;\n\n  uint uVar3;\n\n  int iVar4;\n\n  LRESULT LVar5;\n\n  tagPAINTSTRUCT tStack_48;\n\n  \n\n  if (param_2 < 0x113) {\n\n    if (param_2 == 0x112) {\n\n      if (DAT_00866e2a != '\\0') {\n\n        uVar3 = param_3 & 0xfff0;\n\n        if (uVar3 < 0xf031) {\n\n          if (uVar3 == 0xf030) {\n\n            return 0;\n\n          }\n\n          if (uVar3 == 0xf000) {\n\n            return 0;\n\n          }\n\n          iVar4 = uVar3 - 0xf010;\n\n        }\n\n        else {\n\n          if (uVar3 == 0xf100) {\n\n            return 0;\n\n          }\n\n          iVar4 = uVar3 - 0xf170;\n\n        }\n\n        if (iVar4 == 0) {\n\n          return 0;\n\n        }\n\n        return -1;\n\n      }\n\n    }\n\n    else {\n\n      switch(param_2) {\n\n      case 2:\n\n        if (DAT_00866e2a != '\\0') {\n\n          do {\n\n            iVar4 = ShowCursor(1);\n\n          } while (iVar4 < 1);\n\n        }\n\n        PostQuitMessage(0);\n\n        return 0;\n\n      case 5:\n\n      case 0x14:\n\n      case 0x1c:\n\n        return 0;\n\n      case 6:\n\n        if ((DAT_00866e2a != '\\0') && (DAT_00fcaf34 != 0)) {\n\n          if ((short)param_3 == 0) {\n\n            FUN_005e0490();\n\n            FUN_006599b0();\n\n            do {\n\n              iVar4 = ShowCursor(1);\n\n            } while (iVar4 < 1);\n\n            DAT_00cef68f = 1;\n\n            if (DAT_00cef55c == 0) {\n\n              thunk_FUN_0100ea00();\n\n            }\n\n            DAT_00cef55c = DAT_00cef55c + 1;\n\n            if (DAT_00cef6a0 == 0) {\n\n              piVar1 = *(int **)(DAT_00fcade0 + 4);\n\n              DAT_00cef69c = 1;\n\n              if ((piVar1 != (int *)0x0) && ((*piVar1 == 0 || (*(int *)(*piVar1 + 0xa0) == 0)))) {\n\n                DAT_00cef69c = 0;\n\n                if ((int *)*piVar1 != (int *)0x0) {\n\n                  FUN_00689110((int *)*piVar1);\n\n                }\n\n              }\n\n              DAT_00cef69d = '\\x01';\n\n              uVar2 = thunk_FUN_01007810();\n\n              if ((char)uVar2 == '\\0') {\n\n                DAT_00cef69d = (char)uVar2;\n\n                FUN_00545dc0('\\0');\n\n              }\n\n            }\n\n            DAT_00cef6a0 = 0;\n\n            return 0;\n\n          }\n\n          if (*(int *)(DAT_00fcaf34 + 0xc) != 0) {\n\n            iVar4 = (**(code **)(**(int **)(DAT_00fcaf34 + 0xc) + 0x10))();\n\n            piVar1 = *(int **)(iVar4 + 0x218);\n\n            if (piVar1 != (int *)0x0) {\n\n              (**(code **)(*piVar1 + 0x1c))(piVar1);\n\n            }\n\n          }\n\n          FUN_00659920();\n\n          do {\n\n            iVar4 = ShowCursor(0);\n\n          } while (0 < iVar4);\n\n          if ((DAT_00cef55c != 0) && (DAT_00cef55c = DAT_00cef55c + -1, DAT_00cef55c == 0)) {\n\n            thunk_FUN_0100e9b0();\n\n          }\n\n          DAT_00cef68f = '\\0';\n\n          DAT_00cef6a0 = 2000;\n\n        }\n\n        return 0;\n\n      case 7:\n\n      case 0x20:\n\n        if (DAT_00cef68f == '\\0') {\n\n          do {\n\n            iVar4 = ShowCursor(0);\n\n          } while (0 < iVar4);\n\n          if (DAT_00cf1944 != (int *)0x0) {\n\n            (**(code **)(*DAT_00cf1944 + 0x30))(DAT_00cf1944,0);\n\n            return 0;\n\n          }\n\n        }\n\n        else {\n\n          hCursor = LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n          SetCursor(hCursor);\n\n          FUN_005e0490();\n\n          FUN_006599b0();\n\n          do {\n\n            iVar4 = ShowCursor(1);\n\n          } while (iVar4 < 1);\n\n          if (DAT_00cef55c == 0) {\n\n            thunk_FUN_0100ea00();\n\n          }\n\n          DAT_00cef55c = DAT_00cef55c + 1;\n\n        }\n\n        return 0;\n\n      case 0xf:\n\n        if (DAT_00866e2a == '\\0') {\n\n          BeginPaint(param_1,&tStack_48);\n\n          EndPaint(param_1,&tStack_48);\n\n          return 0;\n\n        }\n\n        ValidateRect(param_1,(RECT *)0x0);\n\n        return 0;\n\n      case 0x10:\n\n        if (DAT_00866e2a == '\\0') {\n\n          FUN_005d82b0(param_1);\n\n        }\n\n        DestroyWindow(param_1);\n\n        return 0;\n\n      case 0x84:\n\n        if (DAT_00866e2a != '\\0') {\n\n          return 1;\n\n        }\n\n      }\n\n    }\n\n  }\n\n  else if (param_2 == 0x120) {\n\n    if (DAT_00866e2a != '\\0') {\n\n      return 0x10000;\n\n    }\n\n  }\n\n  else if (param_2 == 0x218) {\n\n    if ((param_3 != 0) && (param_3 != 7)) {\n\n      return -1;\n\n    }\n\n    return 1;\n\n  }\n\n  LVar5 = DefWindowProcA(param_1,param_2,param_3,param_4);\n\n  return LVar5;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d8a30",
+        "function": {
+          "address": "005d8a30",
+          "name": "FUN_005d8a30",
+          "signature": "LRESULT __stdcall FUN_005d8a30(HWND param_1, uint param_2, uint param_3, LPARAM param_4)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "00ff8380",
+              "name": "FUN_00ff8380",
+              "ref_type": "DATA"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:00000064",
+              "name": "DefWindowProcA"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "007133c4",
+            "name": "PTR_DefWindowProcA_007133c4",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbdb88",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8a30",
+                "func_name": "FUN_005d8a30"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d8a30",
+            "stop": "005d8a42",
+            "out": [
+              1,
+              8
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005d8cc3",
+            "stop": "005d8cc8",
+            "out": [
+              4,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005d8ced",
+            "stop": "005d8cf4",
+            "out": [
+              3,
+              65
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005d8cf6",
+            "stop": "005d8cff",
+            "out": [],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005d8cca",
+            "stop": "005d8ccf",
+            "out": [
+              65,
+              5
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 5,
+            "start": "005d8cd5",
+            "stop": "005d8cda",
+            "out": [
+              6,
+              7
+            ],
+            "in": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "005d8cdc",
+            "stop": "005d8cdf",
+            "out": [
+              17,
+              7
+            ],
+            "in": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "start": "005d8ce1",
+            "stop": "005d8cea",
+            "out": [],
+            "in": [
+              5,
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "005d8a48",
+            "stop": "005d8a48",
+            "out": [
+              18,
+              9
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 9,
+            "start": "005d8d17",
+            "stop": "005d8d1e",
+            "out": [
+              10,
+              65
+            ],
+            "in": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "start": "005d8d20",
+            "stop": "005d8d2d",
+            "out": [
+              11,
+              13
+            ],
+            "in": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "start": "005d8d45",
+            "stop": "005d8d4a",
+            "out": [
+              12,
+              64
+            ],
+            "in": [
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "start": "005d8d50",
+            "stop": "005d8d50",
+            "out": [
+              16
+            ],
+            "in": [
+              11
+            ]
+          },
+          {
+            "index": 13,
+            "start": "005d8d2f",
+            "stop": "005d8d2f",
+            "out": [
+              14,
+              64
+            ],
+            "in": [
+              10
+            ]
+          },
+          {
+            "index": 14,
+            "start": "005d8d35",
+            "stop": "005d8d3a",
+            "out": [
+              15,
+              64
+            ],
+            "in": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "start": "005d8d40",
+            "stop": "005d8d43",
+            "out": [
+              16
+            ],
+            "in": [
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "start": "005d8d53",
+            "stop": "005d8d53",
+            "out": [
+              17,
+              64
+            ],
+            "in": [
+              15,
+              12
+            ]
+          },
+          {
+            "index": 17,
+            "start": "005d8d59",
+            "stop": "005d8d60",
+            "out": [],
+            "in": [
+              16,
+              6
+            ]
+          },
+          {
+            "index": 18,
+            "start": "005d8a4e",
+            "stop": "005d8a57",
+            "out": [
+              65,
+              19
+            ],
+            "in": [
+              8
+            ]
+          },
+          {
+            "index": 19,
+            "start": "005d8a5d",
+            "stop": "005d8a64",
+            "out": [
+              66,
+              65,
+              64,
+              38,
+              28,
+              25,
+              22,
+              20
+            ],
+            "in": [
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "start": "005d8d02",
+            "stop": "005d8d09",
+            "out": [
+              21,
+              65
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 21,
+            "start": "005d8d0b",
+            "stop": "005d8d14",
+            "out": [],
+            "in": [
+              20
+            ]
+          },
+          {
+            "index": 22,
+            "start": "005d8c36",
+            "stop": "005d8c40",
+            "out": [
+              24,
+              23
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 23,
+            "start": "005d8c42",
+            "stop": "005d8c44",
+            "out": [
+              24
+            ],
+            "in": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "start": "005d8c49",
+            "stop": "005d8c56",
+            "out": [],
+            "in": [
+              22,
+              23
+            ]
+          },
+          {
+            "index": 25,
+            "start": "005d8c81",
+            "stop": "005d8c88",
+            "out": [
+              27,
+              26
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 26,
+            "start": "005d8c9f",
+            "stop": "005d8cc0",
+            "out": [],
+            "in": [
+              25
+            ]
+          },
+          {
+            "index": 27,
+            "start": "005d8c8a",
+            "stop": "005d8c9c",
+            "out": [],
+            "in": [
+              25
+            ]
+          },
+          {
+            "index": 28,
+            "start": "005d8baf",
+            "stop": "005d8bb6",
+            "out": [
+              29,
+              34
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 29,
+            "start": "005d8be4",
+            "stop": "005d8c0d",
+            "out": [
+              30
+            ],
+            "in": [
+              28
+            ]
+          },
+          {
+            "index": 30,
+            "start": "005d8c10",
+            "stop": "005d8c16",
+            "out": [
+              31,
+              30
+            ],
+            "in": [
+              29,
+              30
+            ]
+          },
+          {
+            "index": 31,
+            "start": "005d8c18",
+            "stop": "005d8c1f",
+            "out": [
+              33,
+              32
+            ],
+            "in": [
+              30
+            ]
+          },
+          {
+            "index": 32,
+            "start": "005d8c21",
+            "stop": "005d8c21",
+            "out": [
+              33
+            ],
+            "in": [
+              31
+            ]
+          },
+          {
+            "index": 33,
+            "start": "005d8c26",
+            "stop": "005d8c26",
+            "out": [
+              36
+            ],
+            "in": [
+              31,
+              32
+            ]
+          },
+          {
+            "index": 34,
+            "start": "005d8bc0",
+            "stop": "005d8bc6",
+            "out": [
+              34,
+              35
+            ],
+            "in": [
+              34,
+              28
+            ]
+          },
+          {
+            "index": 35,
+            "start": "005d8bc8",
+            "stop": "005d8bcf",
+            "out": [
+              37,
+              36
+            ],
+            "in": [
+              34
+            ]
+          },
+          {
+            "index": 36,
+            "start": "005d8c2d",
+            "stop": "005d8c33",
+            "out": [],
+            "in": [
+              35,
+              33
+            ]
+          },
+          {
+            "index": 37,
+            "start": "005d8bd1",
+            "stop": "005d8be1",
+            "out": [],
+            "in": [
+              35
+            ]
+          },
+          {
+            "index": 38,
+            "start": "005d8a74",
+            "stop": "005d8a7b",
+            "out": [
+              39,
+              50
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 39,
+            "start": "005d8a81",
+            "stop": "005d8a88",
+            "out": [
+              40,
+              50
+            ],
+            "in": [
+              38
+            ]
+          },
+          {
+            "index": 40,
+            "start": "005d8a8e",
+            "stop": "005d8a93",
+            "out": [
+              41,
+              51
+            ],
+            "in": [
+              39
+            ]
+          },
+          {
+            "index": 41,
+            "start": "005d8b49",
+            "stop": "005d8b4d",
+            "out": [
+              42,
+              44
+            ],
+            "in": [
+              40
+            ]
+          },
+          {
+            "index": 42,
+            "start": "005d8b4f",
+            "stop": "005d8b61",
+            "out": [
+              43,
+              44
+            ],
+            "in": [
+              41
+            ]
+          },
+          {
+            "index": 43,
+            "start": "005d8b63",
+            "stop": "005d8b69",
+            "out": [
+              44
+            ],
+            "in": [
+              42
+            ]
+          },
+          {
+            "index": 44,
+            "start": "005d8b6b",
+            "stop": "005d8b70",
+            "out": [
+              45
+            ],
+            "in": [
+              41,
+              42,
+              43
+            ]
+          },
+          {
+            "index": 45,
+            "start": "005d8b76",
+            "stop": "005d8b7c",
+            "out": [
+              45,
+              46
+            ],
+            "in": [
+              44,
+              45
+            ]
+          },
+          {
+            "index": 46,
+            "start": "005d8b7e",
+            "stop": "005d8b85",
+            "out": [
+              47,
+              49
+            ],
+            "in": [
+              45
+            ]
+          },
+          {
+            "index": 47,
+            "start": "005d8b87",
+            "stop": "005d8b8e",
+            "out": [
+              49,
+              48
+            ],
+            "in": [
+              46
+            ]
+          },
+          {
+            "index": 48,
+            "start": "005d8b90",
+            "stop": "005d8b90",
+            "out": [
+              49
+            ],
+            "in": [
+              47
+            ]
+          },
+          {
+            "index": 49,
+            "start": "005d8b95",
+            "stop": "005d8b9c",
+            "out": [
+              50
+            ],
+            "in": [
+              46,
+              47,
+              48
+            ]
+          },
+          {
+            "index": 50,
+            "start": "005d8ba6",
+            "stop": "005d8bac",
+            "out": [],
+            "in": [
+              38,
+              39,
+              49
+            ]
+          },
+          {
+            "index": 51,
+            "start": "005d8a99",
+            "stop": "005d8aa9",
+            "out": [
+              52
+            ],
+            "in": [
+              40
+            ]
+          },
+          {
+            "index": 52,
+            "start": "005d8ab0",
+            "stop": "005d8ab6",
+            "out": [
+              53,
+              52
+            ],
+            "in": [
+              51,
+              52
+            ]
+          },
+          {
+            "index": 53,
+            "start": "005d8ab8",
+            "stop": "005d8ac6",
+            "out": [
+              55,
+              54
+            ],
+            "in": [
+              52
+            ]
+          },
+          {
+            "index": 54,
+            "start": "005d8ac8",
+            "stop": "005d8ac8",
+            "out": [
+              55
+            ],
+            "in": [
+              53
+            ]
+          },
+          {
+            "index": 55,
+            "start": "005d8acd",
+            "stop": "005d8adb",
+            "out": [
+              63,
+              56
+            ],
+            "in": [
+              53,
+              54
+            ]
+          },
+          {
+            "index": 56,
+            "start": "005d8add",
+            "stop": "005d8aef",
+            "out": [
+              57,
+              61
+            ],
+            "in": [
+              55
+            ]
+          },
+          {
+            "index": 57,
+            "start": "005d8af1",
+            "stop": "005d8af5",
+            "out": [
+              58,
+              59
+            ],
+            "in": [
+              56
+            ]
+          },
+          {
+            "index": 58,
+            "start": "005d8af7",
+            "stop": "005d8b03",
+            "out": [
+              61,
+              59
+            ],
+            "in": [
+              57
+            ]
+          },
+          {
+            "index": 59,
+            "start": "005d8b05",
+            "stop": "005d8b10",
+            "out": [
+              60,
+              61
+            ],
+            "in": [
+              57,
+              58
+            ]
+          },
+          {
+            "index": 60,
+            "start": "005d8b12",
+            "stop": "005d8b13",
+            "out": [
+              61
+            ],
+            "in": [
+              59
+            ]
+          },
+          {
+            "index": 61,
+            "start": "005d8b18",
+            "stop": "005d8b26",
+            "out": [
+              63,
+              62
+            ],
+            "in": [
+              56,
+              58,
+              59,
+              60
+            ]
+          },
+          {
+            "index": 62,
+            "start": "005d8b28",
+            "stop": "005d8b31",
+            "out": [
+              63
+            ],
+            "in": [
+              61
+            ]
+          },
+          {
+            "index": 63,
+            "start": "005d8b36",
+            "stop": "005d8b46",
+            "out": [],
+            "in": [
+              55,
+              61,
+              62
+            ]
+          },
+          {
+            "index": 64,
+            "start": "005d8a6b",
+            "stop": "005d8a71",
+            "out": [],
+            "in": [
+              19,
+              13,
+              14,
+              16,
+              11
+            ]
+          },
+          {
+            "index": 65,
+            "start": "005d8d63",
+            "stop": "005d8d7a",
+            "out": [],
+            "in": [
+              18,
+              19,
+              9,
+              4,
+              2,
+              20
+            ]
+          },
+          {
+            "index": 66,
+            "start": "005d8c59",
+            "stop": "005d8c60",
+            "out": [
+              67,
+              68
+            ],
+            "in": [
+              19
+            ]
+          },
+          {
+            "index": 67,
+            "start": "005d8c68",
+            "stop": "005d8c6e",
+            "out": [
+              68,
+              67
+            ],
+            "in": [
+              67,
+              66
+            ]
+          },
+          {
+            "index": 68,
+            "start": "005d8c70",
+            "stop": "005d8c7e",
+            "out": [],
+            "in": [
+              66,
+              67
+            ]
+          }
+        ]
+      }
+    },
+    "005d8e30": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d8e30",
+        "name": "thunk_FUN_00ff8380",
+        "signature": "bool __stdcall thunk_FUN_00ff8380(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    thunk_FUN_00ff8380\n// Address:   0x005d8e30\n// Signature: bool __stdcall thunk_FUN_00ff8380(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nbool thunk_FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT UStack_2c;\n\n  code *pcStack_28;\n\n  int iStack_24;\n\n  int iStack_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    UStack_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    UStack_2c = 0x2020;\n\n  }\n\n  pcStack_28 = FUN_005d8a30;\n\n  iStack_24 = 0;\n\n  iStack_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&UStack_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    thunk_FUN_00ff8380\n// Address:   0x005d8e30\n// Signature: bool __stdcall thunk_FUN_00ff8380(void)\n// Callers:   1  |  Callees: 0\n// ===========================================\n\n\n\nbool thunk_FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT UStack_2c;\n\n  code *pcStack_28;\n\n  int iStack_24;\n\n  int iStack_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    UStack_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    UStack_2c = 0x2020;\n\n  }\n\n  pcStack_28 = FUN_005d8a30;\n\n  iStack_24 = 0;\n\n  iStack_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&UStack_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d8e30",
+        "function": {
+          "address": "005d8e30",
+          "name": "thunk_FUN_00ff8380",
+          "signature": "bool __stdcall thunk_FUN_00ff8380(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d8e30",
+            "stop": "00ff839d",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "00ff83ad",
+            "stop": "00ff83c6",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "00ff839f",
+            "stop": "00ff83ab",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "00ff83ca",
+            "stop": "00ff8433",
+            "out": [],
+            "in": [
+              2,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "005d8ed0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d8ed0",
+        "name": "FUN_005d8ed0",
+        "signature": "HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005d8ed0\n// Address:   0x005d8ed0\n// Signature: HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)\n// Callers:   1  |  Callees: 6\n// ===========================================\n\n\n\nHWND __thiscall FUN_005d8ed0(void *this,HINSTANCE param_1,int param_2,int param_3)\n\n\n\n{\n\n  int in_EAX;\n\n  HWND hWnd;\n\n  UINT uFlags;\n\n  HWND hWndInsertAfter;\n\n  DWORD dwExStyle;\n\n  DWORD *dwStyle;\n\n  tagRECT local_10;\n\n  \n\n  local_10.right = (int)this + param_2;\n\n  local_10.bottom = in_EAX + param_3;\n\n  dwExStyle = 0;\n\n  hWndInsertAfter = (HWND)0x0;\n\n  if (DAT_00866e2a == '\\0') {\n\n    dwStyle = &dwStyle_00cf0000;\n\n    uFlags = 3;\n\n    local_10.left = (LONG)this;\n\n    local_10.top = in_EAX;\n\n  }\n\n  else {\n\n    dwStyle = (DWORD *)0x80000000;\n\n    uFlags = 0x2003;\n\n    local_10.left = 0;\n\n    local_10.top = 0;\n\n    hWndInsertAfter = (HWND)0xffffffff;\n\n    dwExStyle = 8;\n\n  }\n\n  AdjustWindowRectEx(&local_10,(DWORD)dwStyle,0,dwExStyle);\n\n  hWnd = CreateWindowExA(dwExStyle,\"HalfBloodPrinceMainWndClass\",(LPCSTR)&lpWindowName_0073a1cd,\n\n                         (DWORD)dwStyle,local_10.left,local_10.top,local_10.right - local_10.left,\n\n                         local_10.bottom - local_10.top,(HWND)0x0,(HMENU)0x0,param_1,(LPVOID)0x0);\n\n  ShowWindow(hWnd,0);\n\n  SetWindowPos(hWnd,hWndInsertAfter,0,0,0,0,uFlags);\n\n  if (DAT_00866e2a != '\\0') {\n\n    SetMenu(hWnd,(HMENU)0x0);\n\n    SetThreadExecutionState(0x80000002);\n\n  }\n\n  ShowWindow(hWnd,5);\n\n  return hWnd;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005d8ed0\n// Address:   0x005d8ed0\n// Signature: HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)\n// Callers:   1  |  Callees: 6\n// ===========================================\n\n\n\nHWND __thiscall FUN_005d8ed0(void *this,HINSTANCE param_1,int param_2,int param_3)\n\n\n\n{\n\n  int in_EAX;\n\n  HWND hWnd;\n\n  UINT uFlags;\n\n  HWND hWndInsertAfter;\n\n  DWORD dwExStyle;\n\n  DWORD *dwStyle;\n\n  tagRECT local_10;\n\n  \n\n  local_10.right = (int)this + param_2;\n\n  local_10.bottom = in_EAX + param_3;\n\n  dwExStyle = 0;\n\n  hWndInsertAfter = (HWND)0x0;\n\n  if (DAT_00866e2a == '\\0') {\n\n    dwStyle = &dwStyle_00cf0000;\n\n    uFlags = 3;\n\n    local_10.left = (LONG)this;\n\n    local_10.top = in_EAX;\n\n  }\n\n  else {\n\n    dwStyle = (DWORD *)0x80000000;\n\n    uFlags = 0x2003;\n\n    local_10.left = 0;\n\n    local_10.top = 0;\n\n    hWndInsertAfter = (HWND)0xffffffff;\n\n    dwExStyle = 8;\n\n  }\n\n  AdjustWindowRectEx(&local_10,(DWORD)dwStyle,0,dwExStyle);\n\n  hWnd = CreateWindowExA(dwExStyle,\"HalfBloodPrinceMainWndClass\",(LPCSTR)&lpWindowName_0073a1cd,\n\n                         (DWORD)dwStyle,local_10.left,local_10.top,local_10.right - local_10.left,\n\n                         local_10.bottom - local_10.top,(HWND)0x0,(HMENU)0x0,param_1,(LPVOID)0x0);\n\n  ShowWindow(hWnd,0);\n\n  SetWindowPos(hWnd,hWndInsertAfter,0,0,0,0,uFlags);\n\n  if (DAT_00866e2a != '\\0') {\n\n    SetMenu(hWnd,(HMENU)0x0);\n\n    SetThreadExecutionState(0x80000002);\n\n  }\n\n  ShowWindow(hWnd,5);\n\n  return hWnd;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 6
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d8ed0",
+        "function": {
+          "address": "005d8ed0",
+          "name": "FUN_005d8ed0",
+          "signature": "HWND __thiscall FUN_005d8ed0(void * this, HINSTANCE param_1, int param_2, int param_3)",
+          "calling_convention": "__thiscall",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:00000071",
+              "name": "AdjustWindowRectEx"
+            },
+            {
+              "addr": "EXTERNAL:0000006e",
+              "name": "CreateWindowExA"
+            },
+            {
+              "addr": "EXTERNAL:00000060",
+              "name": "ShowWindow"
+            },
+            {
+              "addr": "EXTERNAL:00000070",
+              "name": "SetWindowPos"
+            },
+            {
+              "addr": "EXTERNAL:00000061",
+              "name": "SetMenu"
+            },
+            {
+              "addr": "EXTERNAL:0000000e",
+              "name": "SetThreadExecutionState"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00764574",
+            "value": "HalfBloodPrinceMainWndClass",
+            "length": 27,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300",
+                "ref_addr": "005d93f2"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0",
+                "ref_addr": "005d8f5b"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8385"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8415"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00713044",
+            "name": "PTR_SetThreadExecutionState_00713044",
+            "type": "pointer",
+            "size": 4,
+            "value": "7734be20",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133b4",
+            "name": "PTR_ShowWindow_007133b4",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbca10",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133b8",
+            "name": "PTR_SetMenu_007133b8",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fb6faa",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133ec",
+            "name": "PTR_CreateWindowExA_007133ec",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbdc2a",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133f4",
+            "name": "PTR_SetWindowPos_007133f4",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fc35e3",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "007133f8",
+            "name": "PTR_AdjustWindowRectEx_007133f8",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fc0e4a",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "0073a1cd",
+            "name": "lpWindowName_0073a1cd",
+            "type": "LPCSTR",
+            "size": 4,
+            "value": "00000000",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          },
+          {
+            "address": "00764574",
+            "name": "s_HalfBloodPrinceMainWndClass_00764574",
+            "type": "string",
+            "size": -1,
+            "value": "HalfBloodPrinceMainWndClass",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "00cf0000",
+            "name": "dwStyle_00cf0000",
+            "type": "DWORD",
+            "size": 4,
+            "value": "0x0",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              },
+              {
+                "func_addr": "005d82b0",
+                "func_name": "FUN_005d82b0"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d8ed0",
+            "stop": "005d8efe",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005d8f1a",
+            "stop": "005d8f1f",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005d8f00",
+            "stop": "005d8f18",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005d8f24",
+            "stop": "005d8f8c",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2,
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005d8f8e",
+            "stop": "005d8f9c",
+            "out": [
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "005d8fa2",
+            "stop": "005d8fb0",
+            "out": [],
+            "in": [
+              3,
+              4
+            ]
+          }
+        ]
+      }
+    },
+    "005d9210": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005d9210",
+        "name": "FUN_005d9210",
+        "signature": "undefined __cdecl FUN_005d9210(char param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005d9210\n// Address:   0x005d9210\n// Signature: undefined __cdecl FUN_005d9210(char param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005d9210(char param_1)\n\n\n\n{\n\n  PVOID local_30;\n\n  uint local_2c;\n\n  PVOID local_28;\n\n  uint local_24;\n\n  PVOID local_20;\n\n  uint local_1c;\n\n  undefined4 local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  if (param_1 != '\\0') {\n\n    SystemParametersInfoA(0x3b,8,&pvParam_00866f14,0);\n\n    SystemParametersInfoA(0x35,8,&pvParam_00866f1c,0);\n\n    SystemParametersInfoA(0x33,0x18,&pvParam_00866f24,0);\n\n    return;\n\n  }\n\n  local_30 = pvParam_00866f14;\n\n  local_2c = DAT_00866f18;\n\n  if ((DAT_00866f18 & 1) == 0) {\n\n    local_2c = DAT_00866f18 & 0xfffffff3;\n\n    SystemParametersInfoA(0x3b,8,&local_30,0);\n\n  }\n\n  local_28 = pvParam_00866f1c;\n\n  local_24 = DAT_00866f20;\n\n  if ((DAT_00866f20 & 1) == 0) {\n\n    local_24 = DAT_00866f20 & 0xfffffff3;\n\n    SystemParametersInfoA(0x35,8,&local_28,0);\n\n  }\n\n  local_20 = pvParam_00866f24;\n\n  local_18 = DAT_00866f2c;\n\n  local_14 = DAT_00866f30;\n\n  local_10 = DAT_00866f34;\n\n  local_c = DAT_00866f38;\n\n  if ((DAT_00866f28 & 1) == 0) {\n\n    local_1c = DAT_00866f28 & 0xfffffff3;\n\n    SystemParametersInfoA(0x33,0x18,&local_20,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005d9210\n// Address:   0x005d9210\n// Signature: undefined __cdecl FUN_005d9210(char param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005d9210(char param_1)\n\n\n\n{\n\n  PVOID local_30;\n\n  uint local_2c;\n\n  PVOID local_28;\n\n  uint local_24;\n\n  PVOID local_20;\n\n  uint local_1c;\n\n  undefined4 local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  if (param_1 != '\\0') {\n\n    SystemParametersInfoA(0x3b,8,&pvParam_00866f14,0);\n\n    SystemParametersInfoA(0x35,8,&pvParam_00866f1c,0);\n\n    SystemParametersInfoA(0x33,0x18,&pvParam_00866f24,0);\n\n    return;\n\n  }\n\n  local_30 = pvParam_00866f14;\n\n  local_2c = DAT_00866f18;\n\n  if ((DAT_00866f18 & 1) == 0) {\n\n    local_2c = DAT_00866f18 & 0xfffffff3;\n\n    SystemParametersInfoA(0x3b,8,&local_30,0);\n\n  }\n\n  local_28 = pvParam_00866f1c;\n\n  local_24 = DAT_00866f20;\n\n  if ((DAT_00866f20 & 1) == 0) {\n\n    local_24 = DAT_00866f20 & 0xfffffff3;\n\n    SystemParametersInfoA(0x35,8,&local_28,0);\n\n  }\n\n  local_20 = pvParam_00866f24;\n\n  local_18 = DAT_00866f2c;\n\n  local_14 = DAT_00866f30;\n\n  local_10 = DAT_00866f34;\n\n  local_c = DAT_00866f38;\n\n  if ((DAT_00866f28 & 1) == 0) {\n\n    local_1c = DAT_00866f28 & 0xfffffff3;\n\n    SystemParametersInfoA(0x33,0x18,&local_20,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005d9210",
+        "function": {
+          "address": "005d9210",
+          "name": "FUN_005d9210",
+          "signature": "undefined __cdecl FUN_005d9210(char param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005d9300",
+              "name": "FUN_005d9300",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005da4b0",
+              "name": "FUN_005da4b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:0000005a",
+              "name": "SystemParametersInfoA"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071339c",
+            "name": "PTR_SystemParametersInfoA_0071339c",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fb82e1",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              }
+            ]
+          },
+          {
+            "address": "00866f14",
+            "name": "pvParam_00866f14",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000008",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          },
+          {
+            "address": "00866f1c",
+            "name": "pvParam_00866f1c",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000008",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          },
+          {
+            "address": "00866f24",
+            "name": "pvParam_00866f24",
+            "type": "PVOID",
+            "size": 4,
+            "value": "00000018",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9210",
+                "func_name": "FUN_005d9210"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005d9210",
+            "stop": "005d9224",
+            "out": [
+              8,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005d9252",
+            "stop": "005d9266",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005d9268",
+            "stop": "005d927a",
+            "out": [
+              3
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "005d927c",
+            "stop": "005d9291",
+            "out": [
+              5,
+              4
+            ],
+            "in": [
+              1,
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "005d9293",
+            "stop": "005d92a5",
+            "out": [
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "005d92a7",
+            "stop": "005d92e0",
+            "out": [
+              7,
+              6
+            ],
+            "in": [
+              3,
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "005d92e2",
+            "stop": "005d92f4",
+            "out": [
+              7
+            ],
+            "in": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "start": "005d92f6",
+            "stop": "005d92fa",
+            "out": [],
+            "in": [
+              5,
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "005d9226",
+            "stop": "005d9251",
+            "out": [],
+            "in": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "00ff8380": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "00ff8380",
+        "name": "FUN_00ff8380",
+        "signature": "bool __stdcall FUN_00ff8380(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_00ff8380\n// Address:   0x00ff8380\n// Signature: bool __stdcall FUN_00ff8380(void)\n// Callers:   1  |  Callees: 5\n// ===========================================\n\n\n\nbool FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT local_2c;\n\n  code *local_28;\n\n  int local_24;\n\n  int local_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    local_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    local_2c = 0x2020;\n\n  }\n\n  local_28 = FUN_005d8a30;\n\n  local_24 = 0;\n\n  local_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&local_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_00ff8380\n// Address:   0x00ff8380\n// Signature: bool __stdcall FUN_00ff8380(void)\n// Callers:   1  |  Callees: 5\n// ===========================================\n\n\n\nbool FUN_00ff8380(void)\n\n\n\n{\n\n  ATOM AVar1;\n\n  HINSTANCE unaff_ESI;\n\n  UINT local_2c;\n\n  code *local_28;\n\n  int local_24;\n\n  int local_20;\n\n  \n\n  UnregisterClassA(\"HalfBloodPrinceMainWndClass\",unaff_ESI);\n\n  if (DAT_00866e2a == '\\0') {\n\n    local_2c = 0x2000;\n\n    LoadCursorA((HINSTANCE)0x0,&DAT_00007f00);\n\n  }\n\n  else {\n\n    local_2c = 0x2020;\n\n  }\n\n  local_28 = FUN_005d8a30;\n\n  local_24 = 0;\n\n  local_20 = 0;\n\n  LoadImageA((HINSTANCE)0x0,\".\\\\..\\\\hbp_icon.ico\",1,0x20,0x20,0x10);\n\n  GetStockObject(4);\n\n  AVar1 = RegisterClassA((WNDCLASSA *)&local_2c);\n\n  return AVar1 != 0;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 5
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "00ff8380",
+        "function": {
+          "address": "00ff8380",
+          "name": "FUN_00ff8380",
+          "signature": "bool __stdcall FUN_00ff8380(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "005d8e30",
+              "name": "thunk_FUN_00ff8380",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:0000005e",
+              "name": "UnregisterClassA"
+            },
+            {
+              "addr": "EXTERNAL:0000007c",
+              "name": "LoadCursorA"
+            },
+            {
+              "addr": "EXTERNAL:00000062",
+              "name": "LoadImageA"
+            },
+            {
+              "addr": "EXTERNAL:00000080",
+              "name": "GetStockObject"
+            },
+            {
+              "addr": "EXTERNAL:00000065",
+              "name": "RegisterClassA"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00764574",
+            "value": "HalfBloodPrinceMainWndClass",
+            "length": 27,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300",
+                "ref_addr": "005d93f2"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0",
+                "ref_addr": "005d8f5b"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8385"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff8415"
+              }
+            ]
+          },
+          {
+            "address": "0083d8f4",
+            "value": ".\\..\\hbp_icon.ico",
+            "length": 17,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380",
+                "ref_addr": "00ff83d2"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00713030",
+            "name": "PTR_GetStockObject_00713030",
+            "type": "pointer",
+            "size": 4,
+            "value": "75dc59f4",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              },
+              {
+                "func_addr": "005da670",
+                "func_name": "FUN_005da670"
+              }
+            ]
+          },
+          {
+            "address": "007133ac",
+            "name": "PTR_UnregisterClassA_007133ac",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbbf81",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "007133bc",
+            "name": "PTR_LoadImageA_007133bc",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fd2a31",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "007133c8",
+            "name": "PTR_RegisterClassA_007133c8",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fbdf42",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "00713424",
+            "name": "PTR_LoadCursorA_00713424",
+            "type": "pointer",
+            "size": 4,
+            "value": "76fb8efd",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "00764574",
+            "name": "s_HalfBloodPrinceMainWndClass_00764574",
+            "type": "string",
+            "size": -1,
+            "value": "HalfBloodPrinceMainWndClass",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "005d9300",
+                "func_name": "FUN_005d9300"
+              },
+              {
+                "func_addr": "005d8ed0",
+                "func_name": "FUN_005d8ed0"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              },
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          },
+          {
+            "address": "0083d8f4",
+            "name": "s_.\\..\\hbp_icon.ico_0083d8f4",
+            "type": "string",
+            "size": -1,
+            "value": ".\\..\\hbp_icon.ico",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00ff8380",
+                "func_name": "FUN_00ff8380"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "00ff8380",
+            "stop": "00ff839d",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "00ff83ad",
+            "stop": "00ff83c6",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "00ff839f",
+            "stop": "00ff83ab",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "00ff83ca",
+            "stop": "00ff8433",
+            "out": [],
+            "in": [
+              2,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

@@ -28,4 +28,15 @@ void clear_buffer(std::uintptr_t buffer, std::uint32_t bytes);
 // _stricmp. Returns the matching record pointer or null.
 std::uint8_t* find_volume_by_name(const char* path);
 
+// 006b2673 (true tail call: PUSH EBP; MOV EBP,ESP; PUSH [EBP+8]; CALL
+// find_volume_by_name; POP ECX; MOV ECX,[EAX+0x84]; MOV EAX,[ECX]; POP EBP;
+// JMP [EAX+0x2c] — EBP is restored before the jump, so the callee's own
+// epilogue returns straight to this function's caller). Resolves the
+// volume record for `path`, then calls vtable slot +0x2c of its object
+// (record+0x84), thiscall with the object as `this` and no stack
+// arguments. The exported decompiler could not recover the indirect
+// jump's target and read it as a 0-argument call; there is no null check
+// on the resolved record, matching the exported x86 exactly.
+void invoke_volume_method_2c(const char* path);
+
 } // namespace hp6::runtime

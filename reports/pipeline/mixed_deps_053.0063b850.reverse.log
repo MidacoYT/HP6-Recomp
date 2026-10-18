@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "0063b850",
+      "run_id": "c9da1d1a1f3e4589ac28d16b938401bb",
+      "error": null,
+      "class_name": "",
+      "function_name": "0063b850",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t* DAT_00cf18e4;\nextern volatile std::uint32_t _DAT_00000000;\n\nvoid __fastcall FUN_0063b850(std::uint32_t param_1, std::int32_t param_2)\n{\n    std::int32_t* piVar1 = DAT_00cf18e4 + 1;\n    std::int32_t iVar2 = *DAT_00cf18e4;\n\n    std::uint32_t uVar3 =\n        ((static_cast<std::uint32_t>(param_2) + 3U) & 0xfffffffcU) +\n        static_cast<std::uint32_t>(DAT_00cf18e4[2]);\n\n    DAT_00cf18e4[2] = static_cast<std::int32_t>(uVar3);\n\n    if ((static_cast<std::uint32_t>(*piVar1) +\n         static_cast<std::uint32_t>(iVar2)) <= uVar3) {\n        _DAT_00000000 = 0;\n    }\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the binary\u2019s arithmetic, store, unsigned comparison, branch, and return.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0063b850\\_0063b850.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

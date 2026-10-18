@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d829c",
+      "run_id": "a605058a0c2846ebaa2d3fb618b415e9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d829c",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The member at +0x0C and the owner type are unresolved in the supplied evidence.\nstd::uint32_t* __thiscall FUN_006d829c(void* self, std::uint32_t param_1)\n{\n    const auto value = *reinterpret_cast<std::int32_t*>(\n        static_cast<std::byte*>(self) + 0x0C);\n\n    auto* result = reinterpret_cast<std::uint32_t*>(\n        FUN_006d6ab6(\"c_tex\", value + 0x20, 0x80, 0x20,\n                     param_1, \"shpclone.cpp\", 0x3C));\n\n    FUN_006d822a(self, result);\n    result[1] = 0;\n    result[0] = (result[0] & 0xFFFFFBFFu) | 0x400u;\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and constants match, but the binary evidence shows a different memory access order and the +0x0C member is unnamed.",
+      "issues": [
+        "P-code reads and computes result[0] before storing zero to result[1]. The reversed code stores zero first, then reads result[0]. The decompilation's statement order conflicts with the P-code.",
+        "The self + 0x0C field is accessed by raw offset rather than a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d829c\\_FUN_006d829c.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

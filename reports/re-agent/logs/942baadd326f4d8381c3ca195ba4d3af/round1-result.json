@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d7827",
+      "run_id": "942baadd326f4d8381c3ca195ba4d3af",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7827",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __thiscall FUN_006d7827(void* self, int param_1)\n{\n    // Member names and field types are unresolved; offsets preserve the observed layout.\n    auto* source = reinterpret_cast<const unsigned char*>(param_1);\n    auto* destination = static_cast<unsigned char*>(self);\n\n    FUN_006d7745(self, param_1);\n    *destination = 0x7a;\n\n    const auto value_70 = *reinterpret_cast<const unsigned int*>(source + 0x70);\n    const auto value_6c = *reinterpret_cast<const unsigned int*>(source + 0x6c);\n    const auto value_68 = *reinterpret_cast<const unsigned int*>(source + 0x68);\n    const auto value_64 = *reinterpret_cast<const unsigned int*>(source + 0x64);\n\n    *reinterpret_cast<unsigned int*>(destination + 0x1c) = value_70;\n    *reinterpret_cast<unsigned int*>(destination + 0x18) = value_6c;\n    *reinterpret_cast<unsigned int*>(destination + 0x10) = value_64;\n    *reinterpret_cast<unsigned int*>(destination + 0x14) = value_68;\n\n    FUN_00688550(self, reinterpret_cast<int>(destination + 0x20), 0);\n}",
+      "verdict": "FAIL",
+      "summary": "The operations match the binary evidence, but struct offsets lack named members.",
+      "issues": [
+        "Source offsets 0x64, 0x68, 0x6c, and 0x70 and destination offsets 0x10, 0x14, 0x18, 0x1c, and 0x20 are accessed through raw pointer arithmetic rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7827\\_FUN_006d7827.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

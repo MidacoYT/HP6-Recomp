@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d82ec",
+      "run_id": "29557cd7f05e434ba9522175714d9ed8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d82ec",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __thiscall FUN_006d82ec(void* this_, void* param_1)\n{\n    struct LocalState {\n        std::uint32_t words[24];\n        std::int32_t field_60;\n    } local;\n\n    FUN_006d744b(local.words);\n    FUN_006d7b14(this_, reinterpret_cast<std::intptr_t>(local.words));\n    FUN_006d778a(param_1, reinterpret_cast<std::intptr_t>(local.words));\n\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    destination[1] &= 0xfb;\n\n    if (local.field_60 == 0) {\n        auto* source = static_cast<std::uint8_t*>(this_);\n        std::uint32_t count = *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n\n        const std::int32_t sourceOffset =\n            *reinterpret_cast<std::int32_t*>(source + 0x08);\n        auto* sourceWords = sourceOffset == 0\n            ? nullptr\n            : reinterpret_cast<std::uint32_t*>(source + sourceOffset);\n\n        const std::int32_t destinationOffset =\n            *reinterpret_cast<std::int32_t*>(destination + 0x08);\n        auto* destinationWords = destinationOffset == 0\n            ? nullptr\n            : reinterpret_cast<std::uint32_t*>(destination + destinationOffset);\n\n        for (std::uint32_t words = count >> 2; words != 0; --words) {\n            *destinationWords++ = *sourceWords++;\n        }\n\n        auto* sourceBytes = reinterpret_cast<std::uint8_t*>(sourceWords);\n        auto* destinationBytes = reinterpret_cast<std::uint8_t*>(destinationWords);\n        for (count &= 3; count != 0; --count) {\n            *destinationBytes++ = *sourceBytes++;\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The copy logic matches, but the binary evidence shows a different load order and the object offsets lack named members.",
+      "issues": [
+        "Normalized P-code loads this_ + 0x08 before this_ + 0x0c; the reversed code loads them in the opposite order. This resolves the conflict with Ghidra\u2019s decompilation in favor of the binary evidence.",
+        "Offsets +0x08 and +0x0c in the source object, and +0x08 in the destination object, are accessed through raw pointer arithmetic instead of named struct members."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 5 branches/loops, candidate has 3"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d82ec\\_FUN_006d82ec.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

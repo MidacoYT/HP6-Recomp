@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d7b49",
+      "run_id": "49e120e113034e418148593d8ee602d5",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7b49",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006d7a48(void* self, std::int32_t param_1);\nvoid __thiscall FUN_006d7391(\n    void* self,\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3,\n    std::uint32_t* param_4);\n\nvoid __thiscall FUN_006d7b49(void* self, std::int32_t param_1)\n{\n    FUN_006d7a48(self, param_1);\n\n    auto* data = reinterpret_cast<std::uint8_t*>(\n        static_cast<std::uintptr_t>(static_cast<std::uint32_t>(param_1)));\n    data[5] = static_cast<std::uint8_t>(data[5] | 1);\n\n    FUN_006d7391(\n        self,\n        reinterpret_cast<std::uint32_t*>(data + 0x64),\n        reinterpret_cast<std::uint32_t*>(data + 0x68),\n        reinterpret_cast<std::uint32_t*>(data + 0x6c),\n        reinterpret_cast<std::uint32_t*>(data + 0x70));\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, offsets, and byte update match, but the structure offsets lack named members.",
+      "issues": [
+        "The byte at offset 0x05 and the four 32-bit values at offsets 0x64, 0x68, 0x6c, and 0x70 are accessed through raw offsets rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7b49\\_FUN_006d7b49.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

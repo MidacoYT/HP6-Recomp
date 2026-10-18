@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b1a2e",
+      "run_id": "fcebc89482bd4527a2542cb79fd92915",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b1a2e",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nvoid __cdecl FUN_006b1a2e(int param_1, std::uint64_t* param_2,\n                           std::uint32_t* param_3)\n{\n    auto* base = reinterpret_cast<std::byte*>(param_1);\n    auto* object = *reinterpret_cast<std::uint32_t**>(base + 0x10);\n    auto* vtable = *reinterpret_cast<std::uint32_t**>(object);\n\n    // The concrete types and names of these fields and the virtual method\n    // are unresolved in the supplied evidence.\n    using Slot24 = std::uint64_t (__cdecl*)(std::uint32_t);\n    auto method = *reinterpret_cast<Slot24*>(\n        reinterpret_cast<std::byte*>(vtable) + 0x24);\n\n    *param_2 = method(*reinterpret_cast<std::uint32_t*>(base + 0x08));\n    param_3[0] = *reinterpret_cast<std::uint32_t*>(base + 0x18);\n    param_3[1] = *reinterpret_cast<std::uint32_t*>(base + 0x1c);\n}",
+      "verdict": "FAIL",
+      "summary": "The data flow matches, but required named members and exact read order are missing.",
+      "issues": [
+        "Offsets 0x08, 0x10, 0x18, 0x1c, and the vtable slot at 0x24 are accessed as raw offsets rather than named members.",
+        "The P-code reads the value at 0x08 before dereferencing the object and loading the vtable slot; the reversed code does those reads in the opposite order."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b1a2e\\_FUN_006b1a2e.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

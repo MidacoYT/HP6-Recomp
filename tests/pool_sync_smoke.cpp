@@ -24,6 +24,7 @@ void* PTR_FUN_00715ac0 = nullptr;
 void* PTR_FUN_00715ae0 = nullptr;
 void* PTR_FUN_00715ad0 = nullptr;
 void* PTR_FUN_00715b00 = nullptr;
+void* PTR_FUN_00715af0 = nullptr;
 std::int32_t engine_worker_006b1e32(std::int32_t engine) {
     (void)engine;
     return 0;

@@ -1,0 +1,28 @@
+Candidate validation failed for 006b6833: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006b6833",
+      "run_id": "713cda60135c46c1845a2724c17489ca",
+      "error": null,
+      "class_name": "",
+      "function_name": "006b6833",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\nstruct Object_006b6833 {\n    char field_00[0x40];\n    std::uint32_t field_40;\n    std::uint32_t field_44;\n    std::uint32_t field_48;\n    std::uint32_t field_4c;\n    std::uint32_t field_50;\n    std::uint32_t field_54;\n    std::uint32_t field_58;\n    std::uint32_t field_5c;\n    std::uint8_t field_60;\n\n    void __thiscall FUN_006b6833(\n        const char* param_1,\n        std::uint32_t param_2,\n        std::uint32_t param_3,\n        std::uint32_t param_4,\n        std::uint32_t param_5,\n        const std::uint32_t* param_6);\n};\n\nvoid __fastcall FUN_006b6808(Object_006b6833* param_1);\n\nvoid __thiscall Object_006b6833::FUN_006b6833(\n    const char* param_1,\n    std::uint32_t param_2,\n    std::uint32_t param_3,\n    std::uint32_t param_4,\n    std::uint32_t param_5,\n    const std::uint32_t* param_6)\n{\n    FUN_006b6808(this);\n    std::strncpy(field_00, param_1, 0x40);\n\n    field_40 = param_2;\n    field_44 = param_3;\n    field_48 = param_4;\n    field_4c = param_5;\n\n    if (param_6 != nullptr) {\n        field_50 = param_6[0];\n        field_54 = param_6[1];\n        field_58 = param_6[2];\n        field_5c = param_6[3];\n    }\n\n    field_60 = 0;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and independent control-flow evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

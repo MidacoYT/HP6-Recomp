@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006b7bcb",
+      "run_id": "80ceaa82ff8144539654db4a29958c49",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b7bcb",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t PTR_LAB_00715d30;\nextern std::uint32_t PTR_FUN_00715d0c;\nextern void __fastcall FUN_006b7d0f(std::uint32_t* param_1);\n\nvoid __fastcall FUN_006b7bcb(std::uint32_t* param_1)\n{\n    param_1[0] = reinterpret_cast<std::uint32_t>(&PTR_LAB_00715d30);\n    param_1[7] = reinterpret_cast<std::uint32_t>(&PTR_FUN_00715d0c);\n    FUN_006b7d0f(param_1);\n}",
+      "verdict": "FAIL",
+      "summary": "The stores and call match the binary, but the object offsets lack named members.",
+      "issues": [
+        "param_1[0] and param_1[7] represent offsets 0x00 and 0x1c without named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b7bcb\\_FUN_006b7bcb.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

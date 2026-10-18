@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d9d15",
+      "run_id": "b35fdbad4ec24112872f178c2b65a65a",
+      "error": null,
+      "class_name": "",
+      "function_name": "006d9d15",
+      "success": true,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006d9d15(int param_1)\n{\n    if (DAT_00899d5c == 0) {\n        FUN_006b3b0e(&DAT_00899d60, 0x20);\n        FUN_006b3b0e(&hTimer_008527e0, 0x18);\n        DAT_00899d88 = 0;\n        DAT_00899d5c = 1;\n    }\n\n    DAT_00899d84 = 0;\n    hTimer_008527e0 = CreateWaitableTimerA(nullptr, TRUE, nullptr);\n\n    // These adjacent globals hold the low and high words of the LARGE_INTEGER.\n    const auto dueTime = static_cast<std::int32_t>(\n        -10000000LL / static_cast<std::int64_t>(param_1));\n    lpDueTime_008527f0 =\n        reinterpret_cast<LARGE_INTEGER*>(static_cast<std::intptr_t>(dueTime));\n    _DAT_008527f4 = dueTime >> 31;\n\n    FUN_006d95d0(&DAT_008527e4, &LAB_006d9cae, 0, 0, 0, 2);\n    DAT_00899d80 = param_1;\n\n    SetWaitableTimer(\n        hTimer_008527e0,\n        reinterpret_cast<LARGE_INTEGER*>(&lpDueTime_008527f0),\n        0, nullptr, nullptr, FALSE);\n\n    return DAT_00899d80;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d9d15\\_006d9d15.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

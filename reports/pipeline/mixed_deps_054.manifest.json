@@ -1,0 +1,1246 @@
+{
+  "schema_version": 1,
+  "identity": "9cf02c9d1d437622f52b7371b2637afd49f47421d5b7ec29df313d887a0932e2",
+  "seeds": [
+    "0063ccf0",
+    "0063cd60",
+    "0063d0f0",
+    "01003650",
+    "01003ea0",
+    "01003f20"
+  ],
+  "functions": [
+    {
+      "address": "0063ccf0",
+      "class_name": "",
+      "function_name": "FUN_0063ccf0",
+      "caller_count": 73
+    },
+    {
+      "address": "0063cd60",
+      "class_name": "",
+      "function_name": "0063cd60",
+      "caller_count": 1
+    },
+    {
+      "address": "0063d0f0",
+      "class_name": "",
+      "function_name": "0063d0f0",
+      "caller_count": 25
+    },
+    {
+      "address": "01003650",
+      "class_name": "",
+      "function_name": "FUN_01003650",
+      "caller_count": 1
+    },
+    {
+      "address": "01003ea0",
+      "class_name": "",
+      "function_name": "FUN_01003ea0",
+      "caller_count": 1
+    },
+    {
+      "address": "01003f20",
+      "class_name": "",
+      "function_name": "FUN_01003f20",
+      "caller_count": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "0063cd60",
+      "target": "0063ccf0"
+    },
+    {
+      "source": "0063d0f0",
+      "target": "0063ccf0"
+    },
+    {
+      "source": "01003650",
+      "target": "0063ccf0"
+    },
+    {
+      "source": "01003ea0",
+      "target": "0063ccf0"
+    },
+    {
+      "source": "01003f20",
+      "target": "0063ccf0"
+    }
+  ],
+  "gaps": [],
+  "evidence": {
+    "0063ccf0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0063ccf0",
+        "name": "FUN_0063ccf0",
+        "signature": "noreturn undefined __cdecl FUN_0063ccf0(char * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0063ccf0\n// Address:   0x0063ccf0\n// Signature: noreturn undefined __cdecl FUN_0063ccf0(char * param_1)\n// Callers:   73  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_0063ccf0(char *param_1)\n\n\n\n{\n\n  char local_800 [2048];\n\n  \n\n  vsprintf(local_800,param_1,&stack0x00000008);\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0063ccf0\n// Address:   0x0063ccf0\n// Signature: noreturn undefined __cdecl FUN_0063ccf0(char * param_1)\n// Callers:   73  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_0063ccf0(char *param_1)\n\n\n\n{\n\n  char local_800 [2048];\n\n  \n\n  vsprintf(local_800,param_1,&stack0x00000008);\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 73,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0063ccf0",
+        "function": {
+          "address": "0063ccf0",
+          "name": "FUN_0063ccf0",
+          "signature": "noreturn undefined __cdecl FUN_0063ccf0(char * param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "0063be10",
+              "name": "FUN_0063be10",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063cd60",
+              "name": "FUN_0063cd60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d0f0",
+              "name": "FUN_0063d0f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063e1a0",
+              "name": "FUN_0063e1a0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001920",
+              "name": "FUN_01001920",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001920",
+              "name": "FUN_01001920",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00646200",
+              "name": "FUN_00646200",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00646200",
+              "name": "FUN_00646200",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01002960",
+              "name": "FUN_01002960",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00648e70",
+              "name": "FUN_00648e70",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00648e70",
+              "name": "FUN_00648e70",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006498e0",
+              "name": "FUN_006498e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006498e0",
+              "name": "FUN_006498e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064aa60",
+              "name": "FUN_0064aa60",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064c8c0",
+              "name": "FUN_0064c8c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064c8c0",
+              "name": "FUN_0064c8c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064c8c0",
+              "name": "FUN_0064c8c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01003650",
+              "name": "FUN_01003650",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064e7f0",
+              "name": "FUN_0064e7f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064e7f0",
+              "name": "FUN_0064e7f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0064e7f0",
+              "name": "FUN_0064e7f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01003ea0",
+              "name": "FUN_01003ea0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01003f20",
+              "name": "FUN_01003f20",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659780",
+              "name": "FUN_00659780",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659920",
+              "name": "FUN_00659920",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659920",
+              "name": "FUN_00659920",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659920",
+              "name": "FUN_00659920",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006599b0",
+              "name": "FUN_006599b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006599b0",
+              "name": "FUN_006599b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006599b0",
+              "name": "FUN_006599b0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a480",
+              "name": "FUN_0065a480",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a480",
+              "name": "FUN_0065a480",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a480",
+              "name": "FUN_0065a480",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a480",
+              "name": "FUN_0065a480",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a6d0",
+              "name": "FUN_0065a6d0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a6d0",
+              "name": "FUN_0065a6d0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0065a6d0",
+              "name": "FUN_0065a6d0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006564f0",
+              "name": "FUN_006564f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00606490",
+              "name": "FUN_00606490",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001630",
+              "name": "FUN_01001630",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001630",
+              "name": "FUN_01001630",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001630",
+              "name": "FUN_01001630",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063e410",
+              "name": "FUN_0063e410",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00642620",
+              "name": "FUN_00642620",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00615530",
+              "name": "FUN_00615530",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00617e20",
+              "name": "FUN_00617e20",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d840",
+              "name": "FUN_0063d840",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d840",
+              "name": "FUN_0063d840",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d840",
+              "name": "FUN_0063d840",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01001800",
+              "name": "FUN_01001800",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063eb10",
+              "name": "FUN_0063eb10",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063eb10",
+              "name": "FUN_0063eb10",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063eb10",
+              "name": "FUN_0063eb10",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063eb10",
+              "name": "FUN_0063eb10",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "01004da0",
+              "name": "FUN_01004da0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063c0c0",
+              "name": "FUN_0063c0c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d840",
+              "name": "FUN_0063d840",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0063d840",
+              "name": "FUN_0063d840",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005dbbb0",
+              "name": "FUN_005dbbb0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005dc410",
+              "name": "FUN_005dc410",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f51c0",
+              "name": "FUN_005f51c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f51c0",
+              "name": "FUN_005f51c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f51c0",
+              "name": "FUN_005f51c0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0100fa40",
+              "name": "FUN_0100fa40",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659fc0",
+              "name": "FUN_00659fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659fc0",
+              "name": "FUN_00659fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659fc0",
+              "name": "FUN_00659fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659fc0",
+              "name": "FUN_00659fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00659fc0",
+              "name": "FUN_00659fc0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:000000ac",
+              "name": "vsprintf"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "007131f4",
+            "name": "PTR_vsprintf_007131f4",
+            "type": "pointer",
+            "size": 4,
+            "value": "6e0786e0",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "0063ccf0",
+                "func_name": "FUN_0063ccf0"
+              },
+              {
+                "func_addr": "006b92aa",
+                "func_name": "vsprintf"
+              },
+              {
+                "func_addr": "006328f0",
+                "func_name": "FUN_006328f0"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0063ccf0",
+            "stop": "0063cd14",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "0063cd60": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0063cd60",
+        "name": "0063cd60",
+        "signature": "undefined __stdcall FUN_0063cd60(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0063cd60\n// Address:   0x0063cd60\n// Signature: undefined __stdcall FUN_0063cd60(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_0063cd60(void)\n\n\n\n{\n\n  int iVar1;\n\n  \n\n  iVar1 = 0;\n\n  do {\n\n    if (((DAT_00c70a78 | _DAT_00c75a70) & 1 << ((byte)iVar1 & 0x1f)) == 0) {\n\n      return;\n\n    }\n\n    iVar1 = iVar1 + 1;\n\n  } while (iVar1 < 8);\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"RenderRegionManager::AllocateRegionHandle - FATAL out of regions\\n\");\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0063cd60\n// Address:   0x0063cd60\n// Signature: undefined __stdcall FUN_0063cd60(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid FUN_0063cd60(void)\n\n\n\n{\n\n  int iVar1;\n\n  \n\n  iVar1 = 0;\n\n  do {\n\n    if (((DAT_00c70a78 | _DAT_00c75a70) & 1 << ((byte)iVar1 & 0x1f)) == 0) {\n\n      return;\n\n    }\n\n    iVar1 = iVar1 + 1;\n\n  } while (iVar1 < 8);\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"RenderRegionManager::AllocateRegionHandle - FATAL out of regions\\n\");\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0063cd60",
+        "function": {
+          "address": "0063cd60",
+          "name": "FUN_0063cd60",
+          "signature": "undefined __stdcall FUN_0063cd60(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "0063ce20",
+              "name": "FUN_0063ce20",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063ccf0",
+              "name": "FUN_0063ccf0"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00842cc8",
+            "value": "RenderRegionManager::AllocateRegionHandle - FATAL out of regions\n",
+            "length": 65,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "0063cd60",
+                "func_name": "FUN_0063cd60",
+                "ref_addr": "0063cd85"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00842cc8",
+            "name": "s_RenderRegionManager::AllocateReg_00842cc8",
+            "type": "string",
+            "size": -1,
+            "value": "RenderRegionManager::AllocateRegionHandle - FATAL out of regions\n",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "0063cd60",
+                "func_name": "FUN_0063cd60"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0063cd60",
+            "stop": "0063cd6e",
+            "out": [
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0063cd70",
+            "stop": "0063cd7b",
+            "out": [
+              3,
+              2
+            ],
+            "in": [
+              0,
+              3
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0063cd96",
+            "stop": "0063cd97",
+            "out": [],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "0063cd7d",
+            "stop": "0063cd83",
+            "out": [
+              4,
+              1
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "0063cd85",
+            "stop": "0063cd8a",
+            "out": [],
+            "in": [
+              3
+            ]
+          }
+        ]
+      }
+    },
+    "0063d0f0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "0063d0f0",
+        "name": "0063d0f0",
+        "signature": "undefined __fastcall FUN_0063d0f0(int param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_0063d0f0\n// Address:   0x0063d0f0\n// Signature: undefined __fastcall FUN_0063d0f0(int param_1)\n// Callers:   25  |  Callees: 1\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid __fastcall FUN_0063d0f0(int param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  \n\n  uVar1 = 1 << ((byte)param_1 & 0x1f);\n\n  if ((DAT_00c70a78 & uVar1) != 0) {\n\n    DAT_0089cbfe = (char)uVar1;\n\n    DAT_00998580 = param_1;\n\n    _DAT_00b10890 = *(float *)(&DAT_00ea23e0 + param_1 * 0xa0) + _DAT_00cef858;\n\n    DAT_00967218 = &_Dst_00b170d0 + param_1 * 0x4000;\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\n\n              \"RenderRegionManager::SetActiveRenderRegion - attempt to activate region that is not in use\\n\"\n\n              );\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_0063d0f0\n// Address:   0x0063d0f0\n// Signature: undefined __fastcall FUN_0063d0f0(int param_1)\n// Callers:   25  |  Callees: 1\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nvoid __fastcall FUN_0063d0f0(int param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  \n\n  uVar1 = 1 << ((byte)param_1 & 0x1f);\n\n  if ((DAT_00c70a78 & uVar1) != 0) {\n\n    DAT_0089cbfe = (char)uVar1;\n\n    DAT_00998580 = param_1;\n\n    _DAT_00b10890 = *(float *)(&DAT_00ea23e0 + param_1 * 0xa0) + _DAT_00cef858;\n\n    DAT_00967218 = &_Dst_00b170d0 + param_1 * 0x4000;\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\n\n              \"RenderRegionManager::SetActiveRenderRegion - attempt to activate region that is not in use\\n\"\n\n              );\n\n}\n\n\n\n\n",
+        "callers": 25,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "0063d0f0",
+        "function": {
+          "address": "0063d0f0",
+          "name": "FUN_0063d0f0",
+          "signature": "undefined __fastcall FUN_0063d0f0(int param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "005dd020",
+              "name": "FUN_005dd020",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00486f00",
+              "name": "FUN_00486f00",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00486f00",
+              "name": "FUN_00486f00",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005e66e0",
+              "name": "FUN_005e66e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005e66e0",
+              "name": "FUN_005e66e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005ea030",
+              "name": "FUN_005ea030",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005ea030",
+              "name": "FUN_005ea030",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005ea030",
+              "name": "FUN_005ea030",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005ea030",
+              "name": "FUN_005ea030",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005ea030",
+              "name": "FUN_005ea030",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f5420",
+              "name": "FUN_005f5420",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f58e0",
+              "name": "FUN_005f58e0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f5aa0",
+              "name": "FUN_005f5aa0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00607ac0",
+              "name": "FUN_00607ac0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00607ac0",
+              "name": "FUN_00607ac0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00609860",
+              "name": "FUN_00609860",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00609860",
+              "name": "FUN_00609860",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00609860",
+              "name": "FUN_00609860",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00609860",
+              "name": "FUN_00609860",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00615530",
+              "name": "FUN_00615530",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00615530",
+              "name": "FUN_00615530",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00617e20",
+              "name": "FUN_00617e20",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "00617e20",
+              "name": "FUN_00617e20",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "0100fab0",
+              "name": "FUN_0100fab0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "005f81d0",
+              "name": "FUN_005f81d0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063ccf0",
+              "name": "FUN_0063ccf0"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00842d10",
+            "value": "RenderRegionManager::SetActiveRenderRegion - attempt to activate region that is not in use\n",
+            "length": 91,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "00617e20",
+                "func_name": "FUN_00617e20",
+                "ref_addr": "0061867c"
+              },
+              {
+                "func_addr": "0063d0f0",
+                "func_name": "FUN_0063d0f0",
+                "ref_addr": "0063d138"
+              },
+              {
+                "func_addr": "00615530",
+                "func_name": "FUN_00615530",
+                "ref_addr": "00615ddc"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00842d10",
+            "name": "s_RenderRegionManager::SetActiveRe_00842d10",
+            "type": "string",
+            "size": -1,
+            "value": "RenderRegionManager::SetActiveRenderRegion - attempt to activate region that is not in use\n",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "00617e20",
+                "func_name": "FUN_00617e20"
+              },
+              {
+                "func_addr": "0063d0f0",
+                "func_name": "FUN_0063d0f0"
+              },
+              {
+                "func_addr": "00615530",
+                "func_name": "FUN_00615530"
+              }
+            ]
+          },
+          {
+            "address": "00b170d0",
+            "name": "_Dst_00b170d0",
+            "type": "void *",
+            "size": 4,
+            "value": "00000000",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "006426c0",
+                "func_name": "FUN_006426c0"
+              },
+              {
+                "func_addr": "006426c0",
+                "func_name": "FUN_006426c0"
+              },
+              {
+                "func_addr": "00615530",
+                "func_name": "FUN_00615530"
+              },
+              {
+                "func_addr": "00617e20",
+                "func_name": "FUN_00617e20"
+              },
+              {
+                "func_addr": "0063ce20",
+                "func_name": "FUN_0063ce20"
+              },
+              {
+                "func_addr": "0063d0f0",
+                "func_name": "FUN_0063d0f0"
+              },
+              {
+                "func_addr": "00647480",
+                "func_name": "FUN_00647480"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "0063d0f0",
+            "stop": "0063d0fd",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0063d138",
+            "stop": "0063d13d",
+            "out": [],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0063d0ff",
+            "stop": "0063d137",
+            "out": [],
+            "in": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "01003650": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "01003650",
+        "name": "FUN_01003650",
+        "signature": "undefined __stdcall FUN_01003650(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_01003650\n// Address:   0x01003650\n// Signature: undefined __stdcall FUN_01003650(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nvoid FUN_01003650(void)\n\n\n\n{\n\n  if (10 < DAT_00cf19a0) {\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ModeOption:%d:%d by %d (%d bit)\\n\");\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_01003650\n// Address:   0x01003650\n// Signature: undefined __stdcall FUN_01003650(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nvoid FUN_01003650(void)\n\n\n\n{\n\n  if (10 < DAT_00cf19a0) {\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ModeOption:%d:%d by %d (%d bit)\\n\");\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "01003650",
+        "function": {
+          "address": "01003650",
+          "name": "FUN_01003650",
+          "signature": "undefined __stdcall FUN_01003650(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "0064c860",
+              "name": "thunk_FUN_01003650",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063ccf0",
+              "name": "FUN_0063ccf0"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "008437f0",
+            "value": "ModeOption:%d:%d by %d (%d bit)\n",
+            "length": 32,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "01003650",
+                "func_name": "FUN_01003650",
+                "ref_addr": "01003672"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "008437f0",
+            "name": "s_ModeOption:%d:%d_by_%d_(%d_bit)_008437f0",
+            "type": "string",
+            "size": -1,
+            "value": "ModeOption:%d:%d by %d (%d bit)\n",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "01003650",
+                "func_name": "FUN_01003650"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "01003650",
+            "stop": "0100365a",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "0100365e",
+            "stop": "01003677",
+            "out": [],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "0100365c",
+            "stop": "010036ae",
+            "out": [],
+            "in": [
+              0
+            ]
+          }
+        ]
+      }
+    },
+    "01003ea0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "01003ea0",
+        "name": "FUN_01003ea0",
+        "signature": "undefined4 __stdcall FUN_01003ea0(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_01003ea0\n// Address:   0x01003ea0\n// Signature: undefined4 __stdcall FUN_01003ea0(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 FUN_01003ea0(void)\n\n\n\n{\n\n  ushort uVar1;\n\n  \n\n  if (DAT_00cf1a34 < 0x600) {\n\n    uVar1 = *(ushort *)(&DAT_009978e8 + DAT_00bb0994 * 2);\n\n    DAT_00bb0994 = DAT_00bb0994 + 1;\n\n    if (DAT_00c754cc < uVar1 + 1) {\n\n      DAT_00c754cc = uVar1 + 1;\n\n    }\n\n    DAT_00cf1a34 = DAT_00cf1a34 + 1;\n\n    return CONCAT22((short)(uVar1 + 1 >> 0x10),uVar1);\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!\\n\");\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_01003ea0\n// Address:   0x01003ea0\n// Signature: undefined4 __stdcall FUN_01003ea0(void)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 FUN_01003ea0(void)\n\n\n\n{\n\n  ushort uVar1;\n\n  \n\n  if (DAT_00cf1a34 < 0x600) {\n\n    uVar1 = *(ushort *)(&DAT_009978e8 + DAT_00bb0994 * 2);\n\n    DAT_00bb0994 = DAT_00bb0994 + 1;\n\n    if (DAT_00c754cc < uVar1 + 1) {\n\n      DAT_00c754cc = uVar1 + 1;\n\n    }\n\n    DAT_00cf1a34 = DAT_00cf1a34 + 1;\n\n    return CONCAT22((short)(uVar1 + 1 >> 0x10),uVar1);\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!\\n\");\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "01003ea0",
+        "function": {
+          "address": "01003ea0",
+          "name": "FUN_01003ea0",
+          "signature": "undefined4 __stdcall FUN_01003ea0(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "00652940",
+              "name": "thunk_FUN_01003ea0",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063ccf0",
+              "name": "FUN_0063ccf0"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00843900",
+            "value": "ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!\n",
+            "length": 70,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "01003ea0",
+                "func_name": "FUN_01003ea0",
+                "ref_addr": "01003f01"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00843900",
+            "name": "s_ShaderManager::AllocateShaderID_-_00843900",
+            "type": "string",
+            "size": -1,
+            "value": "ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!\n",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "01003ea0",
+                "func_name": "FUN_01003ea0"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "01003ea0",
+            "stop": "01003eae",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "01003f01",
+            "stop": "01003f06",
+            "out": [],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "01003eb0",
+            "stop": "01003edd",
+            "out": [
+              4,
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "01003edf",
+            "stop": "01003ee6",
+            "out": [
+              4
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "01003eec",
+            "stop": "01003f19",
+            "out": [],
+            "in": [
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    },
+    "01003f20": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "01003f20",
+        "name": "FUN_01003f20",
+        "signature": "undefined __cdecl FUN_01003f20(ushort param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_01003f20\n// Address:   0x01003f20\n// Signature: undefined __cdecl FUN_01003f20(ushort param_1)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_01003f20(ushort param_1)\n\n\n\n{\n\n  if (param_1 <= DAT_00c754cc) {\n\n    if (param_1 + 1 == DAT_00c754cc) {\n\n      DAT_00c754cc = DAT_00c754cc - 1;\n\n    }\n\n    DAT_00bb0994 = DAT_00bb0994 + -1;\n\n    *(ushort *)(&DAT_009978e8 + DAT_00bb0994 * 2) = param_1;\n\n    DAT_00cf1a34 = DAT_00cf1a34 + -1;\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!\\n\"\n\n              );\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_01003f20\n// Address:   0x01003f20\n// Signature: undefined __cdecl FUN_01003f20(ushort param_1)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_01003f20(ushort param_1)\n\n\n\n{\n\n  if (param_1 <= DAT_00c754cc) {\n\n    if (param_1 + 1 == DAT_00c754cc) {\n\n      DAT_00c754cc = DAT_00c754cc - 1;\n\n    }\n\n    DAT_00bb0994 = DAT_00bb0994 + -1;\n\n    *(ushort *)(&DAT_009978e8 + DAT_00bb0994 * 2) = param_1;\n\n    DAT_00cf1a34 = DAT_00cf1a34 + -1;\n\n    return;\n\n  }\n\n                    /* WARNING: Subroutine does not return */\n\n  FUN_0063ccf0(\"ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!\\n\"\n\n              );\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "01003f20",
+        "function": {
+          "address": "01003f20",
+          "name": "FUN_01003f20",
+          "signature": "undefined __cdecl FUN_01003f20(ushort param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "006529c0",
+              "name": "thunk_FUN_01003f20",
+              "ref_type": "UNCONDITIONAL_JUMP"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "0063ccf0",
+              "name": "FUN_0063ccf0"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "00843948",
+            "value": "ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!\n",
+            "length": 82,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "01003f20",
+                "func_name": "FUN_01003f20",
+                "ref_addr": "01003f7b"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "00843948",
+            "name": "s_ShaderManager::FreeShaderID_-_at_00843948",
+            "type": "string",
+            "size": -1,
+            "value": "ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!\n",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "01003f20",
+                "func_name": "FUN_01003f20"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "01003f20",
+            "stop": "01003f2d",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "01003f7b",
+            "stop": "01003f80",
+            "out": [],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "01003f2f",
+            "stop": "01003f3c",
+            "out": [
+              4,
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "01003f3e",
+            "stop": "01003f47",
+            "out": [
+              4
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "01003f4d",
+            "stop": "01003f8e",
+            "out": [],
+            "in": [
+              2,
+              3
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 6
+}

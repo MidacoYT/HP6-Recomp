@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "00653430",
+      "run_id": "a8ca67a455924cbf9e09b211b8ae046b",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00653430",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern void* DAT_00cf1944;\nextern std::uint32_t DAT_00cf1a38;\n\nvoid __cdecl FUN_00653430(\n    std::uint32_t param_1,\n    std::uint32_t param_2,\n    std::int32_t param_3,\n    std::int32_t param_4)\n{\n    using Method = void (__thiscall*)(void*, std::uint32_t, void*);\n\n    auto* record = reinterpret_cast<std::uint8_t*>(\n        static_cast<std::uint32_t>(param_4));\n\n    if (param_3 == 0) {\n        auto* vtable = *reinterpret_cast<std::uint8_t**>(DAT_00cf1944);\n        auto method = *reinterpret_cast<Method*>(vtable + 0x16c);\n        method(DAT_00cf1944, param_1, record + 0x2c);\n    } else if (*reinterpret_cast<std::uint16_t*>(record + 0x22) ==\n               DAT_00cf1a38) {\n        *reinterpret_cast<std::uint32_t*>(record + 0x2c) = 0;\n    } else {\n        auto* vtable = *reinterpret_cast<std::uint8_t**>(DAT_00cf1944);\n        auto method = *reinterpret_cast<Method*>(vtable + 0x1a8);\n        method(DAT_00cf1944, param_1, record + 0x2c);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The branches and operations match, but the required offset mappings are missing.",
+      "issues": [
+        "Record offsets 0x22 and 0x2c are accessed directly instead of through named struct members.",
+        "Virtual table offsets 0x16c and 0x1a8 have no named method entries."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00653430\\_FUN_00653430.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

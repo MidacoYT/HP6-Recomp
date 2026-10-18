@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "0064aa30",
+      "run_id": "15a1d5da039242719725afc26615ff61",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_0064aa30",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __stdcall FUN_0064aa30()\n{\n    using VirtualCall = uint32_t (__thiscall *)(void*);\n\n    const auto vtable = *reinterpret_cast<uintptr_t const*>(DAT_00cf1944);\n    const auto call = *reinterpret_cast<VirtualCall const*>(vtable + 0x10);\n\n    DAT_00cf1964 = call(DAT_00cf1944) >> 20;\n    if (DAT_00cf1964 != 0 && DAT_00cf1964 < 0x21) {\n        thunk_FUN_01011a50();\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The call condition conflicts with the supplied P-code.",
+      "issues": [
+        "The decompilation calls thunk_FUN_01011a50 when DAT_00cf1964 is nonzero and less than 0x21. The P-code instead branches to the return when the value is less than 0x21, so the call occurs when it is nonzero and at least 0x21."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0064aa30\\_FUN_0064aa30.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

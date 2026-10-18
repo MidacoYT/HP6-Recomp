@@ -1,0 +1,62 @@
+
+=======================================================
+_index.json
+Type: objet | Entrées: 12758
+Clés: ['00401000', '00401020', '00401030', '00401050', '004010e0', '00401150', '00401180', '004011e0', '00401220', '00401230', '00401270', '004013a0']
+  00401000: dict
+    Champs: ['name', 'address', 'num_callers', 'num_callees']
+  00401020: dict
+    Champs: ['name', 'address', 'num_callers', 'num_callees']
+
+=======================================================
+_structs.json
+Type: objet | Entrées: 84
+Clés: ['_CONTEXT', '_diskfree_t', '_EXCEPTION_POINTERS', '_EXCEPTION_RECORD', '_FILETIME', '_finddata32_t', '_FLOATING_SAVE_AREA', '_GUID', '_IMAGE_SECTION_HEADER', '_iobuf', '_LARGE_INTEGER', '_LIST_ENTRY']
+  _CONTEXT: dict
+    Champs: ['name', 'path', 'size', 'fields']
+  _diskfree_t: dict
+    Champs: ['name', 'path', 'size', 'fields']
+
+=======================================================
+_vtables.json
+Type: objet | Entrées: 2
+Clés: ['vftable_meta_ptr', 'vftable']
+  vftable_meta_ptr: dict
+    Champs: ['symbol', 'class_name', 'address', 'entry_count', 'entries']
+  vftable: dict
+    Champs: ['symbol', 'class_name', 'address', 'entry_count', 'entries']
+
+=======================================================
+_strings.json
+Type: objet | Entrées: 13448
+Clés: ['005c1320', '005e9de0', '006ba372', '006ba379', '006bb4a5', '006bb4ac', '006bb710', '006bbc78', '006bc009', '006bc2c3', '006bc2cd', '006bcb4f']
+  005c1320: dict
+    Champs: ['address', 'value', 'length', 'type', 'references']
+  005e9de0: dict
+    Champs: ['address', 'value', 'length', 'type', 'references']
+
+=======================================================
+_string_refs_by_function.json
+Type: objet | Entrées: 1039
+Clés: ['005e9c80', '0068bcc0', '006b1968', '006b2a23', '006b3950', '006b3999', '006b39e2', '006b3a18', '006b5ec5', '006b5130', '006b571a', '006b7929']
+  005e9c80: list
+    Éléments: 1
+  0068bcc0: list
+    Éléments: 2
+
+=======================================================
+_global_refs_by_function.json
+Type: objet | Entrées: 2768
+Clés: ['005d73c0', '005d7ae0', '005d7650', '005d7d40', '0100e6a0', '006d9806', '005d7810', '006b9160', '006f2b54', '005da670', '00ff8380', '00570010']
+  005d73c0: list
+    Éléments: 23
+  005d7ae0: list
+    Éléments: 22
+
+=======================================================
+EXEMPLE DE FONCTION
+Fichier: 00401000.json
+Type: objet | Entrées: 16
+Clés: ['address', 'name', 'signature', 'calling_convention', 'return_type', 'parameter_count', 'is_thunk', 'decompiled', 'callers', 'callees', 'data_refs', 'pcode']
+  address: str
+  name: str

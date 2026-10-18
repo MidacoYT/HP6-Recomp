@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dc920",
+      "run_id": "8f4b2fc27d4b41b686856737df4cce5f",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc920",
+      "success": true,
+      "rounds_used": 1,
+      "code": "unsigned char* __cdecl FUN_006dc920(\n    unsigned char* param_1, int param_2, unsigned char* param_3)\n{\n    unsigned char* source =\n        FUN_006dc751(param_1, 0, param_2, nullptr, nullptr);\n\n    if (source != nullptr) {\n        unsigned char* destination = param_3;\n        unsigned char value;\n        do {\n            value = *source;\n            *destination = value;\n            ++source;\n            ++destination;\n        } while (value != 0);\n\n        return param_3;\n    }\n\n    *param_3 = 0;\n    return nullptr;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the call, branches, byte-copy loop, and return behavior.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc920\\_FUN_006dc920.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

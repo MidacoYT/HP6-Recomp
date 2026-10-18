@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dc86f",
+      "run_id": "08ddc8100c7f4cbb92b6010ddba9bb20",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc86f",
+      "success": true,
+      "rounds_used": 1,
+      "code": "unsigned int __cdecl FUN_006dc86f(unsigned char* param_1, int param_2)\n{\n    unsigned int result = 0;\n\n    if (param_2 != 0) {\n        FUN_006dc751(param_1, param_2, 0, &result, nullptr);\n    }\n\n    return result;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc86f\\_FUN_006dc86f.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

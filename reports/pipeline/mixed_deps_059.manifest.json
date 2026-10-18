@@ -1,0 +1,666 @@
+{
+  "schema_version": 1,
+  "identity": "1575ad213c06124f0732c656155b3b87b427ffb75b7c8fa35322dc48b9b27a62",
+  "seeds": [
+    "006b3411",
+    "006b343e",
+    "006b3656",
+    "006d927a",
+    "006d9d15"
+  ],
+  "functions": [
+    {
+      "address": "006b3411",
+      "class_name": "",
+      "function_name": "FUN_006b3411",
+      "caller_count": 2
+    },
+    {
+      "address": "006b343e",
+      "class_name": "",
+      "function_name": "006b343e",
+      "caller_count": 1
+    },
+    {
+      "address": "006b3656",
+      "class_name": "",
+      "function_name": "FUN_006b3656",
+      "caller_count": 1
+    },
+    {
+      "address": "006d927a",
+      "class_name": "",
+      "function_name": "FUN_006d927a",
+      "caller_count": 3
+    },
+    {
+      "address": "006d9d15",
+      "class_name": "",
+      "function_name": "006d9d15",
+      "caller_count": 1
+    }
+  ],
+  "edges": [
+    {
+      "source": "006b3411",
+      "target": "006b3b04"
+    },
+    {
+      "source": "006b3411",
+      "target": "006b3b0e"
+    },
+    {
+      "source": "006b343e",
+      "target": "006b3b04"
+    },
+    {
+      "source": "006b343e",
+      "target": "006b3b0e"
+    },
+    {
+      "source": "006b3656",
+      "target": "006b3b0e"
+    },
+    {
+      "source": "006d927a",
+      "target": "006b3b0e"
+    },
+    {
+      "source": "006d9d15",
+      "target": "006b3b0e"
+    },
+    {
+      "source": "006d9d15",
+      "target": "006d95d0"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006b3411",
+      "reason": "Dependency 006b3b04 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006b3411",
+      "reason": "Dependency 006b3b0e outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006b343e",
+      "reason": "Dependency 006b3b04 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006b343e",
+      "reason": "Dependency 006b3b0e outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006b3656",
+      "reason": "Dependency 006b3b0e outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d927a",
+      "reason": "Dependency 006b3b0e outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d9d15",
+      "reason": "Dependency 006b3b0e outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d9d15",
+      "reason": "Dependency 006d95d0 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006b3411": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006b3411",
+        "name": "FUN_006b3411",
+        "signature": "undefined1 __cdecl FUN_006b3411(int * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006b3411\n// Address:   0x006b3411\n// Signature: undefined1 __cdecl FUN_006b3411(int * param_1)\n// Callers:   2  |  Callees: 2\n// ===========================================\n\n\n\nundefined1 __cdecl FUN_006b3411(int *param_1)\n\n\n\n{\n\n  if (0x50 < *param_1) {\n\n    FUN_006b3b0e(param_1,*param_1);\n\n  }\n\n  FUN_006b3b04();\n\n  return 1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006b3411\n// Address:   0x006b3411\n// Signature: undefined1 __cdecl FUN_006b3411(int * param_1)\n// Callers:   2  |  Callees: 2\n// ===========================================\n\n\n\nundefined1 __cdecl FUN_006b3411(int *param_1)\n\n\n\n{\n\n  if (0x50 < *param_1) {\n\n    FUN_006b3b0e(param_1,*param_1);\n\n  }\n\n  FUN_006b3b04();\n\n  return 1;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006b3411",
+        "function": {
+          "address": "006b3411",
+          "name": "FUN_006b3411",
+          "signature": "undefined1 __cdecl FUN_006b3411(int * param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "00688130",
+              "name": "FUN_00688130",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006885f0",
+              "name": "FUN_006885f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b3b0e",
+              "name": "FUN_006b3b0e"
+            },
+            {
+              "addr": "006b3b04",
+              "name": "FUN_006b3b04"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006b3411",
+            "stop": "006b341e",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006b3420",
+            "stop": "006b3428",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006b3429",
+            "stop": "006b343d",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006b343e": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006b343e",
+        "name": "006b343e",
+        "signature": "undefined4 __cdecl FUN_006b343e(int * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006b343e\n// Address:   0x006b343e\n// Signature: undefined4 __cdecl FUN_006b343e(int * param_1)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nundefined4 __cdecl FUN_006b343e(int *param_1)\n\n\n\n{\n\n  if (*param_1 < 0x50) {\n\n    FUN_006b3b0e(&DAT_00851380,0x50);\n\n  }\n\n  FUN_006b3b04();\n\n  _DAT_008513d4 = param_1[0xb];\n\n  return CONCAT31((int3)((uint)param_1[0xb] >> 8),1);\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006b343e\n// Address:   0x006b343e\n// Signature: undefined4 __cdecl FUN_006b343e(int * param_1)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nundefined4 __cdecl FUN_006b343e(int *param_1)\n\n\n\n{\n\n  if (*param_1 < 0x50) {\n\n    FUN_006b3b0e(&DAT_00851380,0x50);\n\n  }\n\n  FUN_006b3b04();\n\n  _DAT_008513d4 = param_1[0xb];\n\n  return CONCAT31((int3)((uint)param_1[0xb] >> 8),1);\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006b343e",
+        "function": {
+          "address": "006b343e",
+          "name": "FUN_006b343e",
+          "signature": "undefined4 __cdecl FUN_006b343e(int * param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "00688130",
+              "name": "FUN_00688130",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b3b0e",
+              "name": "FUN_006b3b0e"
+            },
+            {
+              "addr": "006b3b04",
+              "name": "FUN_006b3b04"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006b343e",
+            "stop": "006b344e",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006b3450",
+            "stop": "006b3459",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006b345a",
+            "stop": "006b3473",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006b3656": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006b3656",
+        "name": "FUN_006b3656",
+        "signature": "int __stdcall FUN_006b3656(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006b3656\n// Address:   0x006b3656\n// Signature: int __stdcall FUN_006b3656(void)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\nint FUN_006b3656(void)\n\n\n\n{\n\n  DWORD DVar1;\n\n  int iVar2;\n\n  int iVar3;\n\n  \n\n  iVar3 = 0;\n\n  DVar1 = GetLogicalDrives();\n\n  FUN_006b3b0e(&DAT_00892b80,0x68);\n\n  iVar2 = 0;\n\n  do {\n\n    if ((DVar1 & 1 << ((byte)iVar2 & 0x1f)) != 0) {\n\n      (&DAT_00892b80)[iVar3] = (&PTR_DAT_008513e0)[iVar2];\n\n      iVar3 = iVar3 + 1;\n\n    }\n\n    iVar2 = iVar2 + 1;\n\n  } while (iVar2 < 0x1a);\n\n  return iVar3;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006b3656\n// Address:   0x006b3656\n// Signature: int __stdcall FUN_006b3656(void)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\nint FUN_006b3656(void)\n\n\n\n{\n\n  DWORD DVar1;\n\n  int iVar2;\n\n  int iVar3;\n\n  \n\n  iVar3 = 0;\n\n  DVar1 = GetLogicalDrives();\n\n  FUN_006b3b0e(&DAT_00892b80,0x68);\n\n  iVar2 = 0;\n\n  do {\n\n    if ((DVar1 & 1 << ((byte)iVar2 & 0x1f)) != 0) {\n\n      (&DAT_00892b80)[iVar3] = (&PTR_DAT_008513e0)[iVar2];\n\n      iVar3 = iVar3 + 1;\n\n    }\n\n    iVar2 = iVar2 + 1;\n\n  } while (iVar2 < 0x1a);\n\n  return iVar3;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006b3656",
+        "function": {
+          "address": "006b3656",
+          "name": "FUN_006b3656",
+          "signature": "int __stdcall FUN_006b3656(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "006b2a23",
+              "name": "FUN_006b2a23",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "EXTERNAL:00000031",
+              "name": "GetLogicalDrives"
+            },
+            {
+              "addr": "006b3b0e",
+              "name": "FUN_006b3b0e"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "007130d0",
+            "name": "PTR_GetLogicalDrives_007130d0",
+            "type": "pointer",
+            "size": 4,
+            "value": "77387ddd",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006b3656",
+                "func_name": "FUN_006b3656"
+              }
+            ]
+          },
+          {
+            "address": "008513e0",
+            "name": "PTR_DAT_008513e0",
+            "type": "pointer",
+            "size": 4,
+            "value": "00892c24",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "006b3656",
+                "func_name": "FUN_006b3656"
+              }
+            ]
+          },
+          {
+            "address": "008513e4",
+            "name": "PTR_DAT_008513e4",
+            "type": "undefined *",
+            "size": 4,
+            "value": "00892c88",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "006b3656",
+                "func_name": "FUN_006b3656"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006b3656",
+            "stop": "006b3670",
+            "out": [
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006b3672",
+            "stop": "006b3679",
+            "out": [
+              2,
+              3
+            ],
+            "in": [
+              0,
+              3
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006b367b",
+            "stop": "006b3689",
+            "out": [
+              3
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006b368a",
+            "stop": "006b368e",
+            "out": [
+              4,
+              1
+            ],
+            "in": [
+              1,
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006b3690",
+            "stop": "006b3694",
+            "out": [],
+            "in": [
+              3
+            ]
+          }
+        ]
+      }
+    },
+    "006d927a": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d927a",
+        "name": "FUN_006d927a",
+        "signature": "undefined4 __fastcall FUN_006d927a(undefined4 param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d927a\n// Address:   0x006d927a\n// Signature: undefined4 __fastcall FUN_006d927a(undefined4 param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_006d927a(undefined4 param_1)\n\n\n\n{\n\n  FUN_006b3b0e(param_1,0x1c);\n\n  return param_1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d927a\n// Address:   0x006d927a\n// Signature: undefined4 __fastcall FUN_006d927a(undefined4 param_1)\n// Callers:   3  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 __fastcall FUN_006d927a(undefined4 param_1)\n\n\n\n{\n\n  FUN_006b3b0e(param_1,0x1c);\n\n  return param_1;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d927a",
+        "function": {
+          "address": "006d927a",
+          "name": "FUN_006d927a",
+          "signature": "undefined4 __fastcall FUN_006d927a(undefined4 param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "006b2e69",
+              "name": "FUN_006b2e69",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b2e69",
+              "name": "FUN_006b2e69",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b2e69",
+              "name": "FUN_006b2e69",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b3b0e",
+              "name": "FUN_006b3b0e"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d927a",
+            "stop": "006d928a",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d9d15": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d9d15",
+        "name": "006d9d15",
+        "signature": "int __cdecl FUN_006d9d15(int param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d9d15\n// Address:   0x006d9d15\n// Signature: int __cdecl FUN_006d9d15(int param_1)\n// Callers:   1  |  Callees: 4\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nint __cdecl FUN_006d9d15(int param_1)\n\n\n\n{\n\n  if (DAT_00899d5c == 0) {\n\n    FUN_006b3b0e(&DAT_00899d60,0x20);\n\n    FUN_006b3b0e(&hTimer_008527e0,0x18);\n\n    DAT_00899d88 = 0;\n\n    DAT_00899d5c = 1;\n\n  }\n\n  DAT_00899d84 = 0;\n\n  hTimer_008527e0 = CreateWaitableTimerA((LPSECURITY_ATTRIBUTES)0x0,1,(LPCSTR)0x0);\n\n  lpDueTime_008527f0 = (LARGE_INTEGER *)(-10000000 / (longlong)param_1);\n\n  _DAT_008527f4 = (int)lpDueTime_008527f0 >> 0x1f;\n\n  FUN_006d95d0(&DAT_008527e4,&LAB_006d9cae,0,0,0,2);\n\n  DAT_00899d80 = param_1;\n\n  SetWaitableTimer(hTimer_008527e0,(LARGE_INTEGER *)&lpDueTime_008527f0,0,(PTIMERAPCROUTINE)0x0,\n\n                   (LPVOID)0x0,0);\n\n  return DAT_00899d80;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d9d15\n// Address:   0x006d9d15\n// Signature: int __cdecl FUN_006d9d15(int param_1)\n// Callers:   1  |  Callees: 4\n// ===========================================\n\n\n\n/* WARNING: Globals starting with '_' overlap smaller symbols at the same address */\n\n\n\nint __cdecl FUN_006d9d15(int param_1)\n\n\n\n{\n\n  if (DAT_00899d5c == 0) {\n\n    FUN_006b3b0e(&DAT_00899d60,0x20);\n\n    FUN_006b3b0e(&hTimer_008527e0,0x18);\n\n    DAT_00899d88 = 0;\n\n    DAT_00899d5c = 1;\n\n  }\n\n  DAT_00899d84 = 0;\n\n  hTimer_008527e0 = CreateWaitableTimerA((LPSECURITY_ATTRIBUTES)0x0,1,(LPCSTR)0x0);\n\n  lpDueTime_008527f0 = (LARGE_INTEGER *)(-10000000 / (longlong)param_1);\n\n  _DAT_008527f4 = (int)lpDueTime_008527f0 >> 0x1f;\n\n  FUN_006d95d0(&DAT_008527e4,&LAB_006d9cae,0,0,0,2);\n\n  DAT_00899d80 = param_1;\n\n  SetWaitableTimer(hTimer_008527e0,(LARGE_INTEGER *)&lpDueTime_008527f0,0,(PTIMERAPCROUTINE)0x0,\n\n                   (LPVOID)0x0,0);\n\n  return DAT_00899d80;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 4
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d9d15",
+        "function": {
+          "address": "006d9d15",
+          "name": "FUN_006d9d15",
+          "signature": "int __cdecl FUN_006d9d15(int param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "00688130",
+              "name": "FUN_00688130",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b3b0e",
+              "name": "FUN_006b3b0e"
+            },
+            {
+              "addr": "EXTERNAL:00000049",
+              "name": "CreateWaitableTimerA"
+            },
+            {
+              "addr": "006d95d0",
+              "name": "FUN_006d95d0"
+            },
+            {
+              "addr": "EXTERNAL:0000004a",
+              "name": "SetWaitableTimer"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "00713130",
+            "name": "PTR_CreateWaitableTimerA_00713130",
+            "type": "pointer",
+            "size": 4,
+            "value": "77344e56",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              }
+            ]
+          },
+          {
+            "address": "00713134",
+            "name": "PTR_SetWaitableTimer_00713134",
+            "type": "pointer",
+            "size": 4,
+            "value": "773601ef",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              }
+            ]
+          },
+          {
+            "address": "008527e0",
+            "name": "hTimer_008527e0",
+            "type": "HANDLE",
+            "size": 4,
+            "value": "ffffffff",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              },
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              },
+              {
+                "func_addr": "006d9db4",
+                "func_name": "FUN_006d9db4"
+              },
+              {
+                "func_addr": "006d9db4",
+                "func_name": "FUN_006d9db4"
+              },
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              },
+              {
+                "func_addr": "006d9db4",
+                "func_name": "FUN_006d9db4"
+              }
+            ]
+          },
+          {
+            "address": "008527f0",
+            "name": "lpDueTime_008527f0",
+            "type": "LARGE_INTEGER *",
+            "size": 4,
+            "value": "00000000",
+            "section": ".data",
+            "references": [
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              },
+              {
+                "func_addr": "006d9db4",
+                "func_name": "FUN_006d9db4"
+              },
+              {
+                "func_addr": "006d9d15",
+                "func_name": "FUN_006d9d15"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d9d15",
+            "stop": "006d9d25",
+            "out": [
+              2,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d9d27",
+            "stop": "006d9d48",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d9d4e",
+            "stop": "006d9db3",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

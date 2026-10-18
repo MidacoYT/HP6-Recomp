@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "address": "006d7a48",
+      "run_id": "8003e1a0c9db481bb37b40a8e4b3954b",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7a48",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstruct FUN_006d7a48_Output {\n    std::uint8_t field_00[8];\n    std::uint32_t field_08;\n    std::uint32_t field_0c;\n    std::uint32_t field_10;\n};\n\n// The owner type and the three output field names are unresolved.\nvoid __thiscall FUN_006d7a48(\n    void* this_,\n    FUN_006d7a48_Output* param_1)\n{\n    param_1->field_08 =\n        (*static_cast<std::uint32_t*>(this_) >> 10) & 1u;\n    param_1->field_0c =\n        (*static_cast<std::uint32_t*>(this_) >> 11) & 1u;\n    param_1->field_10 =\n        (*static_cast<std::uint32_t*>(this_) >> 9) & 1u;\n}",
+      "verdict": "PASS",
+      "summary": "All three loads, shifts, masks, and stores match the decompilation and P-code in order.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

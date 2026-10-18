@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d7baf",
+      "run_id": "0287af1014cf46faaf0841ca5c47946a",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7baf",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The supplied evidence does not identify the types or names of these fields.\nvoid __thiscall FUN_006d7baf(void* this_, std::int32_t param_1)\n{\n    FUN_006d7a48(this_, param_1);\n\n    auto* destination = reinterpret_cast<std::uint8_t*>(param_1);\n    auto* source = static_cast<std::uint8_t*>(this_);\n\n    destination[0x04] |= 0x80;\n    *reinterpret_cast<std::uint32_t*>(destination + 0x84) =\n        *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n}",
+      "verdict": "FAIL",
+      "summary": "The operations match the binary evidence, but the offsets lack named struct members.",
+      "issues": [
+        "The fields at destination offsets 0x04 and 0x84 and source offset 0x0c are accessed through raw pointer offsets."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7baf\\_FUN_006d7baf.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

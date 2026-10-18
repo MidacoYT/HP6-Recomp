@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "005d8ed0",
+      "run_id": "19aa660f111d4a2aac812c19634418c4",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005d8ed0",
+      "success": true,
+      "rounds_used": 1,
+      "code": "HWND __thiscall FUN_005d8ed0(\n    void* this_, HINSTANCE instance, int width, int height)\n{\n    // The caller supplies the vertical position in EAX.\n    LONG y;\n    __asm mov y, eax\n\n    const LONG x = reinterpret_cast<LONG>(this_);\n    RECT rect;\n    rect.right = x + width;\n    rect.bottom = y + height;\n\n    DWORD exStyle = 0;\n    HWND insertAfter = nullptr;\n    DWORD style;\n    UINT flags;\n\n    if (DAT_00866e2a == '\\0') {\n        style = reinterpret_cast<DWORD>(&dwStyle_00cf0000);\n        flags = 3;\n        rect.left = x;\n        rect.top = y;\n    } else {\n        style = 0x80000000;\n        flags = 0x2003;\n        rect.left = 0;\n        rect.top = 0;\n        insertAfter = reinterpret_cast<HWND>(0xffffffff);\n        exStyle = 8;\n    }\n\n    AdjustWindowRectEx(&rect, style, FALSE, exStyle);\n\n    HWND window = CreateWindowExA(\n        exStyle,\n        \"HalfBloodPrinceMainWndClass\",\n        reinterpret_cast<LPCSTR>(&lpWindowName_0073a1cd),\n        style,\n        rect.left,\n        rect.top,\n        rect.right - rect.left,\n        rect.bottom - rect.top,\n        nullptr,\n        nullptr,\n        instance,\n        nullptr);\n\n    ShowWindow(window, 0);\n    SetWindowPos(window, insertAfter, 0, 0, 0, 0, flags);\n\n    if (DAT_00866e2a != '\\0') {\n        SetMenu(window, nullptr);\n        SetThreadExecutionState(0x80000002);\n    }\n\n    ShowWindow(window, 5);\n    return window;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d8ed0\\_FUN_005d8ed0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

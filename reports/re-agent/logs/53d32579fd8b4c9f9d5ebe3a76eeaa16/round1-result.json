@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d76a6",
+      "run_id": "53d32579fd8b4c9f9d5ebe3a76eeaa16",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d76a6",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t __cdecl FUN_006d74ce(std::int32_t);\nextern std::int32_t __cdecl FUN_006d760a(std::int32_t);\nextern std::int32_t __cdecl FUN_006d768d(std::int32_t);\n\nstd::uint32_t __cdecl FUN_006d76a6(std::int32_t param_1)\n{\n    const auto* base = reinterpret_cast<const std::uint8_t*>(\n        static_cast<std::uintptr_t>(static_cast<std::uint32_t>(param_1)));\n\n    auto load_u32 = [base](std::uint32_t offset) {\n        return *reinterpret_cast<const std::uint32_t*>(base + offset);\n    };\n\n    std::uint32_t size = 0;\n    if ((base[4] & 0x02) != 0) {\n        size = static_cast<std::uint32_t>(FUN_006d74ce(param_1));\n    }\n\n    const std::uint32_t flags = load_u32(4);\n\n    if ((flags & 0x04) != 0) {\n        if (size != 0 && load_u32(0x60) == 0) {\n            size = (size + 0x0f) & 0xfffffff0u;\n        }\n        size += static_cast<std::uint32_t>(FUN_006d760a(param_1));\n    }\n\n    if ((flags & 0x100) != 0) {\n        std::uint32_t aligned = 0;\n        if (size != 0) {\n            aligned = (size + 0x0f) & 0xfffffff0u;\n        }\n        size = aligned + 0x20;\n    }\n\n    if ((flags & 0x10) != 0) {\n        std::uint32_t aligned = 0;\n        if (size != 0) {\n            aligned = (size + 0x0f) & 0xfffffff0u;\n        }\n        size = aligned + static_cast<std::uint32_t>(FUN_006d768d(param_1));\n    }\n\n    if ((flags & 0x80) != 0) {\n        std::uint32_t aligned = 0;\n        if (size != 0) {\n            aligned = ((size - 1) & 0xfffffff0u) + 0x10;\n        }\n        size = aligned + 0x10 + load_u32(0x84);\n    }\n\n    if ((flags & 0x20) != 0) {\n        std::uint32_t aligned = 0;\n        if (size != 0) {\n            aligned = ((size - 1) & 0xfffffff0u) + 0x10;\n        }\n        size = aligned + 0x11 + load_u32(0x90);\n    }\n\n    return size;\n}\n// Member names for offsets 0x04, 0x60, 0x84, and 0x90 are unresolved by the supplied evidence.",
+      "verdict": "FAIL",
+      "summary": "The control flow, calls, and arithmetic match, but the struct offsets lack named members.",
+      "issues": [
+        "Offsets 0x04, 0x60, 0x84, and 0x90 are accessed through raw byte offsets; the stated verification standard requires each to map to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

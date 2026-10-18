@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d88d2",
+      "run_id": "1145eb6e7811422ca60852a9169bb2b8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d88d2",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006d88d2(std::uint32_t* param_1)\n{\n    std::uint32_t total = 0;\n    std::uint32_t* previous = nullptr;\n\n    while (param_1 != nullptr) {\n        // The supplied evidence does not identify members at offsets +0x04\n        // and +0x0c, so these accesses retain their word offsets.\n        const std::uint32_t kind = FUN_006d6c09(param_1);\n\n        if (kind == 2) {\n            if (previous != nullptr) {\n                total = ((total + 0x7fu) & 0xffffff80u) - 0x20u;\n            }\n            total = total + 0x20u + param_1[3];\n        } else if (kind == 4 || kind == 0x10) {\n            if (previous != nullptr) {\n                total = (total + 0x0fu) & 0xfffffff0u;\n            }\n            total = total + 0x20u + param_1[3];\n        } else if (kind == 0x20 || kind == 0x80) {\n            if (previous != nullptr) {\n                total = ((total - 1u) & 0xfffffff0u) + 0x10u;\n            }\n            total = total + 0x10u + param_1[3];\n        } else if (kind == 0x100) {\n            if (previous != nullptr) {\n                total = (total + 0x0fu) & 0xfffffff0u;\n            }\n            total = total + FUN_006d8864(param_1);\n        } else if (kind != 1) {\n            return 0;\n        }\n\n        previous = param_1;\n        param_1 = param_1[1] == 0\n            ? nullptr\n            : reinterpret_cast<std::uint32_t*>(\n                  reinterpret_cast<std::uintptr_t>(param_1) + param_1[1]);\n    }\n\n    return total;\n}",
+      "verdict": "FAIL",
+      "summary": "The arithmetic and branches align, but the return value and structure layout are not fully verified.",
+      "issues": [
+        "Offsets +0x04 and +0x0c remain raw array accesses rather than named struct members.",
+        "Ghidra and the P-code show FUN_006d6c09 producing one byte while the comparisons use the full 32-bit register, whose upper bytes are unresolved. The uint32_t kind assignment does not establish how those bytes behave, particularly for the 0x100 branch."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 14 branches/loops, candidate has 10"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d88d2\\_FUN_006d88d2.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

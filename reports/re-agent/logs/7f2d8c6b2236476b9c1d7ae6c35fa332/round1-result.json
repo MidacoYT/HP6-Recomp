@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dc17c",
+      "run_id": "7f2d8c6b2236476b9c1d7ae6c35fa332",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc17c",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* output_1,\n    std::uint32_t* output_2);\n\nextern void __cdecl FUN_006dbb17(\n    std::uint32_t* param_1,\n    std::uint32_t enabled);\n\nvoid __cdecl FUN_006dc17c(std::uint32_t* param_1, std::int32_t param_2)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c, &local_8) == 0) {\n        auto* record = reinterpret_cast<std::uint8_t*>(\n            static_cast<std::uintptr_t>(local_8));\n\n        // The record type and member names are unresolved.\n        auto& field_50 = *reinterpret_cast<std::int32_t*>(record + 0x50);\n        auto& field_58 = *reinterpret_cast<std::int32_t*>(record + 0x58);\n\n        const std::int32_t previous = field_50;\n        field_50 = param_2;\n\n        const std::uint32_t enabled =\n            static_cast<std::uint32_t>(field_58 < param_2);\n\n        if (static_cast<std::uint32_t>(field_58 < previous) != enabled) {\n            FUN_006dbb17(param_1, enabled);\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and comparisons match, but the record fields and a callee declaration need correction.",
+      "issues": [
+        "Offsets 0x50 and 0x58 are accessed through unresolved field references, not named struct members.",
+        "FUN_006db3f9 is declared __fastcall, while the supplied P-code shows all three arguments passed on the stack."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc17c\\_FUN_006dc17c.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

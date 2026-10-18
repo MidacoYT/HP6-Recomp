@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "00642420",
+      "run_id": "4820f52425cf4c8389cd57b1160ad4d9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00642420",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t DAT_00cf19bc;\n\nextern void __stdcall FUN_006525d0();\nextern void __stdcall FUN_006532e0();\n\nvoid __stdcall FUN_00642420()\n{\n    FUN_006525d0();\n\n    if (DAT_00cf19bc > 2) {\n        FUN_006532e0();\n    }\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the calls and signed conditional branch.",
+      "issues": [],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "P-code return mismatch: normalized IR has 2 returns, candidate has no explicit return"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00642420\\_FUN_00642420.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

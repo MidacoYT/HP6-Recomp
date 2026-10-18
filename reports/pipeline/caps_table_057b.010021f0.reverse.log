@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "010021f0",
+      "run_id": "697325bb9a6d4b989d687edbadf98a61",
+      "error": null,
+      "class_name": "",
+      "function_name": "010021f0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __stdcall FUN_010021f0()\n{\n    // The input is passed in ESI; its structure and member names are unresolved.\n    std::int32_t* values;\n    __asm mov values, esi\n\n    FUN_0064c300(0x13, values[1]);\n    FUN_0064c300(0x14, values[2]);\n    FUN_0064c300(0x1b, values[3]);\n    FUN_0064c300(0x80, values[4]);\n    FUN_0064c300(0x81, values[5]);\n    FUN_0064c300(0x82, values[6]);\n    FUN_0064c300(0x83, values[7]);\n    FUN_0064c300(0x84, values[8]);\n    FUN_0064c300(0x85, values[9]);\n    FUN_0064c300(0x86, values[10]);\n    FUN_0064c300(0x87, values[11]);\n    FUN_0064c300(0xab, values[12]);\n\n    FUN_0064c3b0(0, 1, values[13]);\n    FUN_0064c3b0(0, 2, values[14]);\n    FUN_0064c3b0(0, 3, values[15]);\n    FUN_0064c3b0(0, 4, values[16]);\n    FUN_0064c3b0(0, 5, values[17]);\n    FUN_0064c3b0(0, 6, values[18]);\n\n    _DAT_008813a4 = values[13];\n    _DAT_008813a8 = values[14];\n    _DAT_008813ac = values[15];\n    _DAT_008813b0 = values[16];\n    _DAT_008813b4 = values[17];\n    _DAT_008813b8 = values[18];\n\n    _DAT_00881374 = values[1];\n    _DAT_00881378 = values[2];\n    _DAT_0088137c = values[3];\n    _DAT_00881380 = values[4];\n    _DAT_00881384 = values[5];\n    _DAT_00881388 = values[6];\n    _DAT_0088138c = values[7];\n    _DAT_00881390 = values[8];\n    _DAT_00881394 = values[9];\n    _DAT_00881398 = values[10];\n    _DAT_0088139c = values[11];\n    _DAT_008813a0 = values[12];\n\n    DAT_0086527c = values[0];\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and assignments match, but the input structure has no named members.",
+      "issues": [
+        "values[0] through values[18] preserve the Ghidra offsets but do not map them to named structure members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\010021f0\\_010021f0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,35 @@
+{
+  "results": [
+    {
+      "address": "006d74ce",
+      "run_id": "ea33d902dec24fb98f1597eec56d8d26",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d74ce",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <bit>\n#include <cstdint>\n\nextern const std::uint8_t DAT_0071b150[];\nstd::uint8_t __cdecl FUN_006d7170(std::uint32_t);\nstd::uint8_t __cdecl FUN_006d7187(std::uint32_t);\nstd::int32_t __cdecl FUN_006d8d62(std::uint32_t, std::uint32_t, std::uint32_t);\n\nstd::int32_t __cdecl FUN_006d74ce(std::int32_t param_1)\n{\n    // The supplied evidence does not identify the structure or its member names.\n    const auto base = static_cast<std::uintptr_t>(static_cast<std::uint32_t>(param_1));\n    const auto read = [base](std::uintptr_t offset) -> std::uint32_t {\n        return *reinterpret_cast<const std::uint32_t*>(base + offset);\n    };\n\n    const auto level_limit = std::bit_cast<std::int32_t>(read(0x28));\n    const auto format = read(0x14);\n    std::uint32_t width = read(0x18);\n    std::uint32_t height = read(0x1c);\n    std::uint32_t total = 0;\n\n    if (read(0x50) != 0)\n        return 0x20;\n\n    const auto table_value = DAT_0071b150[format & 0xff];\n    const std::uint32_t bits = table_value == 0x0f ? 0x10 : table_value;\n\n    if (std::bit_cast<std::int32_t>(width) < 1 ||\n        std::bit_cast<std::int32_t>(height) < 1)\n        return 0;\n\n    if (level_limit >= 0) {\n        const auto aligned_four = FUN_006d7170(format);\n        const auto extra_size = FUN_006d7187(format);\n        std::int32_t level = 0;\n\n        do {\n            std::uint32_t row_width;\n            std::uint32_t row_count;\n\n            if (aligned_four != 0) {\n                row_width = (width + 3) & 0xfffffffc;\n                row_count = (height + 3) & 0xfffffffc;\n            } else {\n                row_count = height;\n                if (format == 0x68) {\n                    row_width = (width + 1) & 0xfffffffe;\n                } else if (extra_size != 0) {\n                    row_width = (width + 0x1f) & 0xffffffe0;\n                    row_count = (height + 0x0f) & 0xfffffff0;\n                } else {\n                    row_width = width;\n                }\n            }\n\n            const auto row_bytes =\n                std::bit_cast<std::int32_t>(row_width * bits + 7) >> 3;\n            total += static_cast<std::uint32_t>(row_bytes) * row_count;\n\n            if (extra_size != 0)\n                total += static_cast<std::uint32_t>(\n                    FUN_006d8d62(format, row_count, row_width));\n\n            if (width == 1 && height == 1)\n                break;\n\n            width >>= 1;\n            height >>= 1;\n            if (width < 1) width = 1;\n            if (height < 1) height = 1;\n            ++level;\n        } while (level <= level_limit);\n    }\n\n    return std::bit_cast<std::int32_t>(total + 0x20);\n}",
+      "verdict": "FAIL",
+      "summary": "The calculations and calls match, but the binary\u2019s read order and required struct mapping do not.",
+      "issues": [
+        "P-code reads offset 0x50 before offsets 0x28, 0x1c, 0x14, and 0x18; the reversed code reads it last. This can change behavior if an earlier read faults or the memory changes.",
+        "Offsets 0x14, 0x18, 0x1c, 0x28, and 0x50 use numeric reads instead of named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d74ce\\_FUN_006d74ce.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 3 calls, source has 8 calls (diff: 5)"
+        }
+      ]
+    }
+  ]
+}

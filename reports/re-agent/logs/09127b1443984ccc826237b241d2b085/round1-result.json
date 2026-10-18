@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006b7cef",
+      "run_id": "09127b1443984ccc826237b241d2b085",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b7cef",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The class and vtable entry types are unresolved.\nextern void* PTR_LAB_00715da8;\nextern void __cdecl FUN_005dc710(std::int32_t);\n\nstd::uint32_t* __thiscall FUN_006b7cef(void* this_, std::uint8_t param_1)\n{\n    *reinterpret_cast<void**>(this_) = &PTR_LAB_00715da8;\n\n    if ((param_1 & 1u) != 0) {\n        FUN_005dc710(reinterpret_cast<std::int32_t>(this_));\n    }\n\n    return reinterpret_cast<std::uint32_t*>(this_);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b7cef\\_FUN_006b7cef.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

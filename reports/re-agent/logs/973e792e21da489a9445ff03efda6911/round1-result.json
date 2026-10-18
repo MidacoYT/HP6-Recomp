@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006de65f",
+      "run_id": "973e792e21da489a9445ff03efda6911",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de65f",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t PTR_FUN_0071b628;\nvoid __cdecl FUN_006dcbc7(void* ptr, std::uint32_t size);\n\nstd::uint32_t* __thiscall FUN_006de65f(void* this_, std::uint8_t param_1)\n{\n    *reinterpret_cast<std::uint32_t**>(this_) = &PTR_FUN_0071b628;\n\n    if ((param_1 & 1) != 0) {\n        FUN_006dcbc7(this_, 0x24);\n    }\n\n    return static_cast<std::uint32_t*>(this_);\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow matches, but the object layout and global pointer type are not represented accurately.",
+      "issues": [
+        "The store at this + 0 uses a cast instead of a named struct member.",
+        "PTR_FUN_0071b628 is declared as a uint32_t, while the binary evidence identifies it as a pointer."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006de65f\\_FUN_006de65f.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

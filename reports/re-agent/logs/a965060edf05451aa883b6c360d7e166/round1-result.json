@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006d83ab",
+      "run_id": "a965060edf05451aa883b6c360d7e166",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d83ab",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The types and member names at offsets 0x08 and 0x0C are unresolved.\nvoid __thiscall FUN_006d83ab(void* this_, void* param_1)\n{\n    std::uint32_t local_c4[48];\n\n    FUN_006d744b(local_c4);\n    FUN_006d7b49(this_, reinterpret_cast<std::int32_t>(local_c4));\n    FUN_006d7827(param_1, reinterpret_cast<std::int32_t>(local_c4));\n\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    destination[1] &= 0xfb;\n\n    auto* source = static_cast<std::uint8_t*>(this_);\n    std::uint32_t byte_count =\n        *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n\n    const std::int32_t source_offset =\n        *reinterpret_cast<std::int32_t*>(source + 0x08);\n    auto* source_words = source_offset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(\n              reinterpret_cast<std::uintptr_t>(this_) +\n              static_cast<std::uint32_t>(source_offset));\n\n    const std::int32_t destination_offset =\n        *reinterpret_cast<std::int32_t*>(destination + 0x08);\n    auto* destination_words = destination_offset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(\n              reinterpret_cast<std::uintptr_t>(param_1) +\n              static_cast<std::uint32_t>(destination_offset));\n\n    for (std::uint32_t count = byte_count >> 2; count != 0; --count) {\n        *destination_words = *source_words;\n        ++source_words;\n        ++destination_words;\n    }\n\n    for (byte_count &= 3; byte_count != 0; --byte_count) {\n        *reinterpret_cast<std::uint8_t*>(destination_words) =\n            *reinterpret_cast<std::uint8_t*>(source_words);\n        destination_words = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(destination_words) + 1);\n        source_words = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(source_words) + 1);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The copy logic matches, but the fields at offsets 0x08 and 0x0C are unnamed.",
+      "issues": [
+        "The source and destination fields at offset 0x08 and the byte-count field at offset 0x0C are accessed through raw pointer arithmetic, violating the required named-member mapping."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 4 branches/loops, candidate has 2"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d83ab\\_FUN_006d83ab.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

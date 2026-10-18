@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "00401020",
+      "run_id": "845f779262d94af1a7a29cec6a2a51c2",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00401020",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cmath>\n\n// Requires an ABI where long double is the x87 80-bit floating-point type.\nlong double __cdecl FUN_00401020(float param_1)\n{\n    return std::sqrt(static_cast<long double>(param_1));\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the float-to-80-bit conversion, square root, and return shown by Ghidra and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00401020\\_FUN_00401020.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

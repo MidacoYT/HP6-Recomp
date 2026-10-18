@@ -1,0 +1,15 @@
+Reversal failed for 006da14e: codex CLI not found: C:\Users\trist\AppData\Roaming\npm\codex.cmd
+{
+  "results": [
+    {
+      "address": "006da14e",
+      "run_id": "",
+      "error": "codex CLI not found: C:\\Users\\trist\\AppData\\Roaming\\npm\\codex.cmd",
+      "class_name": "",
+      "function_name": "FUN_006da14e",
+      "success": false,
+      "rounds_used": 0,
+      "code": null
+    }
+  ]
+}

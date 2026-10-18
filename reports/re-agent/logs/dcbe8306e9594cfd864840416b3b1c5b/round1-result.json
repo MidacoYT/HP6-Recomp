@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006de735",
+      "run_id": "dcbe8306e9594cfd864840416b3b1c5b",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de735",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t PTR_FUN_0071b650;\n\n// 32-bit target. The stored value is the address of the global, not its contents.\nvoid __fastcall FUN_006de735(std::uint32_t* param_1)\n{\n    *param_1 = static_cast<std::uint32_t>(\n        reinterpret_cast<std::uintptr_t>(&PTR_FUN_0071b650));\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and P-code: it stores the global's address and returns.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006de735\\_FUN_006de735.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (4 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

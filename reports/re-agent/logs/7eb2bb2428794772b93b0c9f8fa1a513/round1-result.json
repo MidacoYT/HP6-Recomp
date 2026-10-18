@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006de5b0",
+      "run_id": "7eb2bb2428794772b93b0c9f8fa1a513",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de5b0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The member at 0x468 and the two virtual methods have no resolved names.\nstd::uint32_t __fastcall FUN_006de5b0(int param_1)\n{\n    auto* field_468 = reinterpret_cast<void**>(param_1 + 0x468);\n    void* object = *field_468;\n\n    if (object != nullptr) {\n        auto* vtable = *reinterpret_cast<void***>(object);\n        reinterpret_cast<void(__thiscall*)(void*)>(vtable[0x20 / 4])(object);\n\n        object = *field_468;\n        if (object != nullptr) {\n            vtable = *reinterpret_cast<void***>(object);\n            reinterpret_cast<void(__thiscall*)(void*)>(vtable[0x08 / 4])(object);\n            *field_468 = nullptr;\n        }\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and virtual-call order match, but the 0x468 offset lacks a named struct member.",
+      "issues": [
+        "The access at param_1 + 0x468 uses pointer arithmetic instead of a named member, failing the required struct-offset mapping."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006de5b0\\_FUN_006de5b0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

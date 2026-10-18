@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d7745",
+      "run_id": "9e80531c0774487685f36db98ba222af",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7745",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006d6bce(void* this_, std::int32_t param_1);\nvoid __thiscall FUN_006d71fd(void* this_, std::int32_t param_1);\nvoid __thiscall FUN_006d71db(void* this_, std::int32_t param_1);\n\nvoid __thiscall FUN_006d7745(void* this_, std::int32_t param_1)\n{\n    auto* words = static_cast<std::uint32_t*>(this_);\n    const auto* source = reinterpret_cast<const std::int32_t*>(param_1);\n\n    words[0] = (words[0] & 0xFFFFFEFFu) | 0x100u;\n\n    FUN_006d6bce(this_, source[2]); // +0x08\n    FUN_006d71fd(this_, source[3]); // +0x0C\n    FUN_006d71db(this_, source[4]); // +0x10\n\n    words[2] = 0;\n    words[3] = 0;\n    words[1] = 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The logic and operation order match, but the struct offsets lack named members.",
+      "issues": [
+        "words[0], words[1], words[2], and words[3] leave the this-object offsets unnamed.",
+        "source[2], source[3], and source[4] leave the input offsets +0x08, +0x0C, and +0x10 unnamed."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7745\\_FUN_006d7745.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

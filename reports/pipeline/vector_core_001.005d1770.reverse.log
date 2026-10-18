@@ -1,0 +1,36 @@
+{
+  "results": [
+    {
+      "address": "005d1770",
+      "run_id": "0d160a832e3f4533bfe8f833dec665d8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005d1770",
+      "success": true,
+      "rounds_used": 1,
+      "code": "long double __stdcall FUN_005d1770(float* param_1, float* param_2)\n{\n    return static_cast<long double>(param_2[0]) * static_cast<long double>(param_1[0])\n         + static_cast<long double>(param_2[1]) * static_cast<long double>(param_1[1])\n         + static_cast<long double>(param_1[2]) * static_cast<long double>(param_2[2]);\n}",
+      "verdict": "PASS",
+      "summary": "The three products, addition order, float conversions, and return value match the decompilation.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d1770\\_FUN_005d1770.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        },
+        {
+          "level": "yellow",
+          "reason": "ASM contains floating-point sensitive ops but source has no obvious math tokens"
+        }
+      ]
+    }
+  ]
+}

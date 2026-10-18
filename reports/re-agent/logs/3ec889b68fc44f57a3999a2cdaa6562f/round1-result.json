@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dbee7",
+      "run_id": "3ec889b68fc44f57a3999a2cdaa6562f",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbee7",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nextern std::uint32_t __fastcall FUN_006db50a(\n    std::int32_t param_1,\n    std::uint32_t param_2);\n\nstd::uint32_t __cdecl FUN_006dbee7(\n    std::uint32_t* param_1,\n    std::uint32_t param_2)\n{\n    std::uint32_t local_c;\n    std::int32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c,\n                      reinterpret_cast<std::uint32_t*>(&local_8)) == 0) {\n        const std::uint32_t address = FUN_006db50a(local_8, param_2);\n        if (address != 0) {\n            return *reinterpret_cast<const std::uint32_t*>(address + 4);\n        }\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The source matches the decompilation, but the field is unnamed and the independent branch evidence conflicts.",
+      "issues": [
+        "The read at address + 4 uses a raw offset instead of a named struct member.",
+        "The supplied P-code sends equality branches to the opposite paths from the decompilation; the branch behavior cannot be verified from these conflicting representations."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dbee7\\_FUN_006dbee7.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

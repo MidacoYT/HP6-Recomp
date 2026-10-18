@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006dc6a3",
+      "run_id": "3a583a64b63e46b9a2c1fd0bcac26d10",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc6a3",
+      "success": true,
+      "rounds_used": 1,
+      "code": "unsigned int __cdecl FUN_006dc6a3(\n    unsigned char* param_1,\n    int* param_2,\n    unsigned int* param_3)\n{\n    const unsigned int size = FUN_006dc664(param_1);\n    unsigned char* const tail = param_1 + (size - 8);\n\n    const char first = static_cast<char>(tail[0]);\n    if (!((first >= 'A' && first <= 'Z') ||\n          (first >= 'a' && first <= 'z'))) {\n        return 0;\n    }\n\n    const char second = static_cast<char>(tail[1]);\n    if (second < '0' || second > '9') {\n        return 0;\n    }\n\n    const char third = static_cast<char>(tail[2]);\n    if (third < '0' || third > '9') {\n        return 0;\n    }\n\n    const char fourth = static_cast<char>(tail[3]);\n    if (fourth < '0' || fourth > '9') {\n        return 0;\n    }\n\n    if (param_2 != nullptr) {\n        *param_2 = fourth + -0x14d0 + (third + second * 10) * 10;\n    }\n\n    if (param_3 != nullptr) {\n        *param_3 = FUN_006dc532(tail + 4, 4);\n    }\n\n    return 8;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc6a3\\_FUN_006dc6a3.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

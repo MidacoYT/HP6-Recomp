@@ -1,0 +1,534 @@
+{
+  "schema_version": 1,
+  "identity": "189b712cf63dfafaa1af4faf4e6efd540daf1aa92d20e4c534a71d564bf695f4",
+  "seeds": [
+    "006de65f",
+    "006de70d",
+    "006de7a1",
+    "006de7d0",
+    "006de7e5"
+  ],
+  "functions": [
+    {
+      "address": "006de65f",
+      "class_name": "",
+      "function_name": "FUN_006de65f",
+      "caller_count": 0
+    },
+    {
+      "address": "006de70d",
+      "class_name": "",
+      "function_name": "FUN_006de70d",
+      "caller_count": 0
+    },
+    {
+      "address": "006de7a1",
+      "class_name": "",
+      "function_name": "FUN_006de7a1",
+      "caller_count": 0
+    },
+    {
+      "address": "006de7d0",
+      "class_name": "",
+      "function_name": "FUN_006de7d0",
+      "caller_count": 2
+    },
+    {
+      "address": "006de7e5",
+      "class_name": "",
+      "function_name": "FUN_006de7e5",
+      "caller_count": 0
+    }
+  ],
+  "edges": [
+    {
+      "source": "006de65f",
+      "target": "006dcbc7"
+    },
+    {
+      "source": "006de70d",
+      "target": "006dcbc7"
+    },
+    {
+      "source": "006de70d",
+      "target": "006de7d0"
+    },
+    {
+      "source": "006de7a1",
+      "target": "006dcbc7"
+    },
+    {
+      "source": "006de7e5",
+      "target": "006dcbc7"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006de65f",
+      "reason": "Dependency 006dcbc7 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006de70d",
+      "reason": "Dependency 006dcbc7 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006de7a1",
+      "reason": "Dependency 006dcbc7 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006de7e5",
+      "reason": "Dependency 006dcbc7 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006de65f": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006de65f",
+        "name": "FUN_006de65f",
+        "signature": "undefined4 * __thiscall FUN_006de65f(void * this, byte param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006de65f\n// Address:   0x006de65f\n// Signature: undefined4 * __thiscall FUN_006de65f(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de65f(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b628;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x24);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006de65f\n// Address:   0x006de65f\n// Signature: undefined4 * __thiscall FUN_006de65f(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de65f(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b628;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x24);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006de65f",
+        "function": {
+          "address": "006de65f",
+          "name": "FUN_006de65f",
+          "signature": "undefined4 * __thiscall FUN_006de65f(void * this, byte param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006dcbc7",
+              "name": "FUN_006dcbc7"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071b628",
+            "name": "PTR_FUN_0071b628",
+            "type": "pointer",
+            "size": 4,
+            "value": "006de65f",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006de658",
+                "func_name": "FUN_006de658"
+              },
+              {
+                "func_addr": "006de65f",
+                "func_name": "FUN_006de65f"
+              },
+              {
+                "func_addr": "006de63a",
+                "func_name": "FUN_006de63a"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006de65f",
+            "stop": "006de66f",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006de671",
+            "stop": "006de67a",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006de67b",
+            "stop": "006de67f",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006de70d": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006de70d",
+        "name": "FUN_006de70d",
+        "signature": "undefined4 * __thiscall FUN_006de70d(void * this, byte param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006de70d\n// Address:   0x006de70d\n// Signature: undefined4 * __thiscall FUN_006de70d(void * this, byte param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de70d(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b62c;\n\n  FUN_006de7d0(this);\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x78);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006de70d\n// Address:   0x006de70d\n// Signature: undefined4 * __thiscall FUN_006de70d(void * this, byte param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de70d(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b62c;\n\n  FUN_006de7d0(this);\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x78);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006de70d",
+        "function": {
+          "address": "006de70d",
+          "name": "FUN_006de70d",
+          "signature": "undefined4 * __thiscall FUN_006de70d(void * this, byte param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006de7d0",
+              "name": "FUN_006de7d0"
+            },
+            {
+              "addr": "006dcbc7",
+              "name": "FUN_006dcbc7"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071b62c",
+            "name": "PTR_FUN_0071b62c",
+            "type": "undefined *",
+            "size": 4,
+            "value": "006de70d",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006de6d7",
+                "func_name": "FUN_006de6d7"
+              },
+              {
+                "func_addr": "006de687",
+                "func_name": "FUN_006de687"
+              },
+              {
+                "func_addr": "006de70d",
+                "func_name": "FUN_006de70d"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006de70d",
+            "stop": "006de722",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006de724",
+            "stop": "006de72d",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006de72e",
+            "stop": "006de732",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006de7a1": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006de7a1",
+        "name": "FUN_006de7a1",
+        "signature": "undefined4 * __thiscall FUN_006de7a1(void * this, byte param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006de7a1\n// Address:   0x006de7a1\n// Signature: undefined4 * __thiscall FUN_006de7a1(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de7a1(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b650;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x464);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006de7a1\n// Address:   0x006de7a1\n// Signature: undefined4 * __thiscall FUN_006de7a1(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de7a1(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b650;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,0x464);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006de7a1",
+        "function": {
+          "address": "006de7a1",
+          "name": "FUN_006de7a1",
+          "signature": "undefined4 * __thiscall FUN_006de7a1(void * this, byte param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006dcbc7",
+              "name": "FUN_006dcbc7"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071b650",
+            "name": "PTR_FUN_0071b650",
+            "type": "undefined *",
+            "size": 4,
+            "value": "006de7a1",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006de77d",
+                "func_name": "FUN_006de77d"
+              },
+              {
+                "func_addr": "006de76b",
+                "func_name": "FUN_006de76b"
+              },
+              {
+                "func_addr": "006de735",
+                "func_name": "FUN_006de735"
+              },
+              {
+                "func_addr": "006de7a1",
+                "func_name": "FUN_006de7a1"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006de7a1",
+            "stop": "006de7b1",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006de7b3",
+            "stop": "006de7bf",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006de7c0",
+            "stop": "006de7c4",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006de7d0": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006de7d0",
+        "name": "FUN_006de7d0",
+        "signature": "undefined __fastcall FUN_006de7d0(undefined4 * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006de7d0\n// Address:   0x006de7d0\n// Signature: undefined __fastcall FUN_006de7d0(undefined4 * param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nvoid __fastcall FUN_006de7d0(undefined4 *param_1)\n\n\n\n{\n\n  *param_1 = &PTR_FUN_0071b670;\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006de7d0\n// Address:   0x006de7d0\n// Signature: undefined __fastcall FUN_006de7d0(undefined4 * param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nvoid __fastcall FUN_006de7d0(undefined4 *param_1)\n\n\n\n{\n\n  *param_1 = &PTR_FUN_0071b670;\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006de7d0",
+        "function": {
+          "address": "006de7d0",
+          "name": "FUN_006de7d0",
+          "signature": "undefined __fastcall FUN_006de7d0(undefined4 * param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "006de70d",
+              "name": "FUN_006de70d",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006de6d7",
+              "name": "FUN_006de6d7",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071b670",
+            "name": "PTR_FUN_0071b670",
+            "type": "undefined *",
+            "size": 4,
+            "value": "006de7e5",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006de7e5",
+                "func_name": "FUN_006de7e5"
+              },
+              {
+                "func_addr": "006de7d0",
+                "func_name": "FUN_006de7d0"
+              },
+              {
+                "func_addr": "006de7c7",
+                "func_name": "FUN_006de7c7"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006de7d0",
+            "stop": "006de7d6",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006de7e5": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006de7e5",
+        "name": "FUN_006de7e5",
+        "signature": "undefined4 * __thiscall FUN_006de7e5(void * this, byte param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006de7e5\n// Address:   0x006de7e5\n// Signature: undefined4 * __thiscall FUN_006de7e5(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de7e5(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b670;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,4);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006de7e5\n// Address:   0x006de7e5\n// Signature: undefined4 * __thiscall FUN_006de7e5(void * this, byte param_1)\n// Callers:   0  |  Callees: 1\n// ===========================================\n\n\n\nundefined4 * __thiscall FUN_006de7e5(void *this,byte param_1)\n\n\n\n{\n\n  *(undefined ***)this = &PTR_FUN_0071b670;\n\n  if ((param_1 & 1) != 0) {\n\n    FUN_006dcbc7(this,4);\n\n  }\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006de7e5",
+        "function": {
+          "address": "006de7e5",
+          "name": "FUN_006de7e5",
+          "signature": "undefined4 * __thiscall FUN_006de7e5(void * this, byte param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006dcbc7",
+              "name": "FUN_006dcbc7"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [
+          {
+            "address": "0071b670",
+            "name": "PTR_FUN_0071b670",
+            "type": "undefined *",
+            "size": 4,
+            "value": "006de7e5",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006de7e5",
+                "func_name": "FUN_006de7e5"
+              },
+              {
+                "func_addr": "006de7d0",
+                "func_name": "FUN_006de7d0"
+              },
+              {
+                "func_addr": "006de7c7",
+                "func_name": "FUN_006de7c7"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006de7e5",
+            "stop": "006de7f5",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006de7f7",
+            "stop": "006de800",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006de801",
+            "stop": "006de805",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006b492b",
+      "run_id": "8e335e687ff44f59a6ff37c3ec4f54e8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b492b",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nusing Callback_006b492b = void (__cdecl *)(std::uint32_t, std::uint32_t);\nextern Callback_006b492b* DAT_00892df8;\n\nvoid __cdecl FUN_006b492b(std::uint32_t param_1, std::uint32_t param_2)\n{\n    DAT_00892df8[1](param_1, param_2);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the indirect call through the pointer at DAT_00892df8 plus 4, with both arguments in order.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b492b\\_FUN_006b492b.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

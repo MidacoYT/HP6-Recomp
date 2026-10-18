@@ -1,0 +1,196 @@
+{
+  "schema_version": 1,
+  "identity": "42ec0f82510bdf2a6d9e00b47d6ae55509f8346b681ac2254b5cea990c8dfef5",
+  "seeds": [
+    "005dc710"
+  ],
+  "functions": [
+    {
+      "address": "005dc710",
+      "class_name": "",
+      "function_name": "FUN_005dc710",
+      "caller_count": 19
+    }
+  ],
+  "edges": [
+    {
+      "source": "005dc710",
+      "target": "005db920"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "005dc710",
+      "reason": "Dependency 005db920 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "005dc710": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "005dc710",
+        "name": "FUN_005dc710",
+        "signature": "undefined __cdecl FUN_005dc710(int param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_005dc710\n// Address:   0x005dc710\n// Signature: undefined __cdecl FUN_005dc710(int param_1)\n// Callers:   19  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005dc710(int param_1)\n\n\n\n{\n\n  int *piVar1;\n\n  \n\n  if (param_1 != 0) {\n\n    piVar1 = FUN_005db920();\n\n    (**(code **)(*piVar1 + 0xc))(param_1,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_005dc710\n// Address:   0x005dc710\n// Signature: undefined __cdecl FUN_005dc710(int param_1)\n// Callers:   19  |  Callees: 1\n// ===========================================\n\n\n\nvoid __cdecl FUN_005dc710(int param_1)\n\n\n\n{\n\n  int *piVar1;\n\n  \n\n  if (param_1 != 0) {\n\n    piVar1 = FUN_005db920();\n\n    (**(code **)(*piVar1 + 0xc))(param_1,0);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 19,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "005dc710",
+        "function": {
+          "address": "005dc710",
+          "name": "FUN_005dc710",
+          "signature": "undefined __cdecl FUN_005dc710(int param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "006b2ed4",
+              "name": "FUN_006b2ed4",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b2e49",
+              "name": "FUN_006b2e49",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b4a02",
+              "name": "FUN_006b4a02",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b7cef",
+              "name": "FUN_006b7cef",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006be000",
+              "name": "FID_conflict:`scalar_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006be2b0",
+              "name": "FID_conflict:`scalar_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006be310",
+              "name": "FID_conflict:`scalar_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006c4170",
+              "name": "FID_conflict:`scalar_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006c4270",
+              "name": "FUN_006c4270",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006db392",
+              "name": "FUN_006db392",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006dcc40",
+              "name": "FUN_006dcc40",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006dcef4",
+              "name": "FUN_006dcef4",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006de5e1",
+              "name": "FUN_006de5e1",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006e998b",
+              "name": "FUN_006e998b",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006eda14",
+              "name": "FUN_006eda14",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006edd4e",
+              "name": "FUN_006edd4e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b93aa",
+              "name": "FID_conflict:`vector_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006b93aa",
+              "name": "FID_conflict:`vector_deleting_destructor'",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d91f0",
+              "name": "FUN_006d91f0",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "005db920",
+              "name": "FUN_005db920"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "005dc710",
+            "stop": "005dc717",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "005dc719",
+            "stop": "005dc728",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "005dc72a",
+            "stop": "005dc72b",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 1
+}

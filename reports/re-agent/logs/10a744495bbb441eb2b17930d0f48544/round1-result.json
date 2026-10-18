@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006d9416",
+      "run_id": "10a744495bbb441eb2b17930d0f48544",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d9416",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_006d9416(DWORD param_1)\n{\n    SleepEx(param_1, 1);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the call and return logic.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d9416\\_FUN_006d9416.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

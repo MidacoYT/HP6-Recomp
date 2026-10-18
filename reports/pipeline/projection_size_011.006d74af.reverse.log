@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d74af",
+      "run_id": "355a69fdc8db45d386c89d7148ebbe5b",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d74af",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __cdecl FUN_006d74af(std::int32_t param_1)\n{\n    if (param_1 == 4) {\n        return 0x10;\n    }\n    if (param_1 != 8) {\n        return 0;\n    }\n    return 0x100;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d74af\\_FUN_006d74af.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b2199",
+      "run_id": "6e1c7634ae9e417fa7f4305f3d7fc4f6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2199",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The available evidence identifies these fields by offset, but does not\n// establish their original member names or enclosing types.\nvoid __fastcall FUN_006b2199(int param_1)\n{\n    const int container = FUN_006b18df(\n        *reinterpret_cast<const unsigned int*>(param_1 + 0x0c), 1);\n\n    FUN_006d92a1(container + 0x28);\n\n    const unsigned int key =\n        (static_cast<unsigned int>(\n             *reinterpret_cast<const unsigned char*>(param_1 + 0x12)) << 24) |\n        (*reinterpret_cast<const unsigned int*>(param_1 + 0x0c) & 0x00ffff00u);\n\n    int previous = 0;\n    int current = *reinterpret_cast<const int*>(container + 0x10);\n\n    while (current != 0 &&\n           ((static_cast<unsigned int>(\n                 *reinterpret_cast<const unsigned char*>(current + 0x12)) << 24) |\n            (*reinterpret_cast<const unsigned int*>(current + 0x0c) & 0x00ffff00u)) <= key) {\n        previous = current;\n        const int next_link = *reinterpret_cast<const int*>(current + 0x08);\n        current = next_link == 0 ? 0 : next_link - 8;\n    }\n\n    FUN_006b2ce9(reinterpret_cast<void*>(container + 0x10), previous, param_1);\n    FUN_006d92ac(container + 0x28);\n    FUN_006d92da(container + 0x44);\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, branches, and key comparison match, but the required field mapping and operation order do not.",
+      "issues": [
+        "Offsets +0x08, +0x0c, +0x10, +0x12, +0x28, and +0x44 are accessed by raw pointer arithmetic instead of named struct members.",
+        "The reversed code completes the key expression before loading the list head at container +0x10; the P-code loads the list head before the key shift, mask, and OR."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2199\\_FUN_006b2199.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

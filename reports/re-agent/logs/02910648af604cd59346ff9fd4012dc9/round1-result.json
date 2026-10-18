@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dd354",
+      "run_id": "02910648af604cd59346ff9fd4012dc9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dd354",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_006dd354(std::uint32_t* param_1)\n{\n    *param_1 = reinterpret_cast<std::uint32_t>(&PTR_FUN_0071b580);\n\n    FUN_006de5b0(reinterpret_cast<int>(param_1));\n\n    // Member at offset 0x464; its name is unresolved.\n    FUN_006dd00c(\n        reinterpret_cast<void*>(param_1[0x119]),\n        reinterpret_cast<int>(param_1));\n\n    FUN_006de5e1(param_1);\n}",
+      "verdict": "FAIL",
+      "summary": "The logic and call order match, but the struct offsets lack named members.",
+      "issues": [
+        "Offset 0x464 is accessed as param_1[0x119] rather than a named member.",
+        "Offset 0x0 is accessed as *param_1 rather than a named vtable member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dd354\\_FUN_006dd354.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

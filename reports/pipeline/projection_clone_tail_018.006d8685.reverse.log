@@ -1,0 +1,30 @@
+Candidate validation failed for 006d8685: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006d8685",
+      "run_id": "e03e2b3d33374bfe9942690dab9abcec",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8685",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\n// The member at offset 0x0c has no evidence-backed name.\nstruct FUN_006d8685_Context {\n    std::byte unknown_00[0x0c];\n    std::int32_t field_0c;\n};\n\nstd::uint32_t* __thiscall FUN_006d8685(\n    FUN_006d8685_Context* self,\n    std::uint32_t param_1)\n{\n    auto* result = reinterpret_cast<std::uint32_t*>(\n        FUN_006d6ab6(\"cl_cmnt\", self->field_0c + 0x10,\n                     0x10, 0x10, param_1, \"shpclone.cpp\", 0x136));\n\n    FUN_006d8619(self, result);\n    result[1] = 0;\n    result[0] = (result[0] & 0xfffffbffu) | 0x400u;\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and offsets match, but the binary performs the flag calculation before clearing result[1].",
+      "issues": [
+        "The P-code loads result[0] and applies the AND and OR before storing zero to result[1]. The reversed code stores zero first. The decompilation appears to have reordered these independent operations."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

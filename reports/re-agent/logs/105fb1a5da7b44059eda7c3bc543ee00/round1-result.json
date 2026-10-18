@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006db50a",
+      "run_id": "105fb1a5da7b44059eda7c3bc543ee00",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db50a",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006db50a(std::int32_t param_1,\n                                       std::uint32_t param_2)\n{\n    const std::uint32_t index = param_2 & 0xffu;\n\n    // Member names at +0x20 and +0x24 are unresolved.\n    if (static_cast<std::int32_t>(index) <\n        *reinterpret_cast<std::int32_t*>(param_1 + 0x24)) {\n        auto* entry = reinterpret_cast<std::uint32_t*>(\n            index * 0x128u +\n            *reinterpret_cast<std::uint32_t*>(param_1 + 0x20));\n\n        if (param_2 == entry[0]) {\n            return -static_cast<std::uint32_t>(entry[1] != 0) &\n                   static_cast<std::uint32_t>(\n                       reinterpret_cast<std::uintptr_t>(entry));\n        }\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and arithmetic match, but required struct offsets remain unnamed.",
+      "issues": [
+        "The fields at param_1 + 0x20 and +0x24 use raw offsets instead of named members.",
+        "The entry fields at +0x00 and +0x04 use array indices instead of named members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006db50a\\_FUN_006db50a.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

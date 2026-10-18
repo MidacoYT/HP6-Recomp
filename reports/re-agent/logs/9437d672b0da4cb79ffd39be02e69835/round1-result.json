@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "005d6d80",
+      "run_id": "9437d672b0da4cb79ffd39be02e69835",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d6d80",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::exception* __stdcall FUN_005d6d80(\n    std::exception* param_1,\n    std::string* param_2)\n{\n    ::new (static_cast<void*>(param_1)) std::exception;\n\n    // The derived type and its member name are unresolved.\n    *reinterpret_cast<void**>(param_1) =\n        reinterpret_cast<void*>(0x0083e024);\n\n    ::new (static_cast<void*>(\n        reinterpret_cast<std::byte*>(param_1) + 0x0c))\n        std::string(*param_2);\n\n    return param_1;\n}",
+      "verdict": "FAIL",
+      "summary": "The constructor calls and byte offset match, but exception handling and member mapping are incomplete.",
+      "issues": [
+        "The SEH registration, state change from -1 to 0, and restoration of ExceptionList have no corresponding source logic.",
+        "The vtable pointer at offset 0 and std::string at byte offset 0x0c are accessed through casts rather than named members.",
+        "The behavior of handler LAB_006f5259 during a throwing string copy is not accounted for."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d6d80\\_005d6d80.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

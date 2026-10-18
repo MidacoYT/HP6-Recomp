@@ -1,0 +1,1090 @@
+{
+  "schema_version": 1,
+  "identity": "c405b5faaddd3c150f099fc18a536cef9f304832231c6d7c8ea2915ea473bee4",
+  "seeds": [
+    "006d835e",
+    "006d83ab",
+    "006d8466",
+    "006d84de",
+    "006d8864"
+  ],
+  "functions": [
+    {
+      "address": "006d835e",
+      "class_name": "",
+      "function_name": "FUN_006d835e",
+      "caller_count": 0
+    },
+    {
+      "address": "006d83ab",
+      "class_name": "",
+      "function_name": "FUN_006d83ab",
+      "caller_count": 3
+    },
+    {
+      "address": "006d8466",
+      "class_name": "",
+      "function_name": "FUN_006d8466",
+      "caller_count": 3
+    },
+    {
+      "address": "006d84de",
+      "class_name": "",
+      "function_name": "FUN_006d84de",
+      "caller_count": 0
+    },
+    {
+      "address": "006d8864",
+      "class_name": "",
+      "function_name": "FUN_006d8864",
+      "caller_count": 8
+    }
+  ],
+  "edges": [
+    {
+      "source": "006d835e",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d835e",
+      "target": "006d82ec"
+    },
+    {
+      "source": "006d83ab",
+      "target": "006d744b"
+    },
+    {
+      "source": "006d83ab",
+      "target": "006d7827"
+    },
+    {
+      "source": "006d83ab",
+      "target": "006d7b49"
+    },
+    {
+      "source": "006d8466",
+      "target": "006d744b"
+    },
+    {
+      "source": "006d8466",
+      "target": "006d78a8"
+    },
+    {
+      "source": "006d8466",
+      "target": "006d7b7a"
+    },
+    {
+      "source": "006d84de",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d84de",
+      "target": "006d8466"
+    },
+    {
+      "source": "006d8864",
+      "target": "006d6c09"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006d835e",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d835e",
+      "reason": "Dependency 006d82ec outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d83ab",
+      "reason": "Dependency 006d744b outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d83ab",
+      "reason": "Dependency 006d7827 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d83ab",
+      "reason": "Dependency 006d7b49 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d8466",
+      "reason": "Dependency 006d744b outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d8466",
+      "reason": "Dependency 006d78a8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d8466",
+      "reason": "Dependency 006d7b7a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d84de",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d8864",
+      "reason": "Dependency 006d6c09 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006d835e": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d835e",
+        "name": "FUN_006d835e",
+        "signature": "uint * __thiscall FUN_006d835e(void * this, undefined4 param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d835e\n// Address:   0x006d835e\n// Signature: uint * __thiscall FUN_006d835e(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d835e(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"cl_clut\",*(int *)((int)this + 0xc) + 0x20,0x10,0x20,param_1,\n\n                                \"shpclone.cpp\",0x6f);\n\n  FUN_006d82ec(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d835e\n// Address:   0x006d835e\n// Signature: uint * __thiscall FUN_006d835e(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d835e(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"cl_clut\",*(int *)((int)this + 0xc) + 0x20,0x10,0x20,param_1,\n\n                                \"shpclone.cpp\",0x6f);\n\n  FUN_006d82ec(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d835e",
+        "function": {
+          "address": "006d835e",
+          "name": "FUN_006d835e",
+          "signature": "uint * __thiscall FUN_006d835e(void * this, undefined4 param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d82ec",
+              "name": "FUN_006d82ec"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b258",
+            "value": "shpclone.cpp",
+            "length": 12,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816",
+                "ref_addr": "006d8827"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c",
+                "ref_addr": "006d82a3"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e",
+                "ref_addr": "006d8365"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417",
+                "ref_addr": "006d8428"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de",
+                "ref_addr": "006d84e8"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9",
+                "ref_addr": "006d85d3"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685",
+                "ref_addr": "006d868f"
+              }
+            ]
+          },
+          {
+            "address": "0071b268",
+            "value": "cl_clut",
+            "length": 7,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e",
+                "ref_addr": "006d837a"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b258",
+            "name": "s_shpclone.cpp_0071b258",
+            "type": "string",
+            "size": -1,
+            "value": "shpclone.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685"
+              }
+            ]
+          },
+          {
+            "address": "0071b268",
+            "name": "s_cl_clut_0071b268",
+            "type": "string",
+            "size": -1,
+            "value": "cl_clut",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d835e",
+            "stop": "006d83a8",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d83ab": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d83ab",
+        "name": "FUN_006d83ab",
+        "signature": "undefined __thiscall FUN_006d83ab(void * this, void * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d83ab\n// Address:   0x006d83ab\n// Signature: undefined __thiscall FUN_006d83ab(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d83ab(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [48];\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b49(this,(int)local_c4);\n\n  FUN_006d7827(param_1,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  uVar2 = *(uint *)((int)this + 0xc);\n\n  if (*(int *)((int)this + 8) == 0) {\n\n    puVar3 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n  }\n\n  if (*(int *)((int)param_1 + 8) == 0) {\n\n    puVar4 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n  }\n\n  for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n    *puVar4 = *puVar3;\n\n    puVar3 = puVar3 + 1;\n\n    puVar4 = puVar4 + 1;\n\n  }\n\n  for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n    *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n    puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n    puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d83ab\n// Address:   0x006d83ab\n// Signature: undefined __thiscall FUN_006d83ab(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d83ab(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [48];\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b49(this,(int)local_c4);\n\n  FUN_006d7827(param_1,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  uVar2 = *(uint *)((int)this + 0xc);\n\n  if (*(int *)((int)this + 8) == 0) {\n\n    puVar3 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n  }\n\n  if (*(int *)((int)param_1 + 8) == 0) {\n\n    puVar4 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n  }\n\n  for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n    *puVar4 = *puVar3;\n\n    puVar3 = puVar3 + 1;\n\n    puVar4 = puVar4 + 1;\n\n  }\n\n  for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n    *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n    puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n    puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d83ab",
+        "function": {
+          "address": "006d83ab",
+          "name": "FUN_006d83ab",
+          "signature": "undefined __thiscall FUN_006d83ab(void * this, void * param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [
+            {
+              "addr": "006d6d39",
+              "name": "FUN_006d6d39",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d8417",
+              "name": "FUN_006d8417",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d86d5",
+              "name": "FUN_006d86d5",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006d744b",
+              "name": "FUN_006d744b"
+            },
+            {
+              "addr": "006d7b49",
+              "name": "FUN_006d7b49"
+            },
+            {
+              "addr": "006d7827",
+              "name": "FUN_006d7827"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d83ab",
+            "stop": "006d83ee",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d83f4",
+            "stop": "006d83f4",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d83f0",
+            "stop": "006d83f2",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d83f6",
+            "stop": "006d83fb",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2,
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d8401",
+            "stop": "006d8401",
+            "out": [
+              6
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d83fd",
+            "stop": "006d83ff",
+            "out": [
+              6
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d8403",
+            "stop": "006d8405",
+            "out": [
+              7
+            ],
+            "in": [
+              5,
+              4
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d8408",
+            "stop": "006d8408",
+            "out": [
+              12,
+              8
+            ],
+            "in": [
+              6,
+              12
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d840a",
+            "stop": "006d840c",
+            "out": [
+              9
+            ],
+            "in": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d840f",
+            "stop": "006d840f",
+            "out": [
+              11,
+              10
+            ],
+            "in": [
+              8,
+              11
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d8411",
+            "stop": "006d8414",
+            "out": [],
+            "in": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "start": "006d840f",
+            "stop": "006d840f",
+            "out": [
+              9
+            ],
+            "in": [
+              9
+            ]
+          },
+          {
+            "index": 12,
+            "start": "006d8408",
+            "stop": "006d8408",
+            "out": [
+              7
+            ],
+            "in": [
+              7
+            ]
+          }
+        ]
+      }
+    },
+    "006d8466": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d8466",
+        "name": "FUN_006d8466",
+        "signature": "undefined __thiscall FUN_006d8466(void * this, void * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d8466\n// Address:   0x006d8466\n// Signature: undefined __thiscall FUN_006d8466(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d8466(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [48];\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b7a(this,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  FUN_006d78a8(param_1,(int)local_c4);\n\n  *(undefined4 *)((int)param_1 + 0x10) = *(undefined4 *)((int)this + 0x10);\n\n  *(undefined4 *)((int)param_1 + 0x14) = *(undefined4 *)((int)this + 0x14);\n\n  uVar2 = *(uint *)((int)this + 0xc);\n\n  if (*(int *)((int)this + 8) == 0) {\n\n    puVar3 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n  }\n\n  if (*(int *)((int)param_1 + 8) == 0) {\n\n    puVar4 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n  }\n\n  for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n    *puVar4 = *puVar3;\n\n    puVar3 = puVar3 + 1;\n\n    puVar4 = puVar4 + 1;\n\n  }\n\n  for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n    *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n    puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n    puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d8466\n// Address:   0x006d8466\n// Signature: undefined __thiscall FUN_006d8466(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d8466(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [48];\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b7a(this,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  FUN_006d78a8(param_1,(int)local_c4);\n\n  *(undefined4 *)((int)param_1 + 0x10) = *(undefined4 *)((int)this + 0x10);\n\n  *(undefined4 *)((int)param_1 + 0x14) = *(undefined4 *)((int)this + 0x14);\n\n  uVar2 = *(uint *)((int)this + 0xc);\n\n  if (*(int *)((int)this + 8) == 0) {\n\n    puVar3 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n  }\n\n  if (*(int *)((int)param_1 + 8) == 0) {\n\n    puVar4 = (undefined4 *)0x0;\n\n  }\n\n  else {\n\n    puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n  }\n\n  for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n    *puVar4 = *puVar3;\n\n    puVar3 = puVar3 + 1;\n\n    puVar4 = puVar4 + 1;\n\n  }\n\n  for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n    *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n    puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n    puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d8466",
+        "function": {
+          "address": "006d8466",
+          "name": "FUN_006d8466",
+          "signature": "undefined __thiscall FUN_006d8466(void * this, void * param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [
+            {
+              "addr": "006d6d39",
+              "name": "FUN_006d6d39",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d84de",
+              "name": "FUN_006d84de",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d86d5",
+              "name": "FUN_006d86d5",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006d744b",
+              "name": "FUN_006d744b"
+            },
+            {
+              "addr": "006d7b7a",
+              "name": "FUN_006d7b7a"
+            },
+            {
+              "addr": "006d78a8",
+              "name": "FUN_006d78a8"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d8466",
+            "stop": "006d84b5",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d84bb",
+            "stop": "006d84bb",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d84b7",
+            "stop": "006d84b9",
+            "out": [
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d84bd",
+            "stop": "006d84c2",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2,
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d84c8",
+            "stop": "006d84c8",
+            "out": [
+              6
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d84c4",
+            "stop": "006d84c6",
+            "out": [
+              6
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d84ca",
+            "stop": "006d84cc",
+            "out": [
+              7
+            ],
+            "in": [
+              5,
+              4
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d84cf",
+            "stop": "006d84cf",
+            "out": [
+              12,
+              8
+            ],
+            "in": [
+              6,
+              12
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d84d1",
+            "stop": "006d84d3",
+            "out": [
+              9
+            ],
+            "in": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d84d6",
+            "stop": "006d84d6",
+            "out": [
+              11,
+              10
+            ],
+            "in": [
+              8,
+              11
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d84d8",
+            "stop": "006d84db",
+            "out": [],
+            "in": [
+              9
+            ]
+          },
+          {
+            "index": 11,
+            "start": "006d84d6",
+            "stop": "006d84d6",
+            "out": [
+              9
+            ],
+            "in": [
+              9
+            ]
+          },
+          {
+            "index": 12,
+            "start": "006d84cf",
+            "stop": "006d84cf",
+            "out": [
+              7
+            ],
+            "in": [
+              7
+            ]
+          }
+        ]
+      }
+    },
+    "006d84de": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d84de",
+        "name": "FUN_006d84de",
+        "signature": "uint * __thiscall FUN_006d84de(void * this, undefined4 param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d84de\n// Address:   0x006d84de\n// Signature: uint * __thiscall FUN_006d84de(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d84de(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"cl_hots\",*(int *)((int)this + 0xc) + 0x20,0x10,0x20,param_1,\n\n                                \"shpclone.cpp\",0xd2);\n\n  FUN_006d8466(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d84de\n// Address:   0x006d84de\n// Signature: uint * __thiscall FUN_006d84de(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d84de(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"cl_hots\",*(int *)((int)this + 0xc) + 0x20,0x10,0x20,param_1,\n\n                                \"shpclone.cpp\",0xd2);\n\n  FUN_006d8466(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d84de",
+        "function": {
+          "address": "006d84de",
+          "name": "FUN_006d84de",
+          "signature": "uint * __thiscall FUN_006d84de(void * this, undefined4 param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d8466",
+              "name": "FUN_006d8466"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b258",
+            "value": "shpclone.cpp",
+            "length": 12,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816",
+                "ref_addr": "006d8827"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c",
+                "ref_addr": "006d82a3"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e",
+                "ref_addr": "006d8365"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417",
+                "ref_addr": "006d8428"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de",
+                "ref_addr": "006d84e8"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9",
+                "ref_addr": "006d85d3"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685",
+                "ref_addr": "006d868f"
+              }
+            ]
+          },
+          {
+            "address": "0071b278",
+            "value": "cl_hots",
+            "length": 7,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de",
+                "ref_addr": "006d84fd"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b258",
+            "name": "s_shpclone.cpp_0071b258",
+            "type": "string",
+            "size": -1,
+            "value": "shpclone.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685"
+              }
+            ]
+          },
+          {
+            "address": "0071b278",
+            "name": "s_cl_hots_0071b278",
+            "type": "string",
+            "size": -1,
+            "value": "cl_hots",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d84de",
+            "stop": "006d852b",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d8864": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d8864",
+        "name": "FUN_006d8864",
+        "signature": "int __fastcall FUN_006d8864(uint * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d8864\n// Address:   0x006d8864\n// Signature: int __fastcall FUN_006d8864(uint * param_1)\n// Callers:   8  |  Callees: 1\n// ===========================================\n\n\n\nint __fastcall FUN_006d8864(uint *param_1)\n\n\n\n{\n\n  byte bVar1;\n\n  undefined3 extraout_var;\n\n  int iVar2;\n\n  \n\n  while( true ) {\n\n    bVar1 = FUN_006d6c09(param_1);\n\n    iVar2 = CONCAT31(extraout_var,bVar1);\n\n    if (iVar2 == 1) {\n\n      return 0;\n\n    }\n\n    if (((iVar2 == 2) || (iVar2 == 4)) || (iVar2 == 0x10)) break;\n\n    if ((iVar2 == 0x20) || (iVar2 == 0x80)) {\n\n      return param_1[3] + 0x10;\n\n    }\n\n    if (iVar2 != 0x100) {\n\n      return 0;\n\n    }\n\n  }\n\n  return param_1[3] + 0x20;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d8864\n// Address:   0x006d8864\n// Signature: int __fastcall FUN_006d8864(uint * param_1)\n// Callers:   8  |  Callees: 1\n// ===========================================\n\n\n\nint __fastcall FUN_006d8864(uint *param_1)\n\n\n\n{\n\n  byte bVar1;\n\n  undefined3 extraout_var;\n\n  int iVar2;\n\n  \n\n  while( true ) {\n\n    bVar1 = FUN_006d6c09(param_1);\n\n    iVar2 = CONCAT31(extraout_var,bVar1);\n\n    if (iVar2 == 1) {\n\n      return 0;\n\n    }\n\n    if (((iVar2 == 2) || (iVar2 == 4)) || (iVar2 == 0x10)) break;\n\n    if ((iVar2 == 0x20) || (iVar2 == 0x80)) {\n\n      return param_1[3] + 0x10;\n\n    }\n\n    if (iVar2 != 0x100) {\n\n      return 0;\n\n    }\n\n  }\n\n  return param_1[3] + 0x20;\n\n}\n\n\n\n\n",
+        "callers": 8,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d8864",
+        "function": {
+          "address": "006d8864",
+          "name": "FUN_006d8864",
+          "signature": "int __fastcall FUN_006d8864(uint * param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "006d6d39",
+              "name": "FUN_006d6d39",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d8417",
+              "name": "FUN_006d8417",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d86d5",
+              "name": "FUN_006d86d5",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d88d2",
+              "name": "FUN_006d88d2",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006d6c09",
+              "name": "FUN_006d6c09"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d8864",
+            "stop": "006d8865",
+            "out": [
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d8867",
+            "stop": "006d886f",
+            "out": [
+              2,
+              10
+            ],
+            "in": [
+              0,
+              9
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d8871",
+            "stop": "006d8872",
+            "out": [
+              3,
+              5
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d8874",
+            "stop": "006d8876",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d8878",
+            "stop": "006d887b",
+            "out": [
+              6,
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d889a",
+            "stop": "006d88a1",
+            "out": [],
+            "in": [
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d887d",
+            "stop": "006d8880",
+            "out": [
+              7,
+              8
+            ],
+            "in": [
+              4
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d8882",
+            "stop": "006d8885",
+            "out": [
+              9,
+              8
+            ],
+            "in": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d8892",
+            "stop": "006d8899",
+            "out": [],
+            "in": [
+              6,
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d8887",
+            "stop": "006d888c",
+            "out": [
+              10,
+              1
+            ],
+            "in": [
+              7
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d888e",
+            "stop": "006d8891",
+            "out": [],
+            "in": [
+              1,
+              9
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

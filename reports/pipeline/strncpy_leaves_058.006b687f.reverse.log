@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b687f",
+      "run_id": "89be7316704e49028b9588efd45ed039",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b687f",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __fastcall FUN_006b4678(std::uint32_t* param_1);\n\n// No member names are established for the 16 words or the four-word region\n// beginning at offset 0x40.\nvoid __fastcall FUN_006b687f(std::uint32_t* param_1)\n{\n    std::uint32_t* current = param_1;\n    for (int count = 0x10; count != 0; --count) {\n        *current = 0;\n        ++current;\n    }\n\n    FUN_006b4678(param_1 + 0x10);\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and call match, but the data offsets have no named members.",
+      "issues": [
+        "The 16 cleared words and the region at byte offset 0x40 are represented only by pointer arithmetic, contrary to the required named-member mapping."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b687f\\_FUN_006b687f.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

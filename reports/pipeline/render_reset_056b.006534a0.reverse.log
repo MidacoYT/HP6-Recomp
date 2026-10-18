@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006534a0",
+      "run_id": "201a3db287164f719780c00c7fc5f996",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006534a0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_006534a0(int param_1, int* param_2)\n{\n    if (param_1 == 0) {\n        if (param_2 != nullptr) {\n            (**reinterpret_cast<void (***)(int*)>(*param_2 + 8))(param_2);\n        }\n    } else if (param_2 != nullptr) {\n        (**reinterpret_cast<void (***)(int*)>(*param_2 + 8))(param_2);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The branches match, but both indirect calls use one extra pointer load.",
+      "issues": [
+        "In both branches, the cast to void (***)(int*) makes the call read a pointer from *param_2 + 8, then read the function pointer from that pointer. The P-code reads the function pointer directly from *param_2 + 8."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006534a0\\_FUN_006534a0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

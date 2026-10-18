@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b18df",
+      "run_id": "3a411a787d96414b8d2c6b413e419fa6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b18df",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t DAT_00892b60;\n\nint __cdecl FUN_006b18df(unsigned int param_1, char param_2)\n{\n    // The object types and member names at offsets 0x98 and 0x80 are unresolved.\n    const auto base = *reinterpret_cast<std::int32_t*>(\n        static_cast<std::uintptr_t>(DAT_00892b60 + 0x98u));\n\n    const auto address =\n        static_cast<std::uint32_t>((param_1 & 0xffu) * 0x88u) +\n        static_cast<std::uint32_t>(base);\n\n    if (*reinterpret_cast<std::int32_t*>(\n            static_cast<std::uintptr_t>(address + 0x80u)) != 0 &&\n        param_2 != '\\0') {\n        return *reinterpret_cast<std::int32_t*>(\n            static_cast<std::uintptr_t>(DAT_00892b60 + 0x98u));\n    }\n\n    return static_cast<std::int32_t>(address);\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but both struct offsets remain unnamed.",
+      "issues": [
+        "The access at DAT_00892b60 + 0x98 is a raw offset rather than a named member.",
+        "The access at address + 0x80 is a raw offset rather than a named member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b18df\\_FUN_006b18df.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

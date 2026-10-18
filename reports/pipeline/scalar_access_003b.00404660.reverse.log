@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "00404660",
+      "run_id": "ae6123819da042eea225d065c95d8b35",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00404660",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cfloat>\n#include <cmath>\n\nstatic_assert(LDBL_MANT_DIG == 64 && LDBL_MAX_EXP == 16384,\n              \"This function requires an 80-bit x87 long double.\");\n\nlong double __cdecl FUN_00404660(float param_1)\n{\n    return std::fabs(static_cast<long double>(param_1));\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the float-to-float10 conversion followed by absolute value and return.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00404660\\_FUN_00404660.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (3 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

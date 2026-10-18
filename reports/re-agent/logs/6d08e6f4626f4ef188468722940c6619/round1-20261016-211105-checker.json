@@ -1,0 +1,15 @@
+{
+  "round": 1,
+  "timestamp": "20261016-211105",
+  "phase": "check",
+  "prompt": "Verify the following reversed function against the Ghidra decompilation.\n\n**Function:** ::FUN_006d7112 at 006d7112\n\n**Reversed code:**\n```cpp\nvoid __fastcall FUN_006d7112(void* param_1)\n{\n    FUN_006d6c5c(param_1, 0x20);\n}\n```\n\n**Ghidra decompilation (derived evidence; may contain analysis errors):**\n```\n// ===========================================\n// Ghidra:    FUN_006d7112\n// Address:   0x006d7112\n// Signature: undefined __fastcall FUN_006d7112(void * param_1)\n// Callers:   1  |  Callees: 1\n// ===========================================\n\n\n\nvoid __fastcall FUN_006d7112(void *param_1)\n\n\n\n{\n\n  FUN_006d6c5c(param_1,0x20);\n\n  return;\n\n}\n\n\n\n\n\n```\n\nCheck every line, offset, call, branch, and expression order. Return only the JSON object required by the system prompt.\n\n\nIndependent binary evidence (resolve conflicts explicitly):\n## Function evidence bundle\n{\n  \"schema_version\": 1,\n  \"kind\": \"function-context\",\n  \"target\": \"006d7112\",\n  \"function\": {\n    \"address\": \"006d7112\",\n    \"name\": \"FUN_006d7112\",\n    \"signature\": \"undefined __fastcall FUN_006d7112(void * param_1)\",\n    \"calling_convention\": \"__fastcall\",\n    \"callers\": [\n      {\n        \"addr\": \"006d7f96\",\n        \"name\": \"FUN_006d7f96\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      }\n    ],\n    \"callees\": [\n      {\n        \"addr\": \"006d6c5c\",\n        \"name\": \"FUN_006d6c5c\"\n      }\n    ]\n  },\n  \"strings\": [],\n  \"globals\": [],\n  \"cfg\": [\n    {\n      \"index\": 0,\n      \"start\": \"006d7112\",\n      \"stop\": \"006d7119\",\n      \"out\": [],\n      \"in\": []\n    }\n  ]\n}\n\n\n## Control-flow graph\n{\n  \"schema_version\": 1,\n  \"kind\": \"cfg\",\n  \"target\": \"006d7112\",\n  \"data\": [\n    {\n      \"index\": 0,\n      \"start\": \"006d7112\",\n      \"stop\": \"006d7119\",\n      \"out\": [],\n      \"in\": []\n    }\n  ]\n}\n\n\n## Normalized high P-code\n{\n  \"schema_version\": 1,\n  \"kind\": \"pcode\",\n  \"target\": \"006d7112\",\n  \"data\": [\n    {\n      \"seq\": \"(ram, 0x6d7114, 5, 0)\",\n      \"address\": \"006d7114\",\n      \"opcode\": \"CALL\",\n      \"output\": null,\n      \"inputs\": [\n        \"(ram, 0x6d6c5c, 8)\",\n        \"(register, 0x4, 4)\",\n        \"(const, 0x20, 4)\"\n      ]\n    },\n    {\n      \"seq\": \"(ram, 0x6d7119, 8, 1)\",\n      \"address\": \"006d7119\",\n      \"opcode\": \"RETURN\",\n      \"output\": null,\n      \"inputs\": [\n        \"(const, 0x0, 4)\"\n      ]\n    }\n  ]\n}\n",
+  "response": "{\n  \"verdict\": \"PASS\",\n  \"summary\": \"The reversed function matches the decompilation and independent binary evidence.\",\n  \"issues\": [],\n  \"fix_instructions\": []\n}",
+  "verdict": "PASS",
+  "summary": "The reversed function matches the decompilation and independent binary evidence.",
+  "issues": [],
+  "fix_instructions": [],
+  "objective_verdict": "PASS",
+  "objective_summary": "No structural mismatches found",
+  "objective_findings": [],
+  "llm_metadata": {}
+}

@@ -100,4 +100,16 @@ std::int64_t create_and_wait_plain_node(std::uintptr_t record,
     return static_cast<std::int64_t>(take_completed_node(token));
 }
 
+std::int64_t create_and_wait_probe_node(std::uintptr_t record,
+                                        std::int32_t value_0x20,
+                                        std::uint32_t field_0x30,
+                                        std::int32_t value_0x28,
+                                        std::uint8_t mode) {
+    // 006b17b7 (cdecl): the creator, then the wait and the pair read.
+    const auto token = create_probe_node_from_record(
+        record, value_0x20, field_0x30, value_0x28, mode, 0);
+    wait_pool_node(token);
+    return static_cast<std::int64_t>(take_completed_node(token));
+}
+
 } // namespace hp6::runtime

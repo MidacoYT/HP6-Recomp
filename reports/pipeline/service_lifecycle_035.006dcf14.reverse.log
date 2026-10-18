@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dcf14",
+      "run_id": "c19ed8f9dcf94c928ae55699a3617752",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dcf14",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The available evidence does not identify member names for offsets\n// 0x20, 0xa0, or 0xb0.\nextern std::uint32_t PTR_LAB_0071b520;\nextern std::uint32_t PTR_LAB_0071b540;\n\nvoid __fastcall FUN_006dcf14(std::uint32_t* param_1)\n{\n    auto* puVar1 = reinterpret_cast<std::uint32_t*>(param_1[0x2c]);\n    param_1[0] = reinterpret_cast<std::uint32_t>(&PTR_LAB_0071b540);\n\n    while (true) {\n        if (puVar1 != nullptr) {\n            auto* vtable = reinterpret_cast<std::uint32_t*>(*puVar1);\n            auto call = reinterpret_cast<void (__thiscall*)(std::uint32_t*, std::uint32_t)>(vtable[0]);\n            call(puVar1, 1);\n        }\n\n        if (static_cast<std::int32_t>(param_1[0x28]) < 1) {\n            break;\n        }\n        puVar1 = reinterpret_cast<std::uint32_t*>(param_1[8]);\n    }\n\n    param_1[0x28] = 0;\n    param_1[0] = reinterpret_cast<std::uint32_t>(&PTR_LAB_0071b520);\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code matches the supplied decompilation, but the independent P-code conflicts with its loop condition and the struct offsets lack named members.",
+      "issues": [
+        "At 0x006dcf39, the P-code branches to the loop when the signed value at offset 0xa0 is less than 1. The decompilation and reversed code exit the loop under that condition. The binary condition must be checked before either version can be accepted.",
+        "Offsets 0x00, 0x20, 0xa0, and 0xb0 are accessed through numeric indices rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dcf14\\_FUN_006dcf14.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

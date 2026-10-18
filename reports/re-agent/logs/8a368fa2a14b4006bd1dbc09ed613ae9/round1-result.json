@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dbdeb",
+      "run_id": "8a368fa2a14b4006bd1dbc09ed613ae9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbdeb",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::uint32_t __cdecl FUN_006dbdeb(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    const std::uint32_t result = FUN_006db3f9(param_1, &local_c, &local_8);\n    if (result != 0) {\n        return result & 0xffffff00u;\n    }\n\n    // The supplied evidence does not identify members at these offsets.\n    if (*reinterpret_cast<const std::uint32_t*>(local_8 + 0x44u) == 0 &&\n        *reinterpret_cast<const std::uint32_t*>(local_c + 0x08u) == 0) {\n        return 1;\n    }\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The source matches the decompilation, but the independent P-code shows opposite field conditions.",
+      "issues": [
+        "At 006dbe10 and 006dbe18, the P-code branches to the zero return when each loaded field equals zero. The source returns 1 when both fields equal zero.",
+        "The fields at offsets 0x44 and 0x08 are accessed through raw offsets rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dbdeb\\_FUN_006dbdeb.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

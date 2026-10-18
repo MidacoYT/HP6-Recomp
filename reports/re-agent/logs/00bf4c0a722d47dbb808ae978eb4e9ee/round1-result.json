@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "01003ca0",
+      "run_id": "00bf4c0a722d47dbb808ae978eb4e9ee",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01003ca0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\nextern std::uint32_t* DAT_00cf1a08;\n\nvoid __cdecl FUN_01003ca0(void* param_1, std::int32_t param_2)\n{\n    if (*DAT_00cf1a08 != 0) {\n        std::memcpy(\n            reinterpret_cast<void*>(static_cast<std::uintptr_t>(*DAT_00cf1a08)),\n            param_1,\n            static_cast<std::uint32_t>(param_2) << 1);\n\n        *DAT_00cf1a08 =\n            *DAT_00cf1a08 + static_cast<std::uint32_t>(param_2) * 2U;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The source adds an extra pointer dereference.",
+      "issues": [
+        "P-code loads and stores the 32-bit value at address 0x00cf1a08. Declaring DAT_00cf1a08 as a pointer and using *DAT_00cf1a08 instead accesses an address stored there."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01003ca0\\_FUN_01003ca0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

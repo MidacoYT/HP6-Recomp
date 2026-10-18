@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "00ff8380",
+      "run_id": "bc921be1b0a34d849186c05035961d2e",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00ff8380",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <windows.h>\n\nextern unsigned char DAT_00866e2a;\nextern LRESULT CALLBACK FUN_005d8a30(HWND, UINT, WPARAM, LPARAM);\n\nbool __stdcall FUN_00ff8380(void)\n{\n    // The decompile shows ESI as a live-in value, but does not identify\n    // its source. This preserves that register dependency on 32-bit MSVC.\n    HINSTANCE instance;\n    __asm mov instance, esi\n\n    constexpr char className[] = \"HalfBloodPrinceMainWndClass\";\n    UnregisterClassA(className, instance);\n\n    WNDCLASSA windowClass{};\n    if (DAT_00866e2a == 0) {\n        windowClass.style = 0x2000;\n        windowClass.hCursor = LoadCursorA(nullptr, MAKEINTRESOURCEA(0x7f00));\n    } else {\n        windowClass.style = 0x2020;\n    }\n\n    windowClass.lpfnWndProc = FUN_005d8a30;\n    windowClass.cbClsExtra = 0;\n    windowClass.cbWndExtra = 0;\n    windowClass.hInstance = instance;\n    windowClass.hIcon = static_cast<HICON>(\n        LoadImageA(nullptr, \".\\\\..\\\\hbp_icon.ico\", IMAGE_ICON,\n                   0x20, 0x20, LR_LOADFROMFILE));\n    windowClass.hbrBackground = static_cast<HBRUSH>(GetStockObject(4));\n    windowClass.lpszClassName = className;\n\n    return RegisterClassA(&windowClass) != 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The class-name pointer does not match the binary evidence.",
+      "issues": [
+        "The binary passes the static string at 0x00764574 to UnregisterClassA and uses it again for WNDCLASSA::lpszClassName. The reversed code declares className as a local array, giving those uses an automatic-storage address."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00ff8380\\_FUN_00ff8380.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

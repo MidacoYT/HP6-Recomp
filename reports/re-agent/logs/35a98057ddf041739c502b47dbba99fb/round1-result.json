@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "address": "006d793d",
+      "run_id": "35a98057ddf041739c502b47dbba99fb",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d793d",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n#include <cstdio>\n\n// Member identities are unresolved; these names preserve the known offsets.\nstruct FUN_006d793d_Object {\n    std::uint8_t field_0x00;\n    std::uint8_t unknown_0x01[7];\n    std::int32_t field_0x08;  // Relative string offset; zero means null.\n    std::uint8_t unknown_0x0c[4];\n    char field_0x10[1];\n};\n\nstruct FUN_006d793d_Input {\n    std::uint8_t unknown_0x00[0x84];\n    std::int32_t field_0x84;\n};\n\nstatic_assert(offsetof(FUN_006d793d_Object, field_0x08) == 0x08);\nstatic_assert(offsetof(FUN_006d793d_Object, field_0x10) == 0x10);\nstatic_assert(offsetof(FUN_006d793d_Input, field_0x84) == 0x84);\n\nvoid __thiscall FUN_006d7745(void* self, std::int32_t input);\nvoid __thiscall FUN_00688550(void* self, std::int32_t address, std::int32_t value);\n\nvoid __thiscall FUN_006d793d(void* self, std::int32_t param_1)\n{\n    auto* object = static_cast<FUN_006d793d_Object*>(self);\n    auto* input = reinterpret_cast<FUN_006d793d_Input*>(param_1);\n\n    FUN_006d7745(self, param_1);\n    const std::int32_t value = input->field_0x84;\n    object->field_0x00 = 0x69;\n    FUN_00688550(self, reinterpret_cast<std::int32_t>(object->field_0x10), value);\n\n    char* destination = reinterpret_cast<char*>(object->field_0x08);\n    if (destination != nullptr) {\n        destination = reinterpret_cast<char*>(object) + object->field_0x08;\n    }\n    std::sprintf(destination, \"EAGL%d\", value);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and P-code for calls, offsets, branch behavior, and operation order.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

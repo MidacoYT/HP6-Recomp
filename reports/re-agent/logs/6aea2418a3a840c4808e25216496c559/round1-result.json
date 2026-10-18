@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "005dc710",
+      "run_id": "6aea2418a3a840c4808e25216496c559",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005dc710",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t* __stdcall FUN_005db920();\n\nvoid __cdecl FUN_005dc710(int param_1)\n{\n    if (param_1 != 0) {\n        const auto* slots = reinterpret_cast<const std::uint32_t*>(\n            static_cast<std::uintptr_t>(*FUN_005db920()));\n\n        // The identity and declared type of the slot at offset 0xC are unresolved.\n        const auto callback =\n            reinterpret_cast<void (__cdecl*)(int, int)>(slots[3]);\n        callback(param_1, 0);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and dereferences match, but the indirect call slot is not mapped to a named member.",
+      "issues": [
+        "slots[3] represents the function pointer at offset 0xC without a named struct member, violating the required offset mapping."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005dc710\\_FUN_005dc710.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

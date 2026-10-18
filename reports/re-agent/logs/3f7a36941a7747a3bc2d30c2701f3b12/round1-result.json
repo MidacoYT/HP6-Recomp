@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d852e",
+      "run_id": "3f7a36941a7747a3bc2d30c2701f3b12",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d852e",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstdio>\n\nextern std::uint32_t* __fastcall FUN_006d744b(std::uint32_t*);\nextern void __thiscall FUN_006d7baf(void*, std::uint32_t*);\nextern void __thiscall FUN_006d793d(void*, std::uint32_t*);\n\nvoid __thiscall FUN_006d852e(void* this_, void* param_1)\n{\n    std::uint32_t local_c8[48];\n\n    FUN_006d744b(local_c8);\n    FUN_006d7baf(this_, local_c8);\n    FUN_006d793d(param_1, local_c8);\n\n    auto* source = static_cast<std::uint8_t*>(this_);\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    destination[1] &= 0xfb;\n\n    // The fields at +0x08 and +0x0c have no verified member names.\n    std::uint32_t count = *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n    const auto source_offset = *reinterpret_cast<std::int32_t*>(source + 0x08);\n    const auto destination_offset =\n        *reinterpret_cast<std::int32_t*>(destination + 0x08);\n\n    auto* src = source_offset == 0 ? nullptr : source + source_offset;\n    auto* dst = destination_offset == 0\n        ? nullptr : destination + destination_offset;\n\n    for (std::uint32_t words = count >> 2; words != 0; --words) {\n        *reinterpret_cast<std::uint32_t*>(dst) =\n            *reinterpret_cast<std::uint32_t*>(src);\n        src += 4;\n        dst += 4;\n    }\n\n    for (count &= 3; count != 0; --count) {\n        *dst = *src;\n        ++src;\n        ++dst;\n    }\n\n    if (0x14 < *reinterpret_cast<std::int32_t*>(source + 0x0c) + 0x10) {\n        char* text = destination_offset == 0\n            ? nullptr\n            : reinterpret_cast<char*>(destination + destination_offset);\n        std::sprintf(\n            text, \"EAGL%d\",\n            *reinterpret_cast<std::int32_t*>(destination + 0x0c));\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and copy loops match, but the final offset lookup and struct mapping do not.",
+      "issues": [
+        "The sprintf branch uses destination_offset saved before the copy. Ghidra reloads the field at param_1 + 0x08 after the copy, which can change it.",
+        "The fields at offsets +0x08 and +0x0c are accessed by raw offsets rather than mapped to named struct members."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 6 branches/loops, candidate has 3"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d852e\\_FUN_006d852e.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

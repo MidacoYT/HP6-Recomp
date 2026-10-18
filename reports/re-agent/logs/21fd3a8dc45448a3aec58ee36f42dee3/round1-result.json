@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "0064c3b0",
+      "run_id": "21fd3a8dc45448a3aec58ee36f42dee3",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_0064c3b0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t __cdecl FUN_0064c3b0(\n    std::int32_t param_1,\n    std::int32_t param_2,\n    std::int32_t param_3)\n{\n    std::uint32_t result = 0;\n    auto* cachedValues = reinterpret_cast<std::int32_t*>(&DAT_009968d8);\n    auto& cachedValue = cachedValues[param_1 * 0x20 + param_2];\n\n    if (cachedValue != param_3) {\n        // The object's type and the virtual method at offset 0x10C are unresolved.\n        using VirtualMethod = std::uint32_t(__thiscall*)(\n            void*, std::int32_t, std::int32_t, std::int32_t);\n        auto* vtable = *reinterpret_cast<void***>(DAT_00cf1944);\n        result = reinterpret_cast<VirtualMethod>(vtable[0x10C / 4])(\n            DAT_00cf1944, param_1, param_2, param_3);\n        cachedValue = param_3;\n    }\n\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The branch and cache update match, but the offset and indirect call do not meet the stated verification standard.",
+      "issues": [
+        "The virtual-table offset 0x10C remains an unnamed slot rather than a named member.",
+        "The cache address expression was rewritten from base + param_1 * 0x80 + param_2 * 4 to an indexed expression. This changes the specified expression order and can invoke C++ signed-overflow undefined behavior."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0064c3b0\\_FUN_0064c3b0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

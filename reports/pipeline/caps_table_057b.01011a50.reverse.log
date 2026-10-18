@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "01011a50",
+      "run_id": "5b800204e75d439ca012d63d4db24ade",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01011a50",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __stdcall FUN_01011a50()\n{\n    std::uint32_t value;\n    std::uint8_t shift;\n\n    if (DAT_008663d5 == 0) {\n        value = reinterpret_cast<const std::uint32_t*>(0x008928c0)\n                    [DAT_008663b8]\n                << (1U - (static_cast<std::uint32_t>(DAT_00cf1964) < 0x180U));\n        shift = static_cast<std::uint8_t>(\n            1U - (static_cast<std::uint32_t>(DAT_00cf1964) < 0x200U));\n    } else {\n        const auto address =\n            static_cast<std::uint32_t>(DAT_00cf19d0) +\n            static_cast<std::uint32_t>(DAT_008663d8) * 0x584U + 0x474U;\n        value = (static_cast<std::uint32_t>(\n                     -static_cast<std::uint32_t>(\n                         (*reinterpret_cast<const std::uint32_t*>(address) & 0x800U) != 0))\n                 & 0x20U) + 0x20U;\n\n        if (static_cast<std::uint32_t>(DAT_00cf19bc) >= 2U) {\n            value = 0x80U;\n        }\n        shift = static_cast<std::uint8_t>(DAT_008663b8);\n    }\n\n    DAT_008663dc =\n        (value << (shift & 0x1fU)) >>\n        (1U - (static_cast<std::uint32_t>(DAT_00cf1964) > 0x40U));\n\n    if (DAT_00cf1974 != 0) {\n        DAT_008663dc = DAT_00cf1974;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but a struct offset remains unnamed.",
+      "issues": [
+        "The access at DAT_00cf19d0 + DAT_008663d8 * 0x584 + 0x474 uses a raw field offset and record stride instead of a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01011a50\\_FUN_01011a50.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

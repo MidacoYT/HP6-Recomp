@@ -1,0 +1,658 @@
+Reversal failed for 006b22c3: codex exec failed with exit code 1
+OpenAI Codex v0.162.1
+--------
+workdir: D:\HP\HP6_Reconstructed
+model: gpt-6-sol
+provider: openai
+approval: never
+sandbox: read-only
+reasoning effort: medium
+reasoning summaries: none
+session id: 01a147cc-f266-7542-b03a-4302f88e94d4
+--------
+user
+[SYSTEM]
+You are an expert reverse engineer. Convert decompiled native code into clean source while preserving observable binary behavior.
+
+Guidelines:
+- Match the vanilla binary logic EXACTLY — every branch, every call, every arithmetic operation
+- Use names and types supported by the supplied evidence; do not invent confident names without evidence
+- Expression order matters: `A * x + B * y` is NOT the same as `B * y + A * x` for floating point
+- Preserve calling convention, integer widths, signedness, memory offsets, and side effects
+- Call out unresolved types or symbols instead of silently guessing
+
+If essential evidence is missing, you may request read-only tools by returning
+only this JSON shape:
+`{"actions":[{"tool":"decompile","target":"0x..."}]}`.
+Available tools are `decompile`, `xrefs_from`, `xrefs_to`, `struct`, `enum`,
+`vtable`, `global`, `strings`, `context`, `pcode`, and `cfg`. Request only
+evidence needed to resolve a concrete uncertainty.
+
+Output format:
+- Provide the reversed C++ code in a single ```cpp code block
+- End with: REVERSED_FUNCTION: ClassName::FunctionName (0xADDRESS)
+
+[USER]
+Reverse the following function into clean C++20.
+
+**Target:** ::FUN_006b22c3 at 006b22c3
+
+**Ghidra Decompile:**
+```
+// ===========================================
+// Ghidra:    FUN_006b22c3
+// Address:   0x006b22c3
+// Signature: int __cdecl FUN_006b22c3(uint param_1)
+// Callers:   9  |  Callees: 10
+// ===========================================
+
+
+
+int __cdecl FUN_006b22c3(uint param_1)
+
+
+
+{
+
+  uint uVar1;
+
+  bool bVar2;
+
+  void *this;
+
+  int iVar3;
+
+  
+
+  uVar1 = param_1;
+
+  if (param_1 == 0) {
+
+    iVar3 = -3;
+
+  }
+
+  else {
+
+    this = (void *)FUN_006b18df(param_1,'\x01');
+
+    if (*(int *)((int)this + 4) == 0) {
+
+      iVar3 = -3;
+
+    }
+
+    else {
+
+      while( true ) {
+
+        FUN_006d92a1((int)this + 0x28);
+
+        iVar3 = FUN_006b2147(this,uVar1,&param_1);
+
+        param_1 = param_1 & iVar3 != 0;
+
+        FUN_006d92ac((int)this + 0x28);
+
+        if (param_1 == 0) break;
+
+        bVar2 = FUN_006d944e(0);
+
+        if (bVar2) {
+
+          FUN_006d971d();
+
+          FUN_006d9416(1);
+
+        }
+
+        else {
+
+          WaitForSingleObject(*(HANDLE *)((int)this + 0x78),0xffffffff);
+
+          ResetEvent(*(HANDLE *)((int)this + 0x78));
+
+        }
+
+      }
+
+      iVar3 = FUN_006b2223(uVar1);
+
+    }
+
+  }
+
+  return iVar3;
+
+}
+
+
+
+
+
+```
+
+**Cross-references (calls from this function):**
+- FUN_006b18df (0x006b18df) [CALL]
+- FUN_006d92a1 (0x006d92a1) [CALL]
+- FUN_006b2147 (0x006b2147) [CALL]
+- FUN_006d92ac (0x006d92ac) [CALL]
+- FUN_006d944e (0x006d944e) [CALL]
+- FUN_006d971d (0x006d971d) [CALL]
+- FUN_006d9416 (0x006d9416) [CALL]
+- FUN_006b2223 (0x006b2223) [CALL]
+
+**Struct/type context:**
+None
+
+**Existing source context:**
+No relevant existing source context found.
+
+**Structured reverse-engineering evidence:**
+## Function evidence bundle
+{
+  "schema_version": 1,
+  "kind": "function-context",
+  "target": "006b22c3",
+  "function": {
+    "address": "006b22c3",
+    "name": "FUN_006b22c3",
+    "signature": "int __cdecl FUN_006b22c3(uint param_1)",
+    "calling_convention": "__cdecl",
+    "callers": [
+      {
+        "addr": "006b175b",
+        "name": "FUN_006b175b",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b1783",
+        "name": "FUN_006b1783",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b17e5",
+        "name": "FUN_006b17e5",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b183a",
+        "name": "FUN_006b183a",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006dac0c",
+        "name": "FUN_006dac0c",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b17b7",
+        "name": "FUN_006b17b7",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b1815",
+        "name": "FUN_006b1815",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006b186a",
+        "name": "FUN_006b186a",
+        "ref_type": "UNCONDITIONAL_CALL"
+      },
+      {
+        "addr": "006f4f64",
+        "name": "FUN_006f4f64",
+        "ref_type": "UNCONDITIONAL_CALL"
+      }
+    ],
+    "callees": [
+      {
+        "addr": "006b18df",
+        "name": "FUN_006b18df"
+      },
+      {
+        "addr": "006d92a1",
+        "name": "FUN_006d92a1"
+      },
+      {
+        "addr": "006b2147",
+        "name": "FUN_006b2147"
+      },
+      {
+        "addr": "006d92ac",
+        "name": "FUN_006d92ac"
+      },
+      {
+        "addr": "006d944e",
+        "name": "FUN_006d944e"
+      },
+      {
+        "addr": "006d971d",
+        "name": "FUN_006d971d"
+      },
+      {
+        "addr": "006d9416",
+        "name": "FUN_006d9416"
+      },
+      {
+        "addr": "EXTERNAL:00000023",
+        "name": "WaitForSingleObject"
+      },
+      {
+        "addr": "EXTERNAL:00000027",
+        "name": "ResetEvent"
+      },
+      {
+        "addr": "006b2223",
+        "name": "FUN_006b2223"
+      }
+    ]
+  },
+  "strings": [],
+  "globals": [
+    {
+      "address": "00713098",
+      "name": "PTR_WaitForSingleObject_00713098",
+      "type": "pointer",
+      "size": 4,
+      "value": "773897e0",
+      "section": ".rdata",
+      "references": [
+        {
+          "func_addr": "00631630",
+          "func_name": "FUN_00631630"
+        },
+        {
+          "func_addr": "006b203a",
+          "func_name": "FUN_006b203a"
+        },
+        {
+          "func_addr": "006d9591",
+          "func_name": "FUN_006d9591"
+        },
+        {
+          "func_addr": "006b22c3",
+          "func_name": "FUN_006b22c3"
+        },
+        {
+          "func_addr": "00630f00",
+          "func_name": "FUN_00630f00"
+        },
+        {
+          "func_addr": "006d8ea0",
+          "func_name": "FUN_006d8ea0"
+        },
+        {
+          "func_addr": "00631910",
+          "func_name": "FUN_00631910"
+        },
+        {
+          "func_addr": "010113c0",
+          "func_name": "FUN_010113c0"
+        },
+        {
+          "func_addr": "00636500",
+          "func_name": "FUN_00636500"
+        },
+        {
+          "func_addr": "00636990",
+          "func_name": "FUN_00636990"
+        },
+        {
+          "func_addr": "00fffb90",
+          "func_name": "FUN_00fffb90"
+        },
+        {
+          "func_addr": "00630fb0",
+          "func_name": "FUN_00630fb0"
+        },
+        {
+          "func_addr": "00639820",
+          "func_name": "FUN_00639820"
+        },
+        {
+          "func_addr": "0068bcc0",
+          "func_name": "FUN_0068bcc0"
+        },
+        {
+          "func_addr": "006d9303",
+          "func_name": "FUN_006d9303"
+        },
+        {
+          "func_addr": "006d92eb",
+          "func_name": "FUN_006d92eb"
+        },
+        {
+          "func_addr": "006d9316",
+          "func_name": "FUN_006d9316"
+        },
+        {
+          "func_addr": "006e709a",
+          "func_name": "FUN_006e709a"
+        },
+        {
+          "func_addr": "00fff970",
+          "func_name": "FUN_00fff970"
+        }
+      ]
+    },
+    {
+      "address": "007130a8",
+      "name": "PTR_ResetEvent_007130a8",
+      "type": "pointer",
+      "size": 4,
+      "value": "7738a692",
+      "section": ".rdata",
+      "references": [
+        {
+          "func_addr": "006b203a",
+          "func_name": "FUN_006b203a"
+        },
+        {
+          "func_addr": "006b22c3",
+          "func_name": "FUN_006b22c3"
+        }
+      ]
+    }
+  ],
+  "cfg": [
+    {
+      "index": 0,
+      "start": "006b22c3",
+      "stop": "006b22cc",
+      "out": [
+        1,
+        9
+      ],
+      "in": []
+    },
+    {
+      "index": 1,
+      "start": "006b22d6",
+      "stop": "006b22e7",
+      "out": [
+        2,
+        8
+      ],
+      "in": [
+        0
+      ]
+    },
+    {
+      "index": 2,
+      "start": "006b22ee",
+      "stop": "006b22ef",
+      "out": [
+        3
+      ],
+      "in": [
+        1
+      ]
+    },
+    {
+      "index": 3,
+      "start": "006b22f2",
+      "stop": "006b231a",
+      "out": [
+        5,
+        4
+      ],
+      "in": [
+        2,
+        7,
+        6
+      ]
+    },
+    {
+      "index": 4,
+      "start": "006b234d",
+      "stop": "006b2354",
+      "out": [
+        10
+      ],
+      "in": [
+        3
+      ]
+    },
+    {
+      "index": 5,
+      "start": "006b231c",
+      "stop": "006b2326",
+      "out": [
+        7,
+        6
+      ],
+      "in": [
+        3
+      ]
+    },
+    {
+      "index": 6,
+      "start": "006b2337",
+      "stop": "006b234b",
+      "out": [
+        3
+      ],
+      "in": [
+        5
+      ]
+    },
+    {
+      "index": 7,
+      "start": "006b2328",
+      "stop": "006b2335",
+      "out": [
+        3
+      ],
+      "in": [
+        5
+      ]
+    },
+    {
+      "index": 8,
+      "start": "006b22e9",
+      "stop": "006b22ec",
+      "out": [
+        10
+      ],
+      "in": [
+        1
+      ]
+    },
+    {
+      "index": 9,
+      "start": "006b22ce",
+      "stop": "006b22d1",
+      "out": [
+        10
+      ],
+      "in": [
+        0
+      ]
+    },
+    {
+      "index": 10,
+      "start": "006b2356",
+      "stop": "006b2358",
+      "out": [],
+      "in": [
+        9,
+        8,
+        4
+      ]
+    }
+  ]
+}
+
+
+## Control-flow graph
+{
+  "schema_version": 1,
+  "kind": "cfg",
+  "target": "006b22c3",
+  "data": [
+    {
+      "index": 0,
+      "start": "006b22c3",
+      "stop": "006b22cc",
+      "out": [
+        1,
+        9
+      ],
+      "in": []
+    },
+    {
+      "index": 1,
+      "start": "006b22d6",
+      "stop": "006b22e7",
+      "out": [
+        2,
+        8
+      ],
+      "in": [
+        0
+      ]
+    },
+    {
+      "index": 2,
+      "start": "006b22ee",
+      "stop": "006b22ef",
+      "out": [
+        3
+      ],
+      "in": [
+        1
+      ]
+    },
+    {
+      "index": 3,
+      "start": "006b22f2",
+      "stop": "006b231a",
+      "out": [
+        5,
+        4
+      ],
+      "in": [
+        2,
+        7,
+        6
+      ]
+    },
+    {
+      "index": 4,
+      "start": "006b234d",
+      "stop": "006b2354",
+      "out": [
+        10
+      ],
+      "in": [
+        3
+      ]
+    },
+    {
+      "index": 5,
+      "start": "006b231c",
+      "stop": "006b2326",
+      "out": [
+        7,
+        6
+      ],
+      "in": [
+        3
+      ]
+    },
+    {
+      "index": 6,
+      "start": "006b2337",
+      "stop": "006b234b",
+      "out": [
+        3
+      ],
+      "in": [
+        5
+      ]
+    },
+    {
+      "index": 7,
+      "start": "006b2328",
+      "stop": "006b2335",
+      "out": [
+        3
+      ],
+      "in": [
+        5
+      ]
+    },
+    {
+      "index": 8,
+      "start": "006b22e9",
+      "stop": "006b22ec",
+      "out": [
+        10
+      ],
+      "in": [
+        1
+      ]
+    },
+    {
+      "index": 9,
+      "start": "006b22ce",
+      "stop": "006b22d1",
+      "out": [
+        10
+      ],
+      "in": [
+        0
+      ]
+    },
+    {
+      "index": 10,
+      "start": "006b2356",
+      "stop": "006b2358",
+      "out": [],
+      "in": [
+        9,
+        8,
+        4
+      ]
+    }
+  ]
+}
+
+
+## Normalized high P-code
+{"truncated": true, "data": {"schema_version": 1, "kind": "pcode", "target": "006b22c3", "data": [{"seq": "(ram, 0x6b22ca, 14, 0)", "address": "006b22ca", "opcode": "INT_EQUAL", "output": "(register, 0x206, 1)", "inputs": ["(stack, 0x4, 4)", "(const, 0x0, 4)"]}, {"seq": "(ram, 0x6b22cc, 20, 1)", "address": "006b22cc", "opcode": "CBRANCH", "output": null, "inputs": ["(ram, 0x6b22d6, 1)", "(register, 0x206, 1)"]}, {"seq": "(ram, 0x6b22d0, 25, 0)", "address": "006b22d0", "opcode": "COPY", "output": "(unique, 0x87200, 4)", "inputs": ["(const, 0xfffffffd, 4)"]}, {"seq": "(ram, 0x6b22d1, 28, 1)", "address": "006b22d1", "opcode": "BRANCH", "output": null, "inputs": ["(ram, 0x6b2356, 1)"]}, {"seq": "(ram, 0x6b22da, 51, 1)", "address": "006b22da", "opcode": "CALL", "output": "(register, 0x0, 4)", "inputs": ["(ram, 0x6b18df, 8)", "(stack, 0x4, 4)", "(const, 0x1, 1)"]}, {"seq": "(ram, 0x6b22da, 463, 0)", "address": "006b22da", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(const, 0x33, 4)"]}, {"seq": "(ram, 0x6b22e1, 53, 2)", "address": "006b22e1", "opcode": "INT_ADD", "output": "(unique, 0x6600, 4)", "inputs": ["(register, 0x0, 4)", "(const, 0x4, 4)"]}, {"seq": "(ram, 0x6b22e1, 54, 3)", "address": "006b22e1", "opcode": "LOAD", "output": "(unique, 0x17200, 4)", "inputs": ["(const, 0x1a1, 4)", "(unique, 0x6600, 4)"]}, {"seq": "(ram, 0x6b22e1, 60, 4)", "address": "006b22e1", "opcode": "INT_EQUAL", "output": "(register, 0x206, 1)", "inputs": ["(unique, 0x17200, 4)", "(const, 0x0, 4)"]}, {"seq": "(ram, 0x6b22e7, 74, 5)", "address": "006b22e7", "opcode": "CBRANCH", "output": null, "inputs": ["(ram, 0x6b22ee, 1)", "(register, 0x206, 1)"]}, {"seq": "(ram, 0x6b22eb, 79, 0)", "address": "006b22eb", "opcode": "COPY", "output": "(unique, 0x87200, 4)", "inputs": ["(const, 0xfffffffd, 4)"]}, {"seq": "(ram, 0x6b22ec, 82, 1)", "address": "006b22ec", "opcode": "BRANCH", "output": null, "inputs": ["(ram, 0x6b2355, 1)"]}, {"seq": "(ram, 0x6b22ef, 90, 0)", "address": "006b22ef", "opcode": "INT_ADD", "output": "(unique, 0x6600, 4)", "inputs": ["(register, 0x0, 4)", "(const, 0x28, 4)"]}, {"seq": "(ram, 0x6b22f2, 473, 0)", "address": "006b22f2", "opcode": "MULTIEQUAL", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(stack, 0x4, 4)", "(stack, 0x4, 4)"]}, {"seq": "(ram, 0x6b22f4, 95, 2)", "address": "006b22f4", "opcode": "CALL", "output": null, "inputs": ["(ram, 0x6d92a1, 8)", "(unique, 0x6600, 4)"]}, {"seq": "(ram, 0x6b22f4, 464, 1)", "address": "006b22f4", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(const, 0x5f, 4)"]}, {"seq": "(ram, 0x6b22f9, 96, 3)", "address": "006b22f9", "opcode": "INT_ADD", "output": "(unique, 0x6600, 4)", "inputs": ["(register, 0x10, 4)", "(const, 0x4, 4)"]}, {"seq": "(ram, 0x6b2300, 107, 5)", "address": "006b2300", "opcode": "CALL", "output": "(register, 0x0, 4)", "inputs": ["(ram, 0x6b2147, 8)", "(register, 0x0, 4)", "(stack, 0x4, 4)", "(unique, 0x6600, 4)"]}, {"seq": "(ram, 0x6b2300, 465, 4)", "address": "006b2300", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(const, 0x6b, 4)"]}, {"seq": "(ram, 0x6b2307, 121, 6)", "address": "006b2307", "opcode": "INT_NOTEQUAL", "output": "(register, 0x206, 1)", "inputs": ["(register, 0x0, 4)", "(const, 0x0, 4)"]}, {"seq": "(ram, 0x6b2309, 330, 7)", "address": "006b2309", "opcode": "INT_ZEXT", "output": "(register, 0x4, 4)", "inputs": ["(register, 0x206, 1)"]}, {"seq": "(ram, 0x6b230c, 132, 8)", "address": "006b230c", "opcode": "INT_AND", "output": "(unique, 0xa300, 4)", "inputs": ["(stack, 0x4, 4)", "(register, 0x4, 4)"]}, {"seq": "(ram, 0x6b2311, 146, 10)", "address": "006b2311", "opcode": "CALL", "output": null, "inputs": ["(ram, 0x6d92ac, 8)", "(unique, 0x6600, 4)"]}, {"seq": "(ram, 0x6b2311, 466, 9)", "address": "006b2311", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(unique, 0xa300, 4)", "(const, 0x92, 4)"]}, {"seq": "(ram, 0x6b2316, 154, 11)", "address": "006b2316", "opcode": "INT_EQUAL", "output": "(register, 0x206, 1)", "inputs": ["(stack, 0x4, 4)", "(const, 0x0, 4)"]}, {"seq": "(ram, 0x6b231a, 159, 12)", "address": "006b231a", "opcode": "CBRANCH", "output": null, "inputs": ["(ram, 0x6b234d, 1)", "(register, 0x206, 1)"]}, {"seq": "(ram, 0x6b231e, 165, 1)", "address": "006b231e", "opcode": "CALL", "output": "(register, 0x0, 1)", "inputs": ["(ram, 0x6d944e, 8)", "(const, 0x0, 4)"]}, {"seq": "(ram, 0x6b231e, 468, 0)", "address": "006b231e", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(const, 0xa5, 4)"]}, {"seq": "(ram, 0x6b2323, 170, 2)", "address": "006b2323", "opcode": "INT_EQUAL", "output": "(register, 0x206, 1)", "inputs": ["(register, 0x0, 1)", "(const, 0x0, 1)"]}, {"seq": "(ram, 0x6b2326, 179, 3)", "address": "006b2326", "opcode": "CBRANCH", "output": null, "inputs": ["(ram, 0x6b2337, 1)", "(register, 0x206, 1)"]}, {"seq": "(ram, 0x6b2328, 182, 1)", "address": "006b2328", "opcode": "CALL", "output": null, "inputs": ["(ram, 0x6d971d, 8)"]}, {"seq": "(ram, 0x6b2328, 471, 0)", "address": "006b2328", "opcode": "INDIRECT", "output": "(stack, 0x4, 4)", "inputs": ["(stack, 0x4, 4)", "(const, 0xb6, 4)"]}]}}
+
+## Persistent knowledge graph neighborhood
+{"truncated": true, "data": {"nodes": {"function:006b22c3": {"address": "006b22c3", "name": "FUN_006b22c3", "signature": "int __cdecl FUN_006b22c3(uint param_1)", "calling_convention": "__cdecl", "callers": [{"addr": "006b175b", "name": "FUN_006b175b", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b1783", "name": "FUN_006b1783", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b17e5", "name": "FUN_006b17e5", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b183a", "name": "FUN_006b183a", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006dac0c", "name": "FUN_006dac0c", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b17b7", "name": "FUN_006b17b7", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b1815", "name": "FUN_006b1815", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b186a", "name": "FUN_006b186a", "ref_type": "UNCONDITIONAL_CALL"}], "callees": [{"addr": "006b18df", "name": "FUN_006b18df"}, {"addr": "006d92a1", "name": "FUN_006d92a1"}, {"addr": "006b2147", "name": "FUN_006b2147"}, {"addr": "006d92ac", "name": "FUN_006d92ac"}, {"addr": "006d944e", "name": "FUN_006d944e"}, {"addr": "006d971d", "name": "FUN_006d971d"}, {"addr": "006d9416", "name": "FUN_006d9416"}, {"addr": "EXTERNAL:00000023", "name": "WaitForSingleObject"}], "kind": "function"}, "function:00000027": {"addr": "EXTERNAL:00000027", "name": "ResetEvent", "kind": "function"}, "global:00713098": {"address": "00713098", "name": "PTR_WaitForSingleObject_00713098", "type": "pointer", "size": 4, "value": "773897e0", "section": ".rdata", "references": [{"func_addr": "00631630", "func_name": "FUN_00631630"}, {"func_addr": "006b203a", "func_name": "FUN_006b203a"}, {"func_addr": "006d9591", "func_name": "FUN_006d9591"}, {"func_addr": "006b22c3", "func_name": "FUN_006b22c3"}, {"func_addr": "00630f00", "func_name": "FUN_00630f00"}, {"func_addr": "006d8ea0", "func_name": "FUN_006d8ea0"}, {"func_addr": "00631910", "func_name": "FUN_00631910"}, {"func_addr": "010113c0", "func_name": "FUN_010113c0"}], "kind": "global"}, "function:006b2223": {"address": "006b2223", "name": "FUN_006b2223", "signature": "int __cdecl FUN_006b2223(uint param_1)", "calling_convention": "__cdecl", "callers": [{"addr": "006883a0", "name": "FUN_006883a0", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "00688400", "name": "FUN_00688400", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "00688460", "name": "FUN_00688460", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006884b0", "name": "FUN_006884b0", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b22c3", "name": "FUN_006b22c3", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006564f0", "name": "FUN_006564f0", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006564f0", "name": "FUN_006564f0", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006564f0", "name": "FUN_006564f0", "ref_type": "UNCONDITIONAL_CALL"}], "callees": [{"addr": "006b18df", "name": "FUN_006b18df"}, {"addr": "006d92a1", "name": "FUN_006d92a1"}, {"addr": "006b2147", "name": "FUN_006b2147"}, {"addr": "006d92ac", "name": "FUN_006d92ac"}], "kind": "function", "addr": "006b2223"}, "function:00000023": {"addr": "EXTERNAL:00000023", "name": "WaitForSingleObject", "kind": "function"}, "function:006d92ac": {"addr": "006d92ac", "name": "FUN_006d92ac", "kind": "function", "address": "006d92ac", "signature": "undefined __fastcall FUN_006d92ac(int param_1)", "calling_convention": "__fastcall", "callers": [{"addr": "006b2223", "name": "FUN_006b2223", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b2359", "name": "FUN_006b2359", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b1d53", "name": "FUN_006b1d53", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b1910", "name": "FUN_006b1910", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b2199", "name": "FUN_006b2199", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006daca6", "name": "FUN_006daca6", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b227b", "name": "FUN_006b227b", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b22c3", "name": "FUN_006b22c3", "ref_type": "UNCONDITIONAL_CALL"}], "callees": [{"addr": "EXTERNAL:0000001a", "name": "LeaveCriticalSection"}]}, "function:006b2147": {"address": "006b2147", "name": "FUN_006b2147", "signature": "undefined __thiscall FUN_006b2147(void * this, int param_1, undefined4 * param_2)", "calling_convention": "__thiscall", "callers": [{"addr": "006b2223", "name": "FUN_006b2223", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b227b", "name": "FUN_006b227b", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b22c3", "name": "FUN_006b22c3", "ref_type": "UNCONDITIONAL_CALL"}, {"addr": "006b23b2", "name": "FUN_006b23b2", "ref_type": "UNCONDITIONAL_CALL"}], "callees": [{"addr": "006b1ffc", "name": "FUN_006b1ffc"}], "kind": "function", "addr": "006b2147"}, "function:006d971d": {"addr": "006d971d", "name": "FUN_006d971d", "kind": "function"}}, "edges": [{"source": "function:006b22c3", "target": "function:006b18df", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006d92a1", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006b2147", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006d92ac", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006d944e", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006d971d", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:006d9416", "relation": "calls"}, {"source": "function:006b22c3", "target": "function:00000023", "relation": "calls"}], "gaps": []}}
+
+**Project-specific rules:**
+- Preserve the detected ABI, calling convention, widths, and signedness
+- Use evidence-backed names and retain address-based placeholders when unresolved
+
+Requirements:
+1. Match every branch and call from the decompile
+2. Map all offsets (e.g. param_1 + 0x88) to real member names
+3. Preserve exact expression/operand order
+4. Use existing project patterns and naming conventions
+5. Output the complete function implementation in a ```cpp block
+6. End with: REVERSED_FUNCTION: ::FUN_006b22c3 (006b22c3)
+2026-10-17T02:59:36.974382Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: "Bearer resource_metadata=\"https://mcp.fal.ai/.well-known/oauth-protected-resource/mcp\"" })
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:44 AM.
+ERROR: You’ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:44 AM.
+
+{
+  "results": [
+    {
+      "address": "006b22c3",
+      "run_id": "",
+      "error": "codex exec failed with exit code 1\nOpenAI Codex v0.162.1\n--------\nworkdir: D:\\HP\\HP6_Reconstructed\nmodel: gpt-6-sol\nprovider: openai\napproval: never\nsandbox: read-only\nreasoning effort: medium\nreasoning summaries: none\nsession id: 01a147cc-f266-7542-b03a-4302f88e94d4\n--------\nuser\n[SYSTEM]\nYou are an expert reverse engineer. Convert decompiled native code into clean source while preserving observable binary behavior.\n\nGuidelines:\n- Match the vanilla binary logic EXACTLY \u2014 every branch, every call, every arithmetic operation\n- Use names and types supported by the supplied evidence; do not invent confident names without evidence\n- Expression order matters: `A * x + B * y` is NOT the same as `B * y + A * x` for floating point\n- Preserve calling convention, integer widths, signedness, memory offsets, and side effects\n- Call out unresolved types or symbols instead of silently guessing\n\nIf essential evidence is missing, you may request read-only tools by returning\nonly this JSON shape:\n`{\"actions\":[{\"tool\":\"decompile\",\"target\":\"0x...\"}]}`.\nAvailable tools are `decompile`, `xrefs_from`, `xrefs_to`, `struct`, `enum`,\n`vtable`, `global`, `strings`, `context`, `pcode`, and `cfg`. Request only\nevidence needed to resolve a concrete uncertainty.\n\nOutput format:\n- Provide the reversed C++ code in a single ```cpp code block\n- End with: REVERSED_FUNCTION: ClassName::FunctionName (0xADDRESS)\n\n[USER]\nReverse the following function into clean C++20.\n\n**Target:** ::FUN_006b22c3 at 006b22c3\n\n**Ghidra Decompile:**\n```\n// ===========================================\n// Ghidra:    FUN_006b22c3\n// Address:   0x006b22c3\n// Signature: int __cdecl FUN_006b22c3(uint param_1)\n// Callers:   9  |  Callees: 10\n// ===========================================\n\n\n\nint __cdecl FUN_006b22c3(uint param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  bool bVar2;\n\n  void *this;\n\n  int iVar3;\n\n  \n\n  uVar1 = param_1;\n\n  if (param_1 == 0) {\n\n    iVar3 = -3;\n\n  }\n\n  else {\n\n    this = (void *)FUN_006b18df(param_1,'\\x01');\n\n    if (*(int *)((int)this + 4) == 0) {\n\n      iVar3 = -3;\n\n    }\n\n    else {\n\n      while( true ) {\n\n        FUN_006d92a1((int)this + 0x28);\n\n        iVar3 = FUN_006b2147(this,uVar1,&param_1);\n\n        param_1 = param_1 & iVar3 != 0;\n\n        FUN_006d92ac((int)this + 0x28);\n\n        if (param_1 == 0) break;\n\n        bVar2 = FUN_006d944e(0);\n\n        if (bVar2) {\n\n          FUN_006d971d();\n\n          FUN_006d9416(1);\n\n        }\n\n        else {\n\n          WaitForSingleObject(*(HANDLE *)((int)this + 0x78),0xffffffff);\n\n          ResetEvent(*(HANDLE *)((int)this + 0x78));\n\n        }\n\n      }\n\n      iVar3 = FUN_006b2223(uVar1);\n\n    }\n\n  }\n\n  return iVar3;\n\n}\n\n\n\n\n\n```\n\n**Cross-references (calls from this function):**\n- FUN_006b18df (0x006b18df) [CALL]\n- FUN_006d92a1 (0x006d92a1) [CALL]\n- FUN_006b2147 (0x006b2147) [CALL]\n- FUN_006d92ac (0x006d92ac) [CALL]\n- FUN_006d944e (0x006d944e) [CALL]\n- FUN_006d971d (0x006d971d) [CALL]\n- FUN_006d9416 (0x006d9416) [CALL]\n- FUN_006b2223 (0x006b2223) [CALL]\n\n**Struct/type context:**\nNone\n\n**Existing source context:**\nNo relevant existing source context found.\n\n**Structured reverse-engineering evidence:**\n## Function evidence bundle\n{\n  \"schema_version\": 1,\n  \"kind\": \"function-context\",\n  \"target\": \"006b22c3\",\n  \"function\": {\n    \"address\": \"006b22c3\",\n    \"name\": \"FUN_006b22c3\",\n    \"signature\": \"int __cdecl FUN_006b22c3(uint param_1)\",\n    \"calling_convention\": \"__cdecl\",\n    \"callers\": [\n      {\n        \"addr\": \"006b175b\",\n        \"name\": \"FUN_006b175b\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b1783\",\n        \"name\": \"FUN_006b1783\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b17e5\",\n        \"name\": \"FUN_006b17e5\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b183a\",\n        \"name\": \"FUN_006b183a\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006dac0c\",\n        \"name\": \"FUN_006dac0c\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b17b7\",\n        \"name\": \"FUN_006b17b7\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b1815\",\n        \"name\": \"FUN_006b1815\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006b186a\",\n        \"name\": \"FUN_006b186a\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      },\n      {\n        \"addr\": \"006f4f64\",\n        \"name\": \"FUN_006f4f64\",\n        \"ref_type\": \"UNCONDITIONAL_CALL\"\n      }\n    ],\n    \"callees\": [\n      {\n        \"addr\": \"006b18df\",\n        \"name\": \"FUN_006b18df\"\n      },\n      {\n        \"addr\": \"006d92a1\",\n        \"name\": \"FUN_006d92a1\"\n      },\n      {\n        \"addr\": \"006b2147\",\n        \"name\": \"FUN_006b2147\"\n      },\n      {\n        \"addr\": \"006d92ac\",\n        \"name\": \"FUN_006d92ac\"\n      },\n      {\n        \"addr\": \"006d944e\",\n        \"name\": \"FUN_006d944e\"\n      },\n      {\n        \"addr\": \"006d971d\",\n        \"name\": \"FUN_006d971d\"\n      },\n      {\n        \"addr\": \"006d9416\",\n        \"name\": \"FUN_006d9416\"\n      },\n      {\n        \"addr\": \"EXTERNAL:00000023\",\n        \"name\": \"WaitForSingleObject\"\n      },\n      {\n        \"addr\": \"EXTERNAL:00000027\",\n        \"name\": \"ResetEvent\"\n      },\n      {\n        \"addr\": \"006b2223\",\n        \"name\": \"FUN_006b2223\"\n      }\n    ]\n  },\n  \"strings\": [],\n  \"globals\": [\n    {\n      \"address\": \"00713098\",\n      \"name\": \"PTR_WaitForSingleObject_00713098\",\n      \"type\": \"pointer\",\n      \"size\": 4,\n      \"value\": \"773897e0\",\n      \"section\": \".rdata\",\n      \"references\": [\n        {\n          \"func_addr\": \"00631630\",\n          \"func_name\": \"FUN_00631630\"\n        },\n        {\n          \"func_addr\": \"006b203a\",\n          \"func_name\": \"FUN_006b203a\"\n        },\n        {\n          \"func_addr\": \"006d9591\",\n          \"func_name\": \"FUN_006d9591\"\n        },\n        {\n          \"func_addr\": \"006b22c3\",\n          \"func_name\": \"FUN_006b22c3\"\n        },\n        {\n          \"func_addr\": \"00630f00\",\n          \"func_name\": \"FUN_00630f00\"\n        },\n        {\n          \"func_addr\": \"006d8ea0\",\n          \"func_name\": \"FUN_006d8ea0\"\n        },\n        {\n          \"func_addr\": \"00631910\",\n          \"func_name\": \"FUN_00631910\"\n        },\n        {\n          \"func_addr\": \"010113c0\",\n          \"func_name\": \"FUN_010113c0\"\n        },\n        {\n          \"func_addr\": \"00636500\",\n          \"func_name\": \"FUN_00636500\"\n        },\n        {\n          \"func_addr\": \"00636990\",\n          \"func_name\": \"FUN_00636990\"\n        },\n        {\n          \"func_addr\": \"00fffb90\",\n          \"func_name\": \"FUN_00fffb90\"\n        },\n        {\n          \"func_addr\": \"00630fb0\",\n          \"func_name\": \"FUN_00630fb0\"\n        },\n        {\n          \"func_addr\": \"00639820\",\n          \"func_name\": \"FUN_00639820\"\n        },\n        {\n          \"func_addr\": \"0068bcc0\",\n          \"func_name\": \"FUN_0068bcc0\"\n        },\n        {\n          \"func_addr\": \"006d9303\",\n          \"func_name\": \"FUN_006d9303\"\n        },\n        {\n          \"func_addr\": \"006d92eb\",\n          \"func_name\": \"FUN_006d92eb\"\n        },\n        {\n          \"func_addr\": \"006d9316\",\n          \"func_name\": \"FUN_006d9316\"\n        },\n        {\n          \"func_addr\": \"006e709a\",\n          \"func_name\": \"FUN_006e709a\"\n        },\n        {\n          \"func_addr\": \"00fff970\",\n          \"func_name\": \"FUN_00fff970\"\n        }\n      ]\n    },\n    {\n      \"address\": \"007130a8\",\n      \"name\": \"PTR_ResetEvent_007130a8\",\n      \"type\": \"pointer\",\n      \"size\": 4,\n      \"value\": \"7738a692\",\n      \"section\": \".rdata\",\n      \"references\": [\n        {\n          \"func_addr\": \"006b203a\",\n          \"func_name\": \"FUN_006b203a\"\n        },\n        {\n          \"func_addr\": \"006b22c3\",\n          \"func_name\": \"FUN_006b22c3\"\n        }\n      ]\n    }\n  ],\n  \"cfg\": [\n    {\n      \"index\": 0,\n      \"start\": \"006b22c3\",\n      \"stop\": \"006b22cc\",\n      \"out\": [\n        1,\n        9\n      ],\n      \"in\": []\n    },\n    {\n      \"index\": 1,\n      \"start\": \"006b22d6\",\n      \"stop\": \"006b22e7\",\n      \"out\": [\n        2,\n        8\n      ],\n      \"in\": [\n        0\n      ]\n    },\n    {\n      \"index\": 2,\n      \"start\": \"006b22ee\",\n      \"stop\": \"006b22ef\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        1\n      ]\n    },\n    {\n      \"index\": 3,\n      \"start\": \"006b22f2\",\n      \"stop\": \"006b231a\",\n      \"out\": [\n        5,\n        4\n      ],\n      \"in\": [\n        2,\n        7,\n        6\n      ]\n    },\n    {\n      \"index\": 4,\n      \"start\": \"006b234d\",\n      \"stop\": \"006b2354\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        3\n      ]\n    },\n    {\n      \"index\": 5,\n      \"start\": \"006b231c\",\n      \"stop\": \"006b2326\",\n      \"out\": [\n        7,\n        6\n      ],\n      \"in\": [\n        3\n      ]\n    },\n    {\n      \"index\": 6,\n      \"start\": \"006b2337\",\n      \"stop\": \"006b234b\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        5\n      ]\n    },\n    {\n      \"index\": 7,\n      \"start\": \"006b2328\",\n      \"stop\": \"006b2335\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        5\n      ]\n    },\n    {\n      \"index\": 8,\n      \"start\": \"006b22e9\",\n      \"stop\": \"006b22ec\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        1\n      ]\n    },\n    {\n      \"index\": 9,\n      \"start\": \"006b22ce\",\n      \"stop\": \"006b22d1\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        0\n      ]\n    },\n    {\n      \"index\": 10,\n      \"start\": \"006b2356\",\n      \"stop\": \"006b2358\",\n      \"out\": [],\n      \"in\": [\n        9,\n        8,\n        4\n      ]\n    }\n  ]\n}\n\n\n## Control-flow graph\n{\n  \"schema_version\": 1,\n  \"kind\": \"cfg\",\n  \"target\": \"006b22c3\",\n  \"data\": [\n    {\n      \"index\": 0,\n      \"start\": \"006b22c3\",\n      \"stop\": \"006b22cc\",\n      \"out\": [\n        1,\n        9\n      ],\n      \"in\": []\n    },\n    {\n      \"index\": 1,\n      \"start\": \"006b22d6\",\n      \"stop\": \"006b22e7\",\n      \"out\": [\n        2,\n        8\n      ],\n      \"in\": [\n        0\n      ]\n    },\n    {\n      \"index\": 2,\n      \"start\": \"006b22ee\",\n      \"stop\": \"006b22ef\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        1\n      ]\n    },\n    {\n      \"index\": 3,\n      \"start\": \"006b22f2\",\n      \"stop\": \"006b231a\",\n      \"out\": [\n        5,\n        4\n      ],\n      \"in\": [\n        2,\n        7,\n        6\n      ]\n    },\n    {\n      \"index\": 4,\n      \"start\": \"006b234d\",\n      \"stop\": \"006b2354\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        3\n      ]\n    },\n    {\n      \"index\": 5,\n      \"start\": \"006b231c\",\n      \"stop\": \"006b2326\",\n      \"out\": [\n        7,\n        6\n      ],\n      \"in\": [\n        3\n      ]\n    },\n    {\n      \"index\": 6,\n      \"start\": \"006b2337\",\n      \"stop\": \"006b234b\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        5\n      ]\n    },\n    {\n      \"index\": 7,\n      \"start\": \"006b2328\",\n      \"stop\": \"006b2335\",\n      \"out\": [\n        3\n      ],\n      \"in\": [\n        5\n      ]\n    },\n    {\n      \"index\": 8,\n      \"start\": \"006b22e9\",\n      \"stop\": \"006b22ec\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        1\n      ]\n    },\n    {\n      \"index\": 9,\n      \"start\": \"006b22ce\",\n      \"stop\": \"006b22d1\",\n      \"out\": [\n        10\n      ],\n      \"in\": [\n        0\n      ]\n    },\n    {\n      \"index\": 10,\n      \"start\": \"006b2356\",\n      \"stop\": \"006b2358\",\n      \"out\": [],\n      \"in\": [\n        9,\n        8,\n        4\n      ]\n    }\n  ]\n}\n\n\n## Normalized high P-code\n{\"truncated\": true, \"data\": {\"schema_version\": 1, \"kind\": \"pcode\", \"target\": \"006b22c3\", \"data\": [{\"seq\": \"(ram, 0x6b22ca, 14, 0)\", \"address\": \"006b22ca\", \"opcode\": \"INT_EQUAL\", \"output\": \"(register, 0x206, 1)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0x0, 4)\"]}, {\"seq\": \"(ram, 0x6b22cc, 20, 1)\", \"address\": \"006b22cc\", \"opcode\": \"CBRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b22d6, 1)\", \"(register, 0x206, 1)\"]}, {\"seq\": \"(ram, 0x6b22d0, 25, 0)\", \"address\": \"006b22d0\", \"opcode\": \"COPY\", \"output\": \"(unique, 0x87200, 4)\", \"inputs\": [\"(const, 0xfffffffd, 4)\"]}, {\"seq\": \"(ram, 0x6b22d1, 28, 1)\", \"address\": \"006b22d1\", \"opcode\": \"BRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b2356, 1)\"]}, {\"seq\": \"(ram, 0x6b22da, 51, 1)\", \"address\": \"006b22da\", \"opcode\": \"CALL\", \"output\": \"(register, 0x0, 4)\", \"inputs\": [\"(ram, 0x6b18df, 8)\", \"(stack, 0x4, 4)\", \"(const, 0x1, 1)\"]}, {\"seq\": \"(ram, 0x6b22da, 463, 0)\", \"address\": \"006b22da\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0x33, 4)\"]}, {\"seq\": \"(ram, 0x6b22e1, 53, 2)\", \"address\": \"006b22e1\", \"opcode\": \"INT_ADD\", \"output\": \"(unique, 0x6600, 4)\", \"inputs\": [\"(register, 0x0, 4)\", \"(const, 0x4, 4)\"]}, {\"seq\": \"(ram, 0x6b22e1, 54, 3)\", \"address\": \"006b22e1\", \"opcode\": \"LOAD\", \"output\": \"(unique, 0x17200, 4)\", \"inputs\": [\"(const, 0x1a1, 4)\", \"(unique, 0x6600, 4)\"]}, {\"seq\": \"(ram, 0x6b22e1, 60, 4)\", \"address\": \"006b22e1\", \"opcode\": \"INT_EQUAL\", \"output\": \"(register, 0x206, 1)\", \"inputs\": [\"(unique, 0x17200, 4)\", \"(const, 0x0, 4)\"]}, {\"seq\": \"(ram, 0x6b22e7, 74, 5)\", \"address\": \"006b22e7\", \"opcode\": \"CBRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b22ee, 1)\", \"(register, 0x206, 1)\"]}, {\"seq\": \"(ram, 0x6b22eb, 79, 0)\", \"address\": \"006b22eb\", \"opcode\": \"COPY\", \"output\": \"(unique, 0x87200, 4)\", \"inputs\": [\"(const, 0xfffffffd, 4)\"]}, {\"seq\": \"(ram, 0x6b22ec, 82, 1)\", \"address\": \"006b22ec\", \"opcode\": \"BRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b2355, 1)\"]}, {\"seq\": \"(ram, 0x6b22ef, 90, 0)\", \"address\": \"006b22ef\", \"opcode\": \"INT_ADD\", \"output\": \"(unique, 0x6600, 4)\", \"inputs\": [\"(register, 0x0, 4)\", \"(const, 0x28, 4)\"]}, {\"seq\": \"(ram, 0x6b22f2, 473, 0)\", \"address\": \"006b22f2\", \"opcode\": \"MULTIEQUAL\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(stack, 0x4, 4)\", \"(stack, 0x4, 4)\"]}, {\"seq\": \"(ram, 0x6b22f4, 95, 2)\", \"address\": \"006b22f4\", \"opcode\": \"CALL\", \"output\": null, \"inputs\": [\"(ram, 0x6d92a1, 8)\", \"(unique, 0x6600, 4)\"]}, {\"seq\": \"(ram, 0x6b22f4, 464, 1)\", \"address\": \"006b22f4\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0x5f, 4)\"]}, {\"seq\": \"(ram, 0x6b22f9, 96, 3)\", \"address\": \"006b22f9\", \"opcode\": \"INT_ADD\", \"output\": \"(unique, 0x6600, 4)\", \"inputs\": [\"(register, 0x10, 4)\", \"(const, 0x4, 4)\"]}, {\"seq\": \"(ram, 0x6b2300, 107, 5)\", \"address\": \"006b2300\", \"opcode\": \"CALL\", \"output\": \"(register, 0x0, 4)\", \"inputs\": [\"(ram, 0x6b2147, 8)\", \"(register, 0x0, 4)\", \"(stack, 0x4, 4)\", \"(unique, 0x6600, 4)\"]}, {\"seq\": \"(ram, 0x6b2300, 465, 4)\", \"address\": \"006b2300\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0x6b, 4)\"]}, {\"seq\": \"(ram, 0x6b2307, 121, 6)\", \"address\": \"006b2307\", \"opcode\": \"INT_NOTEQUAL\", \"output\": \"(register, 0x206, 1)\", \"inputs\": [\"(register, 0x0, 4)\", \"(const, 0x0, 4)\"]}, {\"seq\": \"(ram, 0x6b2309, 330, 7)\", \"address\": \"006b2309\", \"opcode\": \"INT_ZEXT\", \"output\": \"(register, 0x4, 4)\", \"inputs\": [\"(register, 0x206, 1)\"]}, {\"seq\": \"(ram, 0x6b230c, 132, 8)\", \"address\": \"006b230c\", \"opcode\": \"INT_AND\", \"output\": \"(unique, 0xa300, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(register, 0x4, 4)\"]}, {\"seq\": \"(ram, 0x6b2311, 146, 10)\", \"address\": \"006b2311\", \"opcode\": \"CALL\", \"output\": null, \"inputs\": [\"(ram, 0x6d92ac, 8)\", \"(unique, 0x6600, 4)\"]}, {\"seq\": \"(ram, 0x6b2311, 466, 9)\", \"address\": \"006b2311\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(unique, 0xa300, 4)\", \"(const, 0x92, 4)\"]}, {\"seq\": \"(ram, 0x6b2316, 154, 11)\", \"address\": \"006b2316\", \"opcode\": \"INT_EQUAL\", \"output\": \"(register, 0x206, 1)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0x0, 4)\"]}, {\"seq\": \"(ram, 0x6b231a, 159, 12)\", \"address\": \"006b231a\", \"opcode\": \"CBRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b234d, 1)\", \"(register, 0x206, 1)\"]}, {\"seq\": \"(ram, 0x6b231e, 165, 1)\", \"address\": \"006b231e\", \"opcode\": \"CALL\", \"output\": \"(register, 0x0, 1)\", \"inputs\": [\"(ram, 0x6d944e, 8)\", \"(const, 0x0, 4)\"]}, {\"seq\": \"(ram, 0x6b231e, 468, 0)\", \"address\": \"006b231e\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0xa5, 4)\"]}, {\"seq\": \"(ram, 0x6b2323, 170, 2)\", \"address\": \"006b2323\", \"opcode\": \"INT_EQUAL\", \"output\": \"(register, 0x206, 1)\", \"inputs\": [\"(register, 0x0, 1)\", \"(const, 0x0, 1)\"]}, {\"seq\": \"(ram, 0x6b2326, 179, 3)\", \"address\": \"006b2326\", \"opcode\": \"CBRANCH\", \"output\": null, \"inputs\": [\"(ram, 0x6b2337, 1)\", \"(register, 0x206, 1)\"]}, {\"seq\": \"(ram, 0x6b2328, 182, 1)\", \"address\": \"006b2328\", \"opcode\": \"CALL\", \"output\": null, \"inputs\": [\"(ram, 0x6d971d, 8)\"]}, {\"seq\": \"(ram, 0x6b2328, 471, 0)\", \"address\": \"006b2328\", \"opcode\": \"INDIRECT\", \"output\": \"(stack, 0x4, 4)\", \"inputs\": [\"(stack, 0x4, 4)\", \"(const, 0xb6, 4)\"]}]}}\n\n## Persistent knowledge graph neighborhood\n{\"truncated\": true, \"data\": {\"nodes\": {\"function:006b22c3\": {\"address\": \"006b22c3\", \"name\": \"FUN_006b22c3\", \"signature\": \"int __cdecl FUN_006b22c3(uint param_1)\", \"calling_convention\": \"__cdecl\", \"callers\": [{\"addr\": \"006b175b\", \"name\": \"FUN_006b175b\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b1783\", \"name\": \"FUN_006b1783\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b17e5\", \"name\": \"FUN_006b17e5\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b183a\", \"name\": \"FUN_006b183a\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006dac0c\", \"name\": \"FUN_006dac0c\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b17b7\", \"name\": \"FUN_006b17b7\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b1815\", \"name\": \"FUN_006b1815\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b186a\", \"name\": \"FUN_006b186a\", \"ref_type\": \"UNCONDITIONAL_CALL\"}], \"callees\": [{\"addr\": \"006b18df\", \"name\": \"FUN_006b18df\"}, {\"addr\": \"006d92a1\", \"name\": \"FUN_006d92a1\"}, {\"addr\": \"006b2147\", \"name\": \"FUN_006b2147\"}, {\"addr\": \"006d92ac\", \"name\": \"FUN_006d92ac\"}, {\"addr\": \"006d944e\", \"name\": \"FUN_006d944e\"}, {\"addr\": \"006d971d\", \"name\": \"FUN_006d971d\"}, {\"addr\": \"006d9416\", \"name\": \"FUN_006d9416\"}, {\"addr\": \"EXTERNAL:00000023\", \"name\": \"WaitForSingleObject\"}], \"kind\": \"function\"}, \"function:00000027\": {\"addr\": \"EXTERNAL:00000027\", \"name\": \"ResetEvent\", \"kind\": \"function\"}, \"global:00713098\": {\"address\": \"00713098\", \"name\": \"PTR_WaitForSingleObject_00713098\", \"type\": \"pointer\", \"size\": 4, \"value\": \"773897e0\", \"section\": \".rdata\", \"references\": [{\"func_addr\": \"00631630\", \"func_name\": \"FUN_00631630\"}, {\"func_addr\": \"006b203a\", \"func_name\": \"FUN_006b203a\"}, {\"func_addr\": \"006d9591\", \"func_name\": \"FUN_006d9591\"}, {\"func_addr\": \"006b22c3\", \"func_name\": \"FUN_006b22c3\"}, {\"func_addr\": \"00630f00\", \"func_name\": \"FUN_00630f00\"}, {\"func_addr\": \"006d8ea0\", \"func_name\": \"FUN_006d8ea0\"}, {\"func_addr\": \"00631910\", \"func_name\": \"FUN_00631910\"}, {\"func_addr\": \"010113c0\", \"func_name\": \"FUN_010113c0\"}], \"kind\": \"global\"}, \"function:006b2223\": {\"address\": \"006b2223\", \"name\": \"FUN_006b2223\", \"signature\": \"int __cdecl FUN_006b2223(uint param_1)\", \"calling_convention\": \"__cdecl\", \"callers\": [{\"addr\": \"006883a0\", \"name\": \"FUN_006883a0\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"00688400\", \"name\": \"FUN_00688400\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"00688460\", \"name\": \"FUN_00688460\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006884b0\", \"name\": \"FUN_006884b0\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b22c3\", \"name\": \"FUN_006b22c3\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006564f0\", \"name\": \"FUN_006564f0\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006564f0\", \"name\": \"FUN_006564f0\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006564f0\", \"name\": \"FUN_006564f0\", \"ref_type\": \"UNCONDITIONAL_CALL\"}], \"callees\": [{\"addr\": \"006b18df\", \"name\": \"FUN_006b18df\"}, {\"addr\": \"006d92a1\", \"name\": \"FUN_006d92a1\"}, {\"addr\": \"006b2147\", \"name\": \"FUN_006b2147\"}, {\"addr\": \"006d92ac\", \"name\": \"FUN_006d92ac\"}], \"kind\": \"function\", \"addr\": \"006b2223\"}, \"function:00000023\": {\"addr\": \"EXTERNAL:00000023\", \"name\": \"WaitForSingleObject\", \"kind\": \"function\"}, \"function:006d92ac\": {\"addr\": \"006d92ac\", \"name\": \"FUN_006d92ac\", \"kind\": \"function\", \"address\": \"006d92ac\", \"signature\": \"undefined __fastcall FUN_006d92ac(int param_1)\", \"calling_convention\": \"__fastcall\", \"callers\": [{\"addr\": \"006b2223\", \"name\": \"FUN_006b2223\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b2359\", \"name\": \"FUN_006b2359\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b1d53\", \"name\": \"FUN_006b1d53\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b1910\", \"name\": \"FUN_006b1910\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b2199\", \"name\": \"FUN_006b2199\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006daca6\", \"name\": \"FUN_006daca6\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b227b\", \"name\": \"FUN_006b227b\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b22c3\", \"name\": \"FUN_006b22c3\", \"ref_type\": \"UNCONDITIONAL_CALL\"}], \"callees\": [{\"addr\": \"EXTERNAL:0000001a\", \"name\": \"LeaveCriticalSection\"}]}, \"function:006b2147\": {\"address\": \"006b2147\", \"name\": \"FUN_006b2147\", \"signature\": \"undefined __thiscall FUN_006b2147(void * this, int param_1, undefined4 * param_2)\", \"calling_convention\": \"__thiscall\", \"callers\": [{\"addr\": \"006b2223\", \"name\": \"FUN_006b2223\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b227b\", \"name\": \"FUN_006b227b\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b22c3\", \"name\": \"FUN_006b22c3\", \"ref_type\": \"UNCONDITIONAL_CALL\"}, {\"addr\": \"006b23b2\", \"name\": \"FUN_006b23b2\", \"ref_type\": \"UNCONDITIONAL_CALL\"}], \"callees\": [{\"addr\": \"006b1ffc\", \"name\": \"FUN_006b1ffc\"}], \"kind\": \"function\", \"addr\": \"006b2147\"}, \"function:006d971d\": {\"addr\": \"006d971d\", \"name\": \"FUN_006d971d\", \"kind\": \"function\"}}, \"edges\": [{\"source\": \"function:006b22c3\", \"target\": \"function:006b18df\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006d92a1\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006b2147\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006d92ac\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006d944e\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006d971d\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:006d9416\", \"relation\": \"calls\"}, {\"source\": \"function:006b22c3\", \"target\": \"function:00000023\", \"relation\": \"calls\"}], \"gaps\": []}}\n\n**Project-specific rules:**\n- Preserve the detected ABI, calling convention, widths, and signedness\n- Use evidence-backed names and retain address-based placeholders when unresolved\n\nRequirements:\n1. Match every branch and call from the decompile\n2. Map all offsets (e.g. param_1 + 0x88) to real member names\n3. Preserve exact expression/operand order\n4. Use existing project patterns and naming conventions\n5. Output the complete function implementation in a ```cpp block\n6. End with: REVERSED_FUNCTION: ::FUN_006b22c3 (006b22c3)\n2026-10-17T02:59:36.974382Z ERROR rmcp::transport::worker: worker quit with fatal: Transport channel closed, when AuthRequired(AuthRequiredError { www_authenticate_header: \"Bearer resource_metadata=\\\"https://mcp.fal.ai/.well-known/oauth-protected-resource/mcp\\\"\" })\nERROR: You\u2019ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:44 AM.\nERROR: You\u2019ve hit your usage limit. Upgrade to Pro (https://chatgpt.com/explore/pro), visit https://chatgpt.com/settings/usage to purchase more credits or try again at 6:44 AM.\n",
+      "class_name": "",
+      "function_name": "FUN_006b22c3",
+      "success": false,
+      "rounds_used": 0,
+      "code": null
+    }
+  ]
+}

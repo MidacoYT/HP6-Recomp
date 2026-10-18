@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006dc733",
+      "run_id": "d33e9371504b43c58cdf0325b643e732",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc733",
+      "success": true,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006dc733(unsigned char* param_1)\n{\n    int local_8 = 0;\n    FUN_006dc6a3(param_1, &local_8, nullptr);\n    return local_8;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc733\\_FUN_006dc733.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

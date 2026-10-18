@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d78a8",
+      "run_id": "65954bacbb9641bbb2625263aade11d0",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d78a8",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006d78a8(void* this_, int param_1)\n{\n    FUN_006d7745(this_, param_1);\n\n    auto* destination = static_cast<std::uint8_t*>(this_);\n    destination[0] = 0x7c;\n\n    // Member names and types at these offsets are unresolved.\n    *reinterpret_cast<std::uint32_t*>(destination + 0x10) =\n        *reinterpret_cast<std::uint32_t*>(param_1 + 0x74);\n    *reinterpret_cast<std::uint32_t*>(destination + 0x14) =\n        *reinterpret_cast<std::uint32_t*>(param_1 + 0x78);\n    *reinterpret_cast<std::uint32_t*>(destination + 0x18) =\n        *reinterpret_cast<std::uint32_t*>(param_1 + 0x7c);\n    *reinterpret_cast<std::uint32_t*>(destination + 0x1c) =\n        *reinterpret_cast<std::uint32_t*>(param_1 + 0x80);\n\n    int size = FUN_006d768d(param_1);\n    FUN_00688550(this_, reinterpret_cast<int>(destination + 0x20), size - 0x20);\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but the struct offsets lack named members.",
+      "issues": [
+        "Destination offsets 0x00, 0x10, 0x14, 0x18, 0x1c, and 0x20 and source offsets 0x74, 0x78, 0x7c, and 0x80 use raw pointer arithmetic instead of named members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d78a8\\_FUN_006d78a8.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d733f",
+      "run_id": "7bd6146c0dff41c4942bb52d82acaba7",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d733f",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006d733f(void* this_, std::int32_t param_1)\n{\n    auto* value = static_cast<std::uint32_t*>(this_);\n    *value = (((-static_cast<std::uint32_t>(param_1 != 1) & 0xffff0000u)\n               + 0x10000u) * 0x100u)\n             | (*value & 0xfeffffffu);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d733f\\_FUN_006d733f.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

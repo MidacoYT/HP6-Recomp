@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "0068c0a0",
+      "run_id": "4178771e87494ed29bba998330e86966",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_0068c0a0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_0068c0a0(float* param_1, float* param_2)\n{\n    if (param_2[1] * param_1[0] < param_1[1] * param_2[0]) {\n        return 1;\n    }\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The multiplication order and ordinary comparison match, but NaN behavior differs from the P-code.",
+      "issues": [
+        "The P-code returns 0 when (param_1[1] * param_2[0]) <= (param_2[1] * param_1[0]), and 1 otherwise. For an unordered comparison involving NaN, it returns 1; the reversed code returns 0."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0068c0a0\\_FUN_0068c0a0.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "ASM contains floating-point sensitive ops but source has no obvious math tokens"
+        }
+      ]
+    }
+  ]
+}

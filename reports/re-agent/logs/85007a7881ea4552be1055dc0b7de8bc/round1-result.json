@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d8466",
+      "run_id": "85007a7881ea4552be1055dc0b7de8bc",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8466",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __thiscall FUN_006d8466(void* self, void* param_1)\n{\n    // The supplied evidence does not identify the member names at these offsets.\n    auto* source = static_cast<std::uint8_t*>(self);\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    std::uint32_t local_c4[48];\n\n    FUN_006d744b(local_c4);\n    FUN_006d7b7a(self, reinterpret_cast<std::int32_t>(local_c4));\n    destination[1] &= 0xfb;\n    FUN_006d78a8(param_1, reinterpret_cast<std::int32_t>(local_c4));\n\n    *reinterpret_cast<std::uint32_t*>(destination + 0x10) =\n        *reinterpret_cast<std::uint32_t*>(source + 0x10);\n    *reinterpret_cast<std::uint32_t*>(destination + 0x14) =\n        *reinterpret_cast<std::uint32_t*>(source + 0x14);\n\n    std::uint32_t count =\n        *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n    const std::int32_t sourceOffset =\n        *reinterpret_cast<std::int32_t*>(source + 0x08);\n    const std::int32_t destinationOffset =\n        *reinterpret_cast<std::int32_t*>(destination + 0x08);\n\n    auto* sourceWords = sourceOffset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(source + sourceOffset);\n    auto* destinationWords = destinationOffset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(destination + destinationOffset);\n\n    for (std::uint32_t words = count >> 2; words != 0; --words) {\n        *destinationWords = *sourceWords;\n        ++sourceWords;\n        ++destinationWords;\n    }\n\n    for (count &= 3; count != 0; --count) {\n        *reinterpret_cast<std::uint8_t*>(destinationWords) =\n            *reinterpret_cast<std::uint8_t*>(sourceWords);\n        sourceWords = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(sourceWords) + 1);\n        destinationWords = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(destinationWords) + 1);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The calls, branches, and copy loops match, but the required offset mapping and load order do not.",
+      "issues": [
+        "Offsets 0x08, 0x0c, 0x10, and 0x14 are accessed through byte offsets rather than named struct members.",
+        "The independent P-code loads the source's 0x08 offset before its 0x0c count; the reversed code loads them in the opposite order."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 4 branches/loops, candidate has 2"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d8466\\_FUN_006d8466.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

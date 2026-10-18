@@ -1,0 +1,38 @@
+{
+  "results": [
+    {
+      "address": "005d7650",
+      "run_id": "f14908d46356447198ba1cd7daf7e08c",
+      "error": null,
+      "class_name": "",
+      "function_name": "005d7650",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// x86 MSVC ABI. The registry value name arrives in EDI; the supplied\n// signature does not account for that register input.\nbool __cdecl FUN_005d7650(std::string* param_1, HKEY param_2)\n{\n    const char* valueName;\n    __asm { mov valueName, edi }\n\n    std::vector<char> buffer(0xff, '\\0');\n    DWORD size = 0xff;\n    DWORD type = 1;\n\n    if (buffer.data() == nullptr || buffer.empty())\n        _invalid_parameter_noinfo();\n\n    LSTATUS status = RegQueryValueExA(\n        param_2, valueName, nullptr, &type,\n        reinterpret_cast<LPBYTE>(buffer.data()), &size);\n\n    if (status != ERROR_SUCCESS) {\n        if (status != ERROR_MORE_DATA || buffer.size() >= size)\n            return false;\n\n        buffer.resize(size);\n\n        if (buffer.data() == nullptr || buffer.empty())\n            _invalid_parameter_noinfo();\n\n        status = RegQueryValueExA(\n            param_2, valueName, nullptr, &type,\n            reinterpret_cast<LPBYTE>(buffer.data()), &size);\n\n        if (status != ERROR_SUCCESS)\n            return false;\n    }\n\n    if (buffer.data() == nullptr || buffer.empty())\n        _invalid_parameter_noinfo();\n\n    std::string value(buffer.data());\n    *param_1 = value;\n    return true;\n}",
+      "verdict": "FAIL",
+      "summary": "The registry-query branches match, but the buffer operations are not verified against the binary.",
+      "issues": [
+        "The initial thunk receives &local_45 before local_44[0] is set to 0xff. The evidence does not establish that it constructs a 255-byte vector.",
+        "thunk_FUN_00ff84a0 is represented as buffer.resize(size), but its behavior has not been identified; growth of the allocation, end pointer, and initialized bytes may differ.",
+        "The required mapping of local_34, local_30, and local_2c to named buffer members is missing."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 12 branches/loops, candidate has 6"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d7650\\_005d7650.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 14 calls, source has 18 calls (diff: 4)"
+        }
+      ]
+    }
+  ]
+}

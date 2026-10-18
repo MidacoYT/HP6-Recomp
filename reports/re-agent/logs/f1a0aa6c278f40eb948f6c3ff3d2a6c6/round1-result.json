@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b2ce9",
+      "run_id": "f1a0aa6c278f40eb948f6c3ff3d2a6c6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2ce9",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The list and node types are unresolved. Their observed offsets are kept explicit.\n// This implementation assumes the target's 32-bit ABI.\nvoid __thiscall FUN_006b2ce9(void* this_, int param_1, int param_2)\n{\n    if (param_1 == 0) {\n        FUN_006b2c65(this_, param_2);\n    } else {\n        auto* const previous_link =\n            reinterpret_cast<int*>(param_1 + 8);\n\n        if (*previous_link == 0) {\n            *reinterpret_cast<int*>(static_cast<char*>(this_) + 4) = param_2;\n        }\n\n        *reinterpret_cast<int*>(param_2 + 8) = *previous_link;\n        *previous_link = param_2 + 8;\n\n        auto* const count =\n            reinterpret_cast<int*>(static_cast<char*>(this_) + 8);\n        *count = *count + 1;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and operations match, but the struct offsets lack named members.",
+      "issues": [
+        "The accesses at this+4, this+8, param_1+8, and param_2+8 use raw offsets instead of named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2ce9\\_FUN_006b2ce9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

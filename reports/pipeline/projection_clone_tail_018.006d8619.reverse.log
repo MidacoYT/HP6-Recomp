@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d8619",
+      "run_id": "1b73c867d8884ae28c852ae46e077342",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8619",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The structure type and member names are unresolved. Offsets are retained.\nvoid __thiscall FUN_006d8619(void* this_, void* param_1)\n{\n    std::uint32_t local_c4[48];\n\n    FUN_006d744b(local_c4);\n    FUN_006d7bd2(this_, reinterpret_cast<std::int32_t>(local_c4));\n    FUN_006d79ce(param_1, reinterpret_cast<std::int32_t>(local_c4));\n\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    destination[1] &= 0xfb;\n\n    auto* source = static_cast<std::uint8_t*>(this_);\n    std::uint32_t count = *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n\n    const std::int32_t source_offset =\n        *reinterpret_cast<std::int32_t*>(source + 0x08);\n    auto* source_words = source_offset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(source + source_offset);\n\n    const std::int32_t destination_offset =\n        *reinterpret_cast<std::int32_t*>(destination + 0x08);\n    auto* destination_words = destination_offset == 0\n        ? nullptr\n        : reinterpret_cast<std::uint32_t*>(destination + destination_offset);\n\n    for (std::uint32_t words = count >> 2; words != 0; --words) {\n        *destination_words = *source_words;\n        ++source_words;\n        ++destination_words;\n    }\n\n    for (count &= 3; count != 0; --count) {\n        *reinterpret_cast<std::uint8_t*>(destination_words) =\n            *reinterpret_cast<std::uint8_t*>(source_words);\n        source_words = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(source_words) + 1);\n        destination_words = reinterpret_cast<std::uint32_t*>(\n            reinterpret_cast<std::uint8_t*>(destination_words) + 1);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but the required struct offsets remain unnamed.",
+      "issues": [
+        "The accesses at offsets +0x01, +0x08, and +0x0c use raw pointer arithmetic instead of named struct members.",
+        "The supplied high P-code conflicts with the decompilation on the zero-offset branches, but reuses one temporary for different values and is truncated; it does not establish a source-code mismatch."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 4 branches/loops, candidate has 2"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d8619\\_FUN_006d8619.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

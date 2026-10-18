@@ -1,0 +1,28 @@
+Candidate validation failed for 006dbdc6: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006dbdc6",
+      "run_id": "00f451e807574a428cdd521b41128e8a",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbdc6",
+      "success": false,
+      "rounds_used": 2,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006dbdc6_Record {\n    std::byte unknown_00[0x44];\n    std::uint32_t field_44;\n};\n\nstatic_assert(offsetof(FUN_006dbdc6_Record, field_44) == 0x44);\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::uint32_t __cdecl FUN_006dbdc6(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c, &local_8) != 0) {\n        return 0;\n    }\n\n    return reinterpret_cast<FUN_006dbdc6_Record*>(\n        static_cast<std::uintptr_t>(local_8))->field_44;\n}",
+      "verdict": "PASS",
+      "summary": "The call, branch, return values, and named member at offset 0x44 match the supplied evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

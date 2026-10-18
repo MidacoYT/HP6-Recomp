@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006de70d",
+      "run_id": "819f2d825aa64a9c9a848f6783fdd09e",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006de70d",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t* __thiscall FUN_006de70d(void* this_, std::uint8_t param_1)\n{\n    *reinterpret_cast<void***>(this_) = &PTR_FUN_0071b62c;\n    FUN_006de7d0(this_);\n\n    if ((param_1 & 1) != 0) {\n        FUN_006dcbc7(this_, 0x78);\n    }\n\n    return static_cast<std::uint32_t*>(this_);\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and calls match, but the offset-zero field is unnamed.",
+      "issues": [
+        "The write to offset 0 of this_ uses a raw cast rather than a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006de70d\\_FUN_006de70d.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

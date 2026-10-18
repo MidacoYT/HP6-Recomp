@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d944e",
+      "run_id": "f0a69df9a31b464ab1550be701b9e091",
+      "error": null,
+      "class_name": "",
+      "function_name": "006d944e",
+      "success": false,
+      "rounds_used": 1,
+      "code": "extern DWORD _DAT_00899acc;\n\nbool __cdecl FUN_006d944e(int param_1)\n{\n    if (param_1 == 0) {\n        return GetCurrentThreadId() == _DAT_00899acc;\n    }\n\n    if (param_1 == -1) {\n        return true;\n    }\n\n    const DWORD currentThreadId = GetCurrentThreadId();\n    return *reinterpret_cast<const DWORD*>(param_1 + 8) == currentThreadId;\n}",
+      "verdict": "FAIL",
+      "summary": "The branches and comparisons match, but the field offset is unnamed and one evaluation order is not guaranteed.",
+      "issues": [
+        "The DWORD at param_1 + 8 has no named struct member.",
+        "In the param_1 == 0 branch, C++ does not guarantee that GetCurrentThreadId() is evaluated before _DAT_00899acc is read, as shown in the decompilation."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d944e\\_006d944e.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

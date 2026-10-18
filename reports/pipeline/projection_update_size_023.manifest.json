@@ -1,0 +1,1535 @@
+{
+  "schema_version": 1,
+  "identity": "3a09552e24638ceb13213cf05179190ec852d3f14dec3886ee36e2e8aff922d4",
+  "seeds": [
+    "006d7667",
+    "006d766b",
+    "006d767c",
+    "006d8864",
+    "006d896e"
+  ],
+  "functions": [
+    {
+      "address": "006d7667",
+      "class_name": "",
+      "function_name": "FUN_006d7667",
+      "caller_count": 2
+    },
+    {
+      "address": "006d766b",
+      "class_name": "",
+      "function_name": "FUN_006d766b",
+      "caller_count": 2
+    },
+    {
+      "address": "006d767c",
+      "class_name": "",
+      "function_name": "FUN_006d767c",
+      "caller_count": 2
+    },
+    {
+      "address": "006d8864",
+      "class_name": "",
+      "function_name": "FUN_006d8864",
+      "caller_count": 8
+    },
+    {
+      "address": "006d896e",
+      "class_name": "",
+      "function_name": "FUN_006d896e",
+      "caller_count": 0
+    }
+  ],
+  "edges": [
+    {
+      "source": "006d8864",
+      "target": "006d6c09"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d6c09"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d74ce"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d760a"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d7667"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d766b"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d767c"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d768d"
+    },
+    {
+      "source": "006d896e",
+      "target": "006d8864"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006d8864",
+      "reason": "Dependency 006d6c09 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d896e",
+      "reason": "Dependency 006d6c09 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d896e",
+      "reason": "Dependency 006d74ce outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d896e",
+      "reason": "Dependency 006d760a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d896e",
+      "reason": "Dependency 006d768d outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006d7667": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d7667",
+        "name": "FUN_006d7667",
+        "signature": "undefined4 __stdcall FUN_006d7667(void)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d7667\n// Address:   0x006d7667\n// Signature: undefined4 __stdcall FUN_006d7667(void)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 FUN_006d7667(void)\n\n\n\n{\n\n  return 0x20;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d7667\n// Address:   0x006d7667\n// Signature: undefined4 __stdcall FUN_006d7667(void)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nundefined4 FUN_006d7667(void)\n\n\n\n{\n\n  return 0x20;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d7667",
+        "function": {
+          "address": "006d7667",
+          "name": "FUN_006d7667",
+          "signature": "undefined4 __stdcall FUN_006d7667(void)",
+          "calling_convention": "__stdcall",
+          "callers": [
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d7667",
+            "stop": "006d766a",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d766b": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d766b",
+        "name": "FUN_006d766b",
+        "signature": "int __cdecl FUN_006d766b(int param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d766b\n// Address:   0x006d766b\n// Signature: int __cdecl FUN_006d766b(int param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006d766b(int param_1)\n\n\n\n{\n\n  return *(int *)(param_1 + 0x90) + 0x11;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d766b\n// Address:   0x006d766b\n// Signature: int __cdecl FUN_006d766b(int param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006d766b(int param_1)\n\n\n\n{\n\n  return *(int *)(param_1 + 0x90) + 0x11;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d766b",
+        "function": {
+          "address": "006d766b",
+          "name": "FUN_006d766b",
+          "signature": "int __cdecl FUN_006d766b(int param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d766b",
+            "stop": "006d767b",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d767c": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d767c",
+        "name": "FUN_006d767c",
+        "signature": "int __cdecl FUN_006d767c(int param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d767c\n// Address:   0x006d767c\n// Signature: int __cdecl FUN_006d767c(int param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006d767c(int param_1)\n\n\n\n{\n\n  return *(int *)(param_1 + 0x84) + 0x10;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d767c\n// Address:   0x006d767c\n// Signature: int __cdecl FUN_006d767c(int param_1)\n// Callers:   2  |  Callees: 0\n// ===========================================\n\n\n\nint __cdecl FUN_006d767c(int param_1)\n\n\n\n{\n\n  return *(int *)(param_1 + 0x84) + 0x10;\n\n}\n\n\n\n\n",
+        "callers": 2,
+        "callees": 0
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d767c",
+        "function": {
+          "address": "006d767c",
+          "name": "FUN_006d767c",
+          "signature": "int __cdecl FUN_006d767c(int param_1)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": []
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d767c",
+            "stop": "006d768c",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d8864": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d8864",
+        "name": "FUN_006d8864",
+        "signature": "int __fastcall FUN_006d8864(uint * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d8864\n// Address:   0x006d8864\n// Signature: int __fastcall FUN_006d8864(uint * param_1)\n// Callers:   8  |  Callees: 1\n// ===========================================\n\n\n\nint __fastcall FUN_006d8864(uint *param_1)\n\n\n\n{\n\n  byte bVar1;\n\n  undefined3 extraout_var;\n\n  int iVar2;\n\n  \n\n  while( true ) {\n\n    bVar1 = FUN_006d6c09(param_1);\n\n    iVar2 = CONCAT31(extraout_var,bVar1);\n\n    if (iVar2 == 1) {\n\n      return 0;\n\n    }\n\n    if (((iVar2 == 2) || (iVar2 == 4)) || (iVar2 == 0x10)) break;\n\n    if ((iVar2 == 0x20) || (iVar2 == 0x80)) {\n\n      return param_1[3] + 0x10;\n\n    }\n\n    if (iVar2 != 0x100) {\n\n      return 0;\n\n    }\n\n  }\n\n  return param_1[3] + 0x20;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d8864\n// Address:   0x006d8864\n// Signature: int __fastcall FUN_006d8864(uint * param_1)\n// Callers:   8  |  Callees: 1\n// ===========================================\n\n\n\nint __fastcall FUN_006d8864(uint *param_1)\n\n\n\n{\n\n  byte bVar1;\n\n  undefined3 extraout_var;\n\n  int iVar2;\n\n  \n\n  while( true ) {\n\n    bVar1 = FUN_006d6c09(param_1);\n\n    iVar2 = CONCAT31(extraout_var,bVar1);\n\n    if (iVar2 == 1) {\n\n      return 0;\n\n    }\n\n    if (((iVar2 == 2) || (iVar2 == 4)) || (iVar2 == 0x10)) break;\n\n    if ((iVar2 == 0x20) || (iVar2 == 0x80)) {\n\n      return param_1[3] + 0x10;\n\n    }\n\n    if (iVar2 != 0x100) {\n\n      return 0;\n\n    }\n\n  }\n\n  return param_1[3] + 0x20;\n\n}\n\n\n\n\n",
+        "callers": 8,
+        "callees": 1
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d8864",
+        "function": {
+          "address": "006d8864",
+          "name": "FUN_006d8864",
+          "signature": "int __fastcall FUN_006d8864(uint * param_1)",
+          "calling_convention": "__fastcall",
+          "callers": [
+            {
+              "addr": "006d6d39",
+              "name": "FUN_006d6d39",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d6ec3",
+              "name": "FUN_006d6ec3",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d8417",
+              "name": "FUN_006d8417",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d86d5",
+              "name": "FUN_006d86d5",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d88d2",
+              "name": "FUN_006d88d2",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d896e",
+              "name": "FUN_006d896e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006d6c09",
+              "name": "FUN_006d6c09"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d8864",
+            "stop": "006d8865",
+            "out": [
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d8867",
+            "stop": "006d886f",
+            "out": [
+              2,
+              10
+            ],
+            "in": [
+              0,
+              9
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d8871",
+            "stop": "006d8872",
+            "out": [
+              3,
+              5
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d8874",
+            "stop": "006d8876",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d8878",
+            "stop": "006d887b",
+            "out": [
+              6,
+              5
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d889a",
+            "stop": "006d88a1",
+            "out": [],
+            "in": [
+              2,
+              3,
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d887d",
+            "stop": "006d8880",
+            "out": [
+              7,
+              8
+            ],
+            "in": [
+              4
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d8882",
+            "stop": "006d8885",
+            "out": [
+              9,
+              8
+            ],
+            "in": [
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d8892",
+            "stop": "006d8899",
+            "out": [],
+            "in": [
+              6,
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d8887",
+            "stop": "006d888c",
+            "out": [
+              10,
+              1
+            ],
+            "in": [
+              7
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d888e",
+            "stop": "006d8891",
+            "out": [],
+            "in": [
+              1,
+              9
+            ]
+          }
+        ]
+      }
+    },
+    "006d896e": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d896e",
+        "name": "FUN_006d896e",
+        "signature": "uint __thiscall FUN_006d896e(void * this, int param_1, int param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d896e\n// Address:   0x006d896e\n// Signature: uint __thiscall FUN_006d896e(void * this, int param_1, int param_2)\n// Callers:   0  |  Callees: 8\n// ===========================================\n\n\n\nuint __thiscall FUN_006d896e(void *this,int param_1,int param_2)\n\n\n\n{\n\n  uint *puVar1;\n\n  byte bVar2;\n\n  undefined3 extraout_var;\n\n  int iVar3;\n\n  uint uVar4;\n\n  uint uVar5;\n\n  uint *local_8;\n\n  \n\n  uVar4 = *(uint *)(param_1 + 4);\n\n  uVar5 = 0;\n\n  puVar1 = (uint *)0x0;\n\n  do {\n\n    if (this == (uint *)0x0) {\n\n      if ((param_2 == 3) || (param_2 == 1)) {\n\n        if ((uVar4 & 2) != 0) {\n\n          iVar3 = FUN_006d74ce(param_1);\n\n          uVar5 = iVar3 + -0x20 + (uVar5 + 0x7f & 0xffffff80);\n\n        }\n\n        if ((uVar4 & 4) != 0) {\n\n          iVar3 = FUN_006d760a(param_1);\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if ((uVar4 & 0x100) != 0) {\n\n          iVar3 = FUN_006d7667();\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if ((uVar4 & 0x10) != 0) {\n\n          iVar3 = FUN_006d768d(param_1);\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if (((byte)uVar4 & 0x80) == 0x80) {\n\n          iVar3 = FUN_006d767c(param_1);\n\n          uVar5 = iVar3 + 0x10 + (uVar5 - 1 & 0xfffffff0);\n\n        }\n\n        if ((uVar4 & 0x20) != 0) {\n\n          iVar3 = FUN_006d766b(param_1);\n\n          uVar5 = iVar3 + 0x10 + (uVar5 - 1 & 0xfffffff0);\n\n        }\n\n      }\n\n      return uVar5;\n\n    }\n\n    bVar2 = FUN_006d6c09(this);\n\n    iVar3 = CONCAT31(extraout_var,bVar2);\n\n    if (iVar3 != 1) {\n\n      if (iVar3 == 2) {\n\n        if (((uVar4 & 2) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 + 0x7f & 0xffffff80) - 0x20;\n\n          }\n\n          if (((uVar4 & 2) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d74ce(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xfffffffd;\n\n      }\n\n      else if (iVar3 == 4) {\n\n        if (((uVar4 & 4) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 4) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d760a(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xfffffffb;\n\n      }\n\n      else if (iVar3 == 0x10) {\n\n        if (((uVar4 & 0x10) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 0x10) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d768d(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffffef;\n\n      }\n\n      else if (iVar3 == 0x20) {\n\n        if (((uVar4 & 0x20) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 - 1 & 0xfffffff0) + 0x10;\n\n          }\n\n          if (((uVar4 & 0x20) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x10 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d766b(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffffdf;\n\n      }\n\n      else if (iVar3 == 0x80) {\n\n        if (((uVar4 & 0x80) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 - 1 & 0xfffffff0) + 0x10;\n\n          }\n\n          if (((uVar4 & 0x80) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x10 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d767c(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffff7f;\n\n      }\n\n      else {\n\n        if (iVar3 != 0x100) {\n\n          return 0;\n\n        }\n\n        if (((uVar4 & 0x100) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 0x100) == 0) || (param_2 != 3)) {\n\n            iVar3 = FUN_006d8864(this);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d7667();\n\n          }\n\n          uVar5 = uVar5 + iVar3;\n\n        }\n\n        uVar4 = uVar4 & 0xfffffeff;\n\n      }\n\n    }\n\n    puVar1 = this;\n\n    if (*(uint *)((int)this + 4) == 0) {\n\n      local_8 = (uint *)0x0;\n\n      this = local_8;\n\n    }\n\n    else {\n\n      this = (uint *)((int)this + *(uint *)((int)this + 4));\n\n    }\n\n  } while( true );\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d896e\n// Address:   0x006d896e\n// Signature: uint __thiscall FUN_006d896e(void * this, int param_1, int param_2)\n// Callers:   0  |  Callees: 8\n// ===========================================\n\n\n\nuint __thiscall FUN_006d896e(void *this,int param_1,int param_2)\n\n\n\n{\n\n  uint *puVar1;\n\n  byte bVar2;\n\n  undefined3 extraout_var;\n\n  int iVar3;\n\n  uint uVar4;\n\n  uint uVar5;\n\n  uint *local_8;\n\n  \n\n  uVar4 = *(uint *)(param_1 + 4);\n\n  uVar5 = 0;\n\n  puVar1 = (uint *)0x0;\n\n  do {\n\n    if (this == (uint *)0x0) {\n\n      if ((param_2 == 3) || (param_2 == 1)) {\n\n        if ((uVar4 & 2) != 0) {\n\n          iVar3 = FUN_006d74ce(param_1);\n\n          uVar5 = iVar3 + -0x20 + (uVar5 + 0x7f & 0xffffff80);\n\n        }\n\n        if ((uVar4 & 4) != 0) {\n\n          iVar3 = FUN_006d760a(param_1);\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if ((uVar4 & 0x100) != 0) {\n\n          iVar3 = FUN_006d7667();\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if ((uVar4 & 0x10) != 0) {\n\n          iVar3 = FUN_006d768d(param_1);\n\n          uVar5 = (uVar5 + 0xf & 0xfffffff0) + iVar3;\n\n        }\n\n        if (((byte)uVar4 & 0x80) == 0x80) {\n\n          iVar3 = FUN_006d767c(param_1);\n\n          uVar5 = iVar3 + 0x10 + (uVar5 - 1 & 0xfffffff0);\n\n        }\n\n        if ((uVar4 & 0x20) != 0) {\n\n          iVar3 = FUN_006d766b(param_1);\n\n          uVar5 = iVar3 + 0x10 + (uVar5 - 1 & 0xfffffff0);\n\n        }\n\n      }\n\n      return uVar5;\n\n    }\n\n    bVar2 = FUN_006d6c09(this);\n\n    iVar3 = CONCAT31(extraout_var,bVar2);\n\n    if (iVar3 != 1) {\n\n      if (iVar3 == 2) {\n\n        if (((uVar4 & 2) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 + 0x7f & 0xffffff80) - 0x20;\n\n          }\n\n          if (((uVar4 & 2) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d74ce(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xfffffffd;\n\n      }\n\n      else if (iVar3 == 4) {\n\n        if (((uVar4 & 4) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 4) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d760a(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xfffffffb;\n\n      }\n\n      else if (iVar3 == 0x10) {\n\n        if (((uVar4 & 0x10) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 0x10) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x20 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d768d(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffffef;\n\n      }\n\n      else if (iVar3 == 0x20) {\n\n        if (((uVar4 & 0x20) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 - 1 & 0xfffffff0) + 0x10;\n\n          }\n\n          if (((uVar4 & 0x20) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x10 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d766b(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffffdf;\n\n      }\n\n      else if (iVar3 == 0x80) {\n\n        if (((uVar4 & 0x80) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = (uVar5 - 1 & 0xfffffff0) + 0x10;\n\n          }\n\n          if (((uVar4 & 0x80) == 0) || (param_2 != 3)) {\n\n            uVar5 = uVar5 + 0x10 + *(uint *)((int)this + 0xc);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d767c(param_1);\n\n            uVar5 = uVar5 + iVar3;\n\n          }\n\n        }\n\n        uVar4 = uVar4 & 0xffffff7f;\n\n      }\n\n      else {\n\n        if (iVar3 != 0x100) {\n\n          return 0;\n\n        }\n\n        if (((uVar4 & 0x100) == 0) || (param_2 != 2)) {\n\n          if (puVar1 != (uint *)0x0) {\n\n            uVar5 = uVar5 + 0xf & 0xfffffff0;\n\n          }\n\n          if (((uVar4 & 0x100) == 0) || (param_2 != 3)) {\n\n            iVar3 = FUN_006d8864(this);\n\n          }\n\n          else {\n\n            iVar3 = FUN_006d7667();\n\n          }\n\n          uVar5 = uVar5 + iVar3;\n\n        }\n\n        uVar4 = uVar4 & 0xfffffeff;\n\n      }\n\n    }\n\n    puVar1 = this;\n\n    if (*(uint *)((int)this + 4) == 0) {\n\n      local_8 = (uint *)0x0;\n\n      this = local_8;\n\n    }\n\n    else {\n\n      this = (uint *)((int)this + *(uint *)((int)this + 4));\n\n    }\n\n  } while( true );\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 8
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d896e",
+        "function": {
+          "address": "006d896e",
+          "name": "FUN_006d896e",
+          "signature": "uint __thiscall FUN_006d896e(void * this, int param_1, int param_2)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d6c09",
+              "name": "FUN_006d6c09"
+            },
+            {
+              "addr": "006d7667",
+              "name": "FUN_006d7667"
+            },
+            {
+              "addr": "006d8864",
+              "name": "FUN_006d8864"
+            },
+            {
+              "addr": "006d767c",
+              "name": "FUN_006d767c"
+            },
+            {
+              "addr": "006d766b",
+              "name": "FUN_006d766b"
+            },
+            {
+              "addr": "006d768d",
+              "name": "FUN_006d768d"
+            },
+            {
+              "addr": "006d760a",
+              "name": "FUN_006d760a"
+            },
+            {
+              "addr": "006d74ce",
+              "name": "FUN_006d74ce"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d896e",
+            "stop": "006d8984",
+            "out": [
+              1,
+              68
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d898a",
+            "stop": "006d8993",
+            "out": [
+              2,
+              64
+            ],
+            "in": [
+              0,
+              67
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d8999",
+            "stop": "006d899a",
+            "out": [
+              12,
+              3
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d8b0c",
+            "stop": "006d8b11",
+            "out": [
+              4,
+              5
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d8b13",
+            "stop": "006d8b17",
+            "out": [
+              5,
+              11
+            ],
+            "in": [
+              3
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d8b19",
+            "stop": "006d8b1b",
+            "out": [
+              6,
+              7
+            ],
+            "in": [
+              3,
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d8b1d",
+            "stop": "006d8b23",
+            "out": [
+              7
+            ],
+            "in": [
+              5
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d8b26",
+            "stop": "006d8b28",
+            "out": [
+              8,
+              9
+            ],
+            "in": [
+              5,
+              6
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d8b2a",
+            "stop": "006d8b2e",
+            "out": [
+              9,
+              10
+            ],
+            "in": [
+              7
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d8b3d",
+            "stop": "006d8b43",
+            "out": [
+              11
+            ],
+            "in": [
+              7,
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d8b30",
+            "stop": "006d8b3b",
+            "out": [
+              11
+            ],
+            "in": [
+              8
+            ]
+          },
+          {
+            "index": 11,
+            "start": "006d8b47",
+            "stop": "006d8b47",
+            "out": [
+              64
+            ],
+            "in": [
+              4,
+              10,
+              9
+            ]
+          },
+          {
+            "index": 12,
+            "start": "006d89a0",
+            "stop": "006d89a5",
+            "out": [
+              22,
+              13
+            ],
+            "in": [
+              2
+            ]
+          },
+          {
+            "index": 13,
+            "start": "006d8ad0",
+            "stop": "006d8ad5",
+            "out": [
+              14,
+              15
+            ],
+            "in": [
+              12
+            ]
+          },
+          {
+            "index": 14,
+            "start": "006d8ad7",
+            "stop": "006d8ada",
+            "out": [
+              15,
+              21
+            ],
+            "in": [
+              13
+            ]
+          },
+          {
+            "index": 15,
+            "start": "006d8adc",
+            "stop": "006d8ade",
+            "out": [
+              16,
+              17
+            ],
+            "in": [
+              13,
+              14
+            ]
+          },
+          {
+            "index": 16,
+            "start": "006d8ae0",
+            "stop": "006d8ae3",
+            "out": [
+              17
+            ],
+            "in": [
+              15
+            ]
+          },
+          {
+            "index": 17,
+            "start": "006d8ae6",
+            "stop": "006d8ae8",
+            "out": [
+              18,
+              19
+            ],
+            "in": [
+              15,
+              16
+            ]
+          },
+          {
+            "index": 18,
+            "start": "006d8aea",
+            "stop": "006d8aee",
+            "out": [
+              19,
+              20
+            ],
+            "in": [
+              17
+            ]
+          },
+          {
+            "index": 19,
+            "start": "006d8afd",
+            "stop": "006d8b03",
+            "out": [
+              21
+            ],
+            "in": [
+              17,
+              18
+            ]
+          },
+          {
+            "index": 20,
+            "start": "006d8af0",
+            "stop": "006d8afb",
+            "out": [
+              21
+            ],
+            "in": [
+              18
+            ]
+          },
+          {
+            "index": 21,
+            "start": "006d8b07",
+            "stop": "006d8b0a",
+            "out": [
+              64
+            ],
+            "in": [
+              14,
+              20,
+              19
+            ]
+          },
+          {
+            "index": 22,
+            "start": "006d89ab",
+            "stop": "006d89ae",
+            "out": [
+              32,
+              23
+            ],
+            "in": [
+              12
+            ]
+          },
+          {
+            "index": 23,
+            "start": "006d8a94",
+            "stop": "006d8a99",
+            "out": [
+              24,
+              25
+            ],
+            "in": [
+              22
+            ]
+          },
+          {
+            "index": 24,
+            "start": "006d8a9b",
+            "stop": "006d8a9e",
+            "out": [
+              25,
+              31
+            ],
+            "in": [
+              23
+            ]
+          },
+          {
+            "index": 25,
+            "start": "006d8aa0",
+            "stop": "006d8aa2",
+            "out": [
+              26,
+              27
+            ],
+            "in": [
+              23,
+              24
+            ]
+          },
+          {
+            "index": 26,
+            "start": "006d8aa4",
+            "stop": "006d8aa7",
+            "out": [
+              27
+            ],
+            "in": [
+              25
+            ]
+          },
+          {
+            "index": 27,
+            "start": "006d8aaa",
+            "stop": "006d8aac",
+            "out": [
+              28,
+              29
+            ],
+            "in": [
+              25,
+              26
+            ]
+          },
+          {
+            "index": 28,
+            "start": "006d8aae",
+            "stop": "006d8ab2",
+            "out": [
+              29,
+              30
+            ],
+            "in": [
+              27
+            ]
+          },
+          {
+            "index": 29,
+            "start": "006d8ac1",
+            "stop": "006d8ac7",
+            "out": [
+              31
+            ],
+            "in": [
+              27,
+              28
+            ]
+          },
+          {
+            "index": 30,
+            "start": "006d8ab4",
+            "stop": "006d8abf",
+            "out": [
+              31
+            ],
+            "in": [
+              28
+            ]
+          },
+          {
+            "index": 31,
+            "start": "006d8acb",
+            "stop": "006d8ace",
+            "out": [
+              64
+            ],
+            "in": [
+              24,
+              30,
+              29
+            ]
+          },
+          {
+            "index": 32,
+            "start": "006d89b4",
+            "stop": "006d89b7",
+            "out": [
+              42,
+              33
+            ],
+            "in": [
+              22
+            ]
+          },
+          {
+            "index": 33,
+            "start": "006d8a54",
+            "stop": "006d8a59",
+            "out": [
+              34,
+              35
+            ],
+            "in": [
+              32
+            ]
+          },
+          {
+            "index": 34,
+            "start": "006d8a5b",
+            "stop": "006d8a5e",
+            "out": [
+              35,
+              41
+            ],
+            "in": [
+              33
+            ]
+          },
+          {
+            "index": 35,
+            "start": "006d8a60",
+            "stop": "006d8a62",
+            "out": [
+              36,
+              37
+            ],
+            "in": [
+              33,
+              34
+            ]
+          },
+          {
+            "index": 36,
+            "start": "006d8a64",
+            "stop": "006d8a68",
+            "out": [
+              37
+            ],
+            "in": [
+              35
+            ]
+          },
+          {
+            "index": 37,
+            "start": "006d8a6b",
+            "stop": "006d8a6d",
+            "out": [
+              38,
+              39
+            ],
+            "in": [
+              35,
+              36
+            ]
+          },
+          {
+            "index": 38,
+            "start": "006d8a6f",
+            "stop": "006d8a73",
+            "out": [
+              39,
+              40
+            ],
+            "in": [
+              37
+            ]
+          },
+          {
+            "index": 39,
+            "start": "006d8a82",
+            "stop": "006d8a88",
+            "out": [
+              41
+            ],
+            "in": [
+              37,
+              38
+            ]
+          },
+          {
+            "index": 40,
+            "start": "006d8a75",
+            "stop": "006d8a80",
+            "out": [
+              41
+            ],
+            "in": [
+              38
+            ]
+          },
+          {
+            "index": 41,
+            "start": "006d8a8c",
+            "stop": "006d8a8f",
+            "out": [
+              64
+            ],
+            "in": [
+              34,
+              40,
+              39
+            ]
+          },
+          {
+            "index": 42,
+            "start": "006d89bd",
+            "stop": "006d89c0",
+            "out": [
+              52,
+              43
+            ],
+            "in": [
+              32
+            ]
+          },
+          {
+            "index": 43,
+            "start": "006d8a0f",
+            "stop": "006d8a16",
+            "out": [
+              44,
+              45
+            ],
+            "in": [
+              42
+            ]
+          },
+          {
+            "index": 44,
+            "start": "006d8a18",
+            "stop": "006d8a1b",
+            "out": [
+              45,
+              51
+            ],
+            "in": [
+              43
+            ]
+          },
+          {
+            "index": 45,
+            "start": "006d8a1d",
+            "stop": "006d8a1f",
+            "out": [
+              46,
+              47
+            ],
+            "in": [
+              43,
+              44
+            ]
+          },
+          {
+            "index": 46,
+            "start": "006d8a21",
+            "stop": "006d8a25",
+            "out": [
+              47
+            ],
+            "in": [
+              45
+            ]
+          },
+          {
+            "index": 47,
+            "start": "006d8a28",
+            "stop": "006d8a2a",
+            "out": [
+              48,
+              49
+            ],
+            "in": [
+              45,
+              46
+            ]
+          },
+          {
+            "index": 48,
+            "start": "006d8a2c",
+            "stop": "006d8a30",
+            "out": [
+              49,
+              50
+            ],
+            "in": [
+              47
+            ]
+          },
+          {
+            "index": 49,
+            "start": "006d8a3f",
+            "stop": "006d8a45",
+            "out": [
+              51
+            ],
+            "in": [
+              47,
+              48
+            ]
+          },
+          {
+            "index": 50,
+            "start": "006d8a32",
+            "stop": "006d8a3d",
+            "out": [
+              51
+            ],
+            "in": [
+              48
+            ]
+          },
+          {
+            "index": 51,
+            "start": "006d8a49",
+            "stop": "006d8a4f",
+            "out": [
+              64
+            ],
+            "in": [
+              44,
+              50,
+              49
+            ]
+          },
+          {
+            "index": 52,
+            "start": "006d89c2",
+            "stop": "006d89c7",
+            "out": [
+              53,
+              54
+            ],
+            "in": [
+              42
+            ]
+          },
+          {
+            "index": 53,
+            "start": "006d8c0d",
+            "stop": "006d8c0f",
+            "out": [
+              82
+            ],
+            "in": [
+              52
+            ]
+          },
+          {
+            "index": 54,
+            "start": "006d89cd",
+            "stop": "006d89d4",
+            "out": [
+              55,
+              56
+            ],
+            "in": [
+              52
+            ]
+          },
+          {
+            "index": 55,
+            "start": "006d89d6",
+            "stop": "006d89d9",
+            "out": [
+              56,
+              63
+            ],
+            "in": [
+              54
+            ]
+          },
+          {
+            "index": 56,
+            "start": "006d89db",
+            "stop": "006d89dd",
+            "out": [
+              57,
+              58
+            ],
+            "in": [
+              54,
+              55
+            ]
+          },
+          {
+            "index": 57,
+            "start": "006d89df",
+            "stop": "006d89e2",
+            "out": [
+              58
+            ],
+            "in": [
+              56
+            ]
+          },
+          {
+            "index": 58,
+            "start": "006d89e5",
+            "stop": "006d89e7",
+            "out": [
+              59,
+              60
+            ],
+            "in": [
+              56,
+              57
+            ]
+          },
+          {
+            "index": 59,
+            "start": "006d89e9",
+            "stop": "006d89ed",
+            "out": [
+              60,
+              61
+            ],
+            "in": [
+              58
+            ]
+          },
+          {
+            "index": 60,
+            "start": "006d89fa",
+            "stop": "006d89fd",
+            "out": [
+              62
+            ],
+            "in": [
+              58,
+              59
+            ]
+          },
+          {
+            "index": 61,
+            "start": "006d89ef",
+            "stop": "006d89f8",
+            "out": [
+              62
+            ],
+            "in": [
+              59
+            ]
+          },
+          {
+            "index": 62,
+            "start": "006d8a02",
+            "stop": "006d8a02",
+            "out": [
+              63
+            ],
+            "in": [
+              61,
+              60
+            ]
+          },
+          {
+            "index": 63,
+            "start": "006d8a04",
+            "stop": "006d8a0a",
+            "out": [
+              64
+            ],
+            "in": [
+              55,
+              62
+            ]
+          },
+          {
+            "index": 64,
+            "start": "006d8b4a",
+            "stop": "006d8b54",
+            "out": [
+              66,
+              65
+            ],
+            "in": [
+              1,
+              63,
+              51,
+              41,
+              31,
+              21,
+              11
+            ]
+          },
+          {
+            "index": 65,
+            "start": "006d8b5b",
+            "stop": "006d8b5b",
+            "out": [
+              67
+            ],
+            "in": [
+              64
+            ]
+          },
+          {
+            "index": 66,
+            "start": "006d8b56",
+            "stop": "006d8b59",
+            "out": [
+              67
+            ],
+            "in": [
+              64
+            ]
+          },
+          {
+            "index": 67,
+            "start": "006d8b5f",
+            "stop": "006d8b63",
+            "out": [
+              1,
+              68
+            ],
+            "in": [
+              66,
+              65
+            ]
+          },
+          {
+            "index": 68,
+            "start": "006d8b69",
+            "stop": "006d8b6d",
+            "out": [
+              69,
+              70
+            ],
+            "in": [
+              0,
+              67
+            ]
+          },
+          {
+            "index": 69,
+            "start": "006d8b6f",
+            "stop": "006d8b73",
+            "out": [
+              82,
+              70
+            ],
+            "in": [
+              68
+            ]
+          },
+          {
+            "index": 70,
+            "start": "006d8b79",
+            "stop": "006d8b7c",
+            "out": [
+              71,
+              72
+            ],
+            "in": [
+              68,
+              69
+            ]
+          },
+          {
+            "index": 71,
+            "start": "006d8b7e",
+            "stop": "006d8b8d",
+            "out": [
+              72
+            ],
+            "in": [
+              70
+            ]
+          },
+          {
+            "index": 72,
+            "start": "006d8b91",
+            "stop": "006d8b94",
+            "out": [
+              73,
+              74
+            ],
+            "in": [
+              70,
+              71
+            ]
+          },
+          {
+            "index": 73,
+            "start": "006d8b96",
+            "stop": "006d8ba5",
+            "out": [
+              74
+            ],
+            "in": [
+              72
+            ]
+          },
+          {
+            "index": 74,
+            "start": "006d8ba7",
+            "stop": "006d8baa",
+            "out": [
+              75,
+              76
+            ],
+            "in": [
+              72,
+              73
+            ]
+          },
+          {
+            "index": 75,
+            "start": "006d8bac",
+            "stop": "006d8bbb",
+            "out": [
+              76
+            ],
+            "in": [
+              74
+            ]
+          },
+          {
+            "index": 76,
+            "start": "006d8bbd",
+            "stop": "006d8bc0",
+            "out": [
+              77,
+              78
+            ],
+            "in": [
+              74,
+              75
+            ]
+          },
+          {
+            "index": 77,
+            "start": "006d8bc2",
+            "stop": "006d8bd1",
+            "out": [
+              78
+            ],
+            "in": [
+              76
+            ]
+          },
+          {
+            "index": 78,
+            "start": "006d8bd3",
+            "stop": "006d8bdb",
+            "out": [
+              80,
+              79
+            ],
+            "in": [
+              76,
+              77
+            ]
+          },
+          {
+            "index": 79,
+            "start": "006d8bdd",
+            "stop": "006d8bea",
+            "out": [
+              80
+            ],
+            "in": [
+              78
+            ]
+          },
+          {
+            "index": 80,
+            "start": "006d8bee",
+            "stop": "006d8bf1",
+            "out": [
+              81,
+              82
+            ],
+            "in": [
+              78,
+              79
+            ]
+          },
+          {
+            "index": 81,
+            "start": "006d8bf3",
+            "stop": "006d8c00",
+            "out": [
+              82
+            ],
+            "in": [
+              80
+            ]
+          },
+          {
+            "index": 82,
+            "start": "006d8c06",
+            "stop": "006d8c0a",
+            "out": [],
+            "in": [
+              53,
+              69,
+              80,
+              81
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

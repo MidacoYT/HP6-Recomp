@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006dbb55",
+      "run_id": "9b293d1660e84df89684d8eeec075af6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbb55",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <bit>\n#include <cstdint>\n\nstruct HeaderLayout {\n    std::uint8_t unknown_00[0x30];\n    std::uint32_t field_30; // Member name unresolved.\n    std::int32_t field_34;  // Member name unresolved.\n};\n\nextern std::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* input,\n    std::uint32_t* validatedInput,\n    std::uint32_t* headerAddress);\n\nint __cdecl FUN_006dbb55(std::uint32_t* param_1, std::int32_t param_2)\n{\n    std::uint32_t validatedInput;\n    std::uint32_t headerAddress;\n\n    if (FUN_006db3f9(param_1, &validatedInput, &headerAddress) == 0 &&\n        param_2 > 0) {\n        const auto* header = reinterpret_cast<const HeaderLayout*>(\n            static_cast<std::uintptr_t>(headerAddress));\n\n        if (param_2 <= header->field_34) {\n            const std::uint32_t result =\n                (header->field_30 - 0x10u) +\n                (static_cast<std::uint32_t>(param_2) * 0x10u);\n            return std::bit_cast<std::int32_t>(result);\n        }\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The first branch conflicts with the independent P-code evidence.",
+      "issues": [
+        "At 0x006dbb69\u20130x006dbb6c, the P-code branches to the zero return when FUN_006db3f9 returns 0. The reversed code enters the success path when it returns 0, matching the decompilation but conflicting with that evidence.",
+        "The __fastcall declaration for FUN_006db3f9 is unsupported by the supplied evidence and may pass arguments incorrectly."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

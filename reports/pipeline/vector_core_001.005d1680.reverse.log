@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "005d1680",
+      "run_id": "35fc851fabb84d7094a47ac5bb16db22",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005d1680",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cmath>\n\nvoid __stdcall FUN_005d1680(float* param_1, float* param_2)\n{\n    const float x = param_1[0];\n    const float scale = 1.0f / std::sqrt(\n        x * x + param_1[1] * param_1[1]\n        + param_1[2] * param_1[2]\n        + param_1[3] * param_1[3]);\n\n    param_2[0] = x * scale;\n    param_2[1] = param_1[1] * scale;\n    param_2[2] = scale * param_1[2];\n    param_2[3] = scale * param_1[3];\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompilation and supplied binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d1680\\_FUN_005d1680.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

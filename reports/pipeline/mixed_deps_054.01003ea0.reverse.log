@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "01003ea0",
+      "run_id": "f547af7c60c74115ad9fe4f701769850",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01003ea0",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint16_t DAT_009978e8[];\nextern std::int32_t DAT_00bb0994;\nextern std::int32_t DAT_00c754cc;\nextern std::int32_t DAT_00cf1a34;\n\n[[noreturn]] void __cdecl FUN_0063ccf0(char* format, ...);\n\nstd::uint32_t __stdcall FUN_01003ea0()\n{\n    if (DAT_00cf1a34 < 0x600) {\n        const std::uint16_t shaderId = DAT_009978e8[DAT_00bb0994];\n        ++DAT_00bb0994;\n\n        const std::uint32_t nextId = static_cast<std::uint32_t>(shaderId) + 1;\n        if (DAT_00c754cc < static_cast<std::int32_t>(nextId)) {\n            DAT_00c754cc = static_cast<std::int32_t>(nextId);\n        }\n\n        ++DAT_00cf1a34;\n        return (nextId & 0xffff0000u) | shaderId;\n    }\n\n    FUN_0063ccf0(const_cast<char*>(\n        \"ShaderManager::AllocateShaderID - MAXIMUM number of shaders exceeded!\\n\"));\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompiled logic and the independent binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01003ea0\\_FUN_01003ea0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

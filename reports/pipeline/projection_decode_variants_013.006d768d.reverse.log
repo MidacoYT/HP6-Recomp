@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d768d",
+      "run_id": "158d407ac89443e4a15bf2051ffb197f",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d768d",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <bit>\n#include <cstdint>\n\nint __cdecl FUN_006d768d(int param_1)\n{\n    const auto address =\n        static_cast<std::uintptr_t>(static_cast<std::uint32_t>(param_1));\n\n    // Member names are unresolved; only these offsets are supported by the evidence.\n    const auto field_80 =\n        *reinterpret_cast<const std::int32_t*>(address + 0x80);\n    const auto field_7c =\n        *reinterpret_cast<const std::int32_t*>(address + 0x7c);\n\n    const auto result =\n        static_cast<std::uint32_t>(field_80) *\n        static_cast<std::uint32_t>(field_7c) * 4u + 0x20u;\n    return std::bit_cast<std::int32_t>(result);\n}",
+      "verdict": "FAIL",
+      "summary": "The calculation matches the evidence, but the offsets lack named struct members.",
+      "issues": [
+        "Offsets 0x80 and 0x7c are accessed through pointer arithmetic and local variables, not named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d768d\\_FUN_006d768d.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+Candidate validation failed for 006d6ec3: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006d6ec3",
+      "run_id": "9f3501449ec34603bd84741afcfba012",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d6ec3",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint8_t __fastcall FUN_006d6c09(std::uint32_t*);\nstd::int32_t __fastcall FUN_006d8864(std::uint32_t*);\n\n// The owning class and the meaning of the word at offset +0x04\n// are unresolved in the supplied evidence.\nstruct FUN_006d6ec3_owner {\n    std::int32_t __thiscall FUN_006d6ec3(\n        std::uint32_t* param_1, std::int32_t param_2);\n};\n\nstd::int32_t __thiscall FUN_006d6ec3_owner::FUN_006d6ec3(\n    std::uint32_t* param_1, std::int32_t param_2)\n{\n    static_assert(sizeof(void*) == 4);\n\n    const auto address = static_cast<std::uint32_t>(\n        reinterpret_cast<std::uintptr_t>(this));\n    const std::uint32_t offset16 =\n        ((address + 0x0fu) & 0xfffffff0u) - address;\n    const std::uint32_t offset128 =\n        ((address + 0x7fu) & 0xffffff80u) - address;\n\n    std::uint32_t total = 0;\n    std::uint8_t lastType = 0;\n    const std::uint8_t wantedType = FUN_006d6c09(param_1);\n    bool found = false;\n\n    auto* current = reinterpret_cast<std::uint32_t*>(this);\n    if (current != nullptr) {\n        do {\n            std::int32_t size = 0;\n            lastType = FUN_006d6c09(current);\n\n            if (lastType != wantedType || param_2 == 1) {\n                size = FUN_006d8864(current);\n                if (total != 0) {\n                    if (lastType == 4) {\n                        total = ((((total - offset16) + 0x2fu)\n                                  & 0xfffffff0u) - 0x20u) + offset16;\n                    } else {\n                        total = (((total - offset128) + 0x0fu)\n                                 & 0xfffffff0u) + offset128;\n                    }\n                }\n            }\n            total += static_cast<std::uint32_t>(size);\n\n            if (lastType == wantedType && !found) {\n                found = true;\n                if (param_2 == 3 || param_2 == 1) {\n                    size = FUN_006d8864(param_1);\n                    if (total != 0) {\n                        if (lastType == 4) {\n                            total = ((((total - offset16) + 0x2fu)\n                                      & 0xfffffff0u) - 0x20u) + offset16;\n                        } else {\n                            total = (((total - offset128) + 0x0fu)\n                                     & 0xfffffff0u) + offset128;\n                        }\n                    }\n                    total += static_cast<std::uint32_t>(size);\n                }\n            }\n\n            const std::uint32_t nextOffset = current[1]; // offset +0x04\n            current = nextOffset == 0\n                ? nullptr\n                : reinterpret_cast<std::uint32_t*>(\n                    reinterpret_cast<std::uintptr_t>(current) + nextOffset);\n        } while (current != nullptr);\n\n        if (found) {\n            return static_cast<std::int32_t>(total);\n        }\n    }\n\n    if (param_2 != 2) {\n        if (total != 0) {\n            if (lastType == 4) {\n                total = ((((total - offset16) + 0x2fu)\n                          & 0xfffffff0u) - 0x20u) + offset16;\n            } else {\n                total = (((total - offset128) + 0x0fu)\n                         & 0xfffffff0u) + offset128;\n            }\n        }\n        total += static_cast<std::uint32_t>(FUN_006d8864(param_1));\n    }\n\n    return static_cast<std::int32_t>(total);\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and arithmetic largely match, but the offset and call signatures are not verified faithfully.",
+      "issues": [
+        "The word at offset +0x04 is accessed as current[1] instead of a named struct member.",
+        "Both callees are declared __fastcall, while the supplied P-code shows their arguments in stack locations. The declared calling conventions are unsupported and may pass the wrong arguments.",
+        "Ghidra compares four-byte CONCAT31 values containing unspecified upper bytes; the reversed code compares only the returned bytes. The supplied evidence does not establish that those comparisons are equivalent."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

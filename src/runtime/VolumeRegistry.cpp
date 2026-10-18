@@ -32,6 +32,12 @@ using VolumeNameCall = char* (__thiscall*)(void* object, char* buffer);
 using VolumeNameCall = char* (*)(void* object, char* buffer);
 #endif
 
+#ifdef _MSC_VER
+using VolumeMethodCall = void (__thiscall*)(void*);
+#else
+using VolumeMethodCall = void (*)(void*);
+#endif
+
 std::uint8_t* find_volume_by_name(const char* path) {
     const char* prefix = path;
     const char* colon = std::strchr(path, ':');
@@ -67,6 +73,21 @@ std::uint8_t* find_volume_by_name(const char* path) {
         record = pointer(word(record, 0));
     }
     return nullptr;
+}
+
+// ReAgent candidate: reports/pipeline/rejected/006b2673.cpp. ReAgent's
+// reviewer rejected it for using a call+return in place of the binary's
+// indirect jump and for indexing the vtable by sizeof(void*); both are
+// avoided here by matching this file's own byte-offset style (see
+// architecture/decisions.md, lot pool_deps_052). There is no null check on
+// `record`, matching the exported x86 exactly.
+void invoke_volume_method_2c(const char* path) {
+    auto* record = find_volume_by_name(path);
+    auto* object = pointer(word(record, 0x84));
+    const auto vtable = static_cast<std::uintptr_t>(word(object, 0));
+    const auto slot = reinterpret_cast<VolumeMethodCall>(
+        *reinterpret_cast<void* const*>(vtable + 0x2c));
+    slot(object);
 }
 
 } // namespace hp6::runtime

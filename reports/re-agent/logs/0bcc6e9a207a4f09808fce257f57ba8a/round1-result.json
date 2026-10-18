@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006f363c",
+      "run_id": "0bcc6e9a207a4f09808fce257f57ba8a",
+      "error": null,
+      "class_name": "",
+      "function_name": "006f363c",
+      "success": true,
+      "rounds_used": 1,
+      "code": "extern uintptr_t (__cdecl *PTR__beginthreadex_007131d0)(\n    void*, uint, _StartAddress*, void*, uint, uint*);\n\nuintptr_t __cdecl _beginthreadex(\n    void* _Security,\n    uint _StackSize,\n    _StartAddress* _StartAddress,\n    void* _ArgList,\n    uint _InitFlag,\n    uint* _ThrdAddr)\n{\n    return PTR__beginthreadex_007131d0(\n        _Security, _StackSize, _StartAddress, _ArgList, _InitFlag, _ThrdAddr);\n}",
+      "verdict": "PASS",
+      "summary": "The wrapper matches the indirect transfer through PTR__beginthreadex_007131d0 with all six arguments in order.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006f363c\\_006f363c.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (4 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

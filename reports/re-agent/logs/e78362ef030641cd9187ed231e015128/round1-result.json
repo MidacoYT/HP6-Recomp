@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b6808",
+      "run_id": "e78362ef030641cd9187ed231e015128",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b6808",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __fastcall FUN_006b4678(std::uint32_t* param_1);\n\nvoid __fastcall FUN_006b6808(std::uint32_t* param_1)\n{\n    std::uint32_t* current = param_1;\n    for (int count = 0x10; count != 0; --count) {\n        *current = 0;\n        ++current;\n    }\n\n    // Member names for these offsets are unresolved in the supplied evidence.\n    param_1[0x10] = 0;\n    param_1[0x11] = 0;\n    param_1[0x12] = 0;\n    param_1[0x13] = 0;\n\n    FUN_006b4678(param_1 + 0x14);\n    *reinterpret_cast<std::uint8_t*>(param_1 + 0x18) = 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but the struct offsets lack named members.",
+      "issues": [
+        "The reversed code uses raw offsets for the 16-word loop, the four words at +0x40 through +0x4c, the call argument at +0x50, and the byte at +0x60."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b6808\\_FUN_006b6808.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

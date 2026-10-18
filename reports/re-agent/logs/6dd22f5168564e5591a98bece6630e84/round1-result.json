@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d92b7",
+      "run_id": "6dd22f5168564e5591a98bece6630e84",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d92b7",
+      "success": false,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006d92b7(int param_1)\n{\n    HANDLE eventHandle = CreateEventA(nullptr, 0, 0, nullptr);\n    if (eventHandle != nullptr) {\n        // The member at offset 0x4 has no evidence-backed name.\n        *reinterpret_cast<HANDLE*>(param_1 + 4) = eventHandle;\n        return 1;\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "Behavior matches the binary, but the 0x4 field is not mapped to a named member.",
+      "issues": [
+        "The store at param_1 + 4 uses a raw offset instead of a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d92b7\\_FUN_006d92b7.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

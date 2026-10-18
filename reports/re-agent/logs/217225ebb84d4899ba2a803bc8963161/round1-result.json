@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006dbda1",
+      "run_id": "217225ebb84d4899ba2a803bc8963161",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbda1",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::uint32_t __cdecl FUN_006dbda1(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_8, &local_c) != 0) {\n        return 0;\n    }\n\n    return *reinterpret_cast<std::uint32_t*>(\n        static_cast<std::uintptr_t>(local_8) + 8);\n}",
+      "verdict": "FAIL",
+      "summary": "The branch and return value match, but the offset lacks a named member and the callee convention is unverified.",
+      "issues": [
+        "The load at local_8 + 8 is expressed as raw pointer arithmetic rather than a named struct member.",
+        "FUN_006db3f9 is declared __fastcall, but the supplied evidence does not establish its calling convention."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dbda1\\_FUN_006dbda1.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

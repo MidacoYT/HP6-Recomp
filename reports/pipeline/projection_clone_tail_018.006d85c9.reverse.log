@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d85c9",
+      "run_id": "d71a389ac67b4a15a64ab9f03bc7c096",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d85c9",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t* __thiscall FUN_006d85c9(void* self, std::uint32_t param_1)\n{\n    // The field at offset 0x0c has no evidence-backed member name.\n    const auto value = *reinterpret_cast<std::int32_t*>(\n        reinterpret_cast<std::uint8_t*>(self) + 0x0c);\n\n    auto* result = reinterpret_cast<std::uint32_t*>(\n        FUN_006d6ab6(\"cl_eagl\", value + 0x10, 0x10, 0x10,\n                     param_1, \"shpclone.cpp\", 0x106));\n\n    FUN_006d852e(self, result);\n    result[1] = 0;\n    result[0] = (result[0] & 0xfffffbffu) | 0x400u;\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the decompilation, but the field at offset 0x0c is unnamed.",
+      "issues": [
+        "The read from self + 0x0c uses raw pointer arithmetic instead of a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d85c9\\_FUN_006d85c9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

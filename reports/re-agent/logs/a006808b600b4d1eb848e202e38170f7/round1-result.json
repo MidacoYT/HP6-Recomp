@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006532e0",
+      "run_id": "a006808b600b4d1eb848e202e38170f7",
+      "error": null,
+      "class_name": "",
+      "function_name": "block",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint8_t DAT_00f38b10[];\n\nvoid __stdcall FUN_006534a0(std::int32_t, std::int32_t*);\nvoid __stdcall FUN_00653430(std::uint32_t, std::uint32_t,\n                            std::int32_t, std::int32_t);\n\nvoid __stdcall FUN_006532e0()\n{\n    for (std::uint32_t i = 0; i < 0x600; ++i) {\n        auto* entry = DAT_00f38b10 + i * 0xc4;\n        if (*reinterpret_cast<std::int32_t*>(entry + 0x18) != 0) {\n            FUN_006534a0(\n                *reinterpret_cast<std::int32_t*>(entry + 0x14),\n                *reinterpret_cast<std::int32_t**>(entry + 0x2c));\n        }\n    }\n\n    for (std::uint32_t i = 0; i < 0x600; ++i) {\n        auto* entry = DAT_00f38b10 + i * 0xc4;\n        if (*reinterpret_cast<std::int32_t*>(entry + 0x18) != 0) {\n            FUN_00653430(\n                *reinterpret_cast<std::uint32_t*>(entry + 0x18),\n                *reinterpret_cast<std::uint32_t*>(entry + 0x1c),\n                *reinterpret_cast<std::int32_t*>(entry + 0x14),\n                static_cast<std::int32_t>(\n                    reinterpret_cast<std::uintptr_t>(entry)));\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The loop logic and offsets match, but the required member mapping and evaluation order are not established.",
+      "issues": [
+        "All five accessed fields use raw byte offsets instead of named struct members.",
+        "C++ does not guarantee the evaluation order of function call arguments, so the source does not preserve the binary's load order."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006532e0\\_block.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

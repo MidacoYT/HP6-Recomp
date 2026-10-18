@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006d8d62",
+      "run_id": "d6d1425fa63c4bb6ac47da3e637b8ae9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8d62",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __cdecl FUN_006d8c7d(std::uint32_t param_1, std::int32_t* param_2);\n\nstd::int32_t __cdecl FUN_006d8d62(\n    std::uint32_t param_1,\n    std::int32_t param_2,\n    std::int32_t param_3)\n{\n    std::int32_t values[3];\n    FUN_006d8c7d(param_1, values);\n    return (param_2 * param_3) / (values[1] * values[0]);\n}",
+      "verdict": "PASS",
+      "summary": "The call, stack values, multiplication order, and signed division match the decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d8d62\\_FUN_006d8d62.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (5 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

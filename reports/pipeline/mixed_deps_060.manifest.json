@@ -1,0 +1,421 @@
+{
+  "schema_version": 1,
+  "identity": "6316ef1f9260491dccdcb9823cae3ed57fc3ffbdf5353843bdb309352fa1ab37",
+  "seeds": [
+    "006da081",
+    "006da10c",
+    "006da14e",
+    "006da4b1",
+    "006da4f3"
+  ],
+  "functions": [
+    {
+      "address": "006da081",
+      "class_name": "",
+      "function_name": "FUN_006da081",
+      "caller_count": 1
+    },
+    {
+      "address": "006da10c",
+      "class_name": "",
+      "function_name": "FUN_006da10c",
+      "caller_count": 0
+    },
+    {
+      "address": "006da14e",
+      "class_name": "",
+      "function_name": "FUN_006da14e",
+      "caller_count": 0
+    },
+    {
+      "address": "006da4b1",
+      "class_name": "",
+      "function_name": "FUN_006da4b1",
+      "caller_count": 0
+    },
+    {
+      "address": "006da4f3",
+      "class_name": "",
+      "function_name": "FUN_006da4f3",
+      "caller_count": 0
+    }
+  ],
+  "edges": [
+    {
+      "source": "006da081",
+      "target": "006b2553"
+    },
+    {
+      "source": "006da081",
+      "target": "006b25b8"
+    },
+    {
+      "source": "006da10c",
+      "target": "006b2553"
+    },
+    {
+      "source": "006da10c",
+      "target": "006b25b8"
+    },
+    {
+      "source": "006da14e",
+      "target": "006b2553"
+    },
+    {
+      "source": "006da14e",
+      "target": "006b25b8"
+    },
+    {
+      "source": "006da4b1",
+      "target": "006b2553"
+    },
+    {
+      "source": "006da4b1",
+      "target": "006b25b8"
+    },
+    {
+      "source": "006da4f3",
+      "target": "006b2553"
+    },
+    {
+      "source": "006da4f3",
+      "target": "006b25b8"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006da081",
+      "reason": "Dependency 006b2553 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da081",
+      "reason": "Dependency 006b25b8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da10c",
+      "reason": "Dependency 006b2553 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da10c",
+      "reason": "Dependency 006b25b8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da14e",
+      "reason": "Dependency 006b2553 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da14e",
+      "reason": "Dependency 006b25b8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da4b1",
+      "reason": "Dependency 006b2553 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da4b1",
+      "reason": "Dependency 006b25b8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da4f3",
+      "reason": "Dependency 006b2553 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006da4f3",
+      "reason": "Dependency 006b25b8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006da081": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006da081",
+        "name": "FUN_006da081",
+        "signature": "undefined __cdecl FUN_006da081(char * param_1, undefined4 * param_2, undefined4 param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006da081\n// Address:   0x006da081\n// Signature: undefined __cdecl FUN_006da081(char * param_1, undefined4 * param_2, undefined4 param_3)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da081(char *param_1,undefined4 *param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18 [2];\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_c = 0;\n\n  local_8 = param_3;\n\n  ppcVar3 = local_18;\n\n  uVar2 = 100;\n\n  local_18[0] = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006d9f47,(int)puVar1,uVar2,ppcVar3);\n\n  if (param_2 != (undefined4 *)0x0) {\n\n    *param_2 = local_10;\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006da081\n// Address:   0x006da081\n// Signature: undefined __cdecl FUN_006da081(char * param_1, undefined4 * param_2, undefined4 param_3)\n// Callers:   1  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da081(char *param_1,undefined4 *param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18 [2];\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_c = 0;\n\n  local_8 = param_3;\n\n  ppcVar3 = local_18;\n\n  uVar2 = 100;\n\n  local_18[0] = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006d9f47,(int)puVar1,uVar2,ppcVar3);\n\n  if (param_2 != (undefined4 *)0x0) {\n\n    *param_2 = local_10;\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 1,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006da081",
+        "function": {
+          "address": "006da081",
+          "name": "FUN_006da081",
+          "signature": "undefined __cdecl FUN_006da081(char * param_1, undefined4 * param_2, undefined4 param_3)",
+          "calling_convention": "__cdecl",
+          "callers": [
+            {
+              "addr": "006da18d",
+              "name": "FUN_006da18d",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006b25b8",
+              "name": "FUN_006b25b8"
+            },
+            {
+              "addr": "006b2553",
+              "name": "FUN_006b2553"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006da081",
+            "stop": "006da0b7",
+            "out": [
+              1,
+              2
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006da0b9",
+            "stop": "006da0bc",
+            "out": [
+              2
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006da0be",
+            "stop": "006da0bf",
+            "out": [],
+            "in": [
+              0,
+              1
+            ]
+          }
+        ]
+      }
+    },
+    "006da10c": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006da10c",
+        "name": "FUN_006da10c",
+        "signature": "undefined __cdecl FUN_006da10c(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006da10c\n// Address:   0x006da10c\n// Signature: undefined __cdecl FUN_006da10c(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da10c(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  local_8 = param_4;\n\n  ppcVar3 = &local_18;\n\n  uVar2 = 100;\n\n  local_18 = param_1;\n\n  local_c = 1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006da0c0,(int)puVar1,uVar2,ppcVar3);\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006da10c\n// Address:   0x006da10c\n// Signature: undefined __cdecl FUN_006da10c(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da10c(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  local_8 = param_4;\n\n  ppcVar3 = &local_18;\n\n  uVar2 = 100;\n\n  local_18 = param_1;\n\n  local_c = 1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006da0c0,(int)puVar1,uVar2,ppcVar3);\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006da10c",
+        "function": {
+          "address": "006da10c",
+          "name": "FUN_006da10c",
+          "signature": "undefined __cdecl FUN_006da10c(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006b25b8",
+              "name": "FUN_006b25b8"
+            },
+            {
+              "addr": "006b2553",
+              "name": "FUN_006b2553"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006da10c",
+            "stop": "006da14d",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006da14e": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006da14e",
+        "name": "FUN_006da14e",
+        "signature": "undefined __cdecl FUN_006da14e(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006da14e\n// Address:   0x006da14e\n// Signature: undefined __cdecl FUN_006da14e(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da14e(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_c = 0;\n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  local_8 = param_4;\n\n  ppcVar3 = &local_18;\n\n  uVar2 = 100;\n\n  local_18 = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006da0c0,(int)puVar1,uVar2,ppcVar3);\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006da14e\n// Address:   0x006da14e\n// Signature: undefined __cdecl FUN_006da14e(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nvoid __cdecl FUN_006da14e(char *param_1,undefined4 param_2,undefined4 param_3,undefined4 param_4)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  undefined4 uVar2;\n\n  char **ppcVar3;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  undefined4 local_8;\n\n  \n\n  local_c = 0;\n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  local_8 = param_4;\n\n  ppcVar3 = &local_18;\n\n  uVar2 = 100;\n\n  local_18 = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  FUN_006b2553(FUN_006da0c0,(int)puVar1,uVar2,ppcVar3);\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006da14e",
+        "function": {
+          "address": "006da14e",
+          "name": "FUN_006da14e",
+          "signature": "undefined __cdecl FUN_006da14e(char * param_1, undefined4 param_2, undefined4 param_3, undefined4 param_4)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006b25b8",
+              "name": "FUN_006b25b8"
+            },
+            {
+              "addr": "006b2553",
+              "name": "FUN_006b2553"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006da14e",
+            "stop": "006da18c",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006da4b1": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006da4b1",
+        "name": "FUN_006da4b1",
+        "signature": "bool __cdecl FUN_006da4b1(char * param_1, undefined4 param_2, undefined4 param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006da4b1\n// Address:   0x006da4b1\n// Signature: bool __cdecl FUN_006da4b1(char * param_1, undefined4 param_2, undefined4 param_3)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nbool __cdecl FUN_006da4b1(char *param_1,undefined4 param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  int iVar2;\n\n  undefined4 uVar3;\n\n  char **ppcVar4;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  ppcVar4 = &local_18;\n\n  uVar3 = 100;\n\n  local_18 = param_1;\n\n  local_c = 1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  iVar2 = FUN_006b2553(FUN_006da462,(int)puVar1,uVar3,ppcVar4);\n\n  return (bool)('\\x01' - (iVar2 != 1));\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006da4b1\n// Address:   0x006da4b1\n// Signature: bool __cdecl FUN_006da4b1(char * param_1, undefined4 param_2, undefined4 param_3)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nbool __cdecl FUN_006da4b1(char *param_1,undefined4 param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  int iVar2;\n\n  undefined4 uVar3;\n\n  char **ppcVar4;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  ppcVar4 = &local_18;\n\n  uVar3 = 100;\n\n  local_18 = param_1;\n\n  local_c = 1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  iVar2 = FUN_006b2553(FUN_006da462,(int)puVar1,uVar3,ppcVar4);\n\n  return (bool)('\\x01' - (iVar2 != 1));\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006da4b1",
+        "function": {
+          "address": "006da4b1",
+          "name": "FUN_006da4b1",
+          "signature": "bool __cdecl FUN_006da4b1(char * param_1, undefined4 param_2, undefined4 param_3)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006b25b8",
+              "name": "FUN_006b25b8"
+            },
+            {
+              "addr": "006b2553",
+              "name": "FUN_006b2553"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006da4b1",
+            "stop": "006da4f2",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006da4f3": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006da4f3",
+        "name": "FUN_006da4f3",
+        "signature": "bool __cdecl FUN_006da4f3(char * param_1, undefined4 param_2, undefined4 param_3)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006da4f3\n// Address:   0x006da4f3\n// Signature: bool __cdecl FUN_006da4f3(char * param_1, undefined4 param_2, undefined4 param_3)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nbool __cdecl FUN_006da4f3(char *param_1,undefined4 param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  int iVar2;\n\n  undefined4 uVar3;\n\n  char **ppcVar4;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  local_c = 0;\n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  ppcVar4 = &local_18;\n\n  uVar3 = 100;\n\n  local_18 = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  iVar2 = FUN_006b2553(FUN_006da462,(int)puVar1,uVar3,ppcVar4);\n\n  return (bool)('\\x01' - (iVar2 != 1));\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006da4f3\n// Address:   0x006da4f3\n// Signature: bool __cdecl FUN_006da4f3(char * param_1, undefined4 param_2, undefined4 param_3)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nbool __cdecl FUN_006da4f3(char *param_1,undefined4 param_2,undefined4 param_3)\n\n\n\n{\n\n  undefined4 *puVar1;\n\n  int iVar2;\n\n  undefined4 uVar3;\n\n  char **ppcVar4;\n\n  char *local_18;\n\n  undefined4 local_14;\n\n  undefined4 local_10;\n\n  undefined4 local_c;\n\n  \n\n  local_c = 0;\n\n  local_14 = param_2;\n\n  local_10 = param_3;\n\n  ppcVar4 = &local_18;\n\n  uVar3 = 100;\n\n  local_18 = param_1;\n\n  puVar1 = FUN_006b25b8(param_1);\n\n  iVar2 = FUN_006b2553(FUN_006da462,(int)puVar1,uVar3,ppcVar4);\n\n  return (bool)('\\x01' - (iVar2 != 1));\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006da4f3",
+        "function": {
+          "address": "006da4f3",
+          "name": "FUN_006da4f3",
+          "signature": "bool __cdecl FUN_006da4f3(char * param_1, undefined4 param_2, undefined4 param_3)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006b25b8",
+              "name": "FUN_006b25b8"
+            },
+            {
+              "addr": "006b2553",
+              "name": "FUN_006b2553"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006da4f3",
+            "stop": "006da531",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

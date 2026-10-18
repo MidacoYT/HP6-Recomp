@@ -1,4 +1,5 @@
 #include "stream/Metadata.h"
+#include "runtime/PoolList.h"
 #include <bit>
 
 namespace hp6::stream {
@@ -130,6 +131,44 @@ std::uint32_t entry_value(const std::uintptr_t* slot,
     if (locate_header(slot, &slot_address, &header_address) != 0) return 0;
     const std::uintptr_t entry = find_entry(header_address, identifier);
     return entry == 0 ? 0u : word_at(entry, 4);
+}
+
+// ReAgent candidates: reports/pipeline/rejected/006dc17c.cpp and
+// reports/pipeline/rejected/006dbb17.cpp. Both were rejected by ReAgent's
+// own reviewer for using raw struct offsets (already this file's house
+// style for this unresolved record) and for an unordered-evaluation
+// concern between two independent, side-effect-free reads of header+0x4c
+// and header+0x184 that does not change the observable result; see
+// architecture/decisions.md, lot stream_priority_051.
+void set_header_level(const std::uintptr_t* slot, std::int32_t level) {
+    std::uintptr_t slot_address = 0, header_address = 0;
+    if (locate_header(slot, &slot_address, &header_address) != 0) return;
+    const auto previous = static_cast<std::int32_t>(word_at(header_address, 0x50));
+    set_word(header_address, 0x50, static_cast<std::uint32_t>(level));
+    const auto threshold = static_cast<std::int32_t>(word_at(header_address, 0x58));
+    const auto target = static_cast<std::uint32_t>(threshold < level);
+    if (static_cast<std::uint32_t>(threshold < previous) != target) {
+        apply_level_target(slot, static_cast<std::int32_t>(target));
+    }
+}
+
+void apply_level_target(const std::uintptr_t* slot, std::int32_t target) {
+    std::uintptr_t slot_address = 0, header_address = 0;
+    if (locate_header(slot, &slot_address, &header_address) != 0) return;
+    set_word(header_address, 0x54, static_cast<std::uint32_t>(target));
+    if (target != 0 && word_at(header_address, 0x44) == 1) {
+        hp6::runtime::update_node_priority(
+            word_at(header_address, 0x184),
+            static_cast<std::uint8_t>(word_at(header_address, 0x4c)));
+    }
+}
+
+void set_header_level_006f4ffd(const std::uintptr_t* slot, std::int32_t level) {
+    set_header_level(slot, level);
+}
+
+void set_header_level_006f4eb9(const std::uintptr_t* slot, std::int32_t level) {
+    set_header_level_006f4ffd(slot, level);
 }
 
 }

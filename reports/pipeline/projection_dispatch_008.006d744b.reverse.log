@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "006d744b",
+      "run_id": "6ba237bd296049fba2b4e260c4072096",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d744b",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint32_t* __fastcall FUN_006d744b(std::uint32_t* param_1)\n{\n    FUN_006d73b8(param_1);\n    return param_1;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the decompilation and independent binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d744b\\_FUN_006d744b.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (4 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

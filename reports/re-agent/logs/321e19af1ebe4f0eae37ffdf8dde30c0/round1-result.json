@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d7187",
+      "run_id": "321e19af1ebe4f0eae37ffdf8dde30c0",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d7187",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstd::uint8_t __cdecl FUN_006d7187(std::uint32_t param_1)\n{\n    std::uint8_t result = 0;\n\n    switch (param_1) {\n    case 8:\n    case 9:\n    case 10:\n    case 11:\n    case 12:\n    case 13:\n    case 14:\n    case 15:\n        result = 1;\n        break;\n    }\n\n    return result;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the decompiled return values and control flow.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d7187\\_FUN_006d7187.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

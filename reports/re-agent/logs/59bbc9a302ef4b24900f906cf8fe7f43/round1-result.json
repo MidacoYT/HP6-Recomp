@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006db335",
+      "run_id": "59bbc9a302ef4b24900f906cf8fe7f43",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db335",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The supplied evidence does not identify the structure or its member names.\n// This implementation assumes the original 32-bit target ABI.\nvoid __fastcall FUN_006db335(std::uint32_t* param_1)\n{\n    auto* puVar1 = reinterpret_cast<std::uint32_t*>(param_1[0]);\n\n    if (puVar1 != nullptr) {\n        if (puVar1 == reinterpret_cast<std::uint32_t*>(param_1[1])) {\n            param_1[1] = 0;\n            param_1[0] = 0;\n        } else {\n            param_1[0] = puVar1[0];\n        }\n\n        param_1[2] = param_1[2] - 1;\n        puVar1[0] = 0;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and operations match, but the required struct offsets are unnamed.",
+      "issues": [
+        "param_1[0], param_1[1], and param_1[2] represent offsets +0, +4, and +8 without named members; puVar1[0] leaves the node's +0 member unnamed."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006db335\\_FUN_006db335.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006406a0",
+      "run_id": "36a4be2a3cc64a83a427d1cca60a4fbd",
+      "error": null,
+      "class_name": "",
+      "function_name": "006406a0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The input is supplied in ESI. Its field names and the meanings of these\n// globals are unresolved, so their address-based names are retained.\nextern std::uint32_t DAT_0086527c;\nextern std::uint32_t _DAT_00881374, _DAT_00881378, _DAT_0088137c;\nextern std::uint32_t _DAT_00881380, _DAT_00881384, _DAT_00881388;\nextern std::uint32_t _DAT_0088138c, _DAT_00881390, _DAT_00881394;\nextern std::uint32_t _DAT_00881398, _DAT_0088139c, _DAT_008813a0;\nextern std::uint32_t _DAT_008813a4, _DAT_008813a8, _DAT_008813ac;\nextern std::uint32_t _DAT_008813b0, _DAT_008813b4, _DAT_008813b8;\n\nstd::uint32_t __cdecl FUN_0064c300(int, int);\nstd::uint32_t __cdecl FUN_0064c3b0(int, int, int);\n\n// MSVC x86: preserves the original register-supplied input and stdcall ABI.\nvoid __stdcall thunk_FUN_010021f0()\n{\n    const std::uint32_t* source;\n    __asm mov source, esi\n\n    FUN_0064c300(0x13, source[1]);\n    FUN_0064c300(0x14, source[2]);\n    FUN_0064c300(0x1b, source[3]);\n    FUN_0064c300(0x80, source[4]);\n    FUN_0064c300(0x81, source[5]);\n    FUN_0064c300(0x82, source[6]);\n    FUN_0064c300(0x83, source[7]);\n    FUN_0064c300(0x84, source[8]);\n    FUN_0064c300(0x85, source[9]);\n    FUN_0064c300(0x86, source[10]);\n    FUN_0064c300(0x87, source[11]);\n    FUN_0064c300(0xab, source[12]);\n\n    FUN_0064c3b0(0, 1, source[13]);\n    FUN_0064c3b0(0, 2, source[14]);\n    FUN_0064c3b0(0, 3, source[15]);\n    FUN_0064c3b0(0, 4, source[16]);\n    FUN_0064c3b0(0, 5, source[17]);\n    FUN_0064c3b0(0, 6, source[18]);\n\n    _DAT_008813a4 = source[13];\n    _DAT_008813a8 = source[14];\n    _DAT_008813ac = source[15];\n    _DAT_008813b0 = source[16];\n    _DAT_008813b4 = source[17];\n    _DAT_008813b8 = source[18];\n\n    _DAT_00881374 = source[1];\n    _DAT_00881378 = source[2];\n    _DAT_0088137c = source[3];\n    _DAT_00881380 = source[4];\n    _DAT_00881384 = source[5];\n    _DAT_00881388 = source[6];\n    _DAT_0088138c = source[7];\n    _DAT_00881390 = source[8];\n    _DAT_00881394 = source[9];\n    _DAT_00881398 = source[10];\n    _DAT_0088139c = source[11];\n    _DAT_008813a0 = source[12];\n\n    DAT_0086527c = source[0];\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and assignments match the decompilation, but the input offsets lack named members.",
+      "issues": [
+        "The input at ESI is indexed as source[0] through source[18]; none of its 4-byte offsets maps to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006406a0\\_006406a0.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Call count mismatch: vanilla has 0 calls, source has 18 calls (diff: 18)"
+        }
+      ]
+    }
+  ]
+}

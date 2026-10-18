@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "00688550",
+      "run_id": "0216672902624748b396e141ef3def92",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00688550",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nvoid __thiscall FUN_00688550(\n    void* this_,\n    std::int32_t param_1,\n    std::uint32_t param_2)\n{\n    auto* base = static_cast<std::byte*>(this_);\n    auto& field_8 = *reinterpret_cast<std::uint32_t*>(base + 0x8);\n    auto& field_c = *reinterpret_cast<std::uint32_t*>(base + 0xC);\n\n    if (param_1 == 0) {\n        field_8 = 0;\n        field_c = 0;\n        return;\n    }\n\n    field_8 = static_cast<std::uint32_t>(param_1)\n            - static_cast<std::uint32_t>(\n                  reinterpret_cast<std::uintptr_t>(this_));\n    field_c = param_2;\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and stores match, but the offsets are not mapped to struct members.",
+      "issues": [
+        "Offsets 0x8 and 0xC are accessed through byte-pointer casts and local references, not named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00688550\\_FUN_00688550.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

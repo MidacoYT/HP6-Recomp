@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b4c17",
+      "run_id": "9b2a479abcdf4880baa372919fd0b435",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b4c17",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n#include <cstring>\n\n// Member names and the containing type are unresolved in the supplied evidence.\nvoid __thiscall FUN_006b4c17(void* this_, char* param_1)\n{\n    auto* bytes = static_cast<unsigned char*>(this_);\n    auto* name = reinterpret_cast<char*>(bytes + 0xb4);\n\n    char* cursor = name;\n    for (int count = 8; count != 0; --count) {\n        cursor[0] = '\\0';\n        cursor[1] = '\\0';\n        cursor[2] = '\\0';\n        cursor[3] = '\\0';\n        cursor += 4;\n    }\n\n    ::strncpy(name, param_1, 0x1f);\n\n    *reinterpret_cast<std::uint32_t*>(bytes + 0x4dc) = 0xffffffffu;\n    *reinterpret_cast<std::uint32_t*>(bytes + 0x4e4) = 0;\n    *reinterpret_cast<std::uint32_t*>(bytes + 0x4d8) = 4;\n    *reinterpret_cast<std::uint32_t*>(bytes + 0x6c) = 4;\n    *reinterpret_cast<std::uint32_t*>(bytes + 0x70) = 9;\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow, call, values, and write order match, but the struct offsets lack named members.",
+      "issues": [
+        "Offsets 0xb4, 0x4dc, 0x4e4, 0x4d8, 0x6c, and 0x70 are accessed through raw pointer arithmetic instead of named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b4c17\\_FUN_006b4c17.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

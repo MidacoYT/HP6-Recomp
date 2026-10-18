@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006b2223",
+      "run_id": "eabe6dd016214c45907b29fd3ffec260",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2223",
+      "success": false,
+      "rounds_used": 1,
+      "code": "int __cdecl FUN_006b2223(unsigned int param_1)\n{\n    void* object = (void*)FUN_006b18df(param_1, 1);\n    FUN_006d92a1(reinterpret_cast<int>(object) + 0x28);\n\n    int local_8;\n    int entry = FUN_006b2147(object, param_1, &local_8);\n    int result = 0;\n\n    if (local_8 == 0) {\n        if (entry == 0) {\n            result = -3;\n        } else if (*reinterpret_cast<const signed char*>(entry + 0x10) == 1) {\n            result = -1;\n        } else {\n            result = *reinterpret_cast<const signed char*>(entry + 0x11);\n        }\n    }\n\n    FUN_006d92ac(reinterpret_cast<int>(object) + 0x28);\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The reversed code matches the decompilation, but independent P-code shows two branch conditions reversed.",
+      "issues": [
+        "At 0x006b2254, P-code branches to the return path when local_8 == 0; the reversed code processes the entry when local_8 == 0.",
+        "At 0x006b225e, P-code branches to the signed byte at entry + 0x11 when the byte at entry + 0x10 equals 1; the reversed code returns -1 in that case.",
+        "Offsets 0x28, 0x10, and 0x11 are raw offsets rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2223\\_FUN_006b2223.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

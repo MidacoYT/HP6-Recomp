@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d79ce",
+      "run_id": "27e6187f36f8497eba21837fb0b3a7cf",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d79ce",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nvoid __thiscall FUN_006d79ce(void* self, int param_1)\n{\n    FUN_006d7745(self, param_1);\n\n    *static_cast<std::uint8_t*>(self) = 0x6f;\n\n    // The member at param_1 + 0x90 has no evidence-backed name.\n    const auto value = *reinterpret_cast<const std::uint32_t*>(\n        static_cast<std::uintptr_t>(param_1) + 0x90);\n    FUN_00688550(\n        self,\n        static_cast<std::byte*>(self) + 0x10,\n        value + 1u);\n}",
+      "verdict": "FAIL",
+      "summary": "The calls and operation order match, but the struct offsets are not mapped to named members.",
+      "issues": [
+        "The byte at self + 0x0, the argument at self + 0x10, and the 32-bit value at param_1 + 0x90 use raw offsets."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d79ce\\_FUN_006d79ce.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

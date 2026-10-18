@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006b2147",
+      "run_id": "588f56f6a1a5437d8f8f04e679ca0e80",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2147",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n\n// Member names and concrete object types are unresolved in the supplied evidence.\nstd::uint32_t __thiscall FUN_006b1ffc(\n    void* this_, std::int32_t param_1, char param_2);\n\nvoid __thiscall FUN_006b2147(\n    void* this_, std::int32_t param_1, std::uint32_t* param_2)\n{\n    auto* bytes = static_cast<std::byte*>(this_);\n\n    *param_2 = 0;\n\n    if (*reinterpret_cast<std::int32_t*>(bytes + 0x04) != 0) {\n        auto* current = *reinterpret_cast<std::byte**>(bytes + 0x0c);\n\n        if (current == nullptr ||\n            *reinterpret_cast<std::int32_t*>(current + 0x0c) != param_1) {\n            if (FUN_006b1ffc(bytes + 0x10, param_1, '\\0') == 0) {\n                FUN_006b1ffc(bytes + 0x1c, param_1, '\\0');\n            } else {\n                *param_2 = 1;\n            }\n        } else {\n            *param_2 = 0xffffffffu;\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and calls match, but struct offsets lack named members.",
+      "issues": [
+        "Offsets 0x04, 0x0c, 0x10, and 0x1c in this_ and 0x0c in the pointed-to object are accessed through byte arithmetic rather than named members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2147\\_FUN_006b2147.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

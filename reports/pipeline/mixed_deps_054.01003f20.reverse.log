@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "01003f20",
+      "run_id": "ada8e9a1695046baabcdefadff4d8d5d",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_01003f20",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint16_t DAT_009978e8[];\nextern std::int32_t DAT_00bb0994;\nextern std::int32_t DAT_00c754cc;\nextern std::int32_t DAT_00cf1a34;\n\n[[noreturn]] void __cdecl FUN_0063ccf0(char* format, ...);\n\nvoid __cdecl FUN_01003f20(std::uint16_t param_1)\n{\n    if (static_cast<std::uint32_t>(DAT_00c754cc) <\n        static_cast<std::uint32_t>(param_1)) {\n        FUN_0063ccf0(const_cast<char*>(\n            \"ShaderManager::FreeShaderID - attempt to free a shader above the high water mark!\\n\"));\n    }\n\n    if (static_cast<std::uint32_t>(param_1) + 1 ==\n        static_cast<std::uint32_t>(DAT_00c754cc)) {\n        --DAT_00c754cc;\n    }\n\n    --DAT_00bb0994;\n    DAT_009978e8[DAT_00bb0994] = param_1;\n    --DAT_00cf1a34;\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the supplied control flow, arithmetic, store, and call evidence.",
+      "issues": [],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "P-code return mismatch: normalized IR has 2 returns, candidate has no explicit return"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\01003f20\\_FUN_01003f20.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

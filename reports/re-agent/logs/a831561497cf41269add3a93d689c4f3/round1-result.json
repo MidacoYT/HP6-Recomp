@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "00648e10",
+      "run_id": "a831561497cf41269add3a93d689c4f3",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00648e10",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern void* DAT_00cf1944;\nextern std::uint32_t DAT_00cf19d4;\nextern std::uint8_t DAT_00865286;\nextern std::uint8_t DAT_00c75a7c;\n\nvoid __stdcall FUN_00648e10()\n{\n    const std::uint32_t value =\n        (-(std::uint32_t)(DAT_00865286 != 0) & 0xfffffffeu) + 2u;\n    const std::uint32_t flags = DAT_00cf19d4 | 0x208u;\n\n    // The vtable owner and entry's declared type are unresolved.\n    using VtableEntry = void (__thiscall *)(\n        void*, std::uint32_t, std::uint32_t, std::uint32_t,\n        std::uint32_t, void*, std::uint32_t);\n\n    const auto* vtable = *reinterpret_cast<std::uint8_t* const*>(DAT_00cf1944);\n    const auto entry = *reinterpret_cast<VtableEntry const*>(vtable + 0x68);\n    entry(DAT_00cf1944, 0xe0u, flags, 0u, value, &DAT_00c75a7c, 0u);\n}",
+      "verdict": "FAIL",
+      "summary": "The call logic matches, but the vtable offset is not mapped to a named member.",
+      "issues": [
+        "The indirect call uses raw vtable offset 0x68, contrary to the requirement that every struct offset map to a named member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00648e10\\_FUN_00648e10.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

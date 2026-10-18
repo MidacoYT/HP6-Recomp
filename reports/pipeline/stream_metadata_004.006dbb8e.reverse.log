@@ -1,0 +1,30 @@
+Candidate validation failed for 006dbb8e: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006dbb8e",
+      "run_id": "4908b27d38ef46939dd01a4640d73c9c",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbb8e",
+      "success": false,
+      "rounds_used": 2,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006dbb8e_Record {\n    std::uint32_t field_0;\n    std::uint32_t field_4;\n};\n\nstatic_assert(offsetof(FUN_006dbb8e_Record, field_4) == 4);\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::uint32_t __cdecl FUN_006dbb8e(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_8, &local_c) != 0) {\n        return 0;\n    }\n\n    return reinterpret_cast<FUN_006dbb8e_Record*>(\n        static_cast<std::uintptr_t>(local_8))->field_4;\n}",
+      "verdict": "FAIL",
+      "summary": "The logic and offset-4 member access match, but the callee calling convention remains unverified.",
+      "issues": [
+        "The supplied evidence does not establish that FUN_006db3f9 uses __fastcall, so the call cannot be confirmed as an exact binary match."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

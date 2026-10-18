@@ -1,0 +1,27 @@
+{
+  "results": [
+    {
+      "address": "006dbe45",
+      "run_id": "8c002af73c624e4a8ead5654b8323919",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dbe45",
+      "success": false,
+      "rounds_used": 2,
+      "code": "#include <cstddef>\n#include <cstdint>\n\nstruct FUN_006dbe45_Result {\n    std::uint8_t unknown_00[0x58];\n    std::uint32_t field_58;\n};\n\nstatic_assert(offsetof(FUN_006dbe45_Result, field_58) == 0x58);\n\nstd::uint32_t __fastcall FUN_006db3f9(\n    std::uint32_t* param_1,\n    std::uint32_t* param_2,\n    std::uint32_t* param_3);\n\nstd::uint32_t __cdecl FUN_006dbe45(std::uint32_t* param_1)\n{\n    std::uint32_t local_c;\n    std::uint32_t local_8;\n\n    if (FUN_006db3f9(param_1, &local_c, &local_8) != 0) {\n        return 0;\n    }\n\n    const auto* result = reinterpret_cast<const FUN_006dbe45_Result*>(\n        static_cast<std::uintptr_t>(local_8));\n    return result->field_58;\n}",
+      "verdict": "PASS",
+      "summary": "The call, branch, return value, and named 32-bit member at offset 0x58 match the supplied evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

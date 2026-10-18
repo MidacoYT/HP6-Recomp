@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006dc751",
+      "run_id": "8367405f47844090b7a8ce1121ef13f8",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006dc751",
+      "success": false,
+      "rounds_used": 1,
+      "code": "unsigned char* __cdecl FUN_006dc751(\n    unsigned char* param_1,\n    int param_2,\n    int param_3,\n    unsigned int* param_4,\n    unsigned int* param_5)\n{\n    const unsigned int trailerSize = FUN_006dc6a3(param_1, nullptr, nullptr);\n    unsigned char* const end = param_1 + (FUN_006dc664(param_1) - trailerSize);\n\n    int fieldWidth = 4;\n    int valueWidth = 4;\n    unsigned char* cursor = param_1 + 0x10;\n\n    const int version = FUN_006dc5f9(param_1);\n    if (version == 1) {\n        fieldWidth = 3;\n        valueWidth = 3;\n        cursor = param_1 + 6;\n    } else if (version == 3) {\n        fieldWidth = static_cast<signed char>(param_1[3]) - '0';\n        valueWidth = fieldWidth;\n        if (valueWidth > 4) {\n            valueWidth = 4;\n        }\n    }\n\n    int index = 0;\n    if (param_2 == 0) {\n        while (cursor < end) {\n            unsigned char* result = cursor + fieldWidth + valueWidth;\n            if (index == param_3) {\n                if (param_4 != nullptr) {\n                    *param_4 = static_cast<unsigned int>(\n                        FUN_006dc594(reinterpret_cast<int>(cursor), fieldWidth));\n                }\n                if (param_5 != nullptr) {\n                    *param_5 = FUN_006dc532(cursor + fieldWidth, valueWidth);\n                }\n                return result;\n            }\n\n            while (*result++ != 0) {}\n            ++index;\n            cursor = result;\n        }\n    } else {\n        while (cursor < end) {\n            unsigned char* result = cursor + fieldWidth + valueWidth;\n            if (FUN_006dc5c9(reinterpret_cast<char*>(result)) == 0) {\n                if (param_4 != nullptr) {\n                    *param_4 = static_cast<unsigned int>(\n                        FUN_006dc594(reinterpret_cast<int>(cursor), fieldWidth));\n                }\n                if (param_5 != nullptr) {\n                    *param_5 = FUN_006dc532(cursor + fieldWidth, valueWidth);\n                }\n                return result;\n            }\n\n            while (*result++ != 0) {}\n            cursor = result;\n        }\n    }\n\n    if (param_4 != nullptr) {\n        *param_4 = 0;\n    }\n    if (param_5 != nullptr) {\n        *param_5 = 0;\n    }\n    return nullptr;\n}",
+      "verdict": "FAIL",
+      "summary": "The record pointer calculation uses a different addition order.",
+      "issues": [
+        "In both loops, Ghidra adds valueWidth to fieldWidth before adding cursor. The reversed code calculates cursor + fieldWidth + valueWidth."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 20 branches/loops, candidate has 16"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006dc751\\_FUN_006dc751.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

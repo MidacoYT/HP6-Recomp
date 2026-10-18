@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "address": "006d92ac",
+      "run_id": "dc232063d4d44f6e9d0047a75eba206c",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d92ac",
+      "success": false,
+      "rounds_used": 1,
+      "code": "void __fastcall FUN_006d92ac(int param_1)\n{\n    LeaveCriticalSection(\n        reinterpret_cast<LPCRITICAL_SECTION>(param_1 + 4));\n}",
+      "verdict": "FAIL",
+      "summary": "The logic matches the binary, but the +4 struct offset has no named member.",
+      "issues": [
+        "param_1 + 4 is passed to LeaveCriticalSection, but offset 4 is not represented by a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d92ac\\_FUN_006d92ac.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (4 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

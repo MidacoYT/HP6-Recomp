@@ -1,0 +1,973 @@
+{
+  "schema_version": 1,
+  "identity": "ce2a2ac0387cffaa95b2e568281b1d5197449a7802f5e47a2a48697ac59b9142",
+  "seeds": [
+    "006d77dc",
+    "006d7865",
+    "006d78f2",
+    "006d829c",
+    "006d82ec"
+  ],
+  "functions": [
+    {
+      "address": "006d77dc",
+      "class_name": "",
+      "function_name": "FUN_006d77dc",
+      "caller_count": 0
+    },
+    {
+      "address": "006d7865",
+      "class_name": "",
+      "function_name": "FUN_006d7865",
+      "caller_count": 0
+    },
+    {
+      "address": "006d78f2",
+      "class_name": "",
+      "function_name": "FUN_006d78f2",
+      "caller_count": 0
+    },
+    {
+      "address": "006d829c",
+      "class_name": "",
+      "function_name": "FUN_006d829c",
+      "caller_count": 0
+    },
+    {
+      "address": "006d82ec",
+      "class_name": "",
+      "function_name": "FUN_006d82ec",
+      "caller_count": 3
+    }
+  ],
+  "edges": [
+    {
+      "source": "006d77dc",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d77dc",
+      "target": "006d760a"
+    },
+    {
+      "source": "006d77dc",
+      "target": "006d778a"
+    },
+    {
+      "source": "006d7865",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d7865",
+      "target": "006d7827"
+    },
+    {
+      "source": "006d78f2",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d78f2",
+      "target": "006d768d"
+    },
+    {
+      "source": "006d78f2",
+      "target": "006d78a8"
+    },
+    {
+      "source": "006d829c",
+      "target": "006d6ab6"
+    },
+    {
+      "source": "006d829c",
+      "target": "006d822a"
+    },
+    {
+      "source": "006d82ec",
+      "target": "006d744b"
+    },
+    {
+      "source": "006d82ec",
+      "target": "006d778a"
+    },
+    {
+      "source": "006d82ec",
+      "target": "006d7b14"
+    }
+  ],
+  "gaps": [
+    {
+      "function": "006d77dc",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d77dc",
+      "reason": "Dependency 006d760a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d77dc",
+      "reason": "Dependency 006d778a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d7865",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d7865",
+      "reason": "Dependency 006d7827 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d78f2",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d78f2",
+      "reason": "Dependency 006d768d outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d78f2",
+      "reason": "Dependency 006d78a8 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d829c",
+      "reason": "Dependency 006d6ab6 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d829c",
+      "reason": "Dependency 006d822a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d82ec",
+      "reason": "Dependency 006d744b outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d82ec",
+      "reason": "Dependency 006d778a outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    },
+    {
+      "function": "006d82ec",
+      "reason": "Dependency 006d7b14 outside bounded selection",
+      "origin": "target-plan",
+      "kind": "limit",
+      "site": null
+    }
+  ],
+  "evidence": {
+    "006d77dc": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d77dc",
+        "name": "FUN_006d77dc",
+        "signature": "uint * __cdecl FUN_006d77dc(int param_1, undefined4 param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d77dc\n// Address:   0x006d77dc\n// Signature: uint * __cdecl FUN_006d77dc(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 3\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d77dc(int param_1,undefined4 param_2)\n\n\n\n{\n\n  int iVar1;\n\n  uint *this;\n\n  undefined4 uVar2;\n\n  undefined4 uVar3;\n\n  char *pcVar4;\n\n  undefined4 uVar5;\n\n  \n\n  uVar5 = 0x246;\n\n  pcVar4 = \"D:\\\\depot\\\\egami\\\\realgraph\\\\6\\\\source\\\\shape\\\\cmn\\\\shpcreate.cpp\";\n\n  uVar3 = 0x20;\n\n  uVar2 = 0x10;\n\n  iVar1 = FUN_006d760a(param_1);\n\n  this = (uint *)FUN_006d6ab6(\"Created Clut Element\",iVar1,uVar2,uVar3,param_2,pcVar4,uVar5);\n\n  FUN_006d778a(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d77dc\n// Address:   0x006d77dc\n// Signature: uint * __cdecl FUN_006d77dc(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 3\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d77dc(int param_1,undefined4 param_2)\n\n\n\n{\n\n  int iVar1;\n\n  uint *this;\n\n  undefined4 uVar2;\n\n  undefined4 uVar3;\n\n  char *pcVar4;\n\n  undefined4 uVar5;\n\n  \n\n  uVar5 = 0x246;\n\n  pcVar4 = \"D:\\\\depot\\\\egami\\\\realgraph\\\\6\\\\source\\\\shape\\\\cmn\\\\shpcreate.cpp\";\n\n  uVar3 = 0x20;\n\n  uVar2 = 0x10;\n\n  iVar1 = FUN_006d760a(param_1);\n\n  this = (uint *)FUN_006d6ab6(\"Created Clut Element\",iVar1,uVar2,uVar3,param_2,pcVar4,uVar5);\n\n  FUN_006d778a(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d77dc",
+        "function": {
+          "address": "006d77dc",
+          "name": "FUN_006d77dc",
+          "signature": "uint * __cdecl FUN_006d77dc(int param_1, undefined4 param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d760a",
+              "name": "FUN_006d760a"
+            },
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d778a",
+              "name": "FUN_006d778a"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b0b8",
+            "value": "Created Clut Element",
+            "length": 20,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d7980",
+                "func_name": "FUN_006d7980",
+                "ref_addr": "006d79a3"
+              },
+              {
+                "func_addr": "006d77dc",
+                "func_name": "FUN_006d77dc",
+                "ref_addr": "006d77fb"
+              }
+            ]
+          },
+          {
+            "address": "0071b0d0",
+            "value": "D:\\depot\\egami\\realgraph\\6\\source\\shape\\cmn\\shpcreate.cpp",
+            "length": 57,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d7980",
+                "func_name": "FUN_006d7980",
+                "ref_addr": "006d7993"
+              },
+              {
+                "func_addr": "006d77dc",
+                "func_name": "FUN_006d77dc",
+                "ref_addr": "006d77e5"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b0b8",
+            "name": "s_Created_Clut_Element_0071b0b8",
+            "type": "string",
+            "size": -1,
+            "value": "Created Clut Element",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d7980",
+                "func_name": "FUN_006d7980"
+              },
+              {
+                "func_addr": "006d77dc",
+                "func_name": "FUN_006d77dc"
+              }
+            ]
+          },
+          {
+            "address": "0071b0d0",
+            "name": "s_D:\\depot\\egami\\realgraph\\6\\sourc_0071b0d0",
+            "type": "string",
+            "size": -1,
+            "value": "D:\\depot\\egami\\realgraph\\6\\source\\shape\\cmn\\shpcreate.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d7980",
+                "func_name": "FUN_006d7980"
+              },
+              {
+                "func_addr": "006d77dc",
+                "func_name": "FUN_006d77dc"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d77dc",
+            "stop": "006d7826",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d7865": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d7865",
+        "name": "FUN_006d7865",
+        "signature": "uint * __cdecl FUN_006d7865(int param_1, undefined4 param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d7865\n// Address:   0x006d7865\n// Signature: uint * __cdecl FUN_006d7865(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d7865(int param_1,undefined4 param_2)\n\n\n\n{\n\n  uint *this;\n\n  \n\n  this = (uint *)FUN_006d6ab6(\"cr_clip\",0x20,0x10,0x20,param_2,\"shpcreate.cpp\",0x26f);\n\n  FUN_006d7827(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d7865\n// Address:   0x006d7865\n// Signature: uint * __cdecl FUN_006d7865(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d7865(int param_1,undefined4 param_2)\n\n\n\n{\n\n  uint *this;\n\n  \n\n  this = (uint *)FUN_006d6ab6(\"cr_clip\",0x20,0x10,0x20,param_2,\"shpcreate.cpp\",0x26f);\n\n  FUN_006d7827(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d7865",
+        "function": {
+          "address": "006d7865",
+          "name": "FUN_006d7865",
+          "signature": "uint * __cdecl FUN_006d7865(int param_1, undefined4 param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d7827",
+              "name": "FUN_006d7827"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b10c",
+            "value": "cr_clip",
+            "length": 7,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865",
+                "ref_addr": "006d787c"
+              }
+            ]
+          },
+          {
+            "address": "0071b114",
+            "value": "shpcreate.cpp",
+            "length": 13,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865",
+                "ref_addr": "006d786e"
+              },
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2",
+                "ref_addr": "006d78fb"
+              },
+              {
+                "func_addr": "006d79fa",
+                "func_name": "FUN_006d79fa",
+                "ref_addr": "006d7a0d"
+              },
+              {
+                "func_addr": "006d7d9c",
+                "func_name": "FUN_006d7d9c",
+                "ref_addr": "006d7da5"
+              },
+              {
+                "func_addr": "006d7f49",
+                "func_name": "FUN_006d7f49",
+                "ref_addr": "006d7f52"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b10c",
+            "name": "s_cr_clip_0071b10c",
+            "type": "string",
+            "size": -1,
+            "value": "cr_clip",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865"
+              }
+            ]
+          },
+          {
+            "address": "0071b114",
+            "name": "s_shpcreate.cpp_0071b114",
+            "type": "string",
+            "size": -1,
+            "value": "shpcreate.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865"
+              },
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2"
+              },
+              {
+                "func_addr": "006d79fa",
+                "func_name": "FUN_006d79fa"
+              },
+              {
+                "func_addr": "006d7d9c",
+                "func_name": "FUN_006d7d9c"
+              },
+              {
+                "func_addr": "006d7f49",
+                "func_name": "FUN_006d7f49"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d7865",
+            "stop": "006d78a7",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d78f2": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d78f2",
+        "name": "FUN_006d78f2",
+        "signature": "uint * __cdecl FUN_006d78f2(int param_1, undefined4 param_2)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d78f2\n// Address:   0x006d78f2\n// Signature: uint * __cdecl FUN_006d78f2(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 3\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d78f2(int param_1,undefined4 param_2)\n\n\n\n{\n\n  int iVar1;\n\n  uint *this;\n\n  undefined4 uVar2;\n\n  undefined4 uVar3;\n\n  char *pcVar4;\n\n  undefined4 uVar5;\n\n  \n\n  uVar5 = 0x29c;\n\n  pcVar4 = \"shpcreate.cpp\";\n\n  uVar3 = 0x20;\n\n  uVar2 = 0x10;\n\n  iVar1 = FUN_006d768d(param_1);\n\n  this = (uint *)FUN_006d6ab6(\"cr_hots\",iVar1,uVar2,uVar3,param_2,pcVar4,uVar5);\n\n  FUN_006d78a8(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d78f2\n// Address:   0x006d78f2\n// Signature: uint * __cdecl FUN_006d78f2(int param_1, undefined4 param_2)\n// Callers:   0  |  Callees: 3\n// ===========================================\n\n\n\nuint * __cdecl FUN_006d78f2(int param_1,undefined4 param_2)\n\n\n\n{\n\n  int iVar1;\n\n  uint *this;\n\n  undefined4 uVar2;\n\n  undefined4 uVar3;\n\n  char *pcVar4;\n\n  undefined4 uVar5;\n\n  \n\n  uVar5 = 0x29c;\n\n  pcVar4 = \"shpcreate.cpp\";\n\n  uVar3 = 0x20;\n\n  uVar2 = 0x10;\n\n  iVar1 = FUN_006d768d(param_1);\n\n  this = (uint *)FUN_006d6ab6(\"cr_hots\",iVar1,uVar2,uVar3,param_2,pcVar4,uVar5);\n\n  FUN_006d78a8(this,param_1);\n\n  *this = *this & 0xfffffbff | 0x400;\n\n  return this;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d78f2",
+        "function": {
+          "address": "006d78f2",
+          "name": "FUN_006d78f2",
+          "signature": "uint * __cdecl FUN_006d78f2(int param_1, undefined4 param_2)",
+          "calling_convention": "__cdecl",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d768d",
+              "name": "FUN_006d768d"
+            },
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d78a8",
+              "name": "FUN_006d78a8"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b114",
+            "value": "shpcreate.cpp",
+            "length": 13,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865",
+                "ref_addr": "006d786e"
+              },
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2",
+                "ref_addr": "006d78fb"
+              },
+              {
+                "func_addr": "006d79fa",
+                "func_name": "FUN_006d79fa",
+                "ref_addr": "006d7a0d"
+              },
+              {
+                "func_addr": "006d7d9c",
+                "func_name": "FUN_006d7d9c",
+                "ref_addr": "006d7da5"
+              },
+              {
+                "func_addr": "006d7f49",
+                "func_name": "FUN_006d7f49",
+                "ref_addr": "006d7f52"
+              }
+            ]
+          },
+          {
+            "address": "0071b124",
+            "value": "cr_hots",
+            "length": 7,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2",
+                "ref_addr": "006d7911"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b114",
+            "name": "s_shpcreate.cpp_0071b114",
+            "type": "string",
+            "size": -1,
+            "value": "shpcreate.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d7865",
+                "func_name": "FUN_006d7865"
+              },
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2"
+              },
+              {
+                "func_addr": "006d79fa",
+                "func_name": "FUN_006d79fa"
+              },
+              {
+                "func_addr": "006d7d9c",
+                "func_name": "FUN_006d7d9c"
+              },
+              {
+                "func_addr": "006d7f49",
+                "func_name": "FUN_006d7f49"
+              }
+            ]
+          },
+          {
+            "address": "0071b124",
+            "name": "s_cr_hots_0071b124",
+            "type": "string",
+            "size": -1,
+            "value": "cr_hots",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d78f2",
+                "func_name": "FUN_006d78f2"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d78f2",
+            "stop": "006d793c",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d829c": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d829c",
+        "name": "FUN_006d829c",
+        "signature": "uint * __thiscall FUN_006d829c(void * this, undefined4 param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d829c\n// Address:   0x006d829c\n// Signature: uint * __thiscall FUN_006d829c(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d829c(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"c_tex\",*(int *)((int)this + 0xc) + 0x20,0x80,0x20,param_1,\n\n                                \"shpclone.cpp\",0x3c);\n\n  FUN_006d822a(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d829c\n// Address:   0x006d829c\n// Signature: uint * __thiscall FUN_006d829c(void * this, undefined4 param_1)\n// Callers:   0  |  Callees: 2\n// ===========================================\n\n\n\nuint * __thiscall FUN_006d829c(void *this,undefined4 param_1)\n\n\n\n{\n\n  uint *puVar1;\n\n  \n\n  puVar1 = (uint *)FUN_006d6ab6(\"c_tex\",*(int *)((int)this + 0xc) + 0x20,0x80,0x20,param_1,\n\n                                \"shpclone.cpp\",0x3c);\n\n  FUN_006d822a(this,puVar1);\n\n  puVar1[1] = 0;\n\n  *puVar1 = *puVar1 & 0xfffffbff | 0x400;\n\n  return puVar1;\n\n}\n\n\n\n\n",
+        "callers": 0,
+        "callees": 2
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d829c",
+        "function": {
+          "address": "006d829c",
+          "name": "FUN_006d829c",
+          "signature": "uint * __thiscall FUN_006d829c(void * this, undefined4 param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [],
+          "callees": [
+            {
+              "addr": "006d6ab6",
+              "name": "FUN_006d6ab6"
+            },
+            {
+              "addr": "006d822a",
+              "name": "FUN_006d822a"
+            }
+          ]
+        },
+        "strings": [
+          {
+            "address": "0071b250",
+            "value": "c_tex",
+            "length": 5,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c",
+                "ref_addr": "006d82bb"
+              }
+            ]
+          },
+          {
+            "address": "0071b258",
+            "value": "shpclone.cpp",
+            "length": 12,
+            "type": "string",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816",
+                "ref_addr": "006d8827"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c",
+                "ref_addr": "006d82a3"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e",
+                "ref_addr": "006d8365"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417",
+                "ref_addr": "006d8428"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de",
+                "ref_addr": "006d84e8"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9",
+                "ref_addr": "006d85d3"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685",
+                "ref_addr": "006d868f"
+              }
+            ]
+          }
+        ],
+        "globals": [
+          {
+            "address": "0071b250",
+            "name": "s_c_tex_0071b250",
+            "type": "string",
+            "size": -1,
+            "value": "c_tex",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c"
+              }
+            ]
+          },
+          {
+            "address": "0071b258",
+            "name": "s_shpclone.cpp_0071b258",
+            "type": "string",
+            "size": -1,
+            "value": "shpclone.cpp",
+            "section": ".rdata",
+            "references": [
+              {
+                "func_addr": "006d8816",
+                "func_name": "FUN_006d8816"
+              },
+              {
+                "func_addr": "006d829c",
+                "func_name": "FUN_006d829c"
+              },
+              {
+                "func_addr": "006d835e",
+                "func_name": "FUN_006d835e"
+              },
+              {
+                "func_addr": "006d8417",
+                "func_name": "FUN_006d8417"
+              },
+              {
+                "func_addr": "006d84de",
+                "func_name": "FUN_006d84de"
+              },
+              {
+                "func_addr": "006d85c9",
+                "func_name": "FUN_006d85c9"
+              },
+              {
+                "func_addr": "006d8685",
+                "func_name": "FUN_006d8685"
+              }
+            ]
+          }
+        ],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d829c",
+            "stop": "006d82e9",
+            "out": [],
+            "in": []
+          }
+        ]
+      }
+    },
+    "006d82ec": {
+      "depth": 0,
+      "selection": "seed",
+      "decompile": {
+        "address": "006d82ec",
+        "name": "FUN_006d82ec",
+        "signature": "undefined __thiscall FUN_006d82ec(void * this, void * param_1)",
+        "decompiled": "// ===========================================\n// Ghidra:    FUN_006d82ec\n// Address:   0x006d82ec\n// Signature: undefined __thiscall FUN_006d82ec(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d82ec(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [24];\n\n  int local_64;\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b14(this,(int)local_c4);\n\n  FUN_006d778a(param_1,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  if (local_64 == 0) {\n\n    uVar2 = *(uint *)((int)this + 0xc);\n\n    if (*(int *)((int)this + 8) == 0) {\n\n      puVar3 = (undefined4 *)0x0;\n\n    }\n\n    else {\n\n      puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n    }\n\n    if (*(int *)((int)param_1 + 8) == 0) {\n\n      puVar4 = (undefined4 *)0x0;\n\n    }\n\n    else {\n\n      puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n    }\n\n    for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n      *puVar4 = *puVar3;\n\n      puVar3 = puVar3 + 1;\n\n      puVar4 = puVar4 + 1;\n\n    }\n\n    for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n      *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n      puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n      puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n    }\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "raw_output": "// ===========================================\n// Ghidra:    FUN_006d82ec\n// Address:   0x006d82ec\n// Signature: undefined __thiscall FUN_006d82ec(void * this, void * param_1)\n// Callers:   3  |  Callees: 3\n// ===========================================\n\n\n\nvoid __thiscall FUN_006d82ec(void *this,void *param_1)\n\n\n\n{\n\n  uint uVar1;\n\n  uint uVar2;\n\n  undefined4 *puVar3;\n\n  undefined4 *puVar4;\n\n  undefined4 local_c4 [24];\n\n  int local_64;\n\n  \n\n  FUN_006d744b(local_c4);\n\n  FUN_006d7b14(this,(int)local_c4);\n\n  FUN_006d778a(param_1,(int)local_c4);\n\n  *(byte *)((int)param_1 + 1) = *(byte *)((int)param_1 + 1) & 0xfb;\n\n  if (local_64 == 0) {\n\n    uVar2 = *(uint *)((int)this + 0xc);\n\n    if (*(int *)((int)this + 8) == 0) {\n\n      puVar3 = (undefined4 *)0x0;\n\n    }\n\n    else {\n\n      puVar3 = (undefined4 *)((int)this + *(int *)((int)this + 8));\n\n    }\n\n    if (*(int *)((int)param_1 + 8) == 0) {\n\n      puVar4 = (undefined4 *)0x0;\n\n    }\n\n    else {\n\n      puVar4 = (undefined4 *)((int)param_1 + *(int *)((int)param_1 + 8));\n\n    }\n\n    for (uVar1 = uVar2 >> 2; uVar1 != 0; uVar1 = uVar1 - 1) {\n\n      *puVar4 = *puVar3;\n\n      puVar3 = puVar3 + 1;\n\n      puVar4 = puVar4 + 1;\n\n    }\n\n    for (uVar2 = uVar2 & 3; uVar2 != 0; uVar2 = uVar2 - 1) {\n\n      *(undefined1 *)puVar4 = *(undefined1 *)puVar3;\n\n      puVar3 = (undefined4 *)((int)puVar3 + 1);\n\n      puVar4 = (undefined4 *)((int)puVar4 + 1);\n\n    }\n\n  }\n\n  return;\n\n}\n\n\n\n\n",
+        "callers": 3,
+        "callees": 3
+      },
+      "context": {
+        "schema_version": 1,
+        "kind": "function-context",
+        "target": "006d82ec",
+        "function": {
+          "address": "006d82ec",
+          "name": "FUN_006d82ec",
+          "signature": "undefined __thiscall FUN_006d82ec(void * this, void * param_1)",
+          "calling_convention": "__thiscall",
+          "callers": [
+            {
+              "addr": "006d6d39",
+              "name": "FUN_006d6d39",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d835e",
+              "name": "FUN_006d835e",
+              "ref_type": "UNCONDITIONAL_CALL"
+            },
+            {
+              "addr": "006d86d5",
+              "name": "FUN_006d86d5",
+              "ref_type": "UNCONDITIONAL_CALL"
+            }
+          ],
+          "callees": [
+            {
+              "addr": "006d744b",
+              "name": "FUN_006d744b"
+            },
+            {
+              "addr": "006d7b14",
+              "name": "FUN_006d7b14"
+            },
+            {
+              "addr": "006d778a",
+              "name": "FUN_006d778a"
+            }
+          ]
+        },
+        "strings": [],
+        "globals": [],
+        "cfg": [
+          {
+            "index": 0,
+            "start": "006d82ec",
+            "stop": "006d832b",
+            "out": [
+              11,
+              1
+            ],
+            "in": []
+          },
+          {
+            "index": 1,
+            "start": "006d832d",
+            "stop": "006d8335",
+            "out": [
+              2,
+              3
+            ],
+            "in": [
+              0
+            ]
+          },
+          {
+            "index": 2,
+            "start": "006d833b",
+            "stop": "006d833b",
+            "out": [
+              4
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 3,
+            "start": "006d8337",
+            "stop": "006d8339",
+            "out": [
+              4
+            ],
+            "in": [
+              1
+            ]
+          },
+          {
+            "index": 4,
+            "start": "006d833d",
+            "stop": "006d8342",
+            "out": [
+              5,
+              6
+            ],
+            "in": [
+              3,
+              2
+            ]
+          },
+          {
+            "index": 5,
+            "start": "006d8348",
+            "stop": "006d8348",
+            "out": [
+              7
+            ],
+            "in": [
+              4
+            ]
+          },
+          {
+            "index": 6,
+            "start": "006d8344",
+            "stop": "006d8346",
+            "out": [
+              7
+            ],
+            "in": [
+              4
+            ]
+          },
+          {
+            "index": 7,
+            "start": "006d834a",
+            "stop": "006d834c",
+            "out": [
+              8
+            ],
+            "in": [
+              6,
+              5
+            ]
+          },
+          {
+            "index": 8,
+            "start": "006d834f",
+            "stop": "006d834f",
+            "out": [
+              13,
+              9
+            ],
+            "in": [
+              7,
+              13
+            ]
+          },
+          {
+            "index": 9,
+            "start": "006d8351",
+            "stop": "006d8353",
+            "out": [
+              10
+            ],
+            "in": [
+              8
+            ]
+          },
+          {
+            "index": 10,
+            "start": "006d8356",
+            "stop": "006d8356",
+            "out": [
+              12,
+              11
+            ],
+            "in": [
+              9,
+              12
+            ]
+          },
+          {
+            "index": 11,
+            "start": "006d8358",
+            "stop": "006d835b",
+            "out": [],
+            "in": [
+              0,
+              10
+            ]
+          },
+          {
+            "index": 12,
+            "start": "006d8356",
+            "stop": "006d8356",
+            "out": [
+              10
+            ],
+            "in": [
+              10
+            ]
+          },
+          {
+            "index": 13,
+            "start": "006d834f",
+            "stop": "006d834f",
+            "out": [
+              8
+            ],
+            "in": [
+              8
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "max_depth": 0,
+  "max_functions": 5
+}

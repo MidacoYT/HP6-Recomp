@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "0063d0f0",
+      "run_id": "48cb24c8934749a5b57d7929406db417",
+      "error": null,
+      "class_name": "",
+      "function_name": "0063d0f0",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t DAT_00c70a78;\nextern char DAT_0089cbfe;\nextern int DAT_00998580;\nextern float _DAT_00b10890;\nextern float _DAT_00cef858;\nextern std::uint8_t DAT_00ea23e0;\nextern std::uint8_t _Dst_00b170d0;\nextern std::uint8_t* DAT_00967218;\n\nvoid __cdecl FUN_0063ccf0(char* format, ...);\n\nvoid __fastcall FUN_0063d0f0(int param_1)\n{\n    const std::uint32_t mask =\n        1u << (static_cast<std::uint8_t>(param_1) & 0x1f);\n\n    if ((DAT_00c70a78 & mask) != 0) {\n        DAT_0089cbfe = static_cast<char>(mask);\n        DAT_00998580 = param_1;\n\n        const std::uint32_t index = static_cast<std::uint32_t>(param_1);\n        const auto float_address =\n            reinterpret_cast<std::uintptr_t>(&DAT_00ea23e0) + index * 0xa0u;\n        _DAT_00b10890 =\n            *reinterpret_cast<const float*>(float_address) + _DAT_00cef858;\n\n        const auto region_address =\n            reinterpret_cast<std::uintptr_t>(&_Dst_00b170d0) + index * 0x10000u;\n        DAT_00967218 = reinterpret_cast<std::uint8_t*>(region_address);\n        return;\n    }\n\n    FUN_0063ccf0(const_cast<char*>(\n        \"RenderRegionManager::SetActiveRenderRegion - attempt to activate region that is not in use\\n\"));\n}",
+      "verdict": "FAIL",
+      "summary": "The success path matches, but the error path has different return behavior.",
+      "issues": [
+        "Ghidra marks FUN_0063ccf0 as non-returning, and the CFG ends at that call. The reversed declaration permits it to return, after which FUN_0063d0f0 also returns."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\0063d0f0\\_0063d0f0.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

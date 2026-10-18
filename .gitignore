@@ -10,3 +10,10 @@ dist/
 *.i64
 *.exe
 *.dll
+# Reference data only: decompiled exports from Ghidra. Never committed.
+.ghidra-exports/
+# Pipeline working files (not part of the reconstruction).
+re-agent-progress.json
+re-agent-progress.json.lock
+hp6_memory.json
+hp6_test.json

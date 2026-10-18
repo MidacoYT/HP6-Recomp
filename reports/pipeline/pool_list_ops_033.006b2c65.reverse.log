@@ -1,0 +1,30 @@
+Candidate validation failed for 006b2c65: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006b2c65",
+      "run_id": "68e97c9e021745d1a44a04c281078cb2",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2c65",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// The evidence identifies these offsets, but does not establish their member names.\nstruct Unknown_006b2c65 {\n    std::int32_t field_00;\n    std::int32_t field_04;\n    std::int32_t field_08;\n\n    void __thiscall FUN_006b2c65(std::int32_t param_1);\n};\n\nvoid __thiscall Unknown_006b2c65::FUN_006b2c65(std::int32_t param_1)\n{\n    auto* node = reinterpret_cast<Unknown_006b2c65*>(param_1);\n\n    const std::int32_t value = field_00 == 0 ? 0 : field_00 + 8;\n    node->field_08 = value;\n    field_08 = field_08 + 1;\n    field_00 = param_1;\n\n    if (node->field_08 == 0) {\n        field_04 = param_1;\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The final branch matches the decompilation but conflicts with the independent P-code evidence.",
+      "issues": [
+        "At 006b2c84, the P-code branches to the return when node->field_08 equals zero. The field_04 assignment therefore occurs when node->field_08 is nonzero. Both the decompilation and reversed code show the opposite condition."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

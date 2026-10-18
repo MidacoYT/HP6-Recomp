@@ -40,8 +40,11 @@ struct VolumeNode {
     virtual void v8() {}
     virtual void v9() {}
     virtual void va() {}
-    virtual void vb() {}
+    // vb() sits at vtable slot +0x2c (index 11), the slot
+    // invoke_volume_method_2c (006b2673) tail-jumps into.
+    virtual void vb() { ++method_2c_calls; }
     const char* name_text;
+    int method_2c_calls = 0;
     explicit VolumeNode(const char* text) : name_text(text) {}
     virtual char* name(char* /*buffer*/) {
         // The +0x30 slot answers with the record's own name string; it
@@ -109,6 +112,16 @@ int main() {
     // Nothing matches: null.
     word(root, 0x7c) = address(record_d);
     expect("volume_missing", find_volume_by_name("Y:\\x") == nullptr);
+
+    // ---- invoke_volume_method_2c (006b2673) -----------------------------
+    std::printf("[m6] method 2c\n");
+    word(root, 0x7c) = address(record_d);
+    invoke_volume_method_2c("D:X");
+    expect("method_2c_called", volume_d.method_2c_calls == 1);
+    expect("method_2c_other_untouched", volume_c.method_2c_calls == 0);
+    invoke_volume_method_2c("c:\\levels");
+    expect("method_2c_second_record", volume_c.method_2c_calls == 1 &&
+                                      volume_d.method_2c_calls == 1);
 
     if (failures != 0) {
         std::printf("volume_registry_smoke: %d failure(s)\n", failures);

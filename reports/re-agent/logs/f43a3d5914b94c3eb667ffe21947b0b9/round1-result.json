@@ -1,0 +1,30 @@
+{
+  "results": [
+    {
+      "address": "006b1ffc",
+      "run_id": "f43a3d5914b94c3eb667ffe21947b0b9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b1ffc",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006b2d1d(void* self,\n                             std::uint32_t node,\n                             std::uint32_t previous);\n\nstd::uint32_t __thiscall FUN_006b1ffc(void* self,\n                                      std::int32_t param_1,\n                                      char param_2)\n{\n    std::uint32_t previous = 0;\n    std::uint32_t node = *static_cast<std::uint32_t*>(self);\n\n    while (node != 0) {\n        if (*reinterpret_cast<std::int32_t*>(node + 0x0c) == param_1) {\n            if (param_2 != 0) {\n                FUN_006b2d1d(self, node, previous);\n            }\n            return node;\n        }\n\n        previous = node;\n        const std::uint32_t link =\n            *reinterpret_cast<std::uint32_t*>(node + 0x08);\n        node = link == 0 ? 0 : link - 8;\n    }\n\n    return 0;\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and call match, but the structure offsets lack named members.",
+      "issues": [
+        "The head at self + 0x00, link at node + 0x08, and key at node + 0x0c are accessed without named struct members."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 5 branches/loops, candidate has 3"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b1ffc\\_FUN_006b1ffc.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

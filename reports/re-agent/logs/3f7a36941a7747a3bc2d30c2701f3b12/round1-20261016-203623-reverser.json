@@ -1,0 +1,11 @@
+{
+  "round": 1,
+  "timestamp": "20261016-203623",
+  "phase": "reverse",
+  "target": "::FUN_006d852e",
+  "address": "006d852e",
+  "prompt": "Read-only reverse-engineering tool results:\n\nTOOL struct(0x006d852e):\nnot found\n\nNow return the final reversed function, or request more evidence within the remaining budget.",
+  "response": "```cpp\n#include <cstdint>\n#include <cstdio>\n\nextern std::uint32_t* __fastcall FUN_006d744b(std::uint32_t*);\nextern void __thiscall FUN_006d7baf(void*, std::uint32_t*);\nextern void __thiscall FUN_006d793d(void*, std::uint32_t*);\n\nvoid __thiscall FUN_006d852e(void* this_, void* param_1)\n{\n    std::uint32_t local_c8[48];\n\n    FUN_006d744b(local_c8);\n    FUN_006d7baf(this_, local_c8);\n    FUN_006d793d(param_1, local_c8);\n\n    auto* source = static_cast<std::uint8_t*>(this_);\n    auto* destination = static_cast<std::uint8_t*>(param_1);\n    destination[1] &= 0xfb;\n\n    // The fields at +0x08 and +0x0c have no verified member names.\n    std::uint32_t count = *reinterpret_cast<std::uint32_t*>(source + 0x0c);\n    const auto source_offset = *reinterpret_cast<std::int32_t*>(source + 0x08);\n    const auto destination_offset =\n        *reinterpret_cast<std::int32_t*>(destination + 0x08);\n\n    auto* src = source_offset == 0 ? nullptr : source + source_offset;\n    auto* dst = destination_offset == 0\n        ? nullptr : destination + destination_offset;\n\n    for (std::uint32_t words = count >> 2; words != 0; --words) {\n        *reinterpret_cast<std::uint32_t*>(dst) =\n            *reinterpret_cast<std::uint32_t*>(src);\n        src += 4;\n        dst += 4;\n    }\n\n    for (count &= 3; count != 0; --count) {\n        *dst = *src;\n        ++src;\n        ++dst;\n    }\n\n    if (0x14 < *reinterpret_cast<std::int32_t*>(source + 0x0c) + 0x10) {\n        char* text = destination_offset == 0\n            ? nullptr\n            : reinterpret_cast<char*>(destination + destination_offset);\n        std::sprintf(\n            text, \"EAGL%d\",\n            *reinterpret_cast<std::int32_t*>(destination + 0x0c));\n    }\n}\n```\n\nREVERSED_FUNCTION: ::FUN_006d852e (006d852e)",
+  "code_length": 1697,
+  "llm_metadata": {}
+}

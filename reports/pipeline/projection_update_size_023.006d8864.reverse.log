@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d8864",
+      "run_id": "219730aa39d948bab41b0b08cbc8a992",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d8864",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint8_t __fastcall FUN_006d6c09(std::uint32_t* param_1);\n\nint __fastcall FUN_006d8864(std::uint32_t* param_1)\n{\n    for (;;) {\n        const std::uint32_t value = FUN_006d6c09(param_1);\n\n        if (value == 1) {\n            return 0;\n        }\n        if (value == 2 || value == 4 || value == 0x10) {\n            return param_1[3] + 0x20;\n        }\n        if (value == 0x20 || value == 0x80) {\n            return param_1[3] + 0x10;\n        }\n        if (value != 0x100) {\n            return 0;\n        }\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The return paths match, but the call result and offset are not represented faithfully.",
+      "issues": [
+        "Ghidra compares CONCAT31(extraout_var, bVar1) as a 32-bit value. Assigning the byte return directly to uint32_t zero-extends it, making the 0x100 loop branch unreachable. The supplied evidence does not establish that the upper three bytes are zero.",
+        "param_1[3] accesses offset 0x0c without mapping it to a named struct member."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d8864\\_FUN_006d8864.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

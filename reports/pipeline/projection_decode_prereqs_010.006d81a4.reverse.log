@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d81a4",
+      "run_id": "18ec506ac1664c1aa176e765db33741d",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d81a4",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern \"C\" std::uint8_t __cdecl FUN_006d7170(std::int32_t param_1);\nextern std::uint8_t DAT_0071b150[];\n\nstd::uint32_t __cdecl FUN_006d81a4(std::uint32_t param_1)\n{\n    const std::uint8_t result =\n        FUN_006d7170(static_cast<std::int32_t>(param_1));\n\n    if (result == 0 && param_1 != 0x68u) {\n        const std::uint32_t value = DAT_0071b150[param_1 & 0xffu];\n        if (value == 8u || (value > 0xeu && (value < 0x11u || value == 0x20u))) {\n            return 1u;\n        }\n    }\n\n    // The decompile leaves the upper 24 bits of the callee's return register\n    // unresolved when result is nonzero; it explicitly clears only the low byte.\n    return 0u;\n}",
+      "verdict": "FAIL",
+      "summary": "The conditions and table lookup match, but the return value does not match every path.",
+      "issues": [
+        "When the callee returns a nonzero byte, the binary clears only the low byte of its return register and retains the unresolved upper 24 bits; the reversed code returns zero.",
+        "The same upper-bit discrepancy occurs when the callee returns zero and param_1 is 0x68."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d81a4\\_FUN_006d81a4.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

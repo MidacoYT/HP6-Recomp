@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006da3f9",
+      "run_id": "e340cf62b1974b7cbc642472b9b1e0a7",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006da3f9",
+      "success": true,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nvoid __cdecl FUN_006da3f9(char* param_1, std::uint32_t param_2)\n{\n    struct LocalFrame {\n        char* local_18[2];\n        std::uint32_t local_10;\n        std::uint32_t local_c;\n    } frame;\n\n    frame.local_10 = param_2;\n    char** ppcVar3 = frame.local_18;\n    std::uint32_t uVar2 = 100;\n    frame.local_18[0] = param_1;\n    frame.local_c = 1;\n\n    std::uint32_t* puVar1 = FUN_006b25b8(param_1);\n    FUN_006b2553(FUN_006da296, reinterpret_cast<int>(puVar1),\n                 uVar2, ppcVar3);\n}",
+      "verdict": "PASS",
+      "summary": "The reversed function matches the supplied decompilation and binary evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006da3f9\\_FUN_006da3f9.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

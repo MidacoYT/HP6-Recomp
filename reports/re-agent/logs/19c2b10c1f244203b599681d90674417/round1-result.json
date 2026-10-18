@@ -1,0 +1,32 @@
+{
+  "results": [
+    {
+      "address": "00650d80",
+      "run_id": "19c2b10c1f244203b599681d90674417",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00650d80",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __stdcall FUN_00650d80()\n{\n}",
+      "verdict": "PASS",
+      "summary": "The empty function matches the decompilation and independent return-only evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00650d80\\_FUN_00650d80.cpp",
+      "parity_status": "yellow",
+      "parity_findings": [
+        {
+          "level": "yellow",
+          "reason": "Very short body (2 lines), inspect manually"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "00422e20",
+      "run_id": "801db7d8fa7d4e1b895f3a03dc1a6e28",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_00422e20",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstddef>\n#include <cstdint>\n#include <cstring>\n\n// The type of DAT_00fcade0 and the names of the fields at these offsets\n// are unresolved in the supplied evidence.\nextern void* DAT_00fcade0;\n\nvoid __thiscall FUN_00422e20(void* self, void* param_1, std::size_t param_2)\n{\n    static_assert(sizeof(std::size_t) == 4);\n\n    auto* bytes = static_cast<std::byte*>(self);\n    void* destination;\n\n    if (static_cast<std::int32_t>(param_2) < 0x800) {\n        destination = bytes + 0x10;\n    } else {\n        destination = *reinterpret_cast<void**>(\n            static_cast<std::byte*>(DAT_00fcade0) + 0x18);\n        if (destination == nullptr) {\n            return;\n        }\n        if (static_cast<std::int32_t>(param_2) > 0x23ff) {\n            return;\n        }\n    }\n\n    *reinterpret_cast<void**>(bytes + 0x810) = destination;\n    ::memcpy(destination, param_1, param_2);\n    *reinterpret_cast<std::uint8_t*>(bytes + 0x8) = 1;\n}",
+      "verdict": "FAIL",
+      "summary": "The source follows the decompiled logic, but the required offset mapping is missing.",
+      "issues": [
+        "Offsets this+0x8, this+0x10, this+0x810, and DAT_00fcade0+0x18 are accessed without named struct members.",
+        "The supplied P-code branch targets appear inverted relative to its signed comparisons at 0x00422e2d and 0x00422e47. The CFG does not establish branch polarity, so the binary evidence does not independently confirm the decompiled conditions."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\00422e20\\_FUN_00422e20.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

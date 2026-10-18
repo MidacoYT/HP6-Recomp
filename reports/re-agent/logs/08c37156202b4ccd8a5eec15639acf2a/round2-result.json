@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "005dc750",
+      "run_id": "08c37156202b4ccd8a5eec15639acf2a",
+      "error": null,
+      "class_name": "",
+      "function_name": "005dc750",
+      "success": false,
+      "rounds_used": 2,
+      "code": "void __cdecl FUN_005dc750(\n    std::uint32_t param_1, std::uint32_t param_2)\n{\n    // The supplied decompile and P-code disagree on this branch.\n    // Instruction bytes were unavailable; this follows the decompile.\n    if ((_DAT_00fd1254 & 1u) == 0) {\n        _DAT_00fd1254 |= 1u;\n        DAT_00fcdd74 = &PTR_FUN_0083e55c;\n        DAT_00fcdd78 = &PTR_FUN_0083e56c;\n        _DAT_00cef6bc = &DAT_00fcdd74;\n        FUN_006b936d((_onexit_t)&LAB_00711e60);\n    }\n\n    struct AllocationInfo {\n        std::uint32_t value;\n        std::uint32_t source;\n        std::uint32_t reserved;\n    } allocation_info;\n\n    allocation_info.source = param_2;\n    allocation_info.value = 1u;\n    allocation_info.reserved = 0u;\n\n    using Allocate = void (__cdecl *)(std::uint32_t, void*);\n    reinterpret_cast<Allocate>(*DAT_00fcdd78)(\n        param_1, &allocation_info);\n}",
+      "verdict": "FAIL",
+      "summary": "The branch condition remains unresolved against the supplied P-code.",
+      "issues": [
+        "At 005dc75a, the P-code branches past initialization when (_DAT_00fd1254 & 1) == 0. The decompilation and reversed code initialize when it equals zero. The comment acknowledges this conflict but does not resolve it."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005dc750\\_005dc750.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

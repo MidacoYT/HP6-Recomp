@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006db315",
+      "run_id": "723a166131ea4d4596cc80c0f055af65",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006db315",
+      "success": false,
+      "rounds_used": 2,
+      "code": "#include <cstdint>\n\nvoid __thiscall FUN_006db315(void* self, std::uint32_t* param_1)\n{\n    auto* const bytes = static_cast<std::uint8_t*>(self);\n    std::uint32_t* const previous =\n        *reinterpret_cast<std::uint32_t**>(bytes + 0x4);\n\n    *param_1 = 0;\n    ++*reinterpret_cast<std::uint32_t*>(bytes + 0x8);\n    *reinterpret_cast<std::uint32_t**>(bytes + 0x4) = param_1;\n\n    if (previous == nullptr) {\n        *reinterpret_cast<std::uint32_t**>(bytes) = param_1;\n    } else {\n        *previous = static_cast<std::uint32_t>(\n            reinterpret_cast<std::uintptr_t>(param_1));\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The 32-bit logic and operation order match, but the required struct offsets are unnamed.",
+      "issues": [
+        "Offsets 0x0, 0x4, and 0x8 of self, and offset 0x0 of param_1 and previous, are accessed through raw pointers instead of named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006db315\\_FUN_006db315.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

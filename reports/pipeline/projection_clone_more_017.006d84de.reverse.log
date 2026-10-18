@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006d84de",
+      "run_id": "05c092cb28114cf5a5e6b7274587c5e6",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d84de",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t* __thiscall FUN_006d84de(void* self, std::uint32_t param_1)\n{\n    // The member at offset 0x0c has no evidence-backed name.\n    const auto value = *reinterpret_cast<std::uint32_t*>(\n        static_cast<std::byte*>(self) + 0x0c);\n\n    auto* result = reinterpret_cast<std::uint32_t*>(\n        FUN_006d6ab6(\"cl_hots\", value + 0x20, 0x10, 0x20,\n                     param_1, \"shpclone.cpp\", 0xd2));\n\n    FUN_006d8466(self, result);\n    result[1] = 0;\n    result[0] = (result[0] & 0xfffffbffu) | 0x400u;\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "Calls and values match, but member mapping and operation order do not meet the verification standard.",
+      "issues": [
+        "The field at this + 0x0c and the result fields at offsets 0x00 and 0x04 are accessed without named members.",
+        "The high P-code reads and computes the flags at 0x6d8514\u20130x6d851b before zeroing result offset 0x04 at 0x6d8520. The reversed code zeros that field first, following the decompilation but conflicting with the independent P-code."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d84de\\_FUN_006d84de.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

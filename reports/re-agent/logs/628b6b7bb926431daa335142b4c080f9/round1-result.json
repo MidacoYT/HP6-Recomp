@@ -1,0 +1,28 @@
+{
+  "results": [
+    {
+      "address": "006d81e5",
+      "run_id": "628b6b7bb926431daa335142b4c080f9",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d81e5",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\n// FUN_006d6b3f (0x006d6b3f); its parameter type is unresolved.\nvoid __cdecl FUN_006d6b3f(std::uint32_t param_1);\n\nvoid __cdecl FUN_006d81e5(std::int32_t param_1)\n{\n    const auto base = static_cast<std::uint32_t>(param_1);\n    const auto* bytes = reinterpret_cast<const std::uint8_t*>(base);\n\n    // The member names at offsets 1, 4, and 8 are unresolved.\n    const auto firstOffset =\n        *reinterpret_cast<const std::uint32_t*>(bytes + 4);\n    const std::uint32_t firstAddress =\n        firstOffset == 0 ? 0 : firstOffset + base;\n\n    if (firstAddress != 0) {\n        FUN_006d81e5(static_cast<std::int32_t>(firstAddress));\n    }\n\n    if ((bytes[1] & 8) != 0) {\n        std::uint32_t secondAddress =\n            *reinterpret_cast<const std::uint32_t*>(bytes + 8);\n        if (secondAddress != 0) {\n            secondAddress += base;\n        }\n        FUN_006d6b3f(secondAddress);\n    }\n\n    if ((bytes[1] & 4) != 0) {\n        FUN_006d6b3f(base);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and calls match, but the struct offsets lack named members.",
+      "issues": [
+        "Offsets 1, 4, and 8 are accessed through raw byte or pointer arithmetic instead of named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d81e5\\_FUN_006d81e5.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

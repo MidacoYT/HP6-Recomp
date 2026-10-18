@@ -1,0 +1,32 @@
+Candidate validation failed for 006b2d1d: Candidate must contain exactly one complete function body
+{
+  "results": [
+    {
+      "address": "006b2d1d",
+      "run_id": "aa041f86743246218a595e8f845ce0d7",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2d1d",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nstruct FUN_006b2d1d_Node {\n    std::uint32_t unknown_0[2];\n    std::uint32_t link_at_8; // Address of the next node's link field, or zero.\n};\n\nstruct FUN_006b2d1d_State {\n    std::uint32_t first;\n    std::uint32_t last;\n    std::int32_t count;\n};\n\nstd::uint32_t __thiscall FUN_006b2d1d(\n    FUN_006b2d1d_State* self,\n    std::uint32_t param_1,\n    std::uint32_t param_2)\n{\n    std::uint32_t value = self->first;\n    std::uint8_t success = 0;\n\n    if (param_1 == value) {\n        --self->count;\n\n        if (param_1 == self->last) {\n            self->first = 0;\n            self->last = 0;\n        } else {\n            value = reinterpret_cast<FUN_006b2d1d_Node*>(param_1)->link_at_8;\n            if (value != 0) {\n                value -= 8;\n            }\n            self->first = value;\n        }\n    } else {\n        if (value == 0) {\n            return value;\n        }\n\n        if (param_2 == 0) {\n            param_2 = value;\n        }\n\n        if (reinterpret_cast<FUN_006b2d1d_Node*>(param_2)->link_at_8 != 0) {\n            do {\n                value = reinterpret_cast<FUN_006b2d1d_Node*>(param_2)->link_at_8;\n                const std::uint32_t target_link =\n                    (0u - static_cast<std::uint32_t>(param_1 != 0)) & (param_1 + 8u);\n\n                if (value == target_link) {\n                    break;\n                }\n\n                param_2 = (value == 0) ? 0 : value - 8u;\n            } while (reinterpret_cast<FUN_006b2d1d_Node*>(param_2)->link_at_8 != 0);\n        }\n\n        value = reinterpret_cast<FUN_006b2d1d_Node*>(param_2)->link_at_8;\n        const std::uint32_t target_link =\n            (0u - static_cast<std::uint32_t>(param_1 != 0)) & (param_1 + 8u);\n\n        if (value == 0 || value != target_link) {\n            return value & 0xffffff00u;\n        }\n\n        --self->count;\n        value = reinterpret_cast<FUN_006b2d1d_Node*>(param_1)->link_at_8;\n        reinterpret_cast<FUN_006b2d1d_Node*>(param_2)->link_at_8 = value;\n\n        if (param_1 == self->last) {\n            self->last = param_2;\n        }\n    }\n\n    success = 1;\n    reinterpret_cast<FUN_006b2d1d_Node*>(param_1)->link_at_8 = 0;\n    return (value & 0xffffff00u) | success;\n}",
+      "verdict": "FAIL",
+      "summary": "The control flow and offsets match, but count decrement misses a binary edge case.",
+      "issues": [
+        "Decrementing the signed count has undefined C++ behavior when count is INT32_MIN; the binary's 32-bit subtraction wraps."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 14 branches/loops, candidate has 11"
+      ],
+      "validation_verdict": "FAIL",
+      "validation_summary": "Candidate overlay/validation failed",
+      "validation_findings": [
+        "Candidate must contain exactly one complete function body"
+      ],
+      "validation_checks": [],
+      "candidate_overlay": null
+    }
+  ]
+}

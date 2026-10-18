@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "005d9210",
+      "run_id": "43e8d281af3246ce8deb160ec827fca7",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_005d9210",
+      "success": true,
+      "rounds_used": 1,
+      "code": "void __cdecl FUN_005d9210(char param_1)\n{\n    if (param_1 != '\\0') {\n        SystemParametersInfoA(0x3b, 8, &pvParam_00866f14, 0);\n        SystemParametersInfoA(0x35, 8, &pvParam_00866f1c, 0);\n        SystemParametersInfoA(0x33, 0x18, &pvParam_00866f24, 0);\n        return;\n    }\n\n    struct {\n        PVOID local_30;\n        uint32_t local_2c;\n    } first;\n    first.local_30 = pvParam_00866f14;\n    first.local_2c = DAT_00866f18;\n    if ((DAT_00866f18 & 1) == 0) {\n        first.local_2c = DAT_00866f18 & 0xfffffff3;\n        SystemParametersInfoA(0x3b, 8, &first.local_30, 0);\n    }\n\n    struct {\n        PVOID local_28;\n        uint32_t local_24;\n    } second;\n    second.local_28 = pvParam_00866f1c;\n    second.local_24 = DAT_00866f20;\n    if ((DAT_00866f20 & 1) == 0) {\n        second.local_24 = DAT_00866f20 & 0xfffffff3;\n        SystemParametersInfoA(0x35, 8, &second.local_28, 0);\n    }\n\n    struct {\n        PVOID local_20;\n        uint32_t local_1c;\n        uint32_t local_18;\n        uint32_t local_14;\n        uint32_t local_10;\n        uint32_t local_c;\n    } third;\n    third.local_20 = pvParam_00866f24;\n    third.local_18 = DAT_00866f2c;\n    third.local_14 = DAT_00866f30;\n    third.local_10 = DAT_00866f34;\n    third.local_c = DAT_00866f38;\n    if ((DAT_00866f28 & 1) == 0) {\n        third.local_1c = DAT_00866f28 & 0xfffffff3;\n        SystemParametersInfoA(0x33, 0x18, &third.local_20, 0);\n    }\n}",
+      "verdict": "PASS",
+      "summary": "The reversed code matches the supplied decompilation and independent control-flow evidence.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\005d9210\\_FUN_005d9210.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

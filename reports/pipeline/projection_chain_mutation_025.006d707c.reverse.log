@@ -1,0 +1,31 @@
+{
+  "results": [
+    {
+      "address": "006d707c",
+      "run_id": "46a290b6c611402198a9d3619e781619",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d707c",
+      "success": false,
+      "rounds_used": 1,
+      "code": "std::uint32_t __thiscall FUN_006d707c(void* self, std::uint32_t* param_1)\n{\n    const std::uint8_t wanted = FUN_006d6c09(param_1);\n    auto* current = static_cast<std::uint32_t*>(self);\n    std::uint32_t* previous = nullptr;\n\n    for (;;) {\n        if (current == nullptr) {\n            FUN_006d6bf1(previous, reinterpret_cast<std::int32_t>(param_1));\n            param_1[1] = 0; // Unresolved field at offset 0x04.\n            return 1;\n        }\n\n        const std::uint8_t found = FUN_006d6c09(current);\n        const std::uint32_t offset = current[1]; // Unresolved field at offset 0x04.\n\n        if (wanted == found) {\n            const auto next = offset == 0\n                ? std::int32_t{0}\n                : static_cast<std::int32_t>(\n                      reinterpret_cast<std::uintptr_t>(current) + offset);\n\n            FUN_006d6bf1(param_1, next);\n            FUN_006d6bf1(current, reinterpret_cast<std::int32_t>(param_1));\n            return 1;\n        }\n\n        previous = current;\n        current = offset == 0\n            ? nullptr\n            : reinterpret_cast<std::uint32_t*>(\n                  reinterpret_cast<std::uintptr_t>(current) + offset);\n    }\n}",
+      "verdict": "FAIL",
+      "summary": "The link offset is unnamed, and the comparison width is not verified.",
+      "issues": [
+        "Offset 0x04 is accessed as current[1] and param_1[1] instead of a named struct member.",
+        "The reversed code compares only the low bytes. Ghidra shows a 32-bit equality involving the returned bytes and unresolved upper bytes; the supplied P-code does not establish that byte comparison is equivalent."
+      ],
+      "objective_verdict": "FAIL",
+      "objective_summary": "Objective verifier found structural mismatches",
+      "objective_findings": [
+        "Control-flow mismatch: decompile has 7 branches/loops, candidate has 3"
+      ],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d707c\\_FUN_006d707c.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

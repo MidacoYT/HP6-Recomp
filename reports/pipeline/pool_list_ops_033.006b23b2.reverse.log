@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b23b2",
+      "run_id": "424aa28ff4cc44f2844a6ad34197bde3",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b23b2",
+      "success": false,
+      "rounds_used": 1,
+      "code": "// The supplied evidence does not identify member names or the entry type.\n// FUN_006b2147 is declared here with the pointer return used by this caller;\n// its supplied decompilation incorrectly shows a void return.\nusing Callback = void (__cdecl *)(std::uint32_t, std::int32_t, std::uint32_t);\n\nvoid __cdecl FUN_006b23b2(std::uint32_t param_1, Callback param_2)\n{\n    auto* object = reinterpret_cast<std::byte*>(FUN_006b18df(param_1, '\\x01'));\n\n    FUN_006d92a1(object + 0x28);\n\n    std::int32_t local_8;\n    auto* entry = reinterpret_cast<std::byte*>(\n        FUN_006b2147(object, param_1, &local_8));\n\n    if (local_8 == 0) {\n        param_2(\n            *reinterpret_cast<std::uint32_t*>(entry + 0x0c),\n            *reinterpret_cast<std::int8_t*>(entry + 0x11),\n            *reinterpret_cast<std::uint32_t*>(entry + 0x18));\n    } else {\n        *reinterpret_cast<Callback*>(entry + 0x1c) = param_2;\n    }\n\n    FUN_006d92ac(object + 0x28);\n}",
+      "verdict": "FAIL",
+      "summary": "The branches and calls match, but the source does not meet the offset and expression-order requirements.",
+      "issues": [
+        "Offsets 0x28, 0x0c, 0x11, 0x18, and 0x1c use raw pointer arithmetic instead of named struct members.",
+        "C++ does not guarantee the callback arguments are evaluated in the binary's load order: 0x18, then 0x11, then 0x0c."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b23b2\\_FUN_006b23b2.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

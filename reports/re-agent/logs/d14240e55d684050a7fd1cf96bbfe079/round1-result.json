@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006e3f71",
+      "run_id": "d14240e55d684050a7fd1cf96bbfe079",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006e3f71",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::uint32_t __cdecl FUN_006e0778(std::int32_t param_1);\n\nstd::uint32_t* __cdecl FUN_006e3f71(std::uint32_t param_1)\n{\n    if (static_cast<std::int32_t>(param_1) < 0) {\n        return nullptr;\n    }\n\n    const std::uint32_t base = FUN_006e0778(param_1 & 0xff);\n    if (base == 0) {\n        return nullptr;\n    }\n\n    auto* entry = reinterpret_cast<std::uint32_t*>(\n        static_cast<std::uintptr_t>(\n            *reinterpret_cast<std::uint32_t*>(\n                static_cast<std::uintptr_t>(base) + 0x120)));\n\n    while (entry != nullptr && entry[3] != param_1) {\n        entry = reinterpret_cast<std::uint32_t*>(\n            static_cast<std::uintptr_t>(entry[0]));\n    }\n\n    return entry;\n}",
+      "verdict": "FAIL",
+      "summary": "Control flow and the call match, but the struct offsets lack named members.",
+      "issues": [
+        "The field at base + 0x120 is accessed through a raw offset.",
+        "The entry fields at offsets 0x00 and 0x0c are accessed as entry[0] and entry[3]."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006e3f71\\_FUN_006e3f71.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

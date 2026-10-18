@@ -1,0 +1,29 @@
+{
+  "results": [
+    {
+      "address": "006b2359",
+      "run_id": "14c1a07a6c3049e9bbf7fc55f3713a81",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006b2359",
+      "success": false,
+      "rounds_used": 1,
+      "code": "#include <cstdint>\n\nextern std::int32_t __cdecl FUN_006b18df(std::uint32_t, char);\nextern void __fastcall FUN_006d92a1(std::int32_t);\nextern std::uint32_t __thiscall FUN_006b1ffc(void*, std::int32_t, char);\nextern void __fastcall FUN_006d92ac(std::int32_t);\n\n// The 8-byte return type and the two indirect-call signatures remain unresolved.\nstd::uint64_t __cdecl FUN_006b2359(std::uint32_t param_1)\n{\n    const std::int32_t base = FUN_006b18df(param_1, 1);\n\n    FUN_006d92a1(base + 0x28);\n    auto* entry = reinterpret_cast<std::uint32_t*>(\n        FUN_006b1ffc(\n            reinterpret_cast<void*>(static_cast<std::uintptr_t>(base + 0x1c)),\n            static_cast<std::int32_t>(param_1), 1));\n    FUN_006d92ac(base + 0x28);\n\n    const auto vtable = static_cast<std::uintptr_t>(*entry);\n    const auto get_value = *reinterpret_cast<std::uint64_t (__cdecl**)()>(vtable + 8);\n    const std::uint64_t result = get_value();\n\n    const auto release = *reinterpret_cast<void (__cdecl**)(int)>(vtable);\n    release(1);\n    return result;\n}",
+      "verdict": "FAIL",
+      "summary": "The call sequence matches, but the second indirect call uses a cached vtable pointer.",
+      "issues": [
+        "Ghidra reloads *piVar2 after get_value(); the reversed code reuses vtable. If get_value changes the entry's vtable pointer, release calls a different function.",
+        "The offsets 0x1c, 0x28, and vtable slot 0x8 are raw arithmetic rather than named struct members."
+      ],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006b2359\\_FUN_006b2359.cpp",
+      "parity_status": "green"
+    }
+  ]
+}

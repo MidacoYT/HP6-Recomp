@@ -1,0 +1,26 @@
+{
+  "results": [
+    {
+      "address": "006d6c09",
+      "run_id": "0565543d9ef3482c93ed7df77237b4eb",
+      "error": null,
+      "class_name": "",
+      "function_name": "FUN_006d6c09",
+      "success": true,
+      "rounds_used": 1,
+      "code": "std::uint8_t __fastcall FUN_006d6c09(std::uint32_t* param_1)\n{\n    const std::uint32_t value = *param_1 & 0xff;\n\n    if (value == 0x69) return 0x80;\n    if (value == 0x6f) return 0x20;\n    if (value == 0x7c) return 0x10;\n    if (value == 0x81) return 1;\n\n    if (FUN_006d6b7f(value) != 0) return 4;\n\n    const std::uint32_t result = FUN_006d6ba4(value);\n    return static_cast<std::uint8_t>(\n        -static_cast<int>(static_cast<std::uint8_t>(result) != 0) & 2);\n}",
+      "verdict": "PASS",
+      "summary": "All branches, calls, byte comparisons, and return values match the decompilation and P-code.",
+      "issues": [],
+      "objective_verdict": "PASS",
+      "objective_summary": "No structural mismatches found",
+      "objective_findings": [],
+      "validation_verdict": "UNKNOWN",
+      "validation_summary": "Candidate overlay created; no build or test commands configured",
+      "validation_findings": [],
+      "validation_checks": [],
+      "candidate_overlay": "reports\\re-agent\\candidates\\006d6c09\\_FUN_006d6c09.cpp",
+      "parity_status": "green"
+    }
+  ]
+}
