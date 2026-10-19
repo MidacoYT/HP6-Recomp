@@ -4,12 +4,12 @@
   var STATUS_FROM_CODE = { i: "integrated", d: "deferred", b: "blocked", u: "untouched" };
   var BUILD_FROM_CODE = { p: "passed", c: "compiled_only", n: "not_run", f: "failed" };
   var STATUS_LABELS = {
-    integrated: "Integree",
-    deferred: "Differee",
-    blocked: "Bloquee",
-    untouched: "Non etudiee"
+    integrated: "Integrated",
+    deferred: "Deferred",
+    blocked: "Blocked",
+    untouched: "Not reviewed"
   };
-  var BUILD_LABELS = { passed: "OK", compiled_only: "Compile", not_run: "Non lance", failed: "Echec" };
+  var BUILD_LABELS = { passed: "OK", compiled_only: "Compiled", not_run: "Not run", failed: "Failed" };
   var STATUS_FILL = { integrated: "#22c55e", deferred: "#f59e0b", blocked: "#ef4444", untouched: "#30343d" };
   var PAGE_SIZE = 150;
 
@@ -36,17 +36,17 @@
   }
 
   function formatNumber(value) {
-    return value.toLocaleString("fr-FR");
+    return value.toLocaleString("en-US");
   }
 
   function renderOverall(global, reviewed) {
     document.getElementById("overall-percent").textContent = global.percent.toFixed(1);
     document.getElementById("overall-count").textContent =
-      formatNumber(global.integrated) + " / " + formatNumber(global.total) + " fonctions (" + global.source + ")";
+      formatNumber(global.integrated) + " / " + formatNumber(global.total) + " functions (" + global.source + ")";
 
     document.getElementById("reviewed-percent").textContent = reviewed.percent.toFixed(1);
     document.getElementById("reviewed-count").textContent =
-      formatNumber(reviewed.integrated) + " / " + formatNumber(reviewed.total) + " fonctions deja regardees";
+      formatNumber(reviewed.integrated) + " / " + formatNumber(reviewed.total) + " functions reviewed so far";
 
     var bar = document.getElementById("overall-bar");
     var segments = [
@@ -63,10 +63,10 @@
 
     var legend = document.getElementById("overall-legend");
     legend.innerHTML = [
-      ["var(--ok)", "Integrees", global.integrated],
-      ["var(--warn)", "Differees", global.deferred],
-      ["var(--bad)", "Bloquees", global.blocked],
-      ["var(--muted-dot)", "Non etudiees", global.untouched]
+      ["var(--ok)", "Integrated", global.integrated],
+      ["var(--warn)", "Deferred", global.deferred],
+      ["var(--bad)", "Blocked", global.blocked],
+      ["var(--muted-dot)", "Not reviewed", global.untouched]
     ].map(function (item) {
       return '<span><span class="dot" style="background:' + item[0] + '"></span>' +
         item[1] + " : " + formatNumber(item[2]) + "</span>";
@@ -145,10 +145,10 @@
       var nameText = row.name ? escapeHtml(row.name) : '<span class="muted">—</span>';
       return (
         "<tr" + title + ' data-address="' + row.address + '">' +
-          '<td class="cell-address" data-label="Adresse">0x' + row.address + '</td>' +
-          '<td class="' + nameClass + '" data-label="Nom">' + nameText + '</td>' +
+          '<td class="cell-address" data-label="Address">0x' + row.address + '</td>' +
+          '<td class="' + nameClass + '" data-label="Name">' + nameText + '</td>' +
           '<td class="cell-module" data-label="Module">' + (row.module ? escapeHtml(row.module) : '<span class="muted">—</span>') + '</td>' +
-          '<td data-label="Statut">' + statusBadge(row.status) + '</td>' +
+          '<td data-label="Status">' + statusBadge(row.status) + '</td>' +
           '<td data-label="Build">' + buildBadge(row.build) + '</td>' +
         "</tr>"
       );
@@ -301,7 +301,7 @@
       if (!tooltip) return;
       tooltip.innerHTML =
         '<strong>0x' + item.address + '</strong><br>' +
-        (item.name ? escapeHtml(item.name) : '<span class="muted">sans nom</span>') + '<br>' +
+        (item.name ? escapeHtml(item.name) : '<span class="muted">no name</span>') + '<br>' +
         '<span class="badge badge-' + item.status + '">' + (STATUS_LABELS[item.status] || item.status) + '</span>';
       tooltip.style.left = clientX + 14 + "px";
       tooltip.style.top = clientY + 14 + "px";
@@ -366,7 +366,7 @@
     document.getElementById("function-count").textContent =
       "(" + formatNumber(allRows.length) + ")";
     document.getElementById("generated-at").textContent =
-      new Date(data.generated_at).toLocaleString("fr-FR", { dateStyle: "medium", timeStyle: "short" });
+      new Date(data.generated_at).toLocaleString("en-US", { dateStyle: "medium", timeStyle: "short" });
 
     var state = { query: "", status: "all", visible: PAGE_SIZE, filtered: allRows };
 
@@ -383,7 +383,7 @@
       var remaining = state.filtered.length - slice.length;
       loadMore.hidden = remaining <= 0;
       document.getElementById("shown-count").textContent =
-        formatNumber(slice.length) + " / " + formatNumber(state.filtered.length) + " affichees";
+        formatNumber(slice.length) + " / " + formatNumber(state.filtered.length) + " shown";
     }
 
     var treemap = setupTreemap(allRows, function () { return state; });
@@ -449,6 +449,6 @@
     .then(setup)
     .catch(function (err) {
       document.getElementById("overall-percent").textContent = "err";
-      console.error("Impossible de charger data/progress.json", err);
+      console.error("Could not load data/progress.json", err);
     });
 })();

@@ -50,12 +50,12 @@ def module_for(entry: dict) -> str:
     if match:
         return match.group(1)
     if source == "records/crt" or "CRT external" in (entry.get("cpp_symbol") or ""):
-        return "CRT externe"
+        return "external CRT"
     if "STL internal" in (entry.get("cpp_symbol") or ""):
-        return "STL externe"
+        return "external STL"
     if entry.get("integration") == "integrated":
-        return "autre"
-    return "non assigne"
+        return "other"
+    return "unassigned"
 
 
 def load_ida_catalogue() -> dict[str, dict]:
@@ -170,7 +170,7 @@ def main() -> None:
             "blocked": global_blocked,
             "untouched": global_untouched,
             "percent": global_percent,
-            "source": "IDA + Ghidra, union des deux catalogues" if ida_catalogue else "Ghidra uniquement (catalogue IDA introuvable)",
+            "source": "IDA + Ghidra, union of both catalogues" if ida_catalogue else "Ghidra only (IDA catalogue not found)",
         },
         "reviewed": {**reviewed_totals, "percent": reviewed_percent},
         "modules": modules,
@@ -180,9 +180,9 @@ def main() -> None:
     OUTPUT.parent.mkdir(parents=True, exist_ok=True)
     OUTPUT.write_text(json.dumps(payload, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
     print(
-        f"Wrote {OUTPUT}: {global_total} fonctions au total "
-        f"({global_integrated} integrees, {global_percent}%), "
-        f"{reviewed_totals['total']} deja etudiees"
+        f"Wrote {OUTPUT}: {global_total} functions total "
+        f"({global_integrated} integrated, {global_percent}%), "
+        f"{reviewed_totals['total']} reviewed so far"
     )
 
 

@@ -1,54 +1,52 @@
-# Site de progression (HP6-Recomp)
+# Progress site (HP6-Recomp)
 
-Petit site statique (HTML/CSS/JS vanilla, aucune dependance) qui affiche
-l'avancement de la decompilation/reconstruction, dans l'esprit de
-decomp.dev : pourcentage global, repartition par module, et la liste
-complete des fonctions avec leur statut.
+A small static site (vanilla HTML/CSS/JS, no dependencies) showing
+decompilation/reconstruction progress, in the spirit of decomp.dev:
+overall percentage, breakdown by module, and the full list of functions
+with their status.
 
-Une carte (treemap, dans l'esprit de decomp.dev) affiche les ~14 200
-fonctions sous forme de carres (taille = taille en octets, couleur =
-statut) : survoler ou toucher un carre l'identifie, cliquer dessus le
-retrouve surligne dans le tableau en dessous. Elle est dessinee sur
-`<canvas>` (pas une div par fonction) pour rester fluide avec ce volume
-de donnees, et respecte les memes filtres/recherche que le tableau
-(les carres qui ne correspondent pas s'estompent).
+A treemap (also decomp.dev-inspired) shows all ~14,200 functions as
+squares (size = byte size, colour = status): hovering or tapping a
+square identifies it, clicking it highlights the matching row in the
+table below. It's drawn on a single `<canvas>` (not one div per
+function) to stay smooth at this scale, and respects the same
+search/status filters as the table (non-matching squares fade out).
 
-Deux pourcentages distincts sont affiches : un pourcentage **global**
-(fonctions integrees / ~14 200 fonctions du binaire entier, en croisant
-le catalogue Ghidra de ce depot avec le catalogue IDA independant du
-projet voisin `knowledge/hp6`), et un pourcentage sur les fonctions
-**deja etudiees** (le sous-ensemble que ce projet a explicitement
-regarde, actuellement 466).
+Two distinct percentages are shown: an overall **global** percentage
+(integrated functions / ~14,200 functions across the whole binary,
+cross-referencing this repo's Ghidra catalogue with the independent IDA
+catalogue from the neighbouring `knowledge/hp6` project), and a
+percentage across functions **reviewed so far** (the subset this
+project has explicitly looked at, currently 466).
 
-## Regenerer les donnees
+## Regenerating the data
 
-Les chiffres viennent de `reports/pipeline/state.json` (la meme source de
-verite que `architecture/address_map.csv`), croise avec
-`../knowledge/hp6/functions.json` (catalogue IDA complet du projet
-voisin, pas versionne dans ce depot) pour le pourcentage global. Apres
-une session d'integration, relancer :
+The numbers come from `reports/pipeline/state.json` (the same source of
+truth as `architecture/address_map.csv`), cross-referenced with
+`../knowledge/hp6/functions.json` (the neighbouring project's full IDA
+catalogue, not checked into this repo) for the global percentage. After
+an integration session, rerun:
 
 ```
 python tools/export_progress.py
 ```
 
-Cela reecrit `docs/data/progress.json`. Si le catalogue IDA voisin est
-absent (ex. clone propre sans le projet voisin), le script bascule
-automatiquement sur le sous-ensemble deja etudie uniquement (comme
-avant). Rien d'autre n'a besoin d'etre regenere.
+This rewrites `docs/data/progress.json`. If the neighbouring IDA
+catalogue is missing (e.g. a clean clone without the neighbour
+project), the script automatically falls back to the reviewed-subset-only
+output (as before). Nothing else needs regenerating.
 
-## Visualiser en local
+## Viewing locally
 
 ```
 cd docs
 python -m http.server 8080
 ```
 
-puis ouvrir `http://localhost:8080/`.
+then open `http://localhost:8080/`.
 
-## Publier sur GitHub Pages
+## Publishing on GitHub Pages
 
-Une fois le depot pousse sur `origin` (`main`), activer GitHub Pages dans
-Settings > Pages avec la source "Deploy from a branch", branche `main`,
-dossier `/docs`. Aucune etape de build n'est necessaire : le dossier est
-servi tel quel.
+Once the repo is pushed to `origin` (`main`), enable GitHub Pages under
+Settings > Pages with source "Deploy from a branch", branch `main`,
+folder `/docs`. No build step is needed: the folder is served as-is.
