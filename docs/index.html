@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HP6-Recomp — progression de la reconstruction</title>
+<meta name="description" content="Suivi de la decompilation et de la reconstruction C++ de Harry Potter and the Half-Blood Prince (PC).">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-row">
+    <a class="brand" href="./">
+      <span class="brand-mark">HP6</span>
+      <span class="brand-name">Recomp</span>
+    </a>
+    <nav class="header-links">
+      <a href="https://github.com/MidacoYT/HP6-Recomp" target="_blank" rel="noopener">GitHub</a>
+      <button id="theme-toggle" type="button" aria-label="Changer de theme">&#9789;</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <h1>Reconstruction de <em>Harry Potter and the Half-Blood Prince</em> (PC)</h1>
+    <p class="hero-sub">
+      Decompilation Ghidra fonction par fonction, puis reconstruction fidele en C++ moderne —
+      chaque fonction est soit <strong>integree</strong> (code reel reconstruit et teste),
+      soit <strong>differee</strong> (placeholder documente, jamais invente), soit <strong>bloquee</strong>.
+    </p>
+
+    <div class="overall" id="overall">
+      <div class="overall-number">
+        <span id="overall-percent">—</span>
+        <span class="overall-percent-sign">%</span>
+      </div>
+      <div class="overall-bar" id="overall-bar" role="img" aria-label="Progression globale"></div>
+      <div class="overall-legend" id="overall-legend"></div>
+    </div>
+  </section>
+
+  <section class="modules">
+    <h2>Par module</h2>
+    <div class="module-grid" id="module-grid"></div>
+  </section>
+
+  <section class="functions">
+    <h2>Fonctions <span class="muted" id="function-count"></span></h2>
+    <div class="toolbar">
+      <input id="search" type="search" placeholder="Chercher une adresse, un symbole, un fichier..." autocomplete="off">
+      <div class="status-filters" id="status-filters">
+        <button data-status="all" class="active">Toutes</button>
+        <button data-status="integrated">Integrees</button>
+        <button data-status="deferred">Differees</button>
+        <button data-status="blocked">Bloquees</button>
+      </div>
+    </div>
+    <div class="table-wrap">
+      <table id="function-table">
+        <thead>
+          <tr>
+            <th class="col-address">Adresse</th>
+            <th class="col-symbol">Symbole C++</th>
+            <th class="col-module">Module</th>
+            <th class="col-status">Statut</th>
+            <th class="col-build">Build</th>
+          </tr>
+        </thead>
+        <tbody id="function-rows"></tbody>
+      </table>
+      <p id="empty-state" class="empty-state" hidden>Aucune fonction ne correspond a ce filtre.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer">
+  <div class="wrap">
+    <p>Genere automatiquement depuis <code>reports/pipeline/state.json</code> — derniere mise a jour : <span id="generated-at">—</span>.</p>
+    <p class="muted">Pas de verite inventee : une fonction differee reste un placeholder documente tant qu'elle n'est pas retracee depuis le binaire reel.</p>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
