@@ -2069,8 +2069,31 @@ cables) et un changement de comportement des anciens tests (material
 type 0 desormais rejete par la vraie porte) ont ete trouves et corriges
 en construisant le test.
 
-427/466 fonctions integrees (39 differees, 0 bloquee), 43/43 tests
-CTest verts. Le chemin low-tier de Scene::End a desormais une
-apparence (transform, couleur, declaration/shader) entierement reelle,
-plus seulement un declenchement de dessin avec des parametres
-corrects.
+428/467 fonctions integrees (resolve_material_shader_effect / FUN_01002960
+etait deja reellement integree dans cette meme passe mais son
+enregistrement dans reports/pipeline/state.json avait ete oublie sur
+le coup -- corrige a la suite 18 ci-dessous), 43/43 tests CTest verts.
+Le chemin low-tier de Scene::End a desormais une apparence (transform,
+couleur, declaration/shader) entierement reelle, plus seulement un
+declenchement de dessin avec des parametres corrects.
+
+Suite (19 oct 2026, suite 17) : ScreenLanguageSelectTask's IsReady
+(0x00429850) et slot 2 (0x00429860) integres pour de vrai --
+hp6::presentation::query_ready_language_select_screen_task (remet la
+machine a etats d'Update a l'etat 0, toujours "pret") et
+mark_language_select_pending_task_ready (parcourt la liste de taches
+de PresentationTaskHandler a la recherche du pointeur this+0xc --
+la sous-tache Task_IdleInputTimer qu'Update soumet -- et marque son
+ready_flag +0x4 a 1 si trouvee). Ni l'une ni l'autre n'a son propre
+objet fonction Ghidra (trou non reclame entre FUN_00429780 et
+FUN_00429890) ; lues directement par desassemblage pyghidra plutot que
+devinees. La fonction Update elle-meme (0x00429890, machine a etats a
+3 phases, tampon de 0x118 octets, plusieurs sous-appels non traces)
+reste deliberement differee -- meme traitement que les Update
+equivalentes de toutes les autres taches d'ecran de ce fichier, et de
+toute facon non appelee par rien de reel ici. L'oubli d'enregistrement
+de resolve_material_shader_effect (FUN_01002960) a aussi ete corrige
+dans cette passe.
+
+430/467 fonctions integrees (37 differees, 0 bloquee), 43/43 tests
+CTest verts.

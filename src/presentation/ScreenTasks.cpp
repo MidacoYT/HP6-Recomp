@@ -295,14 +295,16 @@ struct ScreenAttractModeTask {
 };
 
 // 24-byte "Presentation:TaskHandler::Task" for ScreenLanguageSelect;
-// see ScreenTasks.h. Only the constructor/destructor are
-// reconstructed.
+// see ScreenTasks.h. The constructor, destructor, IsReady (slot 1),
+// and slot 2 are reconstructed; slot 3 ("Update") is not.
 struct ScreenLanguageSelectTask {
     void* vtable;
     std::uint8_t ready_flag;
     std::uint8_t reserved[3];
     void* secondary_interface;
-    std::uint8_t unresolved[0x18 - 0xc];
+    void* pending_task;        // +0xc: Update's own Task_IdleInputTimer submission (not reconstructed)
+    std::uint8_t unresolved[4]; // +0x10..+0x13: touched only by Update, not reconstructed
+    std::int32_t state;         // +0x14: Update's own state-machine phase
 
     void* destroy(bool should_free) {
         // The exported x86 writes 0x821548 then immediately overwrites
@@ -314,6 +316,25 @@ struct ScreenLanguageSelectTask {
             hp6::platform::release_through_service(this);
         }
         return this;
+    }
+
+    // Vtable slot 1 ("IsReady"); see ScreenTasks.h.
+    std::int32_t query_ready() {
+        state = 0;
+        return 1;
+    }
+
+    // Vtable slot 2; see ScreenTasks.h.
+    void mark_pending_task_ready_if_enqueued() {
+        auto* node = *reinterpret_cast<std::uint8_t**>(
+            static_cast<std::uint8_t*>(DAT_00fcadf0) + 0xc);
+        while (node != nullptr) {
+            if (*reinterpret_cast<void**>(node + 8) == pending_task) {
+                static_cast<std::uint8_t*>(pending_task)[4] = 1;
+                return;
+            }
+            node = *reinterpret_cast<std::uint8_t**>(node + 4);
+        }
     }
 };
 
@@ -350,11 +371,12 @@ void* kAttractModeScreenTaskVtable[4] = {
     reinterpret_cast<void*>(&unused_screen_task_slot),
 };
 
-// Slots 1-3 are not reconstructed (see ScreenLanguageSelectTask above).
+// Slot 3 ("Update") is not reconstructed (see ScreenLanguageSelectTask
+// above).
 void* kLanguageSelectScreenTaskVtable[4] = {
     member_function_address(&ScreenLanguageSelectTask::destroy),
-    reinterpret_cast<void*>(&unused_screen_task_slot),
-    reinterpret_cast<void*>(&unused_screen_task_slot),
+    member_function_address(&ScreenLanguageSelectTask::query_ready),
+    member_function_address(&ScreenLanguageSelectTask::mark_pending_task_ready_if_enqueued),
     reinterpret_cast<void*>(&unused_screen_task_slot),
 };
 
@@ -477,6 +499,14 @@ void enqueue_language_select_screen_task(void* self) {
         submitted = submit_task(task_handler, nullptr);
     }
     *reinterpret_cast<void**>(static_cast<std::uint8_t*>(self) + 8) = submitted;
+}
+
+std::int32_t query_ready_language_select_screen_task(void* task_ptr) {
+    return static_cast<ScreenLanguageSelectTask*>(task_ptr)->query_ready();
+}
+
+void mark_language_select_pending_task_ready(void* task_ptr) {
+    static_cast<ScreenLanguageSelectTask*>(task_ptr)->mark_pending_task_ready_if_enqueued();
 }
 
 } // namespace hp6::presentation

@@ -92,11 +92,10 @@ void push_item_transform_and_material(std::int32_t* context);
 // DAT_00cf1930/DAT_00cf192c for -- confirming both real draw-call
 // integrations in this project share the same real material). Every
 // other recognized material type dispatches through
-// thunk_FUN_01002960 ("resolve a shader effect by (group, index)"),
-// NOT YET INTEGRATED and left as a documented no-op -- the gate stays
-// true for these (so the real draw call this project already
-// integrates still fires), only the shader actually bound is
-// unfaithful. Only a truly unrecognized material_type clears the gate,
+// hp6::render::resolve_material_shader_effect (0x01002960 -- despite
+// the "thunk_" name other code in this project refers to it by, it is
+// a real, now-integrated function: see its own doc comment in
+// SceneBatchRenderer.cpp). Only a truly unrecognized material_type clears the gate,
 // matching the exported x86's own default case.
 void resolve_material_bindings(std::uint32_t material_type);
 

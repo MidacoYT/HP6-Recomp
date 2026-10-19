@@ -12,8 +12,8 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00405390,"undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)",hp6::math::subtract_xyzw,src/math/Vector.cpp,integrated,passed,unverified
 00422e20,"undefined __thiscall FUN_00422e20(void * this, void * param_1, size_t param_2)",hp6::runtime::store_payload,src/runtime/ScratchBuffers.cpp,integrated,passed,unverified
 00429810,"void * __thiscall FUN_00429810(void *this, bool param_1)",hp6::presentation::(anonymous)::ScreenLanguageSelectTask::destroy,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
-00429850,undefined4 __thiscall FUN_00429850(void *this),,,deferred,not_run,unverified
-00429860,undefined __thiscall FUN_00429860(void *this),,,deferred,not_run,unverified
+00429850,undefined4 __thiscall FUN_00429850(void *this),hp6::presentation::query_ready_language_select_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
+00429860,undefined __thiscall FUN_00429860(void *this),hp6::presentation::mark_language_select_pending_task_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429890,undefined __thiscall FUN_00429890(void *this),,,deferred,not_run,unverified
 00429c70,"void * __thiscall FUN_00429c70(void *this, bool param_1)",hp6::presentation::(anonymous)::IdleInputTimerTask::destroy,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429db0,undefined4 __thiscall FUN_00429db0(void *this),hp6::presentation::(anonymous)::AutosaveWarningMessageTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
@@ -452,6 +452,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 01000c60,,hp6::render::apply_multisample_quality,src/render/DeviceCreate.cpp,integrated,passed,unverified
 010021f0,undefined __stdcall FUN_010021f0(void),hp6::render::apply_render_state_profile,src/render/RenderStateCache.cpp,integrated,passed,unverified
 01002890,"undefined4 __thiscall FUN_01002890(void * this, undefined4 * param_1, char param_2, char param_3)",hp6::runtime::init_payload_record,src/runtime/ScratchBuffers.cpp,integrated,passed,unverified
+01002960,"undefined4 __cdecl FUN_01002960(int param_1, int param_2, uint param_3)",hp6::render::resolve_material_shader_effect,src/render/SceneBatchRenderer.cpp,integrated,passed,unverified
 01002c80,,,,deferred,not_run,unverified
 01003010,,hp6::render::init_default_render_state_table,src/render/DeviceCreate.cpp,integrated,passed,unverified
 01003300,,hp6::render::init_default_sampler_and_stage_state_table,src/render/DeviceCreate.cpp,integrated,passed,unverified

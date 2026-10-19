@@ -2233,9 +2233,18 @@ utilisant exactement `DAT_00cf1930`/`DAT_00cf192c`, les MÊMES globals
 que `hp6::render::render_fade_overlay_quad` (le fondu de debug),
 confirmant que les deux vrais appels de dessin de ce projet partagent
 ce même matériau réel « overlay 2D ». Les autres types reconnus
-passent par `thunk_FUN_01002960` (non tracé, laissé en no-op
-documenté qui garde la porte ouverte). Seul un type de matériau
-vraiment inconnu referme la porte — testé explicitement.
+passent par `FUN_01002960` → `hp6::render::resolve_material_shader_effect`
+(malgré le nom `thunk_FUN_01002960` employé ailleurs, ce n'est pas un
+thunk mais une vraie fonction) — elle aussi intégrée pour de vrai dans
+cette même passe (voir plus bas) : elle calcule un index de « variante »
+de shader à partir des bits de `DAT_00ba14fc` et du type de matériau,
+puis réutilise la liaison par défaut ou une table cache
+déclaration/shader par (variante, groupe, index). Seul son unique
+sous-appel non tracé (`FUN_00641f70`, le constructeur de déclaration en
+cas de cache vide — ambiguïté réelle de registre implicite, pas encore
+résolue) reste différé, en no-op documenté (handle nul) qui garde la
+porte ouverte. Seul un type de matériau vraiment inconnu referme la
+porte — testé explicitement.
 
 Deux petites fonctions de maths pures, sous-appels de
 `push_item_transform_and_material`, ont aussi été ajoutées à
@@ -2259,17 +2268,71 @@ translation connue → résultat transposé vérifié composante par
 composante au registre 0), le matériau partagé `0x20000108`, et le
 cas de matériau inconnu qui ferme la porte de dessin.
 
-**Résultat : 427/466 fonctions intégrées (39 différées, 0 bloquée),
-43/43 tests CTest verts.** Le chemin low-tier de `Scene::End` — celui
-qui dessine très probablement les quads 2D des menus comme
-`ScreenLanguageSelect` — a maintenant une apparence (transform,
-couleur, déclaration/shader) entièrement réelle et tracée, pas
-seulement un déclenchement de dessin avec des paramètres corrects.
-Il ne reste différé, sur ce chemin précis, que `thunk_FUN_01002960`
-(résolution de shader pour les types de matériau hors la liste
-fixe) — qui ne change que l'apparence, jamais si le dessin se
-déclenche. La prochaine étape logique reste la même qu'avant :
+**Résultat : 428/467 fonctions intégrées (39 différées, 0 bloquée),
+43/43 tests CTest verts** (`resolve_material_shader_effect` a été
+intégrée dans cette même passe mais omise de `reports/pipeline/
+state.json` sur le coup — corrigé en suite 17 ci-dessous). Le chemin
+low-tier de `Scene::End` — celui qui dessine très probablement les
+quads 2D des menus comme `ScreenLanguageSelect` — a maintenant une
+apparence (transform, couleur, déclaration/shader) entièrement réelle
+et tracée, pas seulement un déclenchement de dessin avec des
+paramètres corrects. Il ne reste différé, sur ce chemin précis, que
+`FUN_00641f70` (construction de déclaration en cas de cache vide) —
+qui ne change que l'apparence, jamais si le dessin se déclenche. La
+prochaine étape logique reste la même qu'avant :
 trouver le vrai déclencheur par frame (`FUN_00648630`/
 `FUN_00647480`), toujours bloqué par la même limitation d'analyse
 statique (dispatch par vtable) rencontrée partout ailleurs dans ce
 projet.
+
+## 19 oct 2026 (suite 17) — ScreenLanguageSelectTask : IsReady et slot 2 intégrés pour de vrai
+
+Repris la relecture directe de `FUN_00429890` (`Scene`::Update de
+`ScreenLanguageSelectTask`, suite 14/15) pour évaluer si cette
+fonction — documentée « hors scope » depuis plusieurs sessions —
+pouvait enfin être intégrée. Son corps réel confirme bien ce qui était
+déjà noté : une machine à états à 3 phases (0/1/2), un tampon local de
+0x118 octets, une boucle sur une liste de langues (`DAT_00fcae04`,
+structure begin/end façon vecteur) avec des comparaisons de chaînes
+octet-par-octet écrites à la main, et plusieurs sous-appels non tracés
+(`FUN_005e5f30`, `FUN_005e5f00`, `FUN_00435110`, `FUN_00416f70`,
+`thunk_FUN_0100e910`, `thunk_FUN_00fd7920`). Conclusion inchangée :
+rester différée — cohérent avec le traitement identique déjà appliqué
+à TOUTES les fonctions `Update` sœurs des autres tâches d'écran
+(`ScreenMainMenu`, `ScreenTitlePage`, `ScreenFMV`, `ScreenAttractMode`)
+dans ce projet, et de toute façon non appelée par rien de réel ici
+(même blocage de déclencheur par frame que plus haut).
+
+En revanche, les slots 1 (« IsReady », `0x00429850`) et 2
+(`0x00429860`) de cette même tâche se sont révélés réellement
+intégrables. Ni l'un ni l'autre n'a son propre objet fonction dans
+l'analyse Ghidra de ce projet (ils tombent dans un trou non réclamé
+entre `FUN_00429780` et `FUN_00429890` — probablement jamais atteints
+autrement que par la vtable, donc jamais détectés comme fonctions
+séparées par l'analyse automatique) ; lus directement par
+désassemblage en direct (même technique `pyghidra` que pour la
+transposition de matrice, suite 16) plutôt que devinés :
+
+- **`0x00429850` → `query_ready_language_select_screen_task`** :
+  `MOV dword ptr [ECX+0x14],0x0; MOV AL,0x1; RET` — remet la machine à
+  états d'Update à l'état 0 et répond « prêt », exactement la même
+  forme que l'IsReady de chaque tâche sœur déjà dans ce fichier.
+- **`0x00429860` → `mark_language_select_pending_task_ready`** :
+  parcourt la liste de tâches propre à `PresentationTaskHandler`
+  (`+0xc`, liste chaînée simple, tag à `+8`) à la recherche d'un nœud
+  taggé avec le pointeur `this+0xc` (la sous-tâche
+  `Task_IdleInputTimer` qu'Update soumet dans son état 1, elle-même
+  déjà reconstruite pour `ScreenTitlePageTask`) — si trouvé, positionne
+  le `ready_flag` (`+0x4`) de CETTE sous-tâche à 1. Point de
+  désassemblage à vérifier avec soin : au moment de l'écriture finale
+  (`MOV byte ptr [ECX+0x4],0x1`), `ECX` contient encore la valeur
+  `this+0xc` chargée plus tôt (pas le nœud de liste trouvé, `EAX`) —
+  c'est bien la sous-tâche elle-même qui est marquée prête, pas le
+  nœud.
+
+Les deux sont maintenant de vraies méthodes de
+`ScreenLanguageSelectTask` dans `src/presentation/ScreenTasks.cpp`,
+câblées dans sa vtable réelle, testées dans
+`tests/screen_tasks_smoke.cpp` (liste vide, tag non correspondant,
+nœud correspondant trouvé via `next`). **430/467 fonctions intégrées
+(37 différées, 0 bloquée), 43/43 tests verts.**

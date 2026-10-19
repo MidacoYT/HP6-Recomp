@@ -313,6 +313,48 @@ int main() {
     void* lang_self_plus_8 = *reinterpret_cast<void**>(lang_self + 8);
     expect("lang_stored_task_at_self_plus_8", lang_self_plus_8 == DAT_00fcae14);
 
+    // ---- query_ready_language_select_screen_task (0x00429850) --------------
+    {
+        std::uint8_t task[0x18] = {};
+        auto& state = *reinterpret_cast<std::int32_t*>(task + 0x14);
+        state = 2; // mid-navigation
+        expect("lang_ready_returns_true", query_ready_language_select_screen_task(task) == 1);
+        expect("lang_ready_resets_state", state == 0);
+    }
+
+    // ---- mark_language_select_pending_task_ready (0x00429860) --------------
+    // PresentationTaskHandler's own task-list head lives at +0xc of the
+    // same fake_task_handler object used above (FakeTaskHandler::queue_head).
+    {
+        std::uint8_t task[0x18] = {};
+        auto& pending_task = *reinterpret_cast<void**>(task + 0xc);
+        std::uint8_t pending[8] = {}; // +4 = ready_flag, matching every task's own layout
+
+        // No matching node enqueued: nothing happens.
+        pending_task = pending;
+        fake_task_handler.queue_head = nullptr;
+        mark_language_select_pending_task_ready(task);
+        expect("lang_slot2_noop_when_not_enqueued", pending[4] == 0);
+
+        // A node tagged with a different pointer: still no match.
+        std::uint8_t other_node[12] = {};
+        std::uint8_t unrelated[4] = {};
+        *reinterpret_cast<void**>(other_node + 4) = nullptr; // next
+        *reinterpret_cast<void**>(other_node + 8) = unrelated; // tag
+        fake_task_handler.queue_head = other_node;
+        mark_language_select_pending_task_ready(task);
+        expect("lang_slot2_noop_when_tag_mismatches", pending[4] == 0);
+
+        // A second node (reached via the first node's `next`) tagged with
+        // the real pending task pointer: its ready_flag gets set.
+        std::uint8_t matching_node[12] = {};
+        *reinterpret_cast<void**>(matching_node + 4) = nullptr; // next
+        *reinterpret_cast<void**>(matching_node + 8) = pending; // tag
+        *reinterpret_cast<void**>(other_node + 4) = matching_node; // chain
+        mark_language_select_pending_task_ready(task);
+        expect("lang_slot2_marks_ready_when_enqueued", pending[4] == 1);
+    }
+
     if (failures != 0) {
         std::printf("screen_tasks_smoke: %d failure(s)\n", failures);
         return 1;

@@ -125,32 +125,58 @@ void enqueue_fmv_screen_task(void* self);
 void enqueue_attract_mode_screen_task(void* self);
 
 // 0x0050b8b0 ("ScreenTask_ScreenLanguageSelect_Enqueue"; thiscall). A
-// 24-byte task. Only the constructor and shared destructor are
-// reconstructed; vtable slot 3 ("Update", 0x00429890) is a large
-// (0x118-byte local buffer) language-list/navigation state machine,
-// out of scope here. The task's real primary vtable lives at
-// 0x00821528 (read live from the Ghidra project: slot 0 = dtor
-// 0x00429810, slot 1 = 0x00429850, slot 2 = 0x00429860, slot 3 =
-// Update 0x00429890 as above, slot 4/+0x10 = 0x00405a30). That slot 4
-// is the "Render" entry PresentationTaskHandler's own message handler
-// calls on every active task when it receives the named message
-// "iMsgDoRender" (see architecture/startup_path.md, "iMsgDoRender /
-// GUI rendering trail" — PresentationTaskHandler's real vtable at
-// 0x0083d194, slot+0xc is its OnMessage, which for that message walks
-// its task list and calls each task's own vtable slot+0x10) — and for
-// ScreenLanguageSelect specifically it is **confirmed empty**
-// (`FUN_00405a30` is a bare `return;`, no body at all). So this task
-// does not draw its own menu text directly; Update's real body instead
-// writes the localized strings ("GUI_LANGUAGEMENU%d", 0-15) into a
-// shared key/string map object at a fixed address (0x00cf8168, via
-// FUN_00429430, itself confirmed to be a plain std::map-style
-// insert/update — not a draw call) that a separate, not-yet-located
-// central GUI/text renderer must read from. That renderer, and
-// whatever actually calls FUN_005f4b50-or-equivalent to fire
-// "iMsgDoRender" once per frame, remain unresolved as of 18 oct 2026 —
-// deliberately left unresolved rather than guessed at; see
-// architecture/startup_path.md for the full trail of what was checked
-// and ruled out.
+// 24-byte task. The constructor, shared destructor, "IsReady" (vtable
+// slot 1, 0x00429850), and slot 2 (0x00429860) are reconstructed;
+// vtable slot 3 ("Update", 0x00429890) is a large (0x118-byte local
+// buffer) language-list/navigation state machine, out of scope here.
+// The task's real primary vtable lives at 0x00821528 (read live from
+// the Ghidra project: slot 0 = dtor 0x00429810, slot 1 = 0x00429850,
+// slot 2 = 0x00429860, slot 3 = Update 0x00429890 as above, slot 4/
+// +0x10 = 0x00405a30). That slot 4 is the "Render" entry
+// PresentationTaskHandler's own message handler calls on every active
+// task when it receives the named message "iMsgDoRender" (see
+// architecture/startup_path.md, "iMsgDoRender / GUI rendering trail"
+// — PresentationTaskHandler's real vtable at 0x0083d194, slot+0xc is
+// its OnMessage, which for that message walks its task list and calls
+// each task's own vtable slot+0x10) — and for ScreenLanguageSelect
+// specifically it is **confirmed empty** (`FUN_00405a30` is a bare
+// `return;`, no body at all). So this task does not draw its own menu
+// text directly; Update's real body instead writes the localized
+// strings ("GUI_LANGUAGEMENU%d", 0-15) into a shared key/string map
+// object at a fixed address (0x00cf8168, via FUN_00429430, itself
+// confirmed to be a plain std::map-style insert/update — not a draw
+// call) that a separate, not-yet-located central GUI/text renderer
+// must read from. That renderer, and whatever actually calls
+// FUN_005f4b50-or-equivalent to fire "iMsgDoRender" once per frame,
+// remain unresolved as of 18 oct 2026 — deliberately left unresolved
+// rather than guessed at; see architecture/startup_path.md for the
+// full trail of what was checked and ruled out.
 void enqueue_language_select_screen_task(void* self);
+
+// ScreenLanguageSelectTask's vtable slot 1 ("IsReady", 0x00429850).
+// Neither 0x00429850 nor the slot-2 address below have their own
+// Ghidra function object in this project's analysis (they sit in an
+// unclaimed gap between FUN_00429780 and FUN_00429890, likely only
+// ever reached through the vtable, so auto-analysis never carved them
+// out) — read directly via live disassembly instead of a decompiled
+// export: `MOV dword ptr [ECX+0x14],0x0; MOV AL,0x1; RET`.
+// Unconditionally resets the Update state machine (see above) to its
+// initial state (0) and reports "ready" — the same unconditional-reset
+// shape as every sibling task's IsReady in this file.
+std::int32_t query_ready_language_select_screen_task(void* task);
+
+// ScreenLanguageSelectTask's vtable slot 2 (0x00429860), also read
+// directly via live disassembly. Update's state-1 branch (not
+// reconstructed) submits a "Presentation:TaskHandler::Task_
+// IdleInputTimer" sub-task (the same class enqueue_title_page_
+// screen_task's IsReady already constructs, see above) and stores the
+// result at this task's own +0xc. This slot walks
+// PresentationTaskHandler's own task list (+0xc, a singly-linked list
+// of {next, ..., tag} nodes tagged at +8) looking for a node whose tag
+// equals that pending sub-task pointer, and if found, sets the
+// sub-task's own ready_flag (its +0x4 byte — every task here shares
+// that layout) to 1. In other words: once the pending idle-timer
+// sub-task is confirmed registered with the handler, flag it ready.
+void mark_language_select_pending_task_ready(void* task);
 
 } // namespace hp6::presentation

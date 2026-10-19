@@ -6,11 +6,14 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 466 fonctions : 427 intégrées dans `src/math`,
+Le journal suit actuellement 467 fonctions : 430 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
-`src/presentation` et `src/archive`, 39 différées, et 0 bloquées (les 5
+`src/presentation` et `src/archive`, 37 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
-manuel `file_ops_052`) ; 0 en attente de revue.
+manuel `file_ops_052`) ; 0 en attente de revue. Un site de suivi de
+progression (dans l'esprit de decomp.dev, avec une carte cliquable de
+toutes les fonctions du jeu) est publié depuis `docs/` — voir
+`docs/README.md`.
 
 **Deuxième vrai appel de dessin D3D9 intégré, cette fois connecté à la
 vraie scène, avec sa vraie apparence sur le chemin low-tier** :
@@ -27,11 +30,21 @@ Sur son chemin low-tier (`DAT_008663d5 != 0`), la transformation réelle
 utilisé par le fondu de debug) sont désormais intégrées pour de vrai via
 `hp6::render::push_item_transform_and_material` et
 `hp6::render::resolve_material_bindings` — plus de placeholder sur ce
-chemin, seule la résolution de certains effets de shader
-(`thunk_FUN_01002960`) reste différée sans affecter si le dessin se
-déclenche. `src/render/SceneBatchRenderer.cpp`, testé dans
-`tests/scene_batch_renderer_smoke.cpp`. Voir `architecture/startup_path.md`
-("18 oct 2026, suites 14 à 16").
+chemin, seule la construction d'une déclaration en cas de cache vide
+(`FUN_00641f70`, ambiguïté de registre implicite non résolue) reste
+différée sans affecter si le dessin se déclenche. `src/render/
+SceneBatchRenderer.cpp`, testé dans `tests/scene_batch_renderer_smoke.cpp`.
+Voir `architecture/startup_path.md` ("18-19 oct 2026, suites 14 à 17").
+
+**`ScreenLanguageSelectTask` a maintenant un "IsReady" et un slot 2
+réels** (`hp6::presentation::query_ready_language_select_screen_task`,
+`mark_language_select_pending_task_ready`, `src/presentation/
+ScreenTasks.cpp`) — lus par désassemblage direct, ni l'un ni l'autre
+n'ayant son propre objet fonction dans l'analyse Ghidra de ce projet.
+Sa fonction `Update` (la vraie machine à états qui remplit le menu des
+langues) reste délibérément différée, comme pour chaque tâche d'écran
+sœur de ce fichier. Voir `architecture/startup_path.md` ("19 oct 2026,
+suite 17").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,
