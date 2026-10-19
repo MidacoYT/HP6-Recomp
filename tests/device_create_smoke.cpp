@@ -149,7 +149,7 @@ std::int32_t DAT_00cf1974 = 0;
 std::uint8_t DAT_00b108a4[8 * 0x80] = {};
 std::uint8_t DAT_009968dc[8 * 0x80] = {};
 std::uint8_t DAT_00c751a4[0x320] = {};
-std::uint32_t DAT_00bb09b4[4] = {};
+std::uint32_t DAT_00bb09b4[16] = {};
 
 // DeviceReset.cpp / RenderStateCache.cpp / RenderTargetSetup.cpp externs
 // (not all exercised here, but required to link this binary).

@@ -106,7 +106,12 @@ extern void* DAT_00d6af14;               // engine-service object; see header do
 extern std::uint8_t DAT_00b108a4[8 * 0x80]; // per-stage sampler-state defaults
 extern std::uint8_t DAT_009968dc[8 * 0x80]; // per-stage texture-stage-state defaults
 extern std::uint8_t DAT_00c751a4[0x320];    // render-state defaults block
-extern std::uint32_t DAT_00bb09b4[4];       // scratch block zeroed by clear_scratch_light_block
+// Scratch block zeroed (only words 0-3) by clear_scratch_light_block;
+// also reused, across its full 16 words, as the per-stage SetTexture
+// cache by hp6::render::set_texture_cached (RenderStateCache.cpp) —
+// confirmed by reading that function's own disassembly, which indexes
+// the same base symbol up to stage 15.
+extern std::uint32_t DAT_00bb09b4[16];
 
 namespace hp6::render {
 namespace {

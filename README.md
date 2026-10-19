@@ -6,11 +6,32 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 448 fonctions : 409 intégrées dans `src/math`,
+Le journal suit actuellement 466 fonctions : 427 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
 `src/presentation` et `src/archive`, 39 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
 manuel `file_ops_052`) ; 0 en attente de revue.
+
+**Deuxième vrai appel de dessin D3D9 intégré, cette fois connecté à la
+vraie scène, avec sa vraie apparence sur le chemin low-tier** :
+`hp6::render::execute_scene_render_batch` (`0x00646200`, confirmée être
+`Scene::End` par sa propre chaîne de diagnostic embarquée) est le vrai
+exécuteur de dessin au bout de la chaîne complète désormais tracée :
+`PluginPresentationBitmap_BuildRenderQuad` (qui lit la même table de
+chaînes que `ScreenLanguageSelect` remplit) → clip/mise en page →
+`SubmitRenderCommand` (62 vrais appelants) → `RenderAllRegions` →
+`Scene::End`, qui émet les vrais `DrawPrimitive`/`DrawIndexedPrimitive`.
+Sur son chemin low-tier (`DAT_008663d5 != 0`), la transformation réelle
+(matrice vue/projection, transposition) et la liaison matériau réelle
+(déclaration + vertex shader, dont le matériau partagé `0x20000108` déjà
+utilisé par le fondu de debug) sont désormais intégrées pour de vrai via
+`hp6::render::push_item_transform_and_material` et
+`hp6::render::resolve_material_bindings` — plus de placeholder sur ce
+chemin, seule la résolution de certains effets de shader
+(`thunk_FUN_01002960`) reste différée sans affecter si le dessin se
+déclenche. `src/render/SceneBatchRenderer.cpp`, testé dans
+`tests/scene_batch_renderer_smoke.cpp`. Voir `architecture/startup_path.md`
+("18 oct 2026, suites 14 à 16").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,
@@ -26,6 +47,27 @@ complet et `tests/winmain_smoke.cpp` pour le test de bout en bout
 contre une chaîne complète d'objets Direct3D 9 factices. **L'objectif
 directeur de cette reconstruction — un exécutable réel et testable
 atteignant au moins `ScreenLanguageSelect` — est désormais atteint.**
+
+Suite à l'indication que les menus du jeu sont des éléments 3D
+spatiaux (pas du HUD 2D), une recherche des vraies caméras nommées
+(`"ScreenSpaceCamera"`, `"CurrentInWorldCamera"`,
+`"GlobalPresentationCamera"`) a mené à **un premier vrai appel
+`DrawPrimitive`** entièrement reconstruit et testé :
+`hp6::render::submit_screen_quad` (`0x00648c00`, verrouille le tampon
+de sommets dynamique partagé, construit les sommets, lie le flux, émet
+`DrawPrimitive(D3DPT_TRIANGLESTRIP, ...)` sur le vrai device D3D9) et
+`hp6::render::render_fade_overlay_quad` (`0x0064abd0`, compose la
+texture-cible-de-rendu comme un quad plein écran puis
+`EndScene`/`Present`), `src/render/ScreenOverlayRender.cpp`. Cette
+chaîne précise n'est atteinte, dans le binaire exporté, que depuis le
+système d'overlay de debug — confirmé codé en dur à `false` (donc
+mort) dans le build FINAL livré — ce n'est pas encore le vrai moteur
+de rendu des menus, mais le pipeline de dessin lui-même est réel,
+fidèle, et testé de bout en bout (`tests/screen_overlay_render_smoke.cpp`).
+Voir `architecture/startup_path.md` ("18 oct 2026, suite 11 et 12")
+pour l'investigation complète et ce qui reste ouvert (qui déclenche le
+vrai rendu des menus, et la liaison avec les caméras nommées via
+`FUN_005d3570`).
 
 La chaîne réelle **`WinMain` → `FUN_005dca10` → `IDirect3D9::CreateDevice`**
 est désormais intégrée et testée de bout en bout. `create_d3d9_device`
@@ -178,7 +220,7 @@ dans le projet Ghidra et conservee dans `architecture/projection_format_table.bi
 Le fichier `src/projection/FormatTable.inc` contient ces octets pour la compilation.
 `tools/read_ghidra_bytes.py` relit cette table selon `ghidra-bridge.yaml` ;
 `tools/embed_projection_table.py` regenere l'initialiseur C++ a partir du
-fichier binaire conservé. Quarante-et-un tests CTest couvrent les modules intégrés. Six des 24
+fichier binaire conservé. Quarante-trois tests CTest couvrent les modules intégrés. Six des 24
 tâches d'écran (`src/presentation/ScreenTasks.cpp`) sont intégrées :
 `ScreenMainMenu` confirme que `ScreenTitlePage` (pas le menu principal)
 est le véritable premier écran visuel ; `ScreenTitlePage` arme le

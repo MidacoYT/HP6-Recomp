@@ -1816,3 +1816,460 @@ un exécutable réel et testable, assemblé pièce par pièce depuis
 `WinMain`, qui crée une vraie fenêtre, un vrai device Direct3D 9,
 démarre le vrai moteur, et déclenche `TriggerBootupFlow` → résolution
 de chapitre → `ScreenLanguageSelect`.**
+
+## 18 oct 2026 (suite 11) : piste "iMsgDoRender" / rendu GUI — exploration
+## honnête, non résolue
+
+Suite à une demande explicite de continuer la reconstruction jusqu'à
+pouvoir **réellement dessiner** quelque chose à l'écran (sans jamais
+inventer), cette section trace l'investigation menée pour remonter de
+`ScreenLanguageSelect` jusqu'au premier vrai appel D3D9 de dessin. Elle
+est documentée intégralement, y compris les fausses pistes, pour éviter
+qu'une session future ne refasse le même travail à l'aveugle.
+
+**Ce qui est confirmé (lu directement dans le projet Ghidra, adresses
+réelles, désassemblage vérifié) :**
+- `FUN_0050b8b0` (constructeur réel de `ScreenLanguageSelectTask`)
+  installe la vraie vtable à **0x00821528** (pas une adresse inventée) :
+  slot 0 = destructeur `0x00429810`, slot 1 = `0x00429850`,
+  slot 2 = `0x00429860`, slot 3 = `Update` `0x00429890` (déjà documenté),
+  slot 4 (+0x10) = `0x00405a30`.
+- `0x00405a30` est **littéralement vide** (`{ return; }` — un stub réel
+  dans le binaire, pas une supposition).
+- `hp6::presentation::PresentationTaskHandler` (`DAT_00fcadf0`) a sa
+  vraie vtable à **0x0083d194** (4 slots réels : dtor `0x005d28e0`,
+  `0x005c1290`, `0x005d5d70`, OnMessage `0x005d2ad0`). Son `OnMessage`
+  (slot+0xc) compare le type du message reçu à trois sentinelles
+  (`DAT_00d63e50`, `DAT_00d63e28`, `DAT_00d63e70`) ; sur
+  `DAT_00d63e70` — le message nommé **"iMsgDoRender"**, enregistré par
+  `register_render_messages` (déjà intégrée, `EngineBootstrap.cpp`) —
+  il parcourt sa liste de tâches actives et appelle, pour chacune, le
+  slot+0x10 de la vtable PRIMAIRE de la tâche (pas `secondary_interface`,
+  une fausse piste initiale corrigée en cours de route). C'est
+  exactement le mécanisme qui, pour `ScreenLanguageSelectTask`, retombe
+  sur le stub vide `0x00405a30` ci-dessus.
+- `FUN_00429890` (le vrai `Update` de `ScreenLanguageSelect`) construit
+  la liste des langues en appelant `FUN_00429430(0x00cf8168, cle, texte)`
+  pour chaque entrée `"GUI_LANGUAGEMENU%d"` (0 à 15) — `FUN_00429430`
+  est confirmée être une simple insertion/mise à jour dans une structure
+  de type `std::map` (les thunks appelés — `thunk_FUN_00fd78a0`,
+  `FUN_0042ff00`, `thunk_FUN_00fd7d40`, `thunk_FUN_00fd8080`, etc. —
+  correspondent exactement aux patterns internes MSVC STL d'insertion
+  dans un arbre rouge-noir). **Ce n'est pas un appel de dessin.**
+  `0x00cf8168` est un objet GUI central référencé par 45 fonctions
+  différentes à travers le binaire (menus, dialogues, prompts) — un
+  véritable sous-système GUI à part entière, jamais touché jusqu'ici.
+- `DAT_00fcaf34` (lu dans `run_frame_tick`'s appel "simulate", slot 0 de
+  la vtable du frame-pump) est en réalité le **vrai système d'entrée**
+  (`RealInputSystem`, construit par `FUN_005e00f0`, appelé depuis
+  `FUN_00ff80a0`/`initialize_runtime_services`, différée cette session)
+  — **pas** un gestionnaire de rendu comme une première hypothèse
+  l'a suggéré avant vérification ; corrigé en cours d'investigation.
+  Le slot 0 du frame-pump (`0x005dcd80`) draine donc des évènements
+  d'entrée (clavier/souris/manette), pas des commandes de rendu.
+- Le slot+4 du frame-pump (`0x005dcdc0`, que `FrameClock.cpp` nomme
+  générique "render") est en réalité un compte à rebours de 5 ticks qui
+  finit par appeler `show_debug_build_overlay_once` (déjà intégrée) —
+  une fonctionnalité de debug, pas le vrai rendu de la scène.
+- `FUN_005f4b50` enregistre (ré-enregistre) "iMsgDoRender" et plusieurs
+  autres messages puis appelle `FUN_005db1a0` sur chacun — **mais**
+  `FUN_005db1a0` s'est révélée être une insertion dans une liste
+  triée par priorité (abonnement), pas une diffusion/exécution. Cette
+  piste ("FUN_005f4b50 diffuse le rendu chaque frame") a donc été
+  **écartée après vérification**, pas présentée comme acquise.
+
+**Ce qui reste non résolu, honnêtement, à ce stade :**
+- Qui appelle réellement la diffusion du message "iMsgDoRender" chaque
+  frame (la vraie fonction "Fire"/"Dispatch", distincte de
+  `FUN_005db1a0`, n'a pas été localisée).
+- Quel système lit la table `0x00cf8168` pour effectivement dessiner le
+  texte des menus (polices, sprites, `DrawPrimitive`/`DrawIndexedPrimitive`
+  réels) — c'est un sous-système GUI complet, non encore abordé.
+- Tous les appelants de `FUN_00429890`/`FUN_005f4b50` sont vides dans
+  Ghidra (`callers: []`) — cohérent avec la limite déjà documentée
+  plusieurs fois dans ce projet (dispatch par table de pointeurs de
+  fonctions, non résolu par l'analyse statique sans modifier le projet
+  Ghidra, ce que la politique de lecture seule de ce projet exclut).
+
+Rien de ce qui précède n'a été inventé : chaque affirmation "confirmée"
+ci-dessus est appuyée par une adresse réelle et un désassemblage lu en
+direct dans le projet Ghidra. La partie "non résolue" est explicitement
+documentée comme telle plutôt que comblée par une supposition
+plausible — conformément à la règle de ce projet de ne jamais fabriquer
+de comportement de jeu.
+
+## 18 oct 2026 (suite 12) : premier vrai `DrawPrimitive` intégré — la
+## piste des menus "spatiaux" en 3D
+
+Indication clé de l'utilisateur, confirmée dans le binaire : les menus
+de ce jeu ne sont **pas** du HUD 2D classique — ce sont des éléments
+positionnés dans l'espace 3D, rendus via une vraie caméra dédiée.
+Recherche de la chaîne `"Camera"` dans les exports Ghidra déjà en
+cache : confirmation immédiate de **`"ScreenSpaceCamera"`**,
+**`"CurrentInWorldCamera"`** et **`"GlobalPresentationCamera"`**
+(`FUN_0059fa00`/`FUN_0059fdc0`/`FUN_0059f7f0`), chacune activée via
+`FUN_005d3570` (probable "SetActiveCamera par nom", pas encore
+intégrée). `FUN_0059fa00` copie une matrice de transformation
+(16 flottants) d'un champ vers un autre avant d'activer
+`"ScreenSpaceCamera"` — cohérent avec une vraie caméra de rendu
+d'interface positionnée dans le monde 3D plutôt qu'un simple
+espace écran 2D.
+
+En cherchant, dans les exports déjà en cache, les fonctions référençant
+à la fois le device D3D9 réel (`DAT_00cf1944`) et un offset de vtable
+correspondant à `SetTransform`/`DrawPrimitive`/`BeginScene`/`EndScene`,
+quatre candidats sont apparus dans le même voisinage que le code déjà
+intégré (`0x0064a6d0`..`0x0064c8c0`). Deux d'entre eux se sont révélés
+être un **vrai, complet, confirmé** pipeline de dessin D3D9 :
+
+- **`FUN_00648c00`** (→ `hp6::render::submit_screen_quad`) : verrouille
+  le tampon de sommets dynamique partagé déjà créé
+  (`create_dynamic_vertex_buffer`), y entrelace jusqu'à 0x400 sommets
+  (position/couleur/UV selon un masque de bits, toujours 28 octets par
+  sommet), le déverrouille, le lie via `SetStreamSource` (vtable+400,
+  index 100) et la déclaration/le shader de sommets mis en cache, puis
+  émet le vrai appel **`DrawPrimitive(D3DPT_TRIANGLESTRIP, 0, n-2)`**
+  (vtable+0x144, index 81) — les deux offsets confirmés correspondre
+  exactement à la vraie disposition de vtable `IDirect3DDevice9`.
+- **`FUN_0064abd0`** (→ `hp6::render::render_fade_overlay_quad`) :
+  compose la texture-cible-de-rendu (`DAT_00cf1958`, quand elle n'est
+  pas désactivée) comme un quad plein écran teinté d'une couleur
+  (construit directement : 4 sommets, bornes écran calculées depuis la
+  résolution active et deux constantes opaques non encore tracées,
+  `DAT_00831c2c`/`DAT_007db234`), via `submit_screen_quad` ci-dessus,
+  puis appelle `EndScene`/`Present` — un vrai fondu/composite d'écran.
+
+Six petits setters D3D9 mis en cache supplémentaires, du même type
+déjà établi (`set_render_state_cached`, `set_texture_stage_state_
+cached`), ont été intégrés au passage : `set_sampler_state_cached`,
+`set_texture_cached`, `set_vertex_declaration_cached`,
+`set_vertex_shader_cached`, `set_pixel_shader_cached`,
+`reset_vertex_shader_constant_cache` (`src/render/RenderStateCache.cpp`).
+
+**Honnêteté sur la portée réelle** : dans le binaire exporté, cette
+chaîne de dessin n'est atteinte que depuis le système de overlay de
+debug (`FUN_005dd020 → thunk_FUN_010120d0 → FUN_00648630 →
+FUN_0064abd0`), et `hp6::presentation::is_debug_build_overlay_enabled`
+confirme déjà que ce chemin est **codé en dur à `false`** dans le
+binaire FINAL livré — donc mort dans le jeu tel que shippé. Ce n'est
+**pas** encore le vrai moteur de rendu des menus (`ScreenLanguageSelect`
+etc.), qui reste à localiser (voir la section précédente). Mais le
+pipeline de dessin lui-même — verrouillage de tampon, liaison de flux,
+`DrawPrimitive` réel sur un vrai device D3D9 — est désormais reconstruit
+fidèlement depuis le désassemblage réel, et testé de bout en bout contre
+un faux device dans `tests/screen_overlay_render_smoke.cpp`, qui vérifie
+que le vrai appel `DrawPrimitive(TRIANGLESTRIP, 0, 2)` se déclenche avec
+les bonnes données de sommets. **C'est le premier vrai appel de dessin
+D3D9 intégré dans ce projet.**
+
+42/42 tests CTest, tous verts. Piste des caméras `"ScreenSpaceCamera"`/
+`"CurrentInWorldCamera"`/`"GlobalPresentationCamera"` et de
+`FUN_005d3570` ("SetActiveCamera" probable) laissée ouverte pour la
+suite — c'est le prochain fil à tirer pour relier la caméra 3D réelle
+au vrai rendu de `ScreenLanguageSelect`.
+
+## 18 oct 2026 (suite 13) : `FUN_005d3570` tracé — la caméra "Harry"
+## (joueur) trouvée, le déclencheur du dessin de scène toujours non
+## localisé
+
+`FUN_005d3570(this, category, name, transform[16])` est confirmée :
+cherche `name` dans un arbre rouge-noir (comparaison via
+`FUN_005d5a30`) ; si trouvé, copie la matrice 4x4 `transform` dans
+l'entrée ; sinon, en crée une nouvelle. C'est bien une fonction réelle
+« créer/mettre à jour une caméra (ou tout objet transformé) nommée ».
+5 vrais appelants trouvés (pas de dispatch par vtable ici) :
+`FUN_0059fa00`/`FUN_0059fdc0` (déjà connues), `FUN_0053c5b0`,
+`FUN_005550c0`, `FUN_005551f0`.
+
+**`FUN_0053c5b0` est la découverte clé de cette suite** : c'est la
+vraie méthode « Update » (confirmée via une vraie xref de données
+Ghidra — `getReferencesTo`, pas une supposition — vers une vraie table
+de fonctions à `0x00832a44` : slot 0 = constructeur `FUN_0053c4c0`
+déjà connu, slot+0xc = cette fonction). Elle parcourt plusieurs arbres
+rouge-noir de requêtes de chargement de ressources (état 0..9, motif
+très proche de `ChapterLoadStateMachine_Update` déjà intégrée), active
+**`"CurrentInWorldCamera"`** via `FUN_0059fdc0`, construit une matrice
+4x4 (identité par défaut via la constante `DAT_007db234`, ou copiée
+depuis un objet obtenu par `thunk_FUN_00ff2450()` quand il existe), puis
+appelle **`FUN_005d3570(this, offset, "Harry", &matrice)`** — la vraie
+caméra du joueur, nommée d'après le protagoniste. Ceci confirme
+concrètement l'indication de l'utilisateur : une vraie caméra 3D,
+suivant un objet nommé réel, mise à jour chaque passage.
+
+**Les autres slots de cette même table, lus en direct, écartent deux
+fausses pistes plutôt que de les laisser en suspens** : slot+0x10
+(`0x00622a80`) et slot+0x14 (`0x00622a90`) — à la même position relative
+que le slot "Render" trouvé pour `ScreenLanguageSelectTask` — se sont
+révélés être de **simples accesseurs d'état** (`MOV EAX,4; RET`), pas
+des appels de dessin. Slot+0x1c réutilise le même stub vide partagé
+`0x00405a30` déjà rencontré. Slot+0x4 (`FUN_0053c550`) est la
+réinitialisation symétrique du constructeur (appelle `FUN_0059fc90`,
+probable désactivation de `"ScreenSpaceCamera"`). Slot+0x18
+(`0x0053cab0`) est un second gestionnaire de message (compare le type
+de message à deux IDs enregistrés à `this+0x4db4`/`+0x4db6`), pas un
+dessin non plus.
+
+**Conclusion honnête à ce stade** : la configuration de caméra réelle
+(activation par nom, matrice de transformation) est maintenant tracée
+et confirmée, mais **le déclencheur du vrai passage de dessin de la
+scène 3D (et donc des menus positionnés dedans) reste non localisé**
+après une recherche systématique de cette table de fonctions complète.
+Chaque fausse piste explorée a été vérifiée puis explicitement écartée
+plutôt que supposée. La limite reste la même que celle déjà documentée
+plusieurs fois dans ce projet : les appelants réels passent par des
+tables de pointeurs de fonctions que l'analyse statique de Ghidra ne
+résout pas sans modifier le projet (exclu par la politique de lecture
+seule de ce projet). Les deux derniers appelants de `FUN_005d3570` (`FUN_005550c0`,
+`FUN_005551f0`) ont été vérifiés : ce sont des variantes génériques du
+même motif (« mettre à jour la transformation de la caméra attachée à
+telle entité nommée », probablement pour les PNJ/cinématiques plutôt
+que pour le joueur spécifiquement), pas une nouvelle piste vers le
+dessin de scène.
+
+**À ce stade, les 5 appelants réels de `FUN_005d3570` sont tous
+épuisés** sans révéler le déclencheur du vrai passage de dessin. La
+suite a demandé de changer d'approche (voir "suite 14" ci-dessous).
+
+## 18 oct 2026 (suite 14) : la chaîne complète trouvée — de
+## `PluginPresentationBitmap` jusqu'au vrai `DrawPrimitive` de la scène
+
+Changement d'approche : plutôt que de remonter depuis les caméras,
+recherche descendante dans la base de connaissances IDA (`D:\HP\
+knowledge\hp6`, qui couvre les 14177 fonctions et porte certains noms
+réels déjà résolus) pour toute fonction liée au rendu. Résultat
+immédiat et décisif : **`PluginPresentationBitmap_BuildRenderQuad`**
+(`0x0056baa0`), avec l'indice `system_hint: "menus"`, et dont les
+globales référencées incluent **`0x00cf8168`** — exactement le même
+objet GUI déjà identifié (suite 11) comme la table de chaînes
+localisées que `FUN_00429890` (le vrai `Update` de `ScreenLanguageSelect`)
+remplit via `"GUI_LANGUAGEMENU%d"`. **Ceci relie enfin directement
+l'écran de sélection de langue au vrai pipeline de rendu.**
+
+Chaîne complète tracée et confirmée, maillon par maillon, jusqu'au vrai
+appel D3D9 :
+
+1. **`FUN_0056baa0`** (`PluginPresentationBitmap_BuildRenderQuad`) —
+   construit une matrice de transformation 4x4 (combinant la caméra
+   active et la position locale via `FUN_00401520`, "concaténer deux
+   matrices"), récupère le texte localisé (`FUN_00429290`
+   `UITextDb_GetDynamicText`, lisant la table `0xcf8168`), construit un
+   descripteur de quad (couleur, UV, mode de blend lu dans une table
+   indexée par un littéral `"WORLD"` — confirmant à nouveau des espaces
+   de coordonnées distincts), puis appelle `FUN_005e92d0`.
+2. **`FUN_005e92d0`** — teste le rectangle englobant, puis appelle
+   `FUN_005e93e0` (mise en page/glyphes, 1024 octets de scratch),
+   `FUN_005e9680` (découpage/clipping contre le viewport — calculs de
+   ratio sur les coordonnées UV, confirmant un vrai clipping de glyphes)
+   et `FUN_005e9820`.
+3. **`FUN_005e9820`** — alloue depuis `DAT_00cf18e4`, le **même bump
+   arena déjà intégré** dans `src/runtime/ScratchBuffers.cpp` de ce
+   projet (pont concret, pas une coïncidence), génère les indices de
+   triangles d'un quad, pousse une matrice de transformation 4x4 dans
+   un tampon croissant (`DAT_0096b48c`), construit un paquet de
+   commande, puis appelle `FUN_00542e10`.
+4. **`FUN_00542e10`** (**62 vrais appelants** à travers tout le moteur,
+   pas de dispatch par vtable) — "SubmitRenderCommand par matériau" :
+   classe la commande dans une liste chaînée par matériau
+   (`DAT_00967218`), elle-même repointée vers la région active par
+   **`hp6::render::set_active_render_region`** (`FUN_0063d0f0`,
+   **déjà intégrée dans ce projet depuis une session antérieure**,
+   `src/render/RenderRegionManager.cpp` — nom de classe réel confirmé
+   par une chaîne de diagnostic embarquée, `"RenderRegionManager::
+   SetActiveRenderRegion..."`).
+5. **`FUN_00647480`** — la fonction qui vide TOUTES les régions actives
+   chaque frame : parcourt la table de régions (`_Dst_00b970d0`,
+   `_Dst_00ba1500`), et pour chaque région, chaque compartiment de
+   matériau de `&_Dst_00b170d0 + région` (**la même base que
+   `set_active_render_region` écrit déjà** — confirmation croisée
+   directe), parcourt les commandes en attente et appelle
+   `FUN_00646200` pour chacune.
+6. **`FUN_00646200`** — confirmée être **`Scene::End`** par sa propre
+   chaîne de diagnostic embarquée (`"Scene::End - warning drawprim/draw
+   indexed failed?!?!\n"`). C'est l'exécuteur réel du dessin : lie les
+   états de rendu/matériaux (`FUN_0063b6e0`, de nombreux appels), lie
+   la texture/le shader, puis émet le **vrai appel D3D9** :
+   `(**(code**)(*DAT_00cf1944 + 0x144))(...)` = **`DrawPrimitive`**
+   (pas d'index) ou `(**(code**)(*DAT_00cf1944 + 0x148))(...)` =
+   **`DrawIndexedPrimitive`** (avec index) — avec vérification
+   d'échec via la même fonction de diagnostic déjà intégrée
+   (`hp6::platform::format_diagnostic_message`).
+
+`FUN_00647480` n'a qu'un seul appelant trouvé par Ghidra :
+**`FUN_00648630`** — la MÊME fonction déjà examinée en détail cette
+session (suite 12), qui après avoir vidé toutes les régions
+(`FUN_00647480`, maintenant identifiée) compose ensuite le fondu
+d'écran de debug déjà intégré (`hp6::render::render_fade_overlay_quad`,
+`FUN_0064abd0`). **Ceci confirme que `FUN_00648630` est bien la vraie
+fonction "rendre une frame complète"**, et pas seulement un utilitaire
+de debug comme la suite 12 le supposait par prudence — mais son seul
+chemin d'appel trouvé statiquement reste celui, gardé par
+`is_debug_build_overlay_enabled` (donc mort en FINAL), déjà documenté.
+Le vrai déclencheur par-frame (probablement une dispatch par vtable
+que Ghidra ne résout pas statiquement) reste non localisé, mais
+**la chaîne de dessin elle-même, de bout en bout, est maintenant
+entièrement tracée et confirmée jusqu'au vrai `DrawIndexedPrimitive`
+de la scène** — pas seulement celui, plus simple, du quad de fondu
+déjà intégré.
+
+**Honnêteté sur la portée** : `FUN_00646200`/`Scene::End` est une
+fonction volumineuse (~150 lignes) avec de nombreux sous-appels de
+liaison d'état/matériau non encore tracés (`FUN_0063b6e0`,
+`thunk_FUN_010043b0`, `FUN_00644cd0`, `FUN_00642380`, `FUN_00652400`,
+`FUN_006455c0`, etc.). Elle n'a **pas** été intégrée dans le code C++
+de ce projet à cette étape — seulement lue et confirmée en direct dans
+Ghidra, avec les deux vrais sites d'appel `DrawPrimitive`/
+`DrawIndexedPrimitive` identifiés avec certitude. L'intégrer
+fidèlement demanderait de tracer chacun de ces sous-appels en premier,
+pour ne pas inventer la logique de liaison de matériau.
+
+## 18 oct 2026 (suite 15) : `Scene::End` intégrée pour de vrai — deuxième
+## vrai `DrawPrimitive`, cette fois connecté à la vraie scène
+
+Poursuite de la suite 14 : plusieurs des sous-appels de `Scene::End`
+identifiés comme "non tracés" se sont révélés être de simples
+enveloppes D3D9 directes en les lisant réellement, et ont donc été
+intégrées pour de vrai au lieu d'être différées :
+
+- **`FUN_0063b6e0`** → `hp6::render::set_vertex_shader_constant_f` —
+  `SetVertexShaderConstantF` (vtable+0x178, index 94).
+- **`FUN_00652380`** → `hp6::render::bind_vertex_buffer_by_handle` —
+  `SetStreamSource` (vtable+400, index 100) ; le handle se résout via
+  l'une de deux tables à pas fixe de 0x14 octets selon son bit de
+  signe, vers le vrai pointeur de vertex buffer au champ+0x10.
+- **`FUN_00652400`** → `hp6::render::bind_index_buffer_by_handle` —
+  `SetIndices` (vtable+0x1a0, index 104), même motif de résolution.
+- **`FUN_0063b7a0`** → `hp6::render::resolve_mode_pixel_shader_handle`
+  — recherche le shader pixel du mode actif (`DAT_00998580`, déjà
+  écrit par `set_active_render_region`) dans une table de capacités
+  par mode à pas fixe.
+- **`thunk_FUN_010043b0`** → `hp6::render::bind_pixel_shader_for_mode`
+  — combine les deux fonctions ci-dessus avec `set_pixel_shader_cached`
+  déjà intégrée.
+
+Avec ces briques réelles en main, **`FUN_00646200`/`Scene::End` elle-
+même a été intégrée** (`hp6::render::execute_scene_render_batch`,
+`src/render/SceneBatchRenderer.cpp`) : les trois vrais chemins de
+contrôle (invalidation de région, récursion multi-batch `'M'`, dessin
+d'un seul élément sur les deux branches de palier de qualité) sont
+reproduits fidèlement, ainsi que les deux vrais appels D3D9
+(`DrawPrimitive`/`DrawIndexedPrimitive`) avec leurs arguments lus
+directement depuis les champs fixes de l'élément de dessin — ces
+arguments sont corrects et fidèles **indépendamment** de ce qui est
+différé, puisque les blocs de liaison matériau/éclairage différés
+(`FUN_00644cd0`, `FUN_006455c0`, la résolution de handle de
+déclaration de `FUN_00642380`, `thunk_FUN_01002c30`) ne les calculent
+pas — ils ne changent que l'apparence du rendu, jamais si ni avec
+quels paramètres le vrai dessin se déclenche.
+
+Un vrai bug de test a été trouvé et corrigé en écrivant
+`tests/scene_batch_renderer_smoke.cpp` : un tableau de vtable factice
+trop petit de deux emplacements pour le slot `SetPixelShader`
+(`0x1ac`) provoquait une écriture hors limites corrompant un compteur
+de test voisin — détecté immédiatement par une valeur de compteur
+incohérente, corrigé en élargissant le tableau. Un deuxième piège de
+test (les caches de liaison par défaut à zéro coïncidant avec les
+handles de test à zéro, masquant les vrais appels) a aussi été corrigé
+en forçant des valeurs de cache initiales different.
+
+43/43 tests CTest, tous verts, 423/462 fonctions intégrées (39
+différées, 0 bloquée). **C'est le deuxième vrai appel de dessin D3D9
+intégré dans ce projet, et le premier connecté à la vraie chaîne de
+rendu de scène (pas seulement au fondu de debug) — avec la logique de
+contrôle, les deux types de dessin (indexé et non indexé), la
+récursion multi-batch et le chemin d'invalidation tous testés contre
+un vrai device factice.**
+
+## 18 oct 2026 (suite 16) — le chemin low-tier a maintenant sa vraie apparence (transform + matériau)
+
+Suite à la demande explicite de l'utilisateur : « pousse plus loins
+parce que faudras reussir a reelement afficher le menu des langues »,
+les deux derniers blocs différés du chemin **low-tier** de
+`Scene::End` (celui que `DAT_008663d5 != 0` sélectionne) ont été
+reconstruits pour de vrai, sans rien inventer — en relisant le JSON
+Ghidra complet (`decompiled` ET pcode) de `FUN_006455c0` et
+`FUN_00644cd0`, puis en désassemblant directement les sites d'appel
+ambigus via un script `pyghidra` jetable (voir ci-dessous) plutôt que
+de deviner.
+
+**`FUN_006455c0` → `hp6::render::push_item_transform_and_material`**
+(`src/render/SceneBatchRenderer.cpp`). Pousse la transformation et les
+constantes de couleur/matériau du vertex shader pour l'élément en
+cours :
+- si le pointeur de transform de l'élément (`context[0]`) a changé
+  depuis le dernier appel, multiplie la matrice par la matrice
+  vue/projection fixe de la région active (table `DAT_00f82530` ou
+  `DAT_00f82310` selon le bit `0x40000000` de `context[1]`, indexée
+  par `DAT_00cf1914`), transpose le résultat, et le pousse au
+  registre 0 du vertex shader (`set_vertex_shader_constant_f`, déjà
+  intégrée) ;
+- pousse jusqu'à trois autres groupes de constantes couleur/matériau
+  (registres 4, 5, 6, 0x12) et l'état de rendu final (`0x16`), tous
+  conditionnés par les bits de `context[1]`.
+
+Point délicat résolu par désassemblage réel (pas juste le C
+décompilé, qui masque le registre implicite `in_EAX` de
+`FUN_005a2310`/transpose) : les DEUX appels à la transposition
+écrivent dans un tampon de scratch SÉPARÉ de la source (jamais en
+place) — confirmé en lisant les instructions x86 réelles autour des
+deux sites d'appel (`LEA EAX,[EBP+...]` suivi de `LEA ECX,[EBP+...]`
+avec des offsets différents). Cela a évité d'introduire une fonction
+`transpose_matrix4x4` « sûre à l'aliasing » dont le projet n'a en
+réalité pas besoin.
+
+**`FUN_00644cd0` (second chemin, celui avec `param_4 != 0`) →
+`hp6::render::resolve_material_bindings`**. Relecture directe du
+corps décompilé complet de `Scene::End` a aussi confirmé l'ORDRE réel
+des opérations : `DAT_00866360` (le cache du type de matériau) doit
+être écrit **après** l'appel à `FUN_00644cd0`, pas avant — sinon la
+comparaison interne de `resolve_material_bindings` avec la valeur
+*précédente* de `DAT_00866360` serait toujours vraie contre
+elle-même. Le code existant (placeholder) avait le mauvais ordre ;
+corrigé. La fonction elle-même : pose la vraie porte « dessiner pour
+de vrai » (`DAT_00865285`) à vrai, puis sélectionne sur le type de
+matériau pour lier la vraie paire déclaration + vertex shader via
+`set_vertex_declaration_cached`/`set_vertex_shader_cached` (déjà
+intégrées) pour les types 2, 10 et **`0x20000108`** — ce dernier
+utilisant exactement `DAT_00cf1930`/`DAT_00cf192c`, les MÊMES globals
+que `hp6::render::render_fade_overlay_quad` (le fondu de debug),
+confirmant que les deux vrais appels de dessin de ce projet partagent
+ce même matériau réel « overlay 2D ». Les autres types reconnus
+passent par `thunk_FUN_01002960` (non tracé, laissé en no-op
+documenté qui garde la porte ouverte). Seul un type de matériau
+vraiment inconnu referme la porte — testé explicitement.
+
+Deux petites fonctions de maths pures, sous-appels de
+`push_item_transform_and_material`, ont aussi été ajoutées à
+`src/math/Transform.{h,cpp}` : `multiply_matrix4x4` (`FUN_00401520`,
+multiplication 4x4 standard) et `transpose_matrix4x4` (`FUN_005a2310`,
+transposition 4x4 standard).
+
+Un vrai bug de test a été trouvé en construisant
+`tests/scene_batch_renderer_smoke.cpp` : le vtable factice n'avait pas
+les emplacements `SetRenderState` (`0xe4`) ni `SetVertexShaderConstantF`
+(`0x178`) câblés, provoquant un appel à travers un pointeur nul —
+corrigé en les ajoutant. Un deuxième effet de bord a aussi été
+découvert : les items de test avaient `material_type == 0` à l'octet
+`+0x18`, un type non reconnu par la vraie logique maintenant branchée
+— ce qui fermait la porte de dessin et faisait échouer les anciennes
+assertions (elles passaient avant seulement parce que
+`resolve_material_bindings` était un no-op). Corrigé en donnant aux
+items de test un vrai type de matériau reconnu, et de nouveaux tests
+ont été ajoutés : la vraie transposition de matrice (matrice de
+translation connue → résultat transposé vérifié composante par
+composante au registre 0), le matériau partagé `0x20000108`, et le
+cas de matériau inconnu qui ferme la porte de dessin.
+
+**Résultat : 427/466 fonctions intégrées (39 différées, 0 bloquée),
+43/43 tests CTest verts.** Le chemin low-tier de `Scene::End` — celui
+qui dessine très probablement les quads 2D des menus comme
+`ScreenLanguageSelect` — a maintenant une apparence (transform,
+couleur, déclaration/shader) entièrement réelle et tracée, pas
+seulement un déclenchement de dessin avec des paramètres corrects.
+Il ne reste différé, sur ce chemin précis, que `thunk_FUN_01002960`
+(résolution de shader pour les types de matériau hors la liste
+fixe) — qui ne change que l'apparence, jamais si le dessin se
+déclenche. La prochaine étape logique reste la même qu'avant :
+trouver le vrai déclencheur par frame (`FUN_00648630`/
+`FUN_00647480`), toujours bloqué par la même limitation d'analyse
+statique (dispatch par vtable) rencontrée partout ailleurs dans ce
+projet.

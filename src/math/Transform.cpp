@@ -16,4 +16,23 @@ void transform_translated_xyz(float* output, const float* point,
               + matrix_points[11] * 0.0f + matrix_points[8] * x;
 }
 
+void multiply_matrix4x4(float* output, const float* lhs, const float* rhs) {
+    for (int row = 0; row < 4; ++row) {
+        for (int col = 0; col < 4; ++col) {
+            output[row * 4 + col] = lhs[row * 4 + 0] * rhs[0 * 4 + col] +
+                                    lhs[row * 4 + 1] * rhs[1 * 4 + col] +
+                                    lhs[row * 4 + 2] * rhs[2 * 4 + col] +
+                                    lhs[row * 4 + 3] * rhs[3 * 4 + col];
+        }
+    }
+}
+
+void transpose_matrix4x4(float* output, const float* input) {
+    for (int row = 0; row < 4; ++row) {
+        for (int col = 0; col < 4; ++col) {
+            output[col * 4 + row] = input[row * 4 + col];
+        }
+    }
+}
+
 }

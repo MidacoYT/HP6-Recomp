@@ -27,6 +27,27 @@ extern std::uint32_t DAT_00cf19a8;     // active pixel format (matches DeviceCre
 extern std::int32_t DAT_0086527c;
 extern std::int32_t DAT_00865280;
 
+extern std::int32_t DAT_00b108a0[]; // SetSamplerState cache, [sampler*0x20+type]
+// SetTexture cache, one slot per stage (also, words 0-3 only, zeroed by
+// hp6::render::clear_scratch_light_block — see DeviceCreate.cpp).
+extern std::uint32_t DAT_00bb09b4[16];
+extern void* DAT_00cf19c4;          // SetVertexDeclaration cache
+extern std::uint32_t DAT_008663cc;  // SetVertexShader cache (handle, stored as a plain word)
+extern std::uint32_t DAT_008663d0;  // SetPixelShader cache (handle, stored as a plain word)
+extern std::uint32_t DAT_0096b484;  // vertex-shader-constant cache word, reset alongside the shader cache
+extern std::uint32_t DAT_00bac98c;  // vertex-shader-constant cache word, reset alongside the shader cache
+
+extern std::uint8_t DAT_00a70890[]; // vertex-buffer-handle table (handle >= 0), 0x14-byte stride
+extern std::uint8_t DAT_00baa170[]; // vertex-buffer-handle table (handle < 0), 0x14-byte stride
+extern std::uint8_t DAT_0098c6a8[]; // index-buffer-handle table (handle >= 0), 0x14-byte stride
+extern std::uint8_t DAT_009985a0[]; // index-buffer-handle table (handle < 0), 0x14-byte stride
+extern std::int32_t DAT_00998580;   // the active render region's mode index (set by set_active_render_region)
+extern std::int32_t DAT_00c754cc;   // highest valid mode index in the per-mode capability tables
+extern std::uint8_t DAT_00f38b28[]; // per-mode capability table, 0xc4-byte stride (also read by FUN_005e8e70, not yet integrated)
+extern std::int32_t DAT_00cf1a3c;   // fallback mode index when the active one is out of range
+extern std::int32_t DAT_00cf1a48;   // bind_pixel_shader_for_mode's own cache
+extern std::uint32_t DAT_00b170c4;  // bind_pixel_shader_for_mode's rebind counter
+
 extern std::uint32_t DAT_00f82c40;
 extern std::uint32_t DAT_00f82c44;
 extern std::uint32_t DAT_00f82c48;
@@ -138,9 +159,19 @@ namespace {
 #ifdef _MSC_VER
 using D3DCall2 = std::int32_t (__stdcall*)(void*, std::int32_t, std::int32_t);
 using D3DCall3 = std::int32_t (__stdcall*)(void*, std::int32_t, std::int32_t, std::int32_t);
+using D3DCallSetTexture = std::int32_t (__stdcall*)(void*, std::int32_t, void*);
+using D3DCallSetHandle = std::int32_t (__stdcall*)(void*, void*);
+using D3DCallSetVsConstF = std::int32_t (__stdcall*)(void*, std::uint32_t, const void*, std::uint32_t);
+using D3DCallSetStreamSource = std::int32_t (__stdcall*)(void*, std::uint32_t, void*, std::uint32_t, std::uint32_t);
+using D3DCallSetIndices = std::int32_t (__stdcall*)(void*, void*);
 #else
 using D3DCall2 = std::int32_t (*)(void*, std::int32_t, std::int32_t);
 using D3DCall3 = std::int32_t (*)(void*, std::int32_t, std::int32_t, std::int32_t);
+using D3DCallSetTexture = std::int32_t (*)(void*, std::int32_t, void*);
+using D3DCallSetHandle = std::int32_t (*)(void*, void*);
+using D3DCallSetVsConstF = std::int32_t (*)(void*, std::uint32_t, const void*, std::uint32_t);
+using D3DCallSetStreamSource = std::int32_t (*)(void*, std::uint32_t, void*, std::uint32_t, std::uint32_t);
+using D3DCallSetIndices = std::int32_t (*)(void*, void*);
 #endif
 
 void* vtable_of(void* object) {
@@ -394,6 +425,152 @@ void initialize_default_render_state() {
     set_render_state_cached(0x19, 8);
     DAT_0086527c = -8;
     DAT_00865280 = -7;
+}
+
+// 0x0064c350 (cdecl). Direct3D 9 SetSamplerState (device vtable+0x114,
+// index 69) with a per-(sampler,type) cache at
+// DAT_00b108a0[sampler*0x20+type], same shape as
+// set_texture_stage_state_cached above.
+std::uint32_t set_sampler_state_cached(std::int32_t sampler, std::int32_t type,
+                                       std::int32_t value) {
+    std::uint32_t result = 0;
+    auto& cached = DAT_00b108a0[sampler * 0x20 + type];
+    if (cached != value) {
+        auto call = *reinterpret_cast<D3DCall3 const*>(
+            static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x114);
+        result = static_cast<std::uint32_t>(call(DAT_00cf1944, sampler, type, value));
+        cached = value;
+    }
+    return result;
+}
+
+// 0x0064c410 (cdecl). Direct3D 9 SetTexture (device vtable+0x104, index
+// 65) with a per-stage cache at DAT_00bb09b4[stage] (the handle stored
+// as a plain uint32, matching the exported x86 and this file's other
+// handle caches below).
+std::uint32_t set_texture_cached(std::int32_t stage, void* texture) {
+    std::uint32_t result = 0;
+    const auto handle = static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(texture));
+    if (DAT_00bb09b4[stage] != handle) {
+        auto call = *reinterpret_cast<D3DCallSetTexture const*>(
+            static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x104);
+        result = static_cast<std::uint32_t>(call(DAT_00cf1944, stage, texture));
+        DAT_00bb09b4[stage] = handle;
+    }
+    return result;
+}
+
+// 0x0064c5c0 (cdecl). Direct3D 9 SetVertexDeclaration (device
+// vtable+0x15c, index 87) with a cache at DAT_00cf19c4.
+std::uint32_t set_vertex_declaration_cached(void* declaration) {
+    std::uint32_t result = 0;
+    if (DAT_00cf19c4 != declaration) {
+        auto call = *reinterpret_cast<D3DCallSetHandle const*>(
+            static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x15c);
+        result = static_cast<std::uint32_t>(call(DAT_00cf1944, declaration));
+        DAT_00cf19c4 = declaration;
+    }
+    return result;
+}
+
+// 0x006524b0. Resets the two vertex-shader-constant cache words the
+// exported x86 keeps alongside the vertex-shader cache; invalidated
+// whenever set_vertex_shader_cached actually installs a new (resolved)
+// shader handle.
+void reset_vertex_shader_constant_cache() {
+    DAT_0096b484 = 0;
+    DAT_00bac98c = 0;
+}
+
+// 0x0064c4e0 (cdecl). Direct3D 9 SetVertexShader (device vtable+0x170,
+// index 92) with a cache at DAT_008663cc. When `resolve` is set, the
+// exported x86 first passes `handle` through 0x01003de0 (NOT YET
+// INTEGRATED: not traced, so the handle is forwarded unchanged here —
+// a documented no-op that keeps the call shape faithful without
+// fabricating the real resolution logic) and invalidates the
+// vertex-shader-constant cache afterward.
+std::uint32_t set_vertex_shader_cached(void* handle, bool resolve) {
+    std::uint32_t result = 0;
+    const auto handle_word = static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(handle));
+    if (DAT_008663cc != handle_word) {
+        // NOT YET INTEGRATED: when `resolve` is set, the exported x86
+        // first passes `handle` through thunk_FUN_01003de0 — not
+        // traced, so the handle is forwarded unchanged here.
+        auto call = *reinterpret_cast<D3DCallSetHandle const*>(
+            static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x170);
+        result = static_cast<std::uint32_t>(call(DAT_00cf1944, handle));
+        if (resolve) {
+            reset_vertex_shader_constant_cache();
+        }
+        DAT_008663cc = handle_word;
+    }
+    return result;
+}
+
+// 0x0064c570 (cdecl). Direct3D 9 SetPixelShader (device vtable+0x1ac,
+// index 107) with a cache at DAT_008663d0.
+std::uint32_t set_pixel_shader_cached(void* handle) {
+    std::uint32_t result = 0;
+    const auto handle_word = static_cast<std::uint32_t>(reinterpret_cast<std::uintptr_t>(handle));
+    if (DAT_008663d0 != handle_word) {
+        auto call = *reinterpret_cast<D3DCallSetHandle const*>(
+            static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x1ac);
+        result = static_cast<std::uint32_t>(call(DAT_00cf1944, handle));
+        DAT_008663d0 = handle_word;
+    }
+    return result;
+}
+
+void set_vertex_shader_constant_f(std::int32_t start_register, const void* data,
+                                  std::int32_t vector4_count) {
+    auto call = *reinterpret_cast<D3DCallSetVsConstF const*>(
+        static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x178);
+    call(DAT_00cf1944, static_cast<std::uint32_t>(start_register), data,
+         static_cast<std::uint32_t>(vector4_count));
+}
+
+void bind_vertex_buffer_by_handle(std::uint32_t handle, std::uint32_t stride,
+                                  std::uint32_t offset, std::uint32_t stream_number) {
+    if (handle == 0xbad1bad1u) {
+        return;
+    }
+    const std::uint8_t* table = (static_cast<std::int32_t>(handle) >= 0) ? DAT_00a70890 : DAT_00baa170;
+    const std::uint32_t slot = handle & 0x7fffffffu;
+    void* buffer = *reinterpret_cast<void* const*>(table + slot * 0x14 + 0x10);
+    auto call = *reinterpret_cast<D3DCallSetStreamSource const*>(
+        static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 400);
+    call(DAT_00cf1944, stream_number, buffer, offset, stride);
+}
+
+void bind_index_buffer_by_handle(std::uint32_t handle) {
+    if (handle == 0xbad1bad1u) {
+        return;
+    }
+    const std::uint8_t* table = (static_cast<std::int32_t>(handle) >= 0) ? DAT_0098c6a8 : DAT_009985a0;
+    const std::uint32_t slot = handle & 0x7fffffffu;
+    void* indices = *reinterpret_cast<void* const*>(table + slot * 0x14 + 0x10);
+    auto call = *reinterpret_cast<D3DCallSetIndices const*>(
+        static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0x1a0);
+    call(DAT_00cf1944, indices);
+}
+
+void* resolve_mode_pixel_shader_handle() {
+    std::int32_t mode = DAT_00998580;
+    const std::uint8_t* entry = DAT_00f38b28 + static_cast<std::size_t>(mode) * 0xc4;
+    if (mode > DAT_00c754cc || *reinterpret_cast<const std::int32_t*>(entry) == 0) {
+        mode = DAT_00cf1a3c;
+    }
+    const std::uint8_t* resolved = DAT_00f38b28 + static_cast<std::size_t>(mode) * 0xc4;
+    return *reinterpret_cast<void* const*>(resolved + 0x14); // DAT_00f38b3c's own offset from DAT_00f38b28
+}
+
+void bind_pixel_shader_for_mode(std::int32_t handle, bool force) {
+    if (DAT_00cf1a48 != handle || force) {
+        void* resolved = resolve_mode_pixel_shader_handle();
+        set_pixel_shader_cached(resolved);
+        DAT_00cf1a48 = handle;
+        ++DAT_00b170c4;
+    }
 }
 
 } // namespace hp6::render

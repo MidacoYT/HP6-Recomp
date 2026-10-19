@@ -1994,3 +1994,83 @@ cette reconstruction est atteint : un executable reel et testable,
 assemble piece par piece depuis WinMain, qui cree une vraie fenetre,
 un vrai device Direct3D 9, demarre le vrai moteur, et declenche
 TriggerBootupFlow -> resolution de chapitre -> ScreenLanguageSelect.**
+
+## Premier vrai DrawPrimitive integre
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 12"). Indication
+utilisateur confirmee dans le binaire : les menus sont des elements 3D
+spatiaux, rendus via de vraies cameras nommees ("ScreenSpaceCamera",
+"CurrentInWorldCamera", "GlobalPresentationCamera"). En cherchant les
+fonctions referencant a la fois le device D3D9 reel et des offsets de
+vtable SetTransform/DrawPrimitive/BeginScene/EndScene, deux fonctions
+reelles ont ete trouvees et integrees : submit_screen_quad (FUN_00648c00,
+verrouille le vertex buffer partage, construit les sommets, SetStreamSource,
+DrawPrimitive(TRIANGLESTRIP) reel) et render_fade_overlay_quad
+(FUN_0064abd0, compose la texture-cible-de-rendu comme un quad plein
+ecran, EndScene/Present). Six setters D3D9 mis en cache supplementaires
+integres au passage (sampler/texture/vertex declaration/vertex shader/
+pixel shader states). Honnetete sur la portee : cette chaine n'est
+atteinte, dans le binaire exporte, que depuis le systeme d'overlay de
+debug, confirme mort (hardcode false) dans le build FINAL -- ce n'est
+pas encore le vrai moteur de rendu des menus. Teste de bout en bout
+dans tests/screen_overlay_render_smoke.cpp, qui verifie que le vrai
+DrawPrimitive(TRIANGLESTRIP, 0, 2) se declenche avec les bonnes donnees.
+
+42/42 tests CTest, tous verts. Piste ouverte pour la suite : FUN_005d3570
+("SetActiveCamera" probable) et les trois cameras nommees, pour relier
+la vraie camera 3D au rendu reel de ScreenLanguageSelect.
+
+## La chaine complete trouvee, puis Scene::End integree pour de vrai
+
+Voir architecture/startup_path.md ("18 oct 2026, suite 14 et 15").
+Recherche descendante dans la base IDA (14177 fonctions) : trouve
+PluginPresentationBitmap_BuildRenderQuad, dont les globales referencees
+incluent 0xcf8168 -- la meme table de chaines que ScreenLanguageSelect
+remplit. Chaine complete tracee jusqu'au vrai dessin : BuildRenderQuad
+-> clip/mise en page -> SubmitRenderCommand (62 vrais appelants) ->
+RenderAllRegions (vide chaque region active, liee a
+set_active_render_region deja integree) -> Scene::End (confirmee par
+sa propre chaine de diagnostic), qui emet les vrais DrawPrimitive/
+DrawIndexedPrimitive.
+
+Scene::End (FUN_00646200) a ensuite ete integree pour de vrai
+(hp6::render::execute_scene_render_batch, src/render/
+SceneBatchRenderer.cpp) : les trois chemins de controle reels
+(invalidation, recursion multi-batch, dessin simple sur deux paliers
+de qualite) et les deux vrais appels D3D9 sont reproduits fidelement ;
+les blocs de liaison materiau/eclairage non traces sont differes sans
+affecter les parametres du vrai appel de dessin. Six petites fonctions
+D3D9 supplementaires integrees au passage (SetVertexShaderConstantF,
+SetStreamSource/SetIndices par handle, resolution de shader pixel par
+mode). Un vrai bug de test (tableau de vtable factice trop petit,
+ecriture hors limites) a ete trouve et corrige en ecrivant le test.
+
+43/43 tests CTest, tous verts, 423/462 fonctions integrees (39
+differees, 0 bloquee). Deuxieme vrai DrawPrimitive integre dans ce
+projet, et premier connecte a la vraie chaine de rendu de scene.
+
+Suite (18 oct 2026, suite 16) : les deux derniers blocs differes du
+chemin low-tier de Scene::End ont ete integres pour de vrai --
+FUN_006455c0 -> hp6::render::push_item_transform_and_material
+(transform multipliee par la matrice vue/projection de la region
+active, transposee, poussee au registre 0 du vertex shader ; groupes
+de constantes couleur/materiau aux registres 4/5/6/0x12 ; etat de
+rendu 0x16) et le second chemin de FUN_00644cd0 (param_4 != 0) ->
+hp6::render::resolve_material_bindings (porte "dessiner" DAT_00865285,
+liaison declaration+shader reelle pour les types 2, 10 et 0x20000108 --
+ce dernier partage avec le fondu de debug deja integre). Resolu par
+desassemblage reel (pas seulement le C decompile, qui masque le
+registre implicite in_EAX de FUN_005a2310/transpose) : confirme que
+les deux appels de transposition ecrivent dans un tampon separe, jamais
+en place. Deux fonctions de maths pures ajoutees a src/math/Transform
+(multiply_matrix4x4 = FUN_00401520, transpose_matrix4x4 = FUN_005a2310).
+Un bug de vtable factice (SetRenderState/SetVertexShaderConstantF non
+cables) et un changement de comportement des anciens tests (material
+type 0 desormais rejete par la vraie porte) ont ete trouves et corriges
+en construisant le test.
+
+427/466 fonctions integrees (39 differees, 0 bloquee), 43/43 tests
+CTest verts. Le chemin low-tier de Scene::End a desormais une
+apparence (transform, couleur, declaration/shader) entierement reelle,
+plus seulement un declenchement de dessin avec des parametres
+corrects.

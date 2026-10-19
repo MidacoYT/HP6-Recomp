@@ -3,6 +3,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00401020,float10 __cdecl FUN_00401020(float param_1),hp6::math::sqrt_x87,src/math/Scalar.cpp,integrated,passed,unverified
 00401270,,,,deferred,not_run,unverified
 004013a0,,,,deferred,not_run,unverified
+00401520,,hp6::math::multiply_matrix4x4,src/math/Transform.cpp,integrated,passed,unverified
 00401da0,,,,deferred,not_run,unverified
 00403190,,,,deferred,not_run,unverified
 00404660,float10 __cdecl FUN_00404660(float param_1),hp6::math::abs_x87,src/math/Scalar.cpp,integrated,passed,unverified
@@ -55,6 +56,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0059f450,undefined4 __thiscall FUN_0059f450(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0059f460,undefined __thiscall FUN_0059f460(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::update,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 005a1cd0,,hp6::presentation::register_debug_audio_subsystem,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
+005a2310,,hp6::math::transpose_matrix4x4,src/math/Transform.cpp,integrated,passed,unverified
 005d1580,"undefined __stdcall FUN_005d1580(float * param_1, float * param_2)",hp6::math::normalize_xyz_preserve_w,src/math/VectorWithGlobal.cpp,integrated,compiled_only,unverified
 005d1680,"undefined __stdcall FUN_005d1680(float * param_1, float * param_2)",hp6::math::normalize_xyzw,src/math/Vector.cpp,integrated,passed,unverified
 005d16f0,"undefined __stdcall FUN_005d16f0(float * param_1, float * param_2, float * param_3)",hp6::math::cross_xyz,src/math/Vector.cpp,integrated,passed,unverified
@@ -106,6 +108,8 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0063b4a0,int __stdcall FUN_0063b4a0(void),hp6::render::compute_dynamic_table_size,src/render/DeviceReset.cpp,integrated,passed,unverified
 0063b4c0,undefined __stdcall thunk_FUN_01011a50(void),hp6::render::adjust_texture_quality_for_memory,src/render/DeviceReset.cpp,integrated,passed,unverified
 0063b560,,hp6::render::update_quality_tier_flag,src/render/DeviceCreate.cpp,integrated,passed,unverified
+0063b6e0,,hp6::render::set_vertex_shader_constant_f,src/render/RenderStateCache.cpp,integrated,passed,unverified
+0063b7a0,,hp6::render::resolve_mode_pixel_shader_handle,src/render/RenderStateCache.cpp,integrated,passed,unverified
 0063b850,"undefined __fastcall FUN_0063b850(undefined4 param_1, int param_2)",hp6::runtime::bump_allocate,src/runtime/ScratchBuffers.cpp,integrated,passed,unverified
 0063b880,,hp6::render::apply_multisample_quality,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0063ccf0,noreturn undefined __cdecl FUN_0063ccf0(char * param_1),hp6::platform::format_diagnostic_message,src/platform/Diagnostics.cpp,integrated,passed,unverified
@@ -114,6 +118,10 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 006406a0,undefined __stdcall thunk_FUN_010021f0(void),hp6::render::apply_render_state_profile,src/render/RenderStateCache.cpp,integrated,passed,unverified
 00640fb0,undefined __stdcall FUN_00640fb0(void),hp6::render::initialize_default_render_state,src/render/RenderStateCache.cpp,integrated,passed,unverified
 00642420,undefined __stdcall FUN_00642420(void),hp6::render::reset_dynamic_resources,src/render/DeviceReset.cpp,integrated,passed,unverified
+00644cd0,,hp6::render::resolve_material_bindings,src/render/SceneBatchRenderer.cpp,integrated,passed,unverified
+006455c0,,hp6::render::push_item_transform_and_material,src/render/SceneBatchRenderer.cpp,integrated,passed,unverified
+00646200,,hp6::render::execute_scene_render_batch,src/render/SceneBatchRenderer.cpp,integrated,passed,unverified
+00648c00,,hp6::render::submit_screen_quad,src/render/ScreenOverlayRender.cpp,integrated,passed,unverified
 00648e10,undefined __stdcall FUN_00648e10(void),hp6::render::create_dynamic_vertex_buffer,src/render/DeviceReset.cpp,integrated,passed,unverified
 00648e70,,hp6::render::shutdown_render_device,src/render/DeviceLostHandler.cpp,integrated,passed,unverified
 006490b0,,hp6::render::(anonymous namespace)::display_mode_compare,src/render/DeviceCreate.cpp,integrated,passed,unverified
@@ -123,6 +131,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0064a810,undefined __stdcall FUN_0064a810(void),hp6::render::prepare_render_target_texture,src/render/RenderTargetSetup.cpp,integrated,passed,unverified
 0064aa30,undefined __stdcall FUN_0064aa30(void),hp6::render::cache_available_texture_memory,src/render/DeviceReset.cpp,integrated,passed,unverified
 0064aa60,,hp6::render::handle_device_lost,src/render/DeviceLostHandler.cpp,integrated,passed,unverified
+0064abd0,,hp6::render::render_fade_overlay_quad,src/render/ScreenOverlayRender.cpp,integrated,passed,unverified
 0064b560,,hp6::render::clear_scratch_light_block,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0064b5a0,,hp6::render::apply_secondary_render_state_defaults,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0064b5c0,,hp6::render::apply_default_render_states,src/render/DeviceCreate.cpp,integrated,passed,unverified
@@ -130,10 +139,18 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0064bb90,,hp6::render::init_default_sampler_and_stage_state_table,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0064bd90,,hp6::render::apply_default_sampler_and_stage_states,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0064c300,"undefined4 __cdecl FUN_0064c300(int param_1, int param_2)",hp6::render::set_render_state_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
+0064c350,,hp6::render::set_sampler_state_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
 0064c3b0,"undefined4 __cdecl FUN_0064c3b0(int param_1, int param_2, int param_3)",hp6::render::set_texture_stage_state_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
+0064c410,,hp6::render::set_texture_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
 0064c460,,hp6::render::set_render_targets_cached,src/render/DeviceLostHandler.cpp,integrated,passed,unverified
+0064c4e0,,hp6::render::set_vertex_shader_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
+0064c570,,hp6::render::set_pixel_shader_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
+0064c5c0,,hp6::render::set_vertex_declaration_cached,src/render/RenderStateCache.cpp,integrated,passed,unverified
 0064c8c0,,,,deferred,not_run,unverified
 00650d80,undefined __stdcall FUN_00650d80(void),hp6::render::reset_hook_placeholder,src/render/DeviceReset.cpp,integrated,passed,unverified
+00652380,,hp6::render::bind_vertex_buffer_by_handle,src/render/RenderStateCache.cpp,integrated,passed,unverified
+00652400,,hp6::render::bind_index_buffer_by_handle,src/render/RenderStateCache.cpp,integrated,passed,unverified
+006524b0,,hp6::render::reset_vertex_shader_constant_cache,src/render/RenderStateCache.cpp,integrated,passed,unverified
 006525d0,undefined __stdcall FUN_006525d0(void),hp6::render::recreate_vertex_shaders,src/render/DeviceReset.cpp,integrated,passed,unverified
 006532e0,undefined __stdcall FUN_006532e0(void),hp6::render::recreate_shader_table,src/render/DeviceReset.cpp,integrated,passed,unverified
 00653430,"undefined __cdecl FUN_00653430(undefined4 param_1, undefined4 param_2, int param_3, int param_4)",hp6::render::recreate_or_invalidate_shader,src/render/DeviceReset.cpp,integrated,passed,unverified
@@ -444,6 +461,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 01003ca0,"undefined __cdecl FUN_01003ca0(void * param_1, int param_2)",hp6::runtime::append_to_cursor,src/runtime/ScratchBuffers.cpp,integrated,passed,unverified
 01003ea0,undefined4 __stdcall FUN_01003ea0(void),hp6::render::allocate_shader_id,src/render/ShaderManager.cpp,integrated,passed,unverified
 01003f20,undefined __cdecl FUN_01003f20(ushort param_1),hp6::render::free_shader_id,src/render/ShaderManager.cpp,integrated,passed,unverified
+010043b0,,hp6::render::bind_pixel_shader_for_mode,src/render/RenderStateCache.cpp,integrated,passed,unverified
 0100e6e0,undefined __stdcall FUN_0100e6e0(void),hp6::platform::save_display_options,src/platform/RegistryConfig.cpp,integrated,passed,unverified
 0100e9b0,,hp6::presentation::copy_gsc_message_handles,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
 01011a50,undefined __stdcall FUN_01011a50(void),hp6::render::adjust_texture_quality_for_memory,src/render/DeviceReset.cpp,integrated,passed,unverified

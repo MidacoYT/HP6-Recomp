@@ -128,7 +128,29 @@ void enqueue_attract_mode_screen_task(void* self);
 // 24-byte task. Only the constructor and shared destructor are
 // reconstructed; vtable slot 3 ("Update", 0x00429890) is a large
 // (0x118-byte local buffer) language-list/navigation state machine,
-// out of scope here.
+// out of scope here. The task's real primary vtable lives at
+// 0x00821528 (read live from the Ghidra project: slot 0 = dtor
+// 0x00429810, slot 1 = 0x00429850, slot 2 = 0x00429860, slot 3 =
+// Update 0x00429890 as above, slot 4/+0x10 = 0x00405a30). That slot 4
+// is the "Render" entry PresentationTaskHandler's own message handler
+// calls on every active task when it receives the named message
+// "iMsgDoRender" (see architecture/startup_path.md, "iMsgDoRender /
+// GUI rendering trail" — PresentationTaskHandler's real vtable at
+// 0x0083d194, slot+0xc is its OnMessage, which for that message walks
+// its task list and calls each task's own vtable slot+0x10) — and for
+// ScreenLanguageSelect specifically it is **confirmed empty**
+// (`FUN_00405a30` is a bare `return;`, no body at all). So this task
+// does not draw its own menu text directly; Update's real body instead
+// writes the localized strings ("GUI_LANGUAGEMENU%d", 0-15) into a
+// shared key/string map object at a fixed address (0x00cf8168, via
+// FUN_00429430, itself confirmed to be a plain std::map-style
+// insert/update — not a draw call) that a separate, not-yet-located
+// central GUI/text renderer must read from. That renderer, and
+// whatever actually calls FUN_005f4b50-or-equivalent to fire
+// "iMsgDoRender" once per frame, remain unresolved as of 18 oct 2026 —
+// deliberately left unresolved rather than guessed at; see
+// architecture/startup_path.md for the full trail of what was checked
+// and ruled out.
 void enqueue_language_select_screen_task(void* self);
 
 } // namespace hp6::presentation

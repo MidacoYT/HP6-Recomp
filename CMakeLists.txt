@@ -43,6 +43,8 @@ add_library(hp6_reconstructed STATIC
     src/render/RenderHeap.cpp
     src/render/RenderStateCache.cpp
     src/render/RenderTargetSetup.cpp
+    src/render/ScreenOverlayRender.cpp
+    src/render/SceneBatchRenderer.cpp
     src/runtime/PoolAccess.cpp
     src/runtime/PoolList.cpp
     src/runtime/PoolPath.cpp
@@ -159,6 +161,12 @@ if(BUILD_TESTING)
     add_executable(hp6_winmain_smoke tests/winmain_smoke.cpp)
     target_link_libraries(hp6_winmain_smoke PRIVATE hp6_reconstructed)
     add_test(NAME winmain_smoke COMMAND hp6_winmain_smoke)
+    add_executable(hp6_screen_overlay_render_smoke tests/screen_overlay_render_smoke.cpp)
+    target_link_libraries(hp6_screen_overlay_render_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME screen_overlay_render_smoke COMMAND hp6_screen_overlay_render_smoke)
+    add_executable(hp6_scene_batch_renderer_smoke tests/scene_batch_renderer_smoke.cpp)
+    target_link_libraries(hp6_scene_batch_renderer_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME scene_batch_renderer_smoke COMMAND hp6_scene_batch_renderer_smoke)
     add_executable(hp6_device_create_smoke tests/device_create_smoke.cpp)
     target_link_libraries(hp6_device_create_smoke PRIVATE hp6_reconstructed)
     add_test(NAME device_create_smoke COMMAND hp6_device_create_smoke)
