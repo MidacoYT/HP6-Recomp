@@ -26,15 +26,27 @@
   <section class="hero">
     <h1>Reconstruction de <em>Harry Potter and the Half-Blood Prince</em> (PC)</h1>
     <p class="hero-sub">
-      Decompilation Ghidra fonction par fonction, puis reconstruction fidele en C++ moderne —
-      chaque fonction est soit <strong>integree</strong> (code reel reconstruit et teste),
-      soit <strong>differee</strong> (placeholder documente, jamais invente), soit <strong>bloquee</strong>.
+      Decompilation Ghidra et IDA fonction par fonction, puis reconstruction fidele en C++ moderne —
+      chaque fonction du binaire est soit <strong>integree</strong> (code reel reconstruit et teste),
+      soit <strong>differee</strong> (placeholder documente, jamais invente), soit <strong>bloquee</strong>,
+      soit <strong>pas encore etudiee</strong>.
     </p>
 
     <div class="overall" id="overall">
-      <div class="overall-number">
-        <span id="overall-percent">—</span>
-        <span class="overall-percent-sign">%</span>
+      <div class="overall-head">
+        <div>
+          <div class="overall-label">Sur l'ensemble du binaire</div>
+          <div class="overall-number">
+            <span id="overall-percent">—</span>
+            <span class="overall-percent-sign">%</span>
+          </div>
+          <div class="overall-sub" id="overall-count">—</div>
+        </div>
+        <div class="reviewed-stat">
+          <div class="overall-label">Sur les fonctions deja etudiees</div>
+          <div class="reviewed-number"><span id="reviewed-percent">—</span>%</div>
+          <div class="overall-sub" id="reviewed-count">—</div>
+        </div>
       </div>
       <div class="overall-bar" id="overall-bar" role="img" aria-label="Progression globale"></div>
       <div class="overall-legend" id="overall-legend"></div>
@@ -42,27 +54,28 @@
   </section>
 
   <section class="modules">
-    <h2>Par module</h2>
+    <h2>Par module <span class="muted">(parmi les fonctions deja etudiees)</span></h2>
     <div class="module-grid" id="module-grid"></div>
   </section>
 
   <section class="functions">
-    <h2>Fonctions <span class="muted" id="function-count"></span></h2>
+    <h2>Toutes les fonctions <span class="muted" id="function-count"></span></h2>
     <div class="toolbar">
-      <input id="search" type="search" placeholder="Chercher une adresse, un symbole, un fichier..." autocomplete="off">
+      <input id="search" type="search" placeholder="Chercher une adresse, un nom, un fichier..." autocomplete="off">
       <div class="status-filters" id="status-filters">
         <button data-status="all" class="active">Toutes</button>
         <button data-status="integrated">Integrees</button>
         <button data-status="deferred">Differees</button>
         <button data-status="blocked">Bloquees</button>
+        <button data-status="untouched">Non etudiees</button>
       </div>
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap" id="table-wrap">
       <table id="function-table">
         <thead>
           <tr>
             <th class="col-address">Adresse</th>
-            <th class="col-symbol">Symbole C++</th>
+            <th class="col-symbol">Nom / symbole</th>
             <th class="col-module">Module</th>
             <th class="col-status">Statut</th>
             <th class="col-build">Build</th>
@@ -72,13 +85,18 @@
       </table>
       <p id="empty-state" class="empty-state" hidden>Aucune fonction ne correspond a ce filtre.</p>
     </div>
+    <div class="load-more-row">
+      <button id="load-more" type="button" hidden>Afficher plus</button>
+      <span class="muted" id="shown-count"></span>
+    </div>
   </section>
 </main>
 
 <footer class="site-footer">
   <div class="wrap">
-    <p>Genere automatiquement depuis <code>reports/pipeline/state.json</code> — derniere mise a jour : <span id="generated-at">—</span>.</p>
-    <p class="muted">Pas de verite inventee : une fonction differee reste un placeholder documente tant qu'elle n'est pas retracee depuis le binaire reel.</p>
+    <p>Genere automatiquement depuis <code>reports/pipeline/state.json</code> et le catalogue de fonctions
+      (Ghidra + IDA) — derniere mise a jour : <span id="generated-at">—</span>.</p>
+    <p class="muted">Pas de verite inventee : une fonction differee reste un placeholder documente tant qu'elle n'est pas retracee depuis le binaire reel, et une fonction "non etudiee" n'a simplement pas encore ete regardee.</p>
   </div>
 </footer>
 

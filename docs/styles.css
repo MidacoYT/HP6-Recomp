@@ -13,6 +13,7 @@
   --warn-bg: #d9770622;
   --bad: #dc2626;
   --bad-bg: #dc262622;
+  --muted-dot: #9aa1ad;
   --radius: 10px;
   --shadow: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 1px rgba(15, 23, 42, 0.04);
 }
@@ -146,6 +147,22 @@ code {
   padding: 24px;
 }
 
+.overall-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.overall-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-bottom: 4px;
+}
+
 .overall-number {
   font-family: var(--mono);
   font-size: 2.6rem;
@@ -156,8 +173,20 @@ code {
 
 .overall-percent-sign { font-size: 1.4rem; color: var(--text-muted); margin-left: 2px; }
 
+.overall-sub { font-size: 0.82rem; color: var(--text-muted); margin-top: 6px; }
+
+.reviewed-stat { text-align: right; }
+
+.reviewed-number {
+  font-family: var(--mono);
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: var(--text);
+  line-height: 1;
+}
+
 .overall-bar {
-  margin-top: 16px;
+  margin-top: 18px;
   height: 14px;
   border-radius: 999px;
   overflow: hidden;
@@ -169,6 +198,7 @@ code {
 .bar-integrated { background: var(--ok); }
 .bar-deferred { background: var(--warn); }
 .bar-blocked { background: var(--bad); }
+.bar-untouched { background: transparent; }
 
 .overall-legend {
   margin-top: 14px;
@@ -320,10 +350,34 @@ td { padding: 9px 14px; vertical-align: top; }
 .badge-integrated { background: var(--ok-bg); color: var(--ok); }
 .badge-deferred { background: var(--warn-bg); color: var(--warn); }
 .badge-blocked { background: var(--bad-bg); color: var(--bad); }
-.badge-not_run, .badge-pending { background: var(--border); color: var(--text-muted); }
+.badge-untouched, .badge-not_run, .badge-pending { background: var(--border); color: var(--text-muted); }
 .badge-passed { background: var(--ok-bg); color: var(--ok); }
 .badge-failed { background: var(--bad-bg); color: var(--bad); }
 .badge-compiled_only { background: var(--warn-bg); color: var(--warn); }
+
+.auto-name { color: var(--text-muted); font-style: italic; }
+
+.load-more-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+#load-more {
+  border: 1px solid var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+  border-radius: 8px;
+  padding: 9px 18px;
+  font-size: 0.86rem;
+  cursor: pointer;
+}
+
+#load-more:hover { border-color: var(--accent); color: var(--accent); }
+
+#shown-count { font-size: 0.82rem; }
 
 .empty-state {
   text-align: center;
@@ -343,8 +397,46 @@ td { padding: 9px 14px; vertical-align: top; }
 
 .site-footer p { margin: 4px 0; }
 
-@media (max-width: 560px) {
+@media (max-width: 640px) {
+  .wrap { padding: 0 14px; }
+  .overall { padding: 18px; }
   .overall-number { font-size: 2rem; }
-  .hero h1 { font-size: 1.3rem; }
-  thead th:nth-child(3), td:nth-child(3) { display: none; }
+  .reviewed-stat { text-align: left; }
+  .overall-head { gap: 14px; }
+  .hero { padding: 28px 0 20px; }
+  .hero h1 { font-size: 1.25rem; }
+  .hero-sub { font-size: 0.9rem; }
+
+  .status-filters button { padding: 7px 12px; font-size: 0.8rem; }
+  #search { font-size: 16px; } /* prevents iOS auto-zoom on focus */
+
+  /* Table -> stacked cards: each row becomes a small card, each cell a
+     labelled line, instead of a cramped/scrolling wide table. */
+  .table-wrap { max-height: none; overflow: visible; }
+  #function-table thead { display: none; }
+  #function-table, #function-table tbody, #function-table tr, #function-table td {
+    display: block;
+    width: 100%;
+  }
+  #function-table tr {
+    padding: 10px 14px;
+    border-bottom: 1px solid var(--border);
+  }
+  #function-table td {
+    padding: 3px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    text-align: right;
+  }
+  #function-table td::before {
+    content: attr(data-label);
+    color: var(--text-muted);
+    font-size: 0.74rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    text-align: left;
+    flex: 0 0 auto;
+  }
+  #function-table td.cell-address { font-weight: 600; }
 }
