@@ -1,7 +1,7 @@
 address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00401000,,,,deferred,not_run,unverified
 00401020,float10 __cdecl FUN_00401020(float param_1),hp6::math::sqrt_x87,src/math/Scalar.cpp,integrated,passed,unverified
-00401270,,,,deferred,not_run,unverified
+00401270,,hp6::math::fast_cos,src/math/Scalar.cpp,integrated,passed,unverified
 004013a0,,,,deferred,not_run,unverified
 00401520,,hp6::math::multiply_matrix4x4,src/math/Transform.cpp,integrated,passed,unverified
 00401da0,,,,deferred,not_run,unverified

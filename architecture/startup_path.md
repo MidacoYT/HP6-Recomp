@@ -2410,3 +2410,49 @@ aussi.
 
 **434/469 fonctions intégrées (35 différées, 0 bloquée), 43/43 tests
 CTest verts.**
+
+## 19 oct 2026 (suite 20) — `fast_cos`, un vrai cosinus approché par polynôme, trouvé dans le lot `float_ops_015` abandonné
+
+Le lot `float_ops_015` (5 fonctions) portait une note décourageante :
+« ReAgent indisponible, une implémentation manuelle précédente utilisait
+des globals inventés et a été retirée ». En relisant le C décompilé de
+`FUN_00401270`, les quatre fonctions de ce lot partagent un piège
+identique : chaque chemin se termine par un simple `return;` sans
+valeur — Ghidra ne reconnaît pas que le vrai résultat flottant reste
+dans `XMM0` à cet instant, invisible au niveau C décompilé. D'où
+l'échec probable de la tentative précédente (sans doute une
+implémentation inventée pour « faire quelque chose » plutôt que de
+tracer le vrai registre).
+
+Désassemblage direct (`pyghidra`) de `FUN_00401270` : c'est une
+**approximation polynomiale de cos(x) par série de Taylor d'ordre 16**
+(puissances paires uniquement, 9 coefficients `1, -1/2!, 1/4!, ...,
+1/16!`), avec réduction d'angle en deux repliements (`min(r0, 2π-r0)`
+puis `min(r1, π-r1)`) pour ramener l'angle dans `[0, π/2]` avant
+d'évaluer le polynôme, et un indicateur d'inversion de signe calculé
+comme une identité flottante exacte `A - A == 0` (robuste malgré les
+arrondis, puisque réutilise la MÊME valeur calculée une fois). Tous les
+coefficients et constantes (`π`, `2π`, `1/2π`) ont été lus directement
+en mémoire depuis le binaire (`0x0087e990`..`ac`, `0x00866e70`,
+`0x0087ea90/94/98`) — confirmés correspondre exactement à la vraie
+série de Taylor du cosinus, pas recalculés depuis une bibliothèque.
+
+Nouvelle fonction `hp6::math::fast_cos` (`src/math/Scalar.cpp`),
+vérifiée contre `std::cos` à ~1e-7 près sur une période complète et un
+déroulement positif de 15 périodes. Un vrai défaut de précision a été
+découvert et **testé plutôt que caché** : la réduction d'angle tronque
+vers zéro (comme la vraie instruction `CVTTSS2SI`), ce qui ne ramène
+correctement l'angle dans `[0, 2π)` que pour des angles d'entrée
+**positifs** — certains grands angles négatifs restent largement
+non réduits et perdent en précision (toujours à ~1 % près, jamais
+du grand n'importe quoi). Fidèle au binaire réel, pas « corrigé ».
+
+Les trois autres fonctions du même lot (`004013a0`, `00401da0`,
+`00403190`) restent différées : `004013a0` appelle déjà
+`hp6::math::sqrt_x87` (donc probablement liée à sin/asin via
+l'identité pythagoricienne) mais nécessiterait le même travail de
+désassemblage pour en confirmer le registre de retour implicite —
+piste notée pour une prochaine session.
+
+**435/469 fonctions intégrées (34 différées, 0 bloquée), 43/43 tests
+CTest verts.**

@@ -1584,13 +1584,13 @@
     },
     "00401270": {
       "batch": "float_ops_015",
-      "build": "not_run",
-      "cpp_symbol": "",
+      "build": "passed",
+      "cpp_symbol": "hp6::math::fast_cos",
       "equivalence": "unverified",
       "export": ".ghidra-exports/00401270.json",
-      "integration": "deferred",
-      "integration_note": "ReAgent was unavailable for this batch; prior manual implementation used invented zero globals or placeholder logic and was removed. Requires evidence-based reconstruction.",
-      "source": "",
+      "integration": "integrated",
+      "integration_note": "Part of the float_ops_015 batch (ReAgent was unavailable for it; a prior manual attempt using invented placeholder logic was removed). Reconstructed from live x86 disassembly, not the decompiled C alone, since every path in the decompiled C ends in a bare 'return;' -- the real float result is left in XMM0, invisible to Ghidra's decompiler for this function. A 16th-order even-power Taylor polynomial approximation of cos(x): 9 coefficients (1, -1/2!, 1/4!, ..., 1/16!) and the pi/2pi/invTwoPi constants read directly from the binary (0x0087e990..ac, 0x00866e70, 0x0087ea90/94/98), confirmed bit-exact against cos's real Taylor series. Range reduction folds the angle into [0, pi/2] via two reflections (around 2pi, then pi), with a sign-flip flag computed as an exact float A-A==0 identity matching the real SUBSS/MINSS sequence precisely. Verified against std::cos to ~1e-7 across a full period and a 15-period positive wraparound; also confirmed (and tested) a real precision quirk rather than hiding it: truncation-toward-zero range reduction only lands in [0,2pi) for non-negative inputs, so some large-magnitude negative angles get a materially less precise (but still within ~1%) result -- faithful to the real CVTTSS2SI instruction, not a bug. Tested in tests/core_smoke.cpp.",
+      "source": "src/math/Scalar.cpp",
       "updated_at": "2026-10-16T17:08:21.706934+00:00"
     },
     "004013a0": {

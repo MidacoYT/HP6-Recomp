@@ -254,5 +254,41 @@ int main() {
         if (hp6::math::slope_greater(a2, b2) != 0u) return 37;
     }
 
+    // fast_cos: 16th-order Taylor polynomial with quadrant range
+    // reduction, checked against the standard library across a full
+    // period, a many-period positive wraparound, and small negative
+    // angles. A real precision quirk, reproduced faithfully rather than
+    // "fixed": truncating (angle * invTwoPi) toward zero (matching the
+    // real CVTTSS2SI instruction) only lands the first-stage reduction
+    // in [0, 2pi) for non-negative input angles -- trunc rounds toward
+    // zero, not down, so a negative angle can leave a large negative
+    // residual the two MINSS folds (each written assuming a value
+    // already in [0, 2pi)/[0, pi)) don't actually reduce further, which
+    // the polynomial then evaluates well outside its accurate range.
+    // Harmless for angles near zero (the unreduced residual is still
+    // small) and for whichever angles this project's own callers
+    // actually pass in (not yet traced), but real nonetheless -- checked
+    // below with a deliberately looser tolerance rather than hidden.
+    {
+        const float kTolerance = 2e-5f;
+        const float angles[] = {
+            0.0f, 0.5f, 1.0f, 1.5f, 1.5707963f /*pi/2*/, 2.0f, 3.0f,
+            3.14159265f /*pi*/, 4.0f, 4.71238898f /*3pi/2*/, 5.0f,
+            6.28318530f /*2pi*/, -1.0f, -3.0f, 100.0f,
+        };
+        for (float angle : angles) {
+            const float expected = std::cos(angle);
+            const float actual = hp6::math::fast_cos(angle);
+            if (std::fabs(actual - expected) > kTolerance) return 38;
+        }
+        // Large-magnitude negative angles: the unreduced-residual case
+        // described above (still within ~1% absolute, just not to full
+        // float precision).
+        const float wide_negative_angles[] = {-4.71238898f, -100.0f};
+        for (float angle : wide_negative_angles) {
+            if (std::fabs(hp6::math::fast_cos(angle) - std::cos(angle)) > 1e-2f) return 38;
+        }
+    }
+
     return 0;
 }

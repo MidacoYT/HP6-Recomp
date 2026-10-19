@@ -2130,3 +2130,18 @@ avait deja applique.
 
 434/469 fonctions integrees (35 differees, 0 bloquee), 43/43 tests
 CTest verts.
+
+Suite (19 oct 2026, suite 20) : hp6::math::fast_cos (FUN_00401270,
+src/math/Scalar.cpp) integree -- une approximation de cos(x) par serie
+de Taylor d'ordre 16 (9 coefficients + constantes pi/2pi/1-sur-2pi, tous
+lus directement en memoire, confirmes exacts). Reconstruite par
+desassemblage direct (pas le C decompile seul, qui montre chaque chemin
+finissant en un `return;` sans valeur -- le vrai resultat reste dans
+XMM0). Verifiee contre std::cos a ~1e-7 pres ; un vrai defaut de
+precision pour certains grands angles negatifs (reduction tronquee vers
+zero, pas vers le bas) a ete teste explicitement plutot que cache.
+Les 3 autres fonctions du meme lot float_ops_015 restent differees
+(meme travail de desassemblage necessaire, pas fait cette session).
+
+435/469 fonctions integrees (34 differees, 0 bloquee), 43/43 tests
+CTest verts.

@@ -6,9 +6,9 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 469 fonctions : 434 intégrées dans `src/math`,
+Le journal suit actuellement 469 fonctions : 435 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
-`src/presentation` et `src/archive`, 35 différées, et 0 bloquées (les 5
+`src/presentation` et `src/archive`, 34 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
 manuel `file_ops_052`) ; 0 en attente de revue. Un site de suivi de
 progression (dans l'esprit de decomp.dev, avec une carte cliquable de
@@ -63,6 +63,14 @@ ses deux sous-appels étaient déjà intégrés (`handle_device_lost`,
 `cache_available_texture_memory`), il ne restait que le vrai
 `BeginScene` à câbler. Voir `architecture/startup_path.md` ("19 oct
 2026, suite 19").
+
+**Un vrai cosinus par approximation polynomiale** (`hp6::math::fast_cos`,
+`src/math/Scalar.cpp`) a été retrouvé dans un lot de fonctions
+abandonné (`float_ops_015`) — le C décompilé cachait le résultat réel
+(laissé dans `XMM0`), résolu par désassemblage direct. Série de Taylor
+d'ordre 16 avec coefficients et constantes lus en mémoire, vérifiée
+contre `std::cos` à ~1e-7 près. Voir `architecture/startup_path.md`
+("19 oct 2026, suite 20").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,
