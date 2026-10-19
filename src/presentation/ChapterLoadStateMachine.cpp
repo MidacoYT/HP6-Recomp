@@ -17,7 +17,11 @@ extern std::int32_t DAT_00d6dee8;
 extern std::uint8_t DAT_00cef53f;
 extern void* DAT_00cef7b0;
 extern void* DAT_00fcade0;
-extern std::int32_t DAT_00cef610;
+// Read as a POINTER (a "startup-context" object whose +0xb0 byte is
+// the chapter-load gate ScreenLanguageSelectTask::Update waits on —
+// see ScreenTasks.h); its several other readers across the binary
+// mostly null-check it.
+extern void* DAT_00cef610;
 
 namespace hp6::presentation {
 namespace {
@@ -307,9 +311,14 @@ std::uint32_t update_chapter_load_state_machine(std::uint8_t* task) {
         deferred_void(); // thunk_FUN_00fe55d0
         deferred_void(); // FUN_00431840
         emit_chapter_entry_screen_command(registry);
-        if (DAT_00cef610 != 0) {
+        if (DAT_00cef610 != nullptr) {
             // NOT YET INTEGRATED: "STARTLoadChapter: %s" notification.
-            return static_cast<std::uint32_t>(DAT_00cef610) & 0xffffff00u;
+            // The exported x86 returns the pointer value's own low bits
+            // (EAX still holds it at the RET — same conflation driver
+            // as every `& 0xffffff00` fall-through in this file).
+            return static_cast<std::uint32_t>(
+                       reinterpret_cast<std::uintptr_t>(DAT_00cef610)) &
+                   0xffffff00u;
         }
         if (DAT_00fcadfc[4] == 0) {
             result = deferred_uint_zero(); // FUN_0053acd0

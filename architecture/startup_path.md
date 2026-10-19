@@ -2525,3 +2525,95 @@ concrète et bornée pour une session future.
 
 **436/470 fonctions intégrées (34 différées, 0 bloquée), 44/44 tests
 CTest verts.**
+
+## 19 oct 2026 (suite 22) — la vraie machine à états du menu langue intégrée : `ScreenLanguageSelectTask::Update` (0x00429890), sa table de texte (0x00429430) et le chemin de confirmation (FUN_00fd7920)
+
+Reprise du point 1 du « bilan honnête » écrit en suite 21. Les preuves
+viennent des mêmes exports que le reste du projet (décompilations +
+pcode, et pour les deux marqueurs anglais les NOMS DE SYMBOLES de la
+base de connaissances indépendante `knowledge/hp6` : `aEnGb`/`aEnUs`
+à 0x0083e694/0x0083e68c, 5 caractères + NUL, donc les boucles de
+comparaison 6 octets de l'x86 sont observables-équivalentes à strcmp).
+
+**La table de texte partagée est reconstruite** :
+`hp6::presentation::update_localized_text` (FUN_00429430,
+`src/presentation/GuiTextTable.cpp`). Le C décompilé montre son garde
+propre `param_2 == 0 || param_3 == 0 → return;` puis un
+insertion/mise-à-jour dans la structure adresse-racine (0x00cf8168,
+lisible/écrivable par 45 fonctions du binaire). L'implémentation
+conserve le contrat observable (clé nulle ou texte nul → no-op ;
+sinon insère, en remplaçant toute valeur existante) sans répliquer la
+structure interne de nœuds (hybride hash/liste + allocateurs thunks,
+non encore lus par rien d'intégré). Un accesseur de test documenté
+(`read_localized_text`, absent du binaire) donne aux tests un œil sur
+la table — testé dans `tests/gui_text_table_smoke.cpp`.
+
+**`ScreenLanguageSelectTask::Update` (0x00429890) est intégrée** :
+`hp6::presentation::update_language_select_screen_task`
+(`src/presentation/ScreenTasks.cpp`, vtable slot 3 désormais câblée),
+d'après la décompilation + pcode de la fonction elle-même :
+
+- **État 0** : porte sur le contexte de démarrage de chapitre
+  `DAT_00cef610` — réellement UN POINTEUR d'objet (l'état 0 compare son
+  octet +0xb0, pcode confirmé), pas un compteur : retypée `void*`
+  partout (`ChapterLoadStateMachine.cpp` et les deux tests qui en
+  définissent la valeur), son lecteur « `!= 0` » étant inchangé.
+  Avance exactement une fois vers l'état 1 quand l'octet redevient 0.
+- **État 1** : photographie `DAT_00d644f8` à `task+0x10` ; construit
+  et soumet le même `Task_IdleInputTimer` de 0x10 octets que
+  l'IsReady de l'écran-titre (ready_flag=0, vtable partagée 0x00821508,
+  et l'état INTERNE du sous-tâche à +0xc posé à la sentinelle -1) en
+  stockant le résultat de la soumission à `task+0xc` (ce que slot 2
+  lit) ; puis 16 itérations « sprintf "GUI_LANGUAGEMENU%d" » écrivent
+  dans la table 0x00cf8168, slot par slot : pour i inférieur au compte
+  de langues installées (+0xb8/+0xbc du service `DAT_00fcae04`,
+  entrées LARGE à 4 octets chacune, noms `char*` étroits) le texte
+  large que 0x005e5e40 associe au nom étroit (DIFFÉRÉ en callback de
+  test, ECX=+0x04 du service confirmé par pcode), sinon la constante
+  large " " à 0x0081fca8.
+- **État 2** : remet `DAT_00879654` à 0 quand une seule langue est
+  installée (distance d'octets & ~3 == 4, soit exactement 1 élément)
+  OU que le marqueur `+0x98` du service contient "WBSUB" ;
+  `DAT_00d6b8a0 |= 1` ; `DAT_00d6b898 = 0`, `DAT_00d6e5b8 = 0`
+  (pcode : stores 4 octets de la constante 0, donc int, pas float).
+  Balayage de ré-sélection « au ralenti » (seuil 15000 ticks/3,
+  relecture de la ligne de langue courante
+  thunk_FUN_0100e910/FUN_005e5f30/FUN_005e5f00) différée en bloc — son
+  seul observable est `DAT_00879654`, consommé par la confirmation.
+  À plus de 0x14d (333) ticks/3 depuis la photographie : commit via la
+  reconstruction de **FUN_00fd7920** (son unique appelant réel,
+  0x00429cb0) : si `DAT_00879654 >= 0` et l'élément sélectionné non
+  nul, copie du nom (FUN_005e5de0, ECX = +0x04 du service, EAX =
+  l'élément, garde `strlen < 0x3f`, copie jusque NUL inclus —
+  réellement intégrée), titre de fenêtre FUN_005da670 + hook
+  sprintf("Game/Localised/%s.str")/thunk_FUN_00ff7f20 différés
+  (même statut que le "Game.str" de
+  `trigger_bootup_flow`), drapeau registre `DAT_00d46aa8+0xa0`
+  bit 2 posé SAUF pour "en-GB"/"en-US", puis la queue inconditionnelle
+  réelle : `DAT_00d472dc = 8` + `resolve_and_load_chapter(DAT_00fcadec,
+  "FrontEnd")` — le vrai saut de chapitre, déjà intégré depuis la
+  suite 4 — et retour au bas octet 1.
+
+Les retours « hérités d'EAX » de l'x86 (chute d'état 0 = valeur de
+`DAT_00cef610`, état 1 = `this`, état 2 non-commit = elapsed, états
+>2 = état-2) sont répliqués littéralement, chaque provenance documentée
+dans `ScreenTasks.h` (même traitement que les `& 0xffffff00` de
+`ChapterLoadStateMachine.cpp`). Reste différé ici : la resynchro du
+registre de widgets qui suivait le remplissage dans l'x86 (lecture de
+la ligne de langue courante, écriture de l'index de langue dans le
+champ +0xc8 de chaque widget correspondant via FUN_00435110/DAT_0089c014
++ FUN_00416f70) — aucun de ces widgets n'existe dans cette
+reconstruction. Tests : `tests/screen_tasks_smoke.cpp` (états 0/1/2
+jusqu'au commit, incluant le retour 0x100 exact de l'attente sous le
+seuil 333, l'épinglage WBSUB, le marqueur en-GB qui laisse le drapeau
+du registre au repos, et le commit sans sélection) ; la fausse arène
+d'allocation du test passe de 16 à 24 slots (4 allocations de plus).
+
+**Ce qui reste pour le rendu automatique** (inchangé en nature) :
+`BuildRenderQuad` (structure de `PluginPresentationBitmap`
+non confirmée), le moteur de mise en page de texte riche, le pont
+`FUN_005e9820`, et le déclencheur par frame toujours introuvable par
+analyse statique.
+
+**437/470 fonctions intégrées (33 différées, 0 bloquée), 45/45 tests
+CTest verts.**

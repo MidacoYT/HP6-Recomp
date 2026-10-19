@@ -59,6 +59,7 @@ add_library(hp6_reconstructed STATIC
     src/runtime/FrameClock.cpp
     src/presentation/TaskSystem.cpp
     src/presentation/CommandDispatch.cpp
+    src/presentation/GuiTextTable.cpp
     src/presentation/ScreenTasks.cpp
     src/presentation/EngineBootstrap.cpp
     src/presentation/ChapterFlow.cpp
@@ -184,6 +185,9 @@ if(BUILD_TESTING)
     add_executable(hp6_task_system_smoke tests/task_system_smoke.cpp)
     target_link_libraries(hp6_task_system_smoke PRIVATE hp6_reconstructed)
     add_test(NAME task_system_smoke COMMAND hp6_task_system_smoke)
+    add_executable(hp6_gui_text_table_smoke tests/gui_text_table_smoke.cpp)
+    target_link_libraries(hp6_gui_text_table_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME gui_text_table_smoke COMMAND hp6_gui_text_table_smoke)
     add_executable(hp6_screen_tasks_smoke tests/screen_tasks_smoke.cpp)
     target_link_libraries(hp6_screen_tasks_smoke PRIVATE hp6_reconstructed)
     add_test(NAME screen_tasks_smoke COMMAND hp6_screen_tasks_smoke)

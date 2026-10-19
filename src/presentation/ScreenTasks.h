@@ -125,11 +125,11 @@ void enqueue_fmv_screen_task(void* self);
 void enqueue_attract_mode_screen_task(void* self);
 
 // 0x0050b8b0 ("ScreenTask_ScreenLanguageSelect_Enqueue"; thiscall). A
-// 24-byte task. The constructor, shared destructor, "IsReady" (vtable
-// slot 1, 0x00429850), and slot 2 (0x00429860) are reconstructed;
-// vtable slot 3 ("Update", 0x00429890) is a large (0x118-byte local
-// buffer) language-list/navigation state machine, out of scope here.
-// The task's real primary vtable lives at 0x00821528 (read live from
+// 24-byte task. All of its task-object vtable slots are reconstructed:
+// the constructor and shared destructor here, "IsReady" (vtable slot 1,
+// 0x00429850) and slot 2 (0x00429860) as standalone entry points below,
+// and "Update" (vtable slot 3, 0x00429890) as
+// update_language_select_screen_task below. The task's real primary vtable lives at 0x00821528 (read live from
 // the Ghidra project: slot 0 = dtor 0x00429810, slot 1 = 0x00429850,
 // slot 2 = 0x00429860, slot 3 = Update 0x00429890 as above, slot 4/
 // +0x10 = 0x00405a30). That slot 4 is the "Render" entry
@@ -141,14 +141,15 @@ void enqueue_attract_mode_screen_task(void* self);
 // each task's own vtable slot+0x10) — and for ScreenLanguageSelect
 // specifically it is **confirmed empty** (`FUN_00405a30` is a bare
 // `return;`, no body at all). So this task does not draw its own menu
-// text directly; Update's real body instead writes the localized
-// strings ("GUI_LANGUAGEMENU%d", 0-15) into a shared key/string map
-// object at a fixed address (0x00cf8168, via FUN_00429430, itself
-// confirmed to be a plain std::map-style insert/update — not a draw
-// call) that a separate, not-yet-located central GUI/text renderer
+// text directly; Update's body writes the localized strings
+// ("GUI_LANGUAGEMENU%d", 0-15) into a shared key/string map object at
+// a fixed address (0x00cf8168 — FUN_00429430, reconstructed as
+// update_localized_text, GuiTextTable.h, and called for real by the
+// now-reconstructed Update, see update_language_select_screen_task)
+// that a separate, not-yet-located central GUI/text renderer
 // must read from. That renderer, and whatever actually calls
 // FUN_005f4b50-or-equivalent to fire "iMsgDoRender" once per frame,
-// remain unresolved as of 18 oct 2026 — deliberately left unresolved
+// remain unresolved as of 19 oct 2026 — deliberately left unresolved
 // rather than guessed at; see architecture/startup_path.md for the
 // full trail of what was checked and ruled out.
 void enqueue_language_select_screen_task(void* self);
@@ -178,5 +179,72 @@ std::int32_t query_ready_language_select_screen_task(void* task);
 // that layout) to 1. In other words: once the pending idle-timer
 // sub-task is confirmed registered with the handler, flag it ready.
 void mark_language_select_pending_task_ready(void* task);
+
+// ScreenLanguageSelectTask's own "Update" (vtable slot 3, 0x00429890;
+// thiscall, no explicit arguments beyond `this`), reconstructed on
+// 19 oct 2026. A 3-state machine driven per frame through the same
+// vtable dispatch as every other screen task's Update:
+//
+// State 0 — chapter-load gate: waits until DAT_00cef610 points at an
+// object whose +0xb0 byte is 0 (the same startup-context pointer
+// ChapterLoadStateMachine's state machine reads; while its own load is
+// pending the byte is non-zero and this task stays in state 0), then
+// advances to state 1.
+//
+// State 1 — arm + fill the menu text: snapshots DAT_00d644f8 (the
+// frame tick) at task+0x10; constructs and submits the same 0x10-byte
+// "Presentation:TaskHandler::Task_IdleInputTimer" sub-task
+// enqueue_title_page_screen_task's IsReady constructs (ready_flag=0,
+// the shared 0x00821508 vtable, and the sub-task's own +0xc state set
+// to the -1 "not yet armed" sentinel), storing the submission result
+// at task+0xc so slot 2 above can flag it ready when it shows up in
+// the handler's own list; then performs the state's surviving
+// observable: 16 writes into the shared text table 0x00cf8168
+// (update_localized_text, GuiTextTable.h), one per key
+// "GUI_LANGUAGEMENU0".."GUI_LANGUAGEMENU15", each either the wide
+// display text 0x005e5e40 finds for that language (deferred test
+// callback in this reconstruction) in the language service object
+// DAT_00fcae04 (narrow char* entries in the vector at +0xb8/+0xbc;
+// the service's own +0x04 name buffer is what the lookup is keyed
+// against), or the wide " " constant at 0x0081fca8 for slots beyond
+// the installed language count. The exported x86 follows the fill
+// with a widget-registry resync (thunk_FUN_0100e910's current-language
+// row, FUN_00435110's find-by-name, FUN_00416f70) whose only effect is
+// writing each matching UI widget's +0xc8 field
+// with that language's index — deferred as documented in
+// ScreenTasks.cpp because none of those widgets exists in this
+// project yet. ADVANCES STRAIGHT TO STATE 2.
+//
+// State 2 — idle + commit: on entry, when exactly one language is
+// installed (the vector's byte distance is 4) or the service's own
+// +0x98 marker buffer contains "WBSUB", resets the selected-language
+// index DAT_00879654 to 0; then raises DAT_00d6b8a0's bit 0 and
+// zeroes DAT_00d6b898/DAT_00d6e5b8. A 15000-tick idle-selection scan
+// that re-derives DAT_00879654 from the current-process language
+// row (thunk_FUN_0100e910/FUN_005e5f30/FUN_005e5f00 — the IdleInput-
+// Timer sub-task's own +0x8 tick is the idle reference) is deferred
+// as documented in ScreenTasks.cpp. Once more than 0x14d (333)
+// tick/3 units have elapsed since the state-1 snapshot, commits the
+// selection through the confirm path (FUN_00fd7920's reconstruction;
+// integrated in ScreenTasks.cpp): copy the selected language name
+// (0x005e5de0) into the service's +0x04 buffer, raise the registry
+// DAT_00d46aa8's +0xa0 flag bit 2 unless the name is one of the two
+// built-in English markers ("en-GB" at 0x0083e694 / "en-US" at
+// 0x0083e68c, the FUN_005da670 window-title update and the localized
+// .str hook thunk_FUN_00ff7f20 being deferred), set the resolved
+// chapter index DAT_00d472dc to 8 and re-run
+// resolve_and_load_chapter(DAT_00fcadec, "FrontEnd") — the real,
+// already-integrated chapter hop out of the language menu — and then
+// return 1 (task done).
+//
+// The exported x86's EAX at each fall-through exit carries whatever
+// register the last arithmetic left there (DAT_00cef610 for state 0,
+// `this` for state 1, the elapsed tick/3 value for state 2's
+// not-yet-committed exit, `state - 2` for states beyond 2); the low
+// byte is the only part any caller could meaningfully observe, and
+// those fall-through values are replicated literally in
+// ScreenTasks.cpp the way ChapterLoadStateMachine.cpp already does
+// for its own `& 0xffffff00` returns.
+std::int32_t update_language_select_screen_task(void* task);
 
 } // namespace hp6::presentation

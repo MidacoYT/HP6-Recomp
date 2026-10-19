@@ -28,7 +28,7 @@ std::int32_t DAT_00d6dee8 = 0;
 std::uint8_t DAT_00cef53f = 0;
 void* DAT_00cef7b0 = nullptr;
 void* DAT_00fcade0 = nullptr;
-std::int32_t DAT_00cef610 = 0;
+void* DAT_00cef610 = nullptr; // chapter-load gate context (pointer; see ScreenTasks.h)
 
 // ---- ChapterFlow.cpp's own extern dependencies (pulled in transitively
 // through emit_chapter_entry_screen_command) -------------------------------
@@ -140,7 +140,7 @@ int main() {
     std::memset(registry, 0xcd, sizeof(registry));
     *reinterpret_cast<std::int32_t*>(registry + 0x260) = 19;
     DAT_00d472dc = 9; // LanguageSelect
-    DAT_00cef610 = 0;
+    DAT_00cef610 = nullptr;
     dispatch_calls = 0;
     update_chapter_load_state_machine(task);
 

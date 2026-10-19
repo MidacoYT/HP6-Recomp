@@ -14,7 +14,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00429810,"void * __thiscall FUN_00429810(void *this, bool param_1)",hp6::presentation::(anonymous)::ScreenLanguageSelectTask::destroy,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429850,undefined4 __thiscall FUN_00429850(void *this),hp6::presentation::query_ready_language_select_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429860,undefined __thiscall FUN_00429860(void *this),hp6::presentation::mark_language_select_pending_task_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
-00429890,undefined __thiscall FUN_00429890(void *this),,,deferred,not_run,unverified
+00429890,undefined __thiscall FUN_00429890(void *this),hp6::presentation::update_language_select_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429c70,"void * __thiscall FUN_00429c70(void *this, bool param_1)",hp6::presentation::(anonymous)::IdleInputTimerTask::destroy,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429db0,undefined4 __thiscall FUN_00429db0(void *this),hp6::presentation::(anonymous)::AutosaveWarningMessageTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 00429dd0,undefined __thiscall FUN_00429dd0(void *this),hp6::presentation::(anonymous)::AutosaveWarningMessageTask::deactivate_prompt_screen,src/presentation/ScreenTasks.cpp,integrated,passed,unverified

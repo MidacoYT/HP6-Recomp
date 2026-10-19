@@ -1,10 +1,14 @@
 #include "presentation/ScreenTasks.h"
 #include "presentation/CommandDispatch.h"
+#include "presentation/ChapterFlow.h"
+#include "presentation/GuiTextTable.h"
 #include "presentation/TaskSystem.h"
 #include "platform/HandleRegistry.h"
 #include "runtime/FrameClock.h"
 
 #include <cstdint>
+#include <cstdio>
+#include <cstring>
 
 // Addresses read/written by the binary but absent from the exported
 // globals; tests provide their own definitions the way the other
@@ -20,6 +24,40 @@ extern std::int32_t DAT_00868814; // dialog response: 0 = no, 1 = yes, else unan
 extern std::uint8_t DAT_00cef53d; // snapshotted by Task_IdleInputTimer's destructor
 
 // 0x004ccca0 — not reconstructed: an external dependency, same status
+// as 0x006d95d0 (src/platform/StorageInit.cpp). Reports whether a
+// keyboard/controller input was detected since it was last asked.
+extern bool check_for_input();
+
+// ---- ScreenLanguageSelectTask::update's dependencies (0x00429890) --------
+extern void* DAT_00cef610;  // chapter-load startup context; its +0xb0 byte gates
+                            // state 0 (pointer, see ChapterLoadStateMachine.cpp)
+extern void* DAT_00fcae04;  // the screen/language service object: +0x04 64-byte
+                            // current-language name buffer, +0x98 platform
+                            // marker, +0xb8/+0xbc the narrow language-name
+                            // vector (begin/end)
+extern std::int32_t DAT_00879654;  // the selected language's index (-1: none)
+extern std::uint32_t DAT_00d6b8a0; // screen-flow flag bits (bit 0: menu shown)
+extern std::int32_t DAT_00d6b898;
+extern std::int32_t DAT_00d6e5b8;
+extern void* DAT_00d46aa8;  // presentation registry whose +0xa0 byte gains flag
+                            // bit 2 when a non-English language is committed
+extern std::int32_t DAT_00d472dc;  // also in ChapterFlow.cpp
+extern void* DAT_00fcadec;  // the chapter registry "this"; also in
+                            // ChapterFlow.cpp/BootupFlow.cpp
+
+// 0x005e5e40 (EAX = narrow name, ECX = the language service's +0x04 name
+// buffer at the only observed call site; deferred, test-provided): finds
+// the wide display text mapped for a language name inside the language
+// service's own text map, inserting an empty wide value when the key is
+// absent and returning its storage. Only the Update's fill loop calls it
+// (once per installed language slot, 16 keys).
+extern const wchar_t* lookup_localized_language_text(
+    const char* language_name, void* name_buffer_owner);
+
+// The wide " " constant at 0x0081fca8 (Ghidra: _Format_0081fca8): the
+// display-text fallback for menu slots beyond the installed language
+// count. The game-space constant's contents; tests define the array.
+extern const wchar_t kWideBlank_0081fca8[2];// 0x004ccca0 — not reconstructed: an external dependency, same status
 // as 0x006d95d0 (src/platform/StorageInit.cpp). Reports whether a
 // keyboard/controller input was detected since it was last asked.
 extern bool check_for_input();
@@ -88,6 +126,27 @@ struct ScreenMainMenuTask {
         state = 2;
     }
 };
+
+// "" 0x005e5de0 (FUN_005e5de0; ECX = destination, EAX = source at the
+// only observed call — the LanguageSelect confirm path, 0x00fd7920).
+// Bounded name copy: no-op for a null source; when strlen(source) is
+// below the binary's own 0x3f guard, copies the narrow name (including
+// its terminating NUL) into the destination; destination bytes past
+// the terminator and every case with a >= 0x3f name are left
+// untouched. strcpy-equivalent for the observable destination bytes;
+// spelled out to keep the guard and the no-op exact.
+void copy_language_name_into(void* destination, const char* source) {
+    if (source == nullptr) {
+        return;
+    }
+    const std::size_t length = std::strlen(source);
+    if (length < 0x3f) {
+        auto* out = static_cast<char*>(destination);
+        for (std::size_t i = 0; i <= length; ++i) {
+            out[i] = source[i];
+        }
+    }
+}
 
 // Forward declaration: ScreenTitlePageTask::query_ready constructs a
 // Task_IdleInputTimer and needs its vtable before the vtable arrays
@@ -302,8 +361,8 @@ struct ScreenLanguageSelectTask {
     std::uint8_t ready_flag;
     std::uint8_t reserved[3];
     void* secondary_interface;
-    void* pending_task;        // +0xc: Update's own Task_IdleInputTimer submission (not reconstructed)
-    std::uint8_t unresolved[4]; // +0x10..+0x13: touched only by Update, not reconstructed
+    void* pending_task;        // +0xc: Update's own Task_IdleInputTimer submission
+    std::int32_t update_tick_snapshot; // +0x10: tick snapshot Update's state 1 takes
     std::int32_t state;         // +0x14: Update's own state-machine phase
 
     void* destroy(bool should_free) {
@@ -335,6 +394,229 @@ struct ScreenLanguageSelectTask {
             }
             node = *reinterpret_cast<std::uint8_t**>(node + 4);
         }
+    }
+
+    // "" FUN_00fd7920 (reached in the binary through thunk_FUN_00fd7920
+    // from exactly one caller: this Update's state-2 timeout branch,
+    // 0x00429cb0). Commits the selected language and hops to the
+    // FrontEnd chapter. See ScreenTasks.h for the deferred blocks.
+    std::int32_t try_confirm_language_selection() {
+        if (DAT_00879654 >= 0) { // "" if (-1 < DAT_00879654)
+            auto* service = static_cast<std::uint8_t*>(DAT_00fcae04);
+            // The exported x86 re-walks the +0xb8/+0xbc vector with an
+            // index counter and stops at the DAT_00879654-th element;
+            // an in-range index selects exactly that element and an
+            // out-of-range one selects nothing. On the game's 32-bit
+            // target the elements are 4-byte slots, so the element
+            // count is the byte distance >> 2.
+            char** begin =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xb8));
+            char** end =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xbc));
+            if (DAT_00879654 < static_cast<std::int32_t>(end - begin)) {
+                const char* selected = begin[DAT_00879654];
+                if (selected != nullptr) {
+                    // "" 0x005e5de0 (ECX = dst, EAX = src): bounded
+                    // copy of the selected name into the service's own
+                    // +0x04 name buffer (the same buffer the
+                    // 0x005e5e40 text lookups key against).
+                    copy_language_name_into(service + 4, selected);
+
+                    // NOT YET INTEGRATED: FUN_005da670(selected) —
+                    // refreshes the game window's caption from the
+                    // language-row table at 0x008925b0 (needs the
+                    // window object at DAT_00cef694). Its only
+                    // observable is the OS window title.
+                    //
+                    // NOT YET INTEGRATED: sprintf(buf,
+                    // "Game/Localised/%s.str", selected) +
+                    // thunk_FUN_00ff7f20(buf, buf) — the localized .str
+                    // resource hook, the same documented deferred
+                    // no-op as the "Game.str" load in
+                    // trigger_bootup_flow (BootupFlow.cpp): nothing in
+                    // this project's archive/stream stack reads it yet.
+                    //
+                    // "" The exported x86 compares the selected name
+                    // against its own 6-byte "en-GB" (0x0083e694) and
+                    // "en-US" (0x0083e68c) constants with unrolled
+                    // byte-pair loops (5 chars + NUL, observably
+                    // strcmp-equivalent); a name different from BOTH
+                    // markers AND a non-null registry pointer at
+                    // DAT_00d46aa8 raises that registry's +0xa0 flag
+                    // bit 2.
+                    if (std::strcmp(selected, "en-GB") != 0 &&
+                        std::strcmp(selected, "en-US") != 0 &&
+                        DAT_00d46aa8 != nullptr) {
+                        *reinterpret_cast<std::uint32_t*>(
+                            static_cast<std::uint8_t*>(DAT_00d46aa8) + 0xa0) |= 0x4u;
+                    }
+                }
+            }
+        }
+        DAT_00d472dc = 8;
+        // FUN_00576f30's return value only ever feeds this function's
+        // leftover EAX (the same "void callee, a caller reads EAX"
+        // pattern BootupFlow.cpp documents for trigger_bootup_flow's
+        // own resolve_and_load_chapter call; the leftover is not
+        // modeled), so the observable return is the low byte 1.
+        resolve_and_load_chapter(DAT_00fcadec, "FrontEnd");
+        return 1;
+    }
+
+    // "" 0x00429890, vtable slot 3. See ScreenTasks.h for the full
+    // state-machine description; deferred blocks are documented in
+    // place.
+    std::int32_t update() {
+        if (state == 0) {
+            if (DAT_00cef610 != nullptr &&
+                *reinterpret_cast<const std::uint8_t*>(
+                    static_cast<const std::uint8_t*>(DAT_00cef610) + 0xb0) == 0) {
+                state = 1;
+            }
+            // The exported x86's state-0 exit still carries
+            // DAT_00cef610's own value in EAX (written there by the
+            // entry compare); replicated literally, the way
+            // ChapterLoadStateMachine.cpp does for its
+            // `& 0xffffff00` returns.
+            return static_cast<std::int32_t>(
+                reinterpret_cast<std::uintptr_t>(DAT_00cef610) &
+                0xffffff00u);
+        }
+        if (state == 1) {
+            // The tick snapshot the state-2 timeout is measured
+            // against (task+0x10).
+            update_tick_snapshot =
+                static_cast<std::int32_t>(hp6::runtime::current_tick_value());
+
+            // Construct + submit the same 0x10-byte
+            // "Presentation:TaskHandler::Task_IdleInputTimer"
+            // enqueue_title_page_screen_task's IsReady constructs
+            // (same vtable); storing the submission result at +0xc is
+            // what makes this task's own slot-2 able to flag it ready.
+            auto* timer = static_cast<IdleInputTimerTask*>(allocate_via_task_handler(
+                DAT_00fcadf0, sizeof(IdleInputTimerTask),
+                "Presentation:TaskHandler::Task_IdleInputTimer"));
+            if (timer != nullptr) {
+                timer->ready_flag = 0;
+                timer->vtable = kIdleInputTimerTaskVtable;
+            }
+            auto* submitted =
+                static_cast<IdleInputTimerTask*>(submit_task(DAT_00fcadf0, timer));
+            pending_task = submitted;
+            if (submitted != nullptr) {
+                // The exported x86 sets the submitted sub-task's own
+                // +0xc (the IdleInputTimer's state field) to the -1
+                // "not yet armed" sentinel unconditionally; the guard
+                // only covers the never-observed allocation-failure
+                // path, as in the sibling enqueue_* functions.
+                submitted->state = -1;
+            }
+
+            // The fill loop: 16 writes into the shared 0x00cf8168 text
+            // table, one per "GUI_LANGUAGEMENU%d" key. In-range slots
+            // get the wide display text the service's own map holds for
+            // that language (the deferred 0x005e5e40 stand-in); slots
+            // beyond the language count get the wide " " constant at
+            // 0x0081fca8. The exported x86 zeroes its 0x100-byte key
+            // buffer each iteration and sprintf-s the key into it.
+            auto* service = static_cast<std::uint8_t*>(DAT_00fcae04);
+            char** begin =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xb8));
+            char** end =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xbc));
+            for (std::int32_t i = 0; i < 0x10; ++i) {
+                char key[0x100];
+                // sprintf in the exported x86; snprintf here only
+                // sidesteps MSVC's sprintf deprecation warning.
+                std::snprintf(key, sizeof(key), "GUI_LANGUAGEMENU%d", i);
+                const wchar_t* text = kWideBlank_0081fca8;
+                if (i < static_cast<std::int32_t>(end - begin)) {
+                    // The exported x86 finds element i by walking the
+                    // vector with a counter; in range, that is exactly
+                    // `begin[i]` (narrow char* entries).
+                    text = lookup_localized_language_text(begin[i], service + 4);
+                }
+                update_localized_text(0x00cf8168u, key, text);
+            }
+
+            // NOT YET INTEGRATED: the widget-registry resync that
+            // follows the fill in the exported x86:
+            // thunk_FUN_0100e910 (current-language row getter), its
+            // name-vs-list check (FUN_005e5f30), then an indexed walk
+            // over the same vector writing each matching UI widget's
+            // +0xc8 field with that language's index (FUN_00435110
+            // finds the widgets in the hash table at 0x00d260dc by
+            // name and verifies the DAT_0089c014 type tag), plus
+            // FUN_00416f70's follow-up call on the plain name match.
+            // None of those widgets (or that hash table) exists in
+            // this project yet; the map writes above are the state's
+            // surviving observable.
+            state = 2;
+            // The exported x86's state-1 exit carries `this` in EAX;
+            // replicated literally (see ScreenTasks.h).
+            return static_cast<std::int32_t>(
+                reinterpret_cast<std::uintptr_t>(this) & 0xffffff00u);
+        }
+        if (state == 2) {
+            auto* service = static_cast<std::uint8_t*>(DAT_00fcae04);
+            char** begin =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xb8));
+            char** end =
+                reinterpret_cast<char**>(*reinterpret_cast<void**>(service + 0xbc));
+            // The exported x86's own condition is
+            // `((byte_distance & ~3) == 4) || strstr(+0x98, "WBSUB")`:
+            // on the 32-bit target that byte-distance form is exactly
+            // "one installed language", which is what any vector can
+            // satisfy it with, so it is written here as the element
+            // count it reduces to.
+            if (static_cast<std::int32_t>(end - begin) == 1 ||
+                std::strstr(
+                    reinterpret_cast<const char*>(service + 0x98),
+                    "WBSUB") != nullptr) {
+                DAT_00879654 = 0;
+            }
+            DAT_00d6b8a0 |= 1u;
+            DAT_00d6b898 = 0;
+            DAT_00d6e5b8 = 0;
+
+            // NOT YET INTEGRATED: the 15000-tick idle-reselection scan.
+            // Once DAT_00d644f8/3 - <the IdleInputTimer sub-task's own
+            // +0x8 cached tick>/3 exceeds 15000, the exported x86
+            // re-reads the current-process language row
+            // (thunk_FUN_0100e910), checks that row's name against the
+            // service's language list (FUN_005e5f30), and re-derives
+            // DAT_00879654 from a FUN_005e5f00-driven indexed walk over
+            // the vector (or resets it to 0 when the current row's
+            // language is not in the list). That scan's only observable
+            // is DAT_00879654, which the commit path consumes; tests
+            // that reach the commit set DAT_00879654 directly.
+            const std::int32_t elapsed =
+                static_cast<std::int32_t>(hp6::runtime::current_tick_value()) /
+                    3 -
+                update_tick_snapshot / 3;
+            if (elapsed > 0x14d) {
+                if (try_confirm_language_selection() != 0) {
+                    // The exported x86 blends the confirm thunk's own
+                    // leftover EAX into the high bits; the low byte 1 is
+                    // the confirm's guaranteed tail (see
+                    // try_confirm_language_selection's tail comment).
+                    return 1;
+                }
+                // Unreachable given the confirm's unconditional tail
+                // (its low byte is always 1); left structured like the
+                // binary's own branch.
+            }
+            // The exported x86's not-yet-committed exit carries the
+            // elapsed value itself in EAX; replicated literally (see
+            // ScreenTasks.h).
+            return static_cast<std::int32_t>(
+                static_cast<std::uint32_t>(elapsed) & 0xffffff00u);
+        }
+        // States beyond 2 are unreachable through the transitions
+        // above. The exported x86's exit computes (state - 2) in EAX;
+        // replicated literally.
+        return static_cast<std::int32_t>(
+            (static_cast<std::uint32_t>(state) - 2u) & 0xffffff00u);
     }
 };
 
@@ -371,13 +653,16 @@ void* kAttractModeScreenTaskVtable[4] = {
     reinterpret_cast<void*>(&unused_screen_task_slot),
 };
 
-// Slot 3 ("Update") is not reconstructed (see ScreenLanguageSelectTask
-// above).
+// All four task-object vtable slots are reconstructed for this task
+// (slot 3, "Update" (0x00429890), was until the 19 oct 2026
+// integration left as the shared no-op stub — see
+// ScreenLanguageSelectTask in ScreenTasks.h and
+// update_language_select_screen_task below).
 void* kLanguageSelectScreenTaskVtable[4] = {
     member_function_address(&ScreenLanguageSelectTask::destroy),
     member_function_address(&ScreenLanguageSelectTask::query_ready),
     member_function_address(&ScreenLanguageSelectTask::mark_pending_task_ready_if_enqueued),
-    reinterpret_cast<void*>(&unused_screen_task_slot),
+    member_function_address(&ScreenLanguageSelectTask::update),
 };
 
 } // namespace
@@ -507,6 +792,10 @@ std::int32_t query_ready_language_select_screen_task(void* task_ptr) {
 
 void mark_language_select_pending_task_ready(void* task_ptr) {
     static_cast<ScreenLanguageSelectTask*>(task_ptr)->mark_pending_task_ready_if_enqueued();
+}
+
+std::int32_t update_language_select_screen_task(void* task_ptr) {
+    return static_cast<ScreenLanguageSelectTask*>(task_ptr)->update();
 }
 
 } // namespace hp6::presentation

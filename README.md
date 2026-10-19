@@ -6,9 +6,9 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 470 fonctions : 436 intégrées dans `src/math`,
+Le journal suit actuellement 470 fonctions : 437 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
-`src/presentation` et `src/archive`, 34 différées, et 0 bloquées (les 5
+`src/presentation` et `src/archive`, 33 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
 manuel `file_ops_052`) ; 0 en attente de revue. Un site de suivi de
 progression (dans l'esprit de decomp.dev, avec une carte cliquable de
@@ -42,9 +42,28 @@ réels** (`hp6::presentation::query_ready_language_select_screen_task`,
 ScreenTasks.cpp`) — lus par désassemblage direct, ni l'un ni l'autre
 n'ayant son propre objet fonction dans l'analyse Ghidra de ce projet.
 Sa fonction `Update` (la vraie machine à états qui remplit le menu des
-langues) reste délibérément différée, comme pour chaque tâche d'écran
-sœur de ce fichier. Voir `architecture/startup_path.md` ("19 oct 2026,
+langues), longtemps délibérément différée comme pour chaque tâche d'écran
+sœur de ce fichier, est désormais intégrée elle aussi (voir "19 oct
+2026, suite 22"). Voir `architecture/startup_path.md` ("19 oct 2026,
 suite 17").
+
+**`ScreenLanguageSelectTask::Update` (0x00429890) est désormais intégrée
+et testée**, avec la table de texte partagée qu'elle remplit
+(`hp6::presentation::update_localized_text`, FUN_00429430,
+`src/presentation/GuiTextTable.cpp`, testée dans
+`tests/gui_text_table_smoke.cpp`) : porte de chargement de chapitre
+(`DAT_00cef610`+0xb0, retypée `void*`), l'armement du
+`Task_IdleInputTimer` (sentinelle -1), l'écriture des 16 clés
+"GUI_LANGUAGEMENU0..15" (texte large par langue installée ou large
+espace au-delà), les drapeaux d'état-2, puis à plus de 333 ticks/3
+**commet la sélection** via la reconstruction de FUN_00fd7920 : copie
+du nom (0x005e5de0 intégrée), drapeau registre sauf pour les
+marqueurs "en-GB"/"en-US" (symboles confirmés dans le binaire),
+`DAT_00d472dc=8` et `resolve_and_load_chapter("FrontEnd")` — le vrai
+saut de chapitre. Blocs différés (balayage du registre de widgets,
+ré-sélection au ralenti, titre de fenêtre, hook .str) documentés
+inline ; retours hérités d'EAX répliqués littéralement. Voir
+`architecture/startup_path.md` ("19 oct 2026, suite 22").
 
 **Le parseur de dérogations de ligne de commande est intégré pour de
 vrai** (`hp6::platform::parse_command_line_overrides`, `src/platform/
@@ -78,12 +97,13 @@ jusqu'au vrai `DrawPrimitive` est désormais 100 % réelle et testée** :
 « SubmitRenderCommand », 62 vrais appelants — la fonction la plus
 utilisée trouvée jusqu'ici) intégrée via désassemblage direct
 (`src/render/SubmitRenderCommand.cpp`). Il reste, pour un rendu
-**automatique** réellement déclenché par le jeu : la machine à états
-`ScreenLanguageSelectTask::Update`, la structure non confirmée de
-`BuildRenderQuad`, un vrai moteur de mise en page de texte riche
-(parsing de balises), et le déclencheur par frame toujours introuvable
-par analyse statique — bilan honnête complet dans
-`architecture/startup_path.md` ("19 oct 2026, suite 21").
+**automatique** réellement déclenché par le jeu : la structure non
+confirmée de `BuildRenderQuad`, un vrai moteur de mise en page de
+texte riche (parsing de balises), et le déclencheur par frame toujours
+introuvable par analyse statique — bilan honnête complet dans
+`architecture/startup_path.md` ("19 oct 2026, suite 21") ; la
+machine à états `ScreenLanguageSelectTask::Update` de cette liste est
+intégrée depuis ("19 oct 2026, suite 22").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,
