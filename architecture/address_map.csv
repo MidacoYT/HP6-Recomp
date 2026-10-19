@@ -51,6 +51,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0053e9f0,undefined4 __thiscall FUN_0053e9f0(void *this),hp6::presentation::(anonymous)::ScreenMainMenuTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0053ea00,undefined __thiscall FUN_0053ea00(void *this),hp6::presentation::update_main_menu_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0053eb40,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
+00542e10,"undefined __cdecl FUN_00542e10(short param_1, undefined4 * param_2)",hp6::render::submit_render_command,src/render/SubmitRenderCommand.cpp,integrated,passed,unverified
 00576f30,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 00577390,,hp6::presentation::advance_to_next_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 0059f450,undefined4 __thiscall FUN_0059f450(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified

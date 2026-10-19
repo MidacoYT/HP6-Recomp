@@ -2456,3 +2456,72 @@ piste notée pour une prochaine session.
 
 **435/469 fonctions intégrées (34 différées, 0 bloquée), 43/43 tests
 CTest verts.**
+
+## 19 oct 2026 (suite 21) — demande explicite : pousser jusqu'au rendu réel du menu langue ; `SubmitRenderCommand` intégrée, bilan honnête de ce qui reste
+
+L'utilisateur a demandé explicitement de continuer jusqu'à l'affichage
+et le rendu RÉEL du menu des langues. Reprise de la chaîne complète déjà
+tracée en suite 14 (`BuildRenderQuad` → clip → `SubmitRenderCommand` →
+`RenderAllRegions` → `Scene::End`) pour voir ce qui, au-delà de
+`Scene::End` (déjà intégrée), peut être réellement implémenté — pas
+seulement compris conceptuellement.
+
+**Désassemblage direct de `FUN_00542e10` (SubmitRenderCommand, 62 vrais
+appelants)** : le C décompilé étiquette mal son paramètre d'index —
+il ne pointe PAS dans un tableau global plat, mais DANS le bloc propre
+de 0x10000 octets de la région active (`DAT_00967218`, déjà écrit par
+`hp6::render::set_active_render_region`). Deux vrais modes de routage :
+normal (file d'attente dans le bloc de la région active) et « indexé »
+(file d'attente globale par sous-type de matériau,
+`_Dst_00b10ce8`/`_Dst_00966fd8`, avec 3 champs supplémentaires et une
+taille d'élément réelle de 0x2c octets au lieu de 0x10/0x24). Seul
+`thunk_FUN_010026a0` (un gros dispatch de matériau par palier de
+qualité) reste différé — il ne change jamais SI ni avec QUELLE TAILLE
+la commande est mise en file, seulement un bit de drapeau d'apparence.
+Nouvelle fonction `hp6::render::submit_render_command`
+(`src/render/SubmitRenderCommand.cpp`), tous les tests passés du premier
+coup grâce à la précision du désassemblage. **C'est désormais la chaîne
+ENTIÈRE depuis « une commande de dessin est prête » jusqu'au vrai
+DrawPrimitive/DrawIndexedPrimitive qui est 100 % réelle et testée.**
+
+**Ce qui reste, honnêtement, pour un rendu automatique et réellement
+déclenché par le jeu (pas seulement testable manuellement) :**
+
+1. **`ScreenLanguageSelectTask::Update`** (`0x00429890`) — la machine à
+   états de 0x118 octets qui écrit réellement les chaînes
+   "GUI_LANGUAGEMENU%d" dans la table partagée. Toujours différée
+   (plusieurs sous-appels non tracés) ; sa structure de contrôle est
+   comprise mais pas intégrée.
+2. **`BuildRenderQuad`** (`FUN_0056baa0`) — construit le descripteur de
+   quad à partir d'un objet `PluginPresentationBitmap` dont la structure
+   complète (`this+0x10`..`this+0x58`, une vingtaine de champs) n'est
+   PAS indépendamment confirmée. L'implémenter demanderait de deviner
+   la sémantique exacte de plusieurs champs — risque réel de fabrication
+   que ce projet évite délibérément.
+3. **La chaîne de découpage/mise en page** (`FUN_005e92d0` → clip-test
+   avec gestion d'exceptions SEH ; `FUN_005e93e0` → **un vrai moteur de
+   mise en page de texte riche** avec parsing de balises `\[...]`
+   intégrées, tableau croissant de « runs » de glyphes ; `FUN_005e9680`
+   → clipping UV réel). Un sous-système à part entière, bien plus
+   substantiel qu'espéré au départ.
+4. **`FUN_005e9820`** — relie le moteur de mise en page à
+   `SubmitRenderCommand` (maintenant intégrée) ; dépend du n°3 ci-dessus
+   pour avoir des données réelles à transmettre, mais sa propre logique
+   (allocation depuis le bump arena déjà intégré, construction de la
+   matrice via `multiply_matrix4x4` déjà intégrée) est elle-même
+   tractable une fois le n°3 fait.
+5. **Le vrai déclencheur par frame** — toujours introuvable par analyse
+   statique (dispatch par vtable), comme documenté depuis le début de
+   cette investigation.
+
+Contrairement à l'état d'esprit des sessions précédentes (« tout est
+indirect par vtable, blocage total »), cette session montre que la
+majorité de cette chaîne restante est RÉELLEMENT reconstructible avec
+le même niveau de rigueur que le reste de ce projet — simplement plus
+long et plus risqué pour la fabrication (n°2 et n°3 nécessitent de
+confirmer des structures de données non triviales). Travail poursuivi
+en suite 22 si le temps le permet, sinon noté comme prochaine étape
+concrète et bornée pour une session future.
+
+**436/470 fonctions intégrées (34 différées, 0 bloquée), 44/44 tests
+CTest verts.**

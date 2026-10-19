@@ -9605,6 +9605,23 @@
       "build": "passed",
       "integration_note": "The real 'arms elsewhere' site render_fade_overlay_quad's own doc comment referred to (DAT_00cf19e4). A thin, fully tractable wrapper once its own two sub-calls turned out to already be integrated: hp6::render::handle_device_lost (gate) and hp6::render::cache_available_texture_memory (called again, redundant with handle_device_lost's own internal call, reproduced for fidelity), followed by the real Direct3D 9 BeginScene (device vtable+0xa4, index 41). Reached, in the exported x86, only through FUN_01002c80 (a large debug-only scratch-buffer initializer, itself only reached via the confirmed-dead debug-overlay chain) -- NOT YET INTEGRATED, since only this function's own side effect on DAT_00cf19e4 matters to anything this project tests. Tested in tests/screen_overlay_render_smoke.cpp (device-lost and device-ready paths); fixed two real test-harness bugs while writing it: a fake surface vtable sized for Release only (not GetDesc), and DAT_00cf19d0 left at its default null (initialize_default_render_state dereferences it directly for a capability byte) -- same pitfall tests/device_lost_handler_smoke.cpp already documents a fix for.",
       "equivalence": "unverified"
+    },
+    "00542e10": {
+      "batch": "manual_startup_path",
+      "error": null,
+      "export": ".ghidra-exports/00542e10.json",
+      "ghidra_signature": "undefined __cdecl FUN_00542e10(short param_1, undefined4 * param_2)",
+      "reagent_exit_code": null,
+      "reagent_run_id": null,
+      "reagent_validation": null,
+      "reagent_verdict": null,
+      "updated_at": "2026-10-19T15:17:50.177801+00:00",
+      "integration": "integrated",
+      "cpp_symbol": "hp6::render::submit_render_command",
+      "source": "src/render/SubmitRenderCommand.cpp",
+      "build": "passed",
+      "integration_note": "SubmitRenderCommand -- 62 real non-vtable callers across the whole engine, part of the traced BuildRenderQuad -> ... -> SubmitRenderCommand -> RenderAllRegions -> Scene::End chain (architecture/startup_path.md, 'iMsgDoRender / GUI rendering trail'). Fully reconstructed via live disassembly (the decompiled C alone mislabels the bucket-index parameter, making it look like it indexes a flat global array when it actually indexes within the active render region's own 0x10000-byte block). Two real routing modes (normal: queues into DAT_00967218, the already-integrated hp6::render::set_active_render_region's own block; 'indexed': queues into a global per-material-subtype bucket pair _Dst_00b10ce8/_Dst_00966fd8 instead, with 3 extra appended fields and a real 0x2c-byte item size vs the normal 0x10/0x24). NOT YET INTEGRATED: thunk_FUN_010026a0 (a large quality-tier-gated material dispatch with several more untraced sub-calls), left as a documented deferred no-op that never clears the one flag bit it could affect -- doesn't change whether or with what size the real command gets queued. Tested in tests/submit_render_command_smoke.cpp (both routing modes, both item sizes, list-linking across 2 items each).",
+      "equivalence": "unverified"
     }
   },
   "schema_version": 1

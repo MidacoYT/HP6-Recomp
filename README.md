@@ -6,7 +6,7 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 469 fonctions : 435 intégrées dans `src/math`,
+Le journal suit actuellement 470 fonctions : 436 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
 `src/presentation` et `src/archive`, 34 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
@@ -71,6 +71,19 @@ abandonné (`float_ops_015`) — le C décompilé cachait le résultat réel
 d'ordre 16 avec coefficients et constantes lus en mémoire, vérifiée
 contre `std::cos` à ~1e-7 près. Voir `architecture/startup_path.md`
 ("19 oct 2026, suite 20").
+
+**La chaîne complète depuis « une commande de dessin est prête »
+jusqu'au vrai `DrawPrimitive` est désormais 100 % réelle et testée** :
+`hp6::render::submit_render_command` (`0x00542e10`,
+« SubmitRenderCommand », 62 vrais appelants — la fonction la plus
+utilisée trouvée jusqu'ici) intégrée via désassemblage direct
+(`src/render/SubmitRenderCommand.cpp`). Il reste, pour un rendu
+**automatique** réellement déclenché par le jeu : la machine à états
+`ScreenLanguageSelectTask::Update`, la structure non confirmée de
+`BuildRenderQuad`, un vrai moteur de mise en page de texte riche
+(parsing de balises), et le déclencheur par frame toujours introuvable
+par analyse statique — bilan honnête complet dans
+`architecture/startup_path.md` ("19 oct 2026, suite 21").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,

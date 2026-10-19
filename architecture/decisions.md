@@ -2145,3 +2145,27 @@ Les 3 autres fonctions du meme lot float_ops_015 restent differees
 
 435/469 fonctions integrees (34 differees, 0 bloquee), 43/43 tests
 CTest verts.
+
+Suite (19 oct 2026, suite 21) : demande explicite de pousser jusqu'au
+rendu reel du menu langue. hp6::render::submit_render_command
+(FUN_00542e10, SubmitRenderCommand, 62 vrais appelants) integree via
+desassemblage direct -- le C decompile etiquette mal son index de
+bucket (il indexe DANS le bloc de la region active, pas un tableau
+global plat). Deux modes de routage reels (normal via DAT_00967218
+deja integre ; "indexe" via un bucket global par sous-type de materiau
+avec taille d'element reelle differente, 0x2c vs 0x10/0x24). Seul
+thunk_FUN_010026a0 (dispatch materiau par palier de qualite) reste
+differe, sans affecter si/comment la commande est mise en file.
+
+La chaine ENTIERE de "commande prete" jusqu'au vrai DrawPrimitive est
+maintenant 100% reelle et testee. Ce qui reste pour un rendu
+automatique reel : ScreenLanguageSelectTask::Update (machine a etats
+0x118 octets), BuildRenderQuad (structure PluginPresentationBitmap non
+confirmee independamment), le moteur de mise en page de texte riche
+(FUN_005e93e0, parsing de balises), et toujours le declencheur par
+frame introuvable par analyse statique. Bilan honnete documente dans
+architecture/startup_path.md plutot que de deviner les structures
+manquantes.
+
+436/470 fonctions integrees (34 differees, 0 bloquee), 44/44 tests
+CTest verts.
