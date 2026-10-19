@@ -304,6 +304,76 @@ code {
   color: #fff;
 }
 
+/* Treemap */
+.treemap-panel {
+  background: #0b0d11;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.treemap-head {
+  color: #9aa1ad;
+  font-size: 0.8rem;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+.treemap-wrap {
+  position: relative;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  background: #0b0d11;
+}
+
+#treemap-canvas {
+  display: block;
+  width: 100%;
+  cursor: default;
+}
+
+.treemap-tooltip {
+  position: fixed;
+  z-index: 50;
+  background: #11141a;
+  border: 1px solid #2a2f3a;
+  color: #e7e9ee;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 0.78rem;
+  line-height: 1.45;
+  pointer-events: none;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+  max-width: 260px;
+}
+
+.treemap-legend {
+  margin-top: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  font-size: 0.78rem;
+  color: #9aa1ad;
+}
+
+.treemap-legend .dot {
+  display: inline-block;
+  width: 9px;
+  height: 9px;
+  border-radius: 2px;
+  margin-right: 6px;
+}
+
+@keyframes row-flash {
+  0%, 100% { background: transparent; }
+  25%, 75% { background: var(--ok-bg); }
+}
+
+tr.row-flash { animation: row-flash 1.6s ease-in-out; }
+
 .table-wrap {
   background: var(--bg-elevated);
   border: 1px solid var(--border);

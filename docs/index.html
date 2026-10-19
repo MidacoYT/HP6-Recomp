@@ -70,6 +70,23 @@
         <button data-status="untouched">Non etudiees</button>
       </div>
     </div>
+
+    <div class="treemap-panel">
+      <div class="treemap-head">
+        <span>Carte de toutes les fonctions — chaque carre est une fonction (taille = taille en octets), survolez ou touchez pour l'identifier, cliquez pour la retrouver dans le tableau.</span>
+      </div>
+      <div class="treemap-wrap" id="treemap-wrap">
+        <canvas id="treemap-canvas"></canvas>
+        <div id="treemap-tooltip" class="treemap-tooltip" hidden></div>
+      </div>
+      <div class="treemap-legend">
+        <span><span class="dot" style="background:#22c55e"></span>Integree</span>
+        <span><span class="dot" style="background:#f59e0b"></span>Differee</span>
+        <span><span class="dot" style="background:#ef4444"></span>Bloquee</span>
+        <span><span class="dot" style="background:#30343d"></span>Non etudiee</span>
+      </div>
+    </div>
+
     <div class="table-wrap" id="table-wrap">
       <table id="function-table">
         <thead>

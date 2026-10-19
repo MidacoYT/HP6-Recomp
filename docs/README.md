@@ -5,6 +5,14 @@ l'avancement de la decompilation/reconstruction, dans l'esprit de
 decomp.dev : pourcentage global, repartition par module, et la liste
 complete des fonctions avec leur statut.
 
+Une carte (treemap, dans l'esprit de decomp.dev) affiche les ~14 200
+fonctions sous forme de carres (taille = taille en octets, couleur =
+statut) : survoler ou toucher un carre l'identifie, cliquer dessus le
+retrouve surligne dans le tableau en dessous. Elle est dessinee sur
+`<canvas>` (pas une div par fonction) pour rester fluide avec ce volume
+de donnees, et respecte les memes filtres/recherche que le tableau
+(les carres qui ne correspondent pas s'estompent).
+
 Deux pourcentages distincts sont affiches : un pourcentage **global**
 (fonctions integrees / ~14 200 fonctions du binaire entier, en croisant
 le catalogue Ghidra de ce depot avec le catalogue IDA independant du

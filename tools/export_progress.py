@@ -31,6 +31,11 @@ MODULE_PATTERN = re.compile(r"^(src/[^/]+)/")
 STATUS_CODE = {"integrated": "i", "deferred": "d", "blocked": "b", "untouched": "u"}
 BUILD_CODE = {"passed": "p", "compiled_only": "c", "not_run": "n", "failed": "f"}
 
+# Median function size (bytes) across the IDA catalogue, used as a
+# fallback "sz" for the handful of functions Ghidra found that IDA's own
+# catalogue doesn't separately enumerate (see export script's docstring).
+FALLBACK_SIZE = 71
+
 
 def normalize_address(value: str) -> str:
     value = value.lower()
@@ -63,6 +68,7 @@ def load_ida_catalogue() -> dict[str, dict]:
         catalogue[address] = {
             "name": entry.get("name") or "",
             "automatic_name": bool(entry.get("automatic_name")),
+            "size": entry.get("size") or FALLBACK_SIZE,
         }
     return catalogue
 
@@ -103,6 +109,7 @@ def main() -> None:
             "b": BUILD_CODE.get(entry.get("build") or "not_run", "n"),
             "note": entry.get("integration_note") or "",
             "src": entry.get("source") or "",
+            "sz": ida_name.get("size", FALLBACK_SIZE),
         })
 
     reviewed_totals = dict(totals)
@@ -123,6 +130,7 @@ def main() -> None:
             "b": "n",
             "note": "",
             "src": "",
+            "sz": ida_entry.get("size", FALLBACK_SIZE),
         })
 
     rows.sort(key=lambda row: row["a"])
