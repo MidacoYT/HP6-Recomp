@@ -6,7 +6,7 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 468 fonctions : 433 intégrées dans `src/math`,
+Le journal suit actuellement 469 fonctions : 434 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
 `src/presentation` et `src/archive`, 35 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
@@ -54,6 +54,15 @@ tampon global, pas un « this » abstrait. Découpe la ligne de commande
 en drapeaux nus et paires `-clé=valeur`, deux bizarreries réelles
 d'avancement de curseur reproduites fidèlement plutôt que corrigées.
 Voir `architecture/startup_path.md` ("19 oct 2026, suite 18").
+
+**Un fil en suspens depuis plusieurs sessions est refermé** :
+`render_fade_overlay_quad`'s compteur « armé ailleurs (non tracé) » a
+son vrai site d'armement (`hp6::render::try_begin_debug_overlay_scene`,
+`src/render/ScreenOverlayRender.cpp`) — entièrement tractable puisque
+ses deux sous-appels étaient déjà intégrés (`handle_device_lost`,
+`cache_available_texture_memory`), il ne restait que le vrai
+`BeginScene` à câbler. Voir `architecture/startup_path.md` ("19 oct
+2026, suite 19").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,

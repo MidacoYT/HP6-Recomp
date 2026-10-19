@@ -2114,3 +2114,19 @@ pleine. Teste dans tests/winmain_smoke.cpp.
 
 433/468 fonctions integrees (35 differees, 0 bloquee), 43/43 tests
 CTest verts.
+
+Suite (19 oct 2026, suite 19) : FUN_0064a9e0 -> hp6::render::
+try_begin_debug_overlay_scene integree -- c'etait le vrai site "arme
+ailleurs" que render_fade_overlay_quad (suite 12/13) laissait en
+suspens pour DAT_00cf19e4. Ses deux sous-appels etaient deja integres
+(handle_device_lost, cache_available_texture_memory), donc entierement
+tractable : gate sur handle_device_lost, puis le vrai BeginScene
+(vtable+0xa4), incremente DAT_00cf19e4. Deux vrais bugs de test
+corriges en l'ecrivant : vtable de surface factice trop petite pour
+GetDesc (meme piege que feedback_fake_vtable_sizing), et DAT_00cf19d0
+laisse nul alors qu'initialize_default_render_state le dereference
+directement -- meme correctif que tests/device_lost_handler_smoke.cpp
+avait deja applique.
+
+434/469 fonctions integrees (35 differees, 0 bloquee), 43/43 tests
+CTest verts.

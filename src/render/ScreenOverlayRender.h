@@ -20,6 +20,25 @@ namespace hp6::render {
 // quad (2 triangles).
 void submit_screen_quad(const float* data, std::uint32_t flags, std::int32_t vertex_count);
 
+// 0x0064a9e0 (stdcall). The real "arms elsewhere" site
+// render_fade_overlay_quad's own doc comment below refers to: a no-op
+// (returns false) when hp6::render::handle_device_lost reports the
+// device isn't ready to render this tick (device lost, mid-reset, or
+// TestCooperativeLevel still failing); otherwise refreshes the cached
+// available texture memory (redundant with handle_device_lost's own
+// internal call, reproduced anyway for fidelity), issues the real
+// Direct3D 9 BeginScene (device vtable+0xa4, index 41), increments
+// DAT_00cf19e4 (arming render_fade_overlay_quad's own one-shot
+// countdown by one), and reports whether BeginScene itself succeeded
+// (HRESULT == 0). Reached, in the exported x86, only through
+// FUN_01002c80 (a large debug-only scratch-buffer initializer, itself
+// reached only via the same confirmed-dead debug-overlay chain
+// render_fade_overlay_quad's doc comment describes) — NOT YET
+// INTEGRATED, since its own value is never observably used by anything
+// this project's tests depend on, only its side effect on
+// DAT_00cf19e4 matters here.
+bool try_begin_debug_overlay_scene();
+
 // 0x0064abd0 (cdecl). Composites the render-target-as-texture
 // (DAT_00cf1958, when not disabled) as a full-screen, `color`-tinted
 // quad (built directly in this function: 4 vertices, z/rhw/UV corners
@@ -30,8 +49,8 @@ void submit_screen_quad(const float* data, std::uint32_t flags, std::int32_t ver
 // DAT_00cf1994/FilterFlip is set), via submit_screen_quad above, then
 // unconditionally calls EndScene (device vtable+0xa8) and Present
 // (device vtable+0x44). Guarded by a one-shot countdown
-// (DAT_00cf19e4/DAT_00cf19e0) the exported x86 arms elsewhere (not yet
-// traced). Reached, in the exported x86, only from the debug build's
+// (DAT_00cf19e4/DAT_00cf19e0), armed by try_begin_debug_overlay_scene
+// above. Reached, in the exported x86, only from the debug build's
 // overlay-rendering chain (FUN_005dd020 -> thunk_FUN_010120d0 ->
 // FUN_00648630 -> this function) which hp6::presentation::
 // is_debug_build_overlay_enabled already confirms is hardcoded false

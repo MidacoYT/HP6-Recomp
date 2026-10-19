@@ -9588,6 +9588,23 @@
       "build": "passed",
       "integration_note": "fastcall; cursor is the implicit ESI register, confirmed via live disassembly of both call sites in parse_command_line_overrides (each passes the address of its own local cursor variable). Extracts the next token: quote-delimited (embedded whitespace allowed, both quotes stripped) when it starts with a single or double quote, else whitespace-delimited. Null-terminates in place and advances *cursor past the token. Tested indirectly via parse_command_line_overrides's own test in tests/winmain_smoke.cpp.",
       "equivalence": "unverified"
+    },
+    "0064a9e0": {
+      "batch": "manual_startup_path",
+      "error": null,
+      "export": ".ghidra-exports/0064a9e0.json",
+      "ghidra_signature": "bool __stdcall FUN_0064a9e0(void)",
+      "reagent_exit_code": null,
+      "reagent_run_id": null,
+      "reagent_validation": null,
+      "reagent_verdict": null,
+      "updated_at": "2026-10-19T14:46:47.202643+00:00",
+      "integration": "integrated",
+      "cpp_symbol": "hp6::render::try_begin_debug_overlay_scene",
+      "source": "src/render/ScreenOverlayRender.cpp",
+      "build": "passed",
+      "integration_note": "The real 'arms elsewhere' site render_fade_overlay_quad's own doc comment referred to (DAT_00cf19e4). A thin, fully tractable wrapper once its own two sub-calls turned out to already be integrated: hp6::render::handle_device_lost (gate) and hp6::render::cache_available_texture_memory (called again, redundant with handle_device_lost's own internal call, reproduced for fidelity), followed by the real Direct3D 9 BeginScene (device vtable+0xa4, index 41). Reached, in the exported x86, only through FUN_01002c80 (a large debug-only scratch-buffer initializer, itself only reached via the confirmed-dead debug-overlay chain) -- NOT YET INTEGRATED, since only this function's own side effect on DAT_00cf19e4 matters to anything this project tests. Tested in tests/screen_overlay_render_smoke.cpp (device-lost and device-ready paths); fixed two real test-harness bugs while writing it: a fake surface vtable sized for Release only (not GetDesc), and DAT_00cf19d0 left at its default null (initialize_default_render_state dereferences it directly for a capability byte) -- same pitfall tests/device_lost_handler_smoke.cpp already documents a fix for.",
+      "equivalence": "unverified"
     }
   },
   "schema_version": 1

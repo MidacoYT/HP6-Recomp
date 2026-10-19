@@ -1,5 +1,6 @@
 #include "render/ScreenOverlayRender.h"
 #include "render/DeviceLostHandler.h"
+#include "render/DeviceReset.h"
 #include "render/RenderStateCache.h"
 
 #include <cstdint>
@@ -39,6 +40,7 @@ using EndSceneCall = std::int32_t(__stdcall*)(void*);
 using PresentCall = std::int32_t(__stdcall*)(void*, void*, void*, void*, void*);
 using GetBackBufferCall = std::int32_t(__stdcall*)(void*, std::uint32_t, std::uint32_t, void*);
 using ReleaseCall = std::int32_t(__stdcall*)(void*);
+using BeginSceneCall = std::int32_t(__stdcall*)(void*);
 #else
 using VbLockCall = std::int32_t(*)(void*, std::uint32_t, std::uint32_t, void**, std::uint32_t);
 using VbUnlockCall = std::int32_t(*)(void*);
@@ -48,6 +50,7 @@ using EndSceneCall = std::int32_t(*)(void*);
 using PresentCall = std::int32_t(*)(void*, void*, void*, void*, void*);
 using GetBackBufferCall = std::int32_t(*)(void*, std::uint32_t, std::uint32_t, void*);
 using ReleaseCall = std::int32_t(*)(void*);
+using BeginSceneCall = std::int32_t(*)(void*);
 #endif
 
 void* vtable_of(void* object) {
@@ -117,6 +120,22 @@ void submit_screen_quad(const float* data, std::uint32_t flags, std::int32_t ver
     draw_primitive(DAT_00cf1944, kPrimitiveTypeTriangleStrip, 0,
                    static_cast<std::uint32_t>(vertex_count - 2));
     DAT_00866360 = 0xfffffff3u;
+}
+
+bool try_begin_debug_overlay_scene() {
+    if ((handle_device_lost() & 0xffu) == 0u) {
+        return false;
+    }
+    // Redundant with handle_device_lost's own internal call (it refreshes
+    // the same cache on every path that reaches here); reproduced anyway
+    // for fidelity to the exported x86, which makes the same two calls.
+    cache_available_texture_memory();
+
+    auto begin_scene = *reinterpret_cast<BeginSceneCall const*>(
+        static_cast<const std::uint8_t*>(vtable_of(DAT_00cf1944)) + 0xa4);
+    const std::int32_t result = begin_scene(DAT_00cf1944);
+    ++DAT_00cf19e4;
+    return result == 0;
 }
 
 void render_fade_overlay_quad(std::uint32_t color) {

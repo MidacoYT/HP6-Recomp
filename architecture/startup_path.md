@@ -2374,3 +2374,39 @@ paire simple, valeur entre guillemets avec espace interne).
 
 **433/468 fonctions intégrées (35 différées, 0 bloquée), 43/43 tests
 CTest verts.**
+
+## 19 oct 2026 (suite 19) — fermeture d'un fil en suspens : `render_fade_overlay_quad`'s « armé ailleurs » enfin tracé
+
+`render_fade_overlay_quad` (suite 12/13) portait depuis plusieurs
+sessions une note : son compteur à usage unique (`DAT_00cf19e4`) est
+« armé ailleurs (non encore tracé) ». `FUN_0064a9e0` est précisément ce
+site — et s'est révélé entièrement intégrable d'un coup, puisque ses
+deux seuls sous-appels (`FUN_0064aa60` et `FUN_0064aa30`) sont déjà
+`hp6::render::handle_device_lost` et `hp6::render::
+cache_available_texture_memory`, intégrés depuis longtemps. Nouvelle
+fonction `hp6::render::try_begin_debug_overlay_scene`
+(`src/render/ScreenOverlayRender.cpp`) : si le device n'est pas prêt à
+dessiner (`handle_device_lost` échoue), ne fait rien ; sinon rafraîchit
+le cache de mémoire texture (redondant mais fidèle), appelle le vrai
+`BeginScene` (vtable+0xa4), incrémente `DAT_00cf19e4`. Atteinte, dans le
+binaire exporté, uniquement via `FUN_01002c80` (un gros initialiseur de
+tampons de debug, lui-même seulement atteignable par la même chaîne de
+overlay de debug confirmée morte) — `FUN_01002c80` lui-même reste
+différé (trop de sous-dépendances non tracées pour une valeur marginale
+sur un chemin mort), mais `FUN_0064a9e0` vaut le détour puisque c'est
+du vrai code D3D9 testable.
+
+Deux vrais bugs de test trouvés et corrigés en écrivant
+`tests/screen_overlay_render_smoke.cpp` : un vtable de surface factice
+dimensionné seulement pour `Release` (8 octets) alors que le chemin
+« device prêt » de `prepare_render_target_texture` appelle aussi
+`GetDesc` (+0x30) — même piège que `feedback_fake_vtable_sizing`
+documente déjà ; et `DAT_00cf19d0` laissé à sa valeur par défaut (nulle)
+alors qu'`initialize_default_render_state` le déréférence directement
+(`DAT_00cf19d0 + DAT_008663d8*0x584 + 0x474`) pour lire un octet de
+capacité — `tests/device_lost_handler_smoke.cpp` avait déjà ce correctif
+(un tampon factice alloué et pointé par `DAT_00cf19d0`), appliqué ici
+aussi.
+
+**434/469 fonctions intégrées (35 différées, 0 bloquée), 43/43 tests
+CTest verts.**

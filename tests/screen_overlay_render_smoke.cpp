@@ -151,9 +151,21 @@ void* swap_chain_vtable[8] = {};
 struct FakeSwapChain { void* vtable = swap_chain_vtable; };
 FakeSwapChain fake_swap_chain;
 
-void* surface_vtable[4] = {};
+// Sized for GetDesc (0x30), not just Release (8): handle_device_lost's
+// "clean device" path calls prepare_render_target_texture, which reads
+// the back buffer's own surface description (see feedback memory on
+// fake-vtable sizing: undersizing this corrupts memory silently rather
+// than crashing predictably).
+void* surface_vtable[16] = {};
 struct FakeSurface { void* vtable = surface_vtable; };
 FakeSurface fake_back_buffer;
+
+int get_desc_calls = 0;
+std::int32_t HP6_STDCALL fake_get_desc(void*, void* out) {
+    ++get_desc_calls;
+    std::memset(out, 0, 0x20);
+    return 0;
+}
 
 void* texture_vtable[4] = {};
 struct FakeTexture { void* vtable = texture_vtable; };
@@ -233,6 +245,38 @@ std::int32_t HP6_STDCALL fake_set_vertex_shader(void*, void*) {
     return 0;
 }
 
+int begin_scene_calls = 0;
+std::int32_t HP6_STDCALL fake_begin_scene(void*) { ++begin_scene_calls; return 0; }
+
+int test_cooperative_level_calls = 0;
+std::int32_t test_cooperative_level_result = 0;
+std::int32_t HP6_STDCALL fake_test_cooperative_level(void*) {
+    ++test_cooperative_level_calls;
+    return test_cooperative_level_result;
+}
+
+std::uint32_t HP6_STDCALL fake_get_available_texture_mem(void*) { return 0; }
+std::int32_t HP6_STDCALL fake_set_texture_stage_state(void*, std::uint32_t, std::uint32_t,
+                                                       std::uint32_t) {
+    return 0;
+}
+
+int create_depth_stencil_calls = 0;
+std::int32_t HP6_STDCALL fake_create_depth_stencil(void*, std::uint32_t, std::uint32_t,
+                                                    std::uint32_t, std::uint32_t, std::uint32_t,
+                                                    std::uint32_t, void* out, std::uint32_t) {
+    ++create_depth_stencil_calls;
+    static void* depth_stencil_vtable[16] = {};
+    static bool vtable_ready = false;
+    if (!vtable_ready) {
+        depth_stencil_vtable[8 / sizeof(void*)] = reinterpret_cast<void*>(&fake_release);
+        vtable_ready = true;
+    }
+    static struct { void* vtable = depth_stencil_vtable; } fake_depth_stencil_surface;
+    *reinterpret_cast<void**>(out) = &fake_depth_stencil_surface;
+    return 0;
+}
+
 } // namespace
 
 int main() {
@@ -253,12 +297,27 @@ int main() {
     device_vtable[0x104 / sizeof(void*)] = reinterpret_cast<void*>(&fake_set_texture);
     device_vtable[0x15c / sizeof(void*)] = reinterpret_cast<void*>(&fake_set_vertex_declaration);
     device_vtable[0x170 / sizeof(void*)] = reinterpret_cast<void*>(&fake_set_vertex_shader);
+    device_vtable[0xa4 / sizeof(void*)] = reinterpret_cast<void*>(&fake_begin_scene);
+    device_vtable[0xc / sizeof(void*)] = reinterpret_cast<void*>(&fake_test_cooperative_level);
+    device_vtable[0x10 / sizeof(void*)] = reinterpret_cast<void*>(&fake_get_available_texture_mem);
+    device_vtable[0x10c / sizeof(void*)] = reinterpret_cast<void*>(&fake_set_texture_stage_state);
+    device_vtable[0x74 / sizeof(void*)] = reinterpret_cast<void*>(&fake_create_depth_stencil);
+
+    // initialize_default_render_state (pulled in transitively through
+    // prepare_render_target_texture) reads a capability byte at
+    // DAT_00cf19d0 + DAT_008663d8*0x584 + 0x474; point it at a real
+    // zero-filled scratch region rather than leaving it at the default 0
+    // (which would read unmapped memory), same fix as
+    // tests/device_lost_handler_smoke.cpp already applies.
+    static alignas(16) std::uint8_t mode_table[0x584 + 0x475] = {};
+    DAT_00cf19d0 = static_cast<std::int32_t>(reinterpret_cast<std::uintptr_t>(mode_table));
     DAT_00cf1944 = &fake_device;
 
     swap_chain_vtable[0x14 / sizeof(void*)] = reinterpret_cast<void*>(&fake_get_back_buffer);
     DAT_00cf1948 = &fake_swap_chain;
 
     surface_vtable[8 / sizeof(void*)] = reinterpret_cast<void*>(&fake_release);
+    surface_vtable[0x30 / sizeof(void*)] = reinterpret_cast<void*>(&fake_get_desc);
     texture_vtable[8 / sizeof(void*)] = reinterpret_cast<void*>(&fake_release);
 
     // ---- submit_screen_quad (00648c00) -------------------------------------
@@ -332,6 +391,24 @@ int main() {
     render_fade_overlay_quad(0xffffffffu);
     expect("fade_skips_quad_when_texture_disabled", draw_primitive_calls == 0);
     expect("fade_still_ends_scene_and_presents", end_scene_calls == 1 && present_calls == 1);
+
+    // ---- try_begin_debug_overlay_scene (0064a9e0) --------------------------
+    // Device lost: handle_device_lost reports not-ready, no real BeginScene,
+    // the fade countdown stays unarmed.
+    test_cooperative_level_result = -0x7789f798; // D3DERR_DEVICELOST
+    begin_scene_calls = 0;
+    DAT_00cf19e4 = 0;
+    bool began = try_begin_debug_overlay_scene();
+    expect("overlay_scene_not_begun_when_device_lost", !began && begin_scene_calls == 0);
+    expect("overlay_scene_countdown_unchanged_when_not_begun", DAT_00cf19e4 == 0);
+
+    // Device ready: the real BeginScene fires and arms render_fade_overlay_
+    // quad's own countdown by one.
+    test_cooperative_level_result = 0; // S_OK
+    begin_scene_calls = 0;
+    began = try_begin_debug_overlay_scene();
+    expect("overlay_scene_begun_when_device_ready", began && begin_scene_calls == 1);
+    expect("overlay_scene_arms_fade_countdown", DAT_00cf19e4 == 1);
 
     if (failures != 0) {
         std::printf("screen_overlay_render_smoke: %d failure(s)\n", failures);

@@ -130,6 +130,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 006498e0,,hp6::render::create_d3d9_device,src/render/DeviceCreate.cpp,integrated,passed,unverified
 0064a6d0,,hp6::render::release_dynamic_render_resources,src/render/DeviceLostHandler.cpp,integrated,passed,unverified
 0064a810,undefined __stdcall FUN_0064a810(void),hp6::render::prepare_render_target_texture,src/render/RenderTargetSetup.cpp,integrated,passed,unverified
+0064a9e0,bool __stdcall FUN_0064a9e0(void),hp6::render::try_begin_debug_overlay_scene,src/render/ScreenOverlayRender.cpp,integrated,passed,unverified
 0064aa30,undefined __stdcall FUN_0064aa30(void),hp6::render::cache_available_texture_memory,src/render/DeviceReset.cpp,integrated,passed,unverified
 0064aa60,,hp6::render::handle_device_lost,src/render/DeviceLostHandler.cpp,integrated,passed,unverified
 0064abd0,,hp6::render::render_fade_overlay_quad,src/render/ScreenOverlayRender.cpp,integrated,passed,unverified
