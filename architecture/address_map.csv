@@ -50,7 +50,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0053e000,"undefined __thiscall FUN_0053e000(void *this, int param_1)",,,deferred,not_run,unverified
 0053e9f0,undefined4 __thiscall FUN_0053e9f0(void *this),hp6::presentation::(anonymous)::ScreenMainMenuTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0053ea00,undefined __thiscall FUN_0053ea00(void *this),hp6::presentation::update_main_menu_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
-0053eb40,,,,deferred,not_run,unverified
+0053eb40,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 00576f30,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 00577390,,hp6::presentation::advance_to_next_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 0059f450,undefined4 __thiscall FUN_0059f450(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
@@ -94,6 +94,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 005dced0,,,,deferred,not_run,unverified
 005dcfd0,,hp6::presentation::register_render_messages,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
 005dd020,,hp6::presentation::show_debug_build_overlay_once,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
+005e0630,char * __stdcall FUN_005e0630(void),hp6::platform::(anonymous)::extract_next_token,src/platform/EngineSubsystems.cpp,integrated,passed,unverified
 005e09d0,,hp6::runtime::reset_frame_pump_state,src/runtime/FrameClock.cpp,integrated,passed,unverified
 005e0a30,undefined __stdcall FUN_005e0a30(void),hp6::runtime::accumulate_simulation_time_sample,src/runtime/FrameClock.cpp,integrated,passed,unverified
 005e0b10,undefined __cdecl FUN_005e0b10(int *param_1),hp6::runtime::interpolate_render_time,src/runtime/FrameClock.cpp,integrated,passed,unverified
@@ -447,7 +448,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00ff8ce0,,hp6::platform::is_platform_compatible,src/platform/EngineSubsystems.cpp,integrated,passed,unverified
 00ff8de0,,hp6::presentation::register_lifecycle_messages,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
 00ff8f00,,hp6::presentation::register_render_messages,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
-00ffa0d0,,,,deferred,not_run,unverified
+00ffa0d0,,hp6::platform::parse_command_line_overrides,src/platform/EngineSubsystems.cpp,integrated,passed,unverified
 00ffa270,,,,deferred,not_run,unverified
 01000c60,,hp6::render::apply_multisample_quality,src/render/DeviceCreate.cpp,integrated,passed,unverified
 010021f0,undefined __stdcall FUN_010021f0(void),hp6::render::apply_render_state_profile,src/render/RenderStateCache.cpp,integrated,passed,unverified

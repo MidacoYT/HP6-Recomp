@@ -7,6 +7,7 @@
 // already do) and pre-arms the message loop's one-shot quit guard
 // (DAT_00cef68d) so run_message_loop returns immediately instead of
 // looping forever waiting for a real Windows message.
+#include "platform/EngineSubsystems.h"
 #include "platform/WinMain.h"
 #include "presentation/BootupFlow.h"
 #include "presentation/ChapterFlow.h"
@@ -281,6 +282,13 @@ std::uint8_t DAT_00cf1b04 = 0;
 std::uint8_t DAT_00853f84 = 0;
 std::int32_t DAT_00cf1b00 = 0;
 std::uint8_t DAT_00892df0 = 0; // reset_particle_system_tables's one-shot guard
+char DAT_00d63f68[0x200] = {};   // parse_command_line_overrides's own copy of the command line
+char DAT_00d64168[0x200] = {};   // a second copy the real call site also makes
+char* DAT_00d64368[0x20] = {};   // "-flag" plain overrides
+char* DAT_00d643e8[0x20] = {};   // "-key=value" keys
+char* DAT_00d64468[0x20] = {};   // "-key=value" values
+std::int32_t DAT_00d644e8 = 0;   // plain-override count
+std::int32_t DAT_00d644ec = 0;   // pair-override count
 std::uint32_t DAT_009978e4 = 0; // saved HWND for CreateDevice's hFocusWindow; never
                                  // actually produced by this project's own WinMain
                                  // reconstruction either (see DeviceCreate.cpp/
@@ -584,6 +592,28 @@ int main() {
         DestroyWindow(static_cast<HWND>(DAT_00cef694));
     }
     UnregisterClassA("HalfBloodPrinceMainWndClass", GetModuleHandleA(nullptr));
+
+    // ---- parse_command_line_overrides (0x00ffa0d0) -------------------------
+    // Independent of run_win_main above: a plain "-flag", a simple
+    // "-key=value" pair, and a quoted value with an embedded space (the
+    // quote-aware tokenizer, FUN_005e0630, must strip the quotes and not
+    // stop at the space inside them).
+    {
+        DAT_00d644e8 = 0;
+        DAT_00d644ec = 0;
+        char overrides[] = "-windowed -lang=en -title=\"Half Blood Prince\"";
+        hp6::platform::parse_command_line_overrides(overrides);
+
+        expect("overrides_pair_count", DAT_00d644ec == 3);
+        expect("overrides_plain_count", DAT_00d644e8 == 0);
+        expect("overrides_windowed_key", std::strcmp(DAT_00d643e8[0], "windowed") == 0);
+        expect("overrides_windowed_no_value", DAT_00d64468[0] == nullptr);
+        expect("overrides_lang_key", std::strcmp(DAT_00d643e8[1], "lang") == 0);
+        expect("overrides_lang_value", std::strcmp(DAT_00d64468[1], "en") == 0);
+        expect("overrides_title_key", std::strcmp(DAT_00d643e8[2], "title") == 0);
+        expect("overrides_title_quoted_value_with_space",
+               std::strcmp(DAT_00d64468[2], "Half Blood Prince") == 0);
+    }
 
     if (failures != 0) {
         std::printf("winmain_smoke: %d failure(s)\n", failures);

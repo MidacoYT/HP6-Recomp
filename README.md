@@ -6,9 +6,9 @@ observée, sans reprendre l'arborescence du jeu.
 
 ## État
 
-Le journal suit actuellement 467 fonctions : 430 intégrées dans `src/math`,
+Le journal suit actuellement 468 fonctions : 433 intégrées dans `src/math`,
 `src/stream`, `src/projection`, `src/platform`, `src/render`, `src/runtime`,
-`src/presentation` et `src/archive`, 37 différées, et 0 bloquées (les 5
+`src/presentation` et `src/archive`, 35 différées, et 0 bloquées (les 5
 ex-bloquées du lot ReAgent `mixed_deps_060` sont intégrées depuis le lot
 manuel `file_ops_052`) ; 0 en attente de revue. Un site de suivi de
 progression (dans l'esprit de decomp.dev, avec une carte cliquable de
@@ -45,6 +45,15 @@ Sa fonction `Update` (la vraie machine à états qui remplit le menu des
 langues) reste délibérément différée, comme pour chaque tâche d'écran
 sœur de ce fichier. Voir `architecture/startup_path.md` ("19 oct 2026,
 suite 17").
+
+**Le parseur de dérogations de ligne de commande est intégré pour de
+vrai** (`hp6::platform::parse_command_line_overrides`, `src/platform/
+EngineSubsystems.cpp`) — résolu par désassemblage direct du site
+d'appel réel dans `WinMain` : `EDI` est l'adresse codée en dur d'un
+tampon global, pas un « this » abstrait. Découpe la ligne de commande
+en drapeaux nus et paires `-clé=valeur`, deux bizarreries réelles
+d'avancement de curseur reproduites fidèlement plutôt que corrigées.
+Voir `architecture/startup_path.md` ("19 oct 2026, suite 18").
 
 **`WinMain` (`0x005d9300`) est désormais entièrement assemblée, intégrée
 et testée de bout en bout** (`hp6::platform::run_win_main`,

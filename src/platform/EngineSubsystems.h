@@ -41,13 +41,21 @@ void initialize_debug_variable_system();
 void initialize_runtime_services();
 
 // 0x00ffa0d0. Called once from WinMain, immediately after the startup
-// SystemParametersInfoA save, with the command line (param_3) as an
-// implicit "this" (EDI). Parses "-key=value" tokens out of the command
-// line into a small table (up to 0x20 entries) on the same object. No
-// test in this project passes command-line overrides, and no traced
-// caller reads the resulting table back yet, so this is a documented
-// deferred no-op; the real per-token parse (isspace-delimited,
-// '='-split, FUN_005e0630 to duplicate the value) is left unreconstructed.
+// SystemParametersInfoA save. Confirmed via live disassembly of the
+// real call site (WinMain copies its own command line into two fixed
+// 0x200-byte global buffers first, then calls this with EDI pointing at
+// the first one -- not a "this" on an abstract object, just a hardcoded
+// global address) that the decompiled C alone did not make clear.
+// Tokenizes the command line: "-flag" tokens (no '=') go into a plain-
+// override table (up to 0x20 entries); "-key=value" tokens split into a
+// parallel keys/values pair table (also up to 0x20); anything else is
+// skipped. Values and plain tokens both go through FUN_005e0630 (a
+// quote-aware tokenizer: strips a leading quote and scans to its match,
+// else scans to the next whitespace), which also resynchronizes the
+// outer scan position. No test in this project passes command-line
+// overrides, and no traced caller reads the resulting tables back yet,
+// so this remains functionally inert in this project even though it is
+// now a real, faithful reconstruction rather than a no-op.
 void parse_command_line_overrides(const char* command_line);
 
 // 0x006882b0. Called once from WinMain, right after run_message_loop

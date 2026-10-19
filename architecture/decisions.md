@@ -2097,3 +2097,20 @@ dans cette passe.
 
 430/467 fonctions integrees (37 differees, 0 bloquee), 43/43 tests
 CTest verts.
+
+Suite (19 oct 2026, suite 18) : FUN_0053eb40 (recherche de nom de
+chapitre) reconnue comme deja integree -- deja reproduite en ligne dans
+resolve_and_load_chapter, jamais factorisee separement. FUN_00ffa0d0 ->
+hp6::platform::parse_command_line_overrides integree pour de vrai :
+resolu par desassemblage direct du site d'appel reel dans WinMain que
+EDI est l'adresse codee en dur d'un tampon global (0x00d63f68), pas un
+"this" abstrait -- WinMain copie sa ligne de commande dans deux tampons
+fixes de 0x200 octets avant l'appel. Decoupe en deux tables (drapeaux
+nus / paires cle=valeur, 0x20 entrees max chacune), reutilisant
+FUN_005e0630 (extract_next_token, tokenizer sensible aux guillemets).
+Deux bizarreries reelles reproduites fidelement (pas "corrigees") :
+asymetrie d'avancement du curseur quand l'une ou l'autre table est
+pleine. Teste dans tests/winmain_smoke.cpp.
+
+433/468 fonctions integrees (35 differees, 0 bloquee), 43/43 tests
+CTest verts.

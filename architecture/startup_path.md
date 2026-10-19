@@ -2336,3 +2336,41 @@ câblées dans sa vtable réelle, testées dans
 `tests/screen_tasks_smoke.cpp` (liste vide, tag non correspondant,
 nœud correspondant trouvé via `next`). **430/467 fonctions intégrées
 (37 différées, 0 bloquée), 43/43 tests verts.**
+
+## 19 oct 2026 (suite 18) — le parseur de ligne de commande intégré pour de vrai ; `FUN_0053eb40` reconnue comme déjà faite
+
+En triant les 37 fonctions encore différées pour la suite, deux
+corrections de comptabilité d'abord : `FUN_0053eb40` (résolution de nom
+de chapitre dans la table à 10 entrées de `0x00892300`) est en réalité
+déjà intégrée — son comportement (une recherche `strcmp`-équivalente)
+est reproduit fidèlement, mais *en ligne*, dans la seconde boucle de
+`hp6::presentation::resolve_and_load_chapter`
+(`src/presentation/ChapterFlow.cpp`), jamais factorisé en fonction
+séparée puisque `resolve_and_load_chapter` en est l'unique appelant réel
+confirmé. Enregistrée comme intégrée après coup.
+
+Ensuite, `FUN_00ffa0d0` (le parseur de dérogations de ligne de commande,
+`hp6::platform::parse_command_line_overrides`,
+`src/platform/EngineSubsystems.cpp`) a été intégré pour de vrai, en
+réglant d'abord une ambiguïté de registre implicite par désassemblage
+direct du site d'appel réel dans `WinMain` (`0x005d93b3`-`0x005d93eb`) :
+`EDI` n'est PAS un « this » sur un objet abstrait comme le laissait
+penser le commentaire précédent, mais l'adresse **codée en dur** d'un
+tampon global fixe (`0x00d63f68`) — `WinMain` copie sa propre ligne de
+commande (tronquée) dans deux tampons globaux adjacents de 0x200 octets
+avant d'appeler cette fonction avec `EDI` pointant sur le premier. La
+fonction découpe la ligne en deux tables à 0x20 entrées max : les
+drapeaux nus (`-flag`) et les paires (`-cle=valeur`), en réutilisant
+`FUN_005e0630` (`extract_next_token`, un tokenizer sensible aux
+guillemets) pour extraire la valeur ou le jeton brut. Deux vraies
+bizarreries du binaire d'origine ont été reproduites fidèlement plutôt
+que « corrigées » : la branche paires avance toujours au-delà de son
+jeton même si SA table est pleine, alors que la branche drapeaux nus
+N'avance PAS si LA SIENNE est pleine (un risque de boucle infinie
+latent dans le binaire original au-delà de 32 jetons nus, jamais
+déclenché par les tests de ce projet). Aucun appelant tracé ne relit
+encore ces tables. Testé dans `tests/winmain_smoke.cpp` (drapeau nu,
+paire simple, valeur entre guillemets avec espace interne).
+
+**433/468 fonctions intégrées (35 différées, 0 bloquée), 43/43 tests
+CTest verts.**
