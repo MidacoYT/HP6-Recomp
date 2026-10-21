@@ -292,3 +292,11 @@ std::int32_t run_win_main(HINSTANCE instance, char* command_line, ProcessTermina
 }
 
 } // namespace hp6::platform
+
+// FUN_005d9300 is called with the WinMain ABI by the original
+// ___tmainCRTStartup at 0x006b9457. MSVC supplies the CRT startup for this
+// target; this symbol maps its four WinMain arguments to the reconstructed
+// body above. The decompiled body does not use hPrevInstance.
+int WINAPI WinMain(HINSTANCE instance, HINSTANCE, LPSTR command_line, int) {
+    return hp6::platform::run_win_main(instance, command_line);
+}

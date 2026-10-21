@@ -8,8 +8,8 @@ namespace hp6::presentation {
 // per this project's own cross-referencing) that ScreenLanguageSelectTask
 // ::Update (and presumably other screens) populate with localized UI
 // text, later read by a separate GUI/text renderer
-// (PluginPresentationBitmap_BuildRenderQuad, 0x0056baa0 -- not yet
-// integrated, see architecture/startup_path.md).
+// (PluginPresentationBitmap_BuildRenderQuad, 0x0056baa0; its mode-2
+// producer and submission path are reconstructed separately).
 //
 // Confirmed real contract: a no-op when either `key` or `text` is null
 // (the exported x86's own `if (param_2 == 0 || param_3 == 0) return;`

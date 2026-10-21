@@ -43,7 +43,11 @@ extern std::uint8_t DAT_0098c6a8[]; // index-buffer-handle table (handle >= 0), 
 extern std::uint8_t DAT_009985a0[]; // index-buffer-handle table (handle < 0), 0x14-byte stride
 extern std::int32_t DAT_00998580;   // the active render region's mode index (set by set_active_render_region)
 extern std::int32_t DAT_00c754cc;   // highest valid mode index in the per-mode capability tables
+#ifdef HP6_NATIVE_ARRAY_ALIASES
+extern std::uint8_t* DAT_00f38b28; // original DAT_00f38b10 + 0x18
+#else
 extern std::uint8_t DAT_00f38b28[]; // per-mode capability table, 0xc4-byte stride (also read by FUN_005e8e70, not yet integrated)
+#endif
 extern std::int32_t DAT_00cf1a3c;   // fallback mode index when the active one is out of range
 extern std::int32_t DAT_00cf1a48;   // bind_pixel_shader_for_mode's own cache
 extern std::uint32_t DAT_00b170c4;  // bind_pixel_shader_for_mode's rebind counter

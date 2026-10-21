@@ -579,6 +579,9 @@ int main() {
                                              &recording_terminate);
 
     expect("window_was_created", DAT_00cef694 != nullptr);
+    expect("device_focus_window_matches_game_window",
+           DAT_009978e4 == static_cast<std::uint32_t>(
+               reinterpret_cast<std::uintptr_t>(DAT_00cef694)));
     expect("bootup_flow_dispatched", DAT_00cef68e == 1);
     // DAT_00cf1944 is checked via the creation counter, not its final
     // value: shutdown_render_device (part of run_win_main's own

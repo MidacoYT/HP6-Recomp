@@ -32,6 +32,7 @@ extern std::uint32_t DAT_008663dc;    // texture/LOD scale (also in DeviceReset.
 extern std::uint32_t DAT_00866364;    // multisample-quality setting
 
 extern std::uint32_t DAT_009978e4;     // saved HWND (hFocusWindow for CreateDevice)
+extern void* DAT_00cef694;             // game window, copied by original 0x005dca10
 extern std::int32_t DAT_00cf1950;      // nonzero selects the overridden/custom resolution-list path (deferred)
 extern std::uint32_t DAT_00cf19a8;     // active pixel-format selector (also in DisplayMode.cpp/RenderStateCache.cpp)
 extern std::int32_t DAT_00cf198c;
@@ -103,9 +104,15 @@ extern void* DAT_00d6af14;               // engine-service object; see header do
 // array/struct region. Modelled here as byte arrays with manual offset
 // arithmetic to stay faithful to that single-block layout (same approach
 // RenderStateCache.cpp documents for DAT_00881370).
+#ifdef HP6_NATIVE_ARRAY_ALIASES
+extern std::uint8_t* DAT_00b108a4; // original DAT_00b108a0 + 4
+extern std::uint8_t* DAT_009968dc; // original DAT_009968d8 + 4
+extern std::uint8_t* DAT_00c751a4; // original DAT_00c75188 + 0x1c
+#else
 extern std::uint8_t DAT_00b108a4[8 * 0x80]; // per-stage sampler-state defaults
 extern std::uint8_t DAT_009968dc[8 * 0x80]; // per-stage texture-stage-state defaults
 extern std::uint8_t DAT_00c751a4[0x320];    // render-state defaults block
+#endif
 // Scratch block zeroed (only words 0-3) by clear_scratch_light_block;
 // also reused, across its full 16 words, as the per-stage SetTexture
 // cache by hp6::render::set_texture_cached (RenderStateCache.cpp) —
@@ -913,6 +920,8 @@ void invoke_engine_service_hook(void*) {}
 std::int32_t create_and_configure_render_device(std::uint32_t width, std::uint32_t height) {
     hp6::runtime::reset_frame_pump_state();
     initialize_render_framework_heap(DAT_00d71250);
+    DAT_009978e4 = static_cast<std::uint32_t>(
+        reinterpret_cast<std::uintptr_t>(DAT_00cef694));
     const std::int32_t result = create_d3d9_device(width, height, 0, 0, 6);
     if (result == -0x7fffbffb) { // 0x80004005, E_FAIL
 #ifdef _WIN32

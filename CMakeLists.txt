@@ -65,11 +65,52 @@ add_library(hp6_reconstructed STATIC
     src/presentation/ChapterFlow.cpp
     src/presentation/ChapterLoadStateMachine.cpp
     src/presentation/BootupFlow.cpp
+    src/presentation/TextLayout.cpp
+    src/presentation/BitmapRenderQuad.cpp
+    src/presentation/BitmapRenderSubmit.cpp
+    src/presentation/PresentationRenderDispatch.cpp
+    src/presentation/LanguageSelectAssets.cpp
+    src/presentation/SasCurveEvaluator.cpp
+    src/presentation/SasColorAnimation.cpp
+    src/presentation/LanguageSkuConfig.cpp
+    src/presentation/PresentationStringRender.cpp
+    src/presentation/PresentationStringLayout.cpp
+    src/presentation/PresentationStringGeometry.cpp
+    src/presentation/PresentationFocusRegistry.cpp
+    src/presentation/ShpiDxtDecode.cpp
+    src/render/GeometryBatcher.cpp
+    src/render/GeometryBatchFlush.cpp
 )
 target_include_directories(hp6_reconstructed PUBLIC src)
 target_compile_features(hp6_reconstructed PUBLIC cxx_std_20)
 if(WIN32)
     target_link_libraries(hp6_reconstructed PUBLIC user32 gdi32 winmm)
+    add_library(hp6_native_render_aliases OBJECT
+        src/render/DeviceCreate.cpp
+        src/render/RenderStateCache.cpp)
+    target_include_directories(hp6_native_render_aliases PRIVATE src)
+    target_compile_features(hp6_native_render_aliases PRIVATE cxx_std_20)
+    target_compile_definitions(hp6_native_render_aliases PRIVATE HP6_NATIVE_ARRAY_ALIASES)
+    # The native entry point is available for incremental linking, but the
+    # game's global storage and runtime service factories are not yet rebuilt.
+    # Keep the normal build usable until those dependencies are supplied.
+    add_executable(hp6 EXCLUDE_FROM_ALL WIN32
+        src/platform/WinMain.cpp
+        src/platform/NativeInitialGlobals.cpp
+        src/platform/NativeImageArrays.cpp
+        src/platform/NativeChapterTables.cpp
+        src/platform/NativeDriveTable.cpp
+        src/platform/NativeHeapOverrides.cpp
+        src/platform/NativeArrayAliases.cpp
+        src/platform/TimerCompletion.cpp
+        $<TARGET_OBJECTS:hp6_native_render_aliases>)
+    target_link_libraries(hp6 PRIVATE hp6_reconstructed d3d9 shell32)
+    option(HP6_BUILD_LANGUAGE_INSPECTOR "Build the standalone asset inspection window" OFF)
+    if(HP6_BUILD_LANGUAGE_INSPECTOR)
+        add_executable(hp6_language_select_preview EXCLUDE_FROM_ALL WIN32
+            src/presentation/LanguageSelectMenuApp.cpp)
+        target_link_libraries(hp6_language_select_preview PRIVATE hp6_reconstructed shell32)
+    endif()
 endif()
 
 # The original target is x86. This library can also be compiled on x64 for
@@ -82,6 +123,9 @@ endif()
 
 include(CTest)
 if(BUILD_TESTING)
+    add_executable(hp6_language_sku_config_smoke tests/language_sku_config_smoke.cpp)
+    target_link_libraries(hp6_language_sku_config_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME language_sku_config_smoke COMMAND hp6_language_sku_config_smoke)
     add_executable(hp6_archive_header_smoke tests/archive_header_smoke.cpp)
     target_link_libraries(hp6_archive_header_smoke PRIVATE hp6_reconstructed)
     add_test(NAME archive_header_smoke COMMAND hp6_archive_header_smoke)
@@ -206,7 +250,34 @@ if(BUILD_TESTING)
     add_executable(hp6_bootup_flow_smoke tests/bootup_flow_smoke.cpp)
     target_link_libraries(hp6_bootup_flow_smoke PRIVATE hp6_reconstructed)
     add_test(NAME bootup_flow_smoke COMMAND hp6_bootup_flow_smoke)
+    add_executable(hp6_text_layout_smoke tests/text_layout_smoke.cpp)
+    target_link_libraries(hp6_text_layout_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME text_layout_smoke COMMAND hp6_text_layout_smoke)
+    add_executable(hp6_bitmap_render_quad_smoke tests/bitmap_render_quad_smoke.cpp)
+    target_link_libraries(hp6_bitmap_render_quad_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME bitmap_render_quad_smoke COMMAND hp6_bitmap_render_quad_smoke)
+    add_executable(hp6_presentation_render_dispatch_smoke tests/presentation_render_dispatch_smoke.cpp)
+    target_link_libraries(hp6_presentation_render_dispatch_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME presentation_render_dispatch_smoke COMMAND hp6_presentation_render_dispatch_smoke)
+    add_executable(hp6_presentation_string_render_smoke tests/presentation_string_render_smoke.cpp)
+    target_link_libraries(hp6_presentation_string_render_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME presentation_string_render_smoke COMMAND hp6_presentation_string_render_smoke)
+    add_executable(hp6_presentation_string_layout_smoke tests/presentation_string_layout_smoke.cpp)
+    target_link_libraries(hp6_presentation_string_layout_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME presentation_string_layout_smoke COMMAND hp6_presentation_string_layout_smoke)
+    if(EXISTS "${PROJECT_SOURCE_DIR}/../extract/chapters/languageselect.str"
+       AND EXISTS "${PROJECT_SOURCE_DIR}/../extract/game.str")
+        add_executable(hp6_language_select_assets_smoke tests/language_select_assets_smoke.cpp)
+        target_link_libraries(hp6_language_select_assets_smoke PRIVATE hp6_reconstructed)
+        add_test(NAME language_select_assets_smoke COMMAND hp6_language_select_assets_smoke
+                 "${PROJECT_SOURCE_DIR}/../extract/chapters/languageselect.str"
+                 "${PROJECT_SOURCE_DIR}/../extract/game.str")
+    endif()
     if(WIN32)
+        add_executable(hp6_timer_completion_smoke
+            tests/timer_completion_smoke.cpp src/platform/TimerCompletion.cpp)
+        target_compile_features(hp6_timer_completion_smoke PRIVATE cxx_std_20)
+        add_test(NAME timer_completion_smoke COMMAND hp6_timer_completion_smoke)
         add_executable(hp6_game_window_smoke tests/game_window_smoke.cpp)
         target_link_libraries(hp6_game_window_smoke PRIVATE hp6_reconstructed)
         add_test(NAME game_window_smoke COMMAND hp6_game_window_smoke)

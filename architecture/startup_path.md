@@ -1,11 +1,18 @@
 # Chemin de démarrage observé
 
-La fonction d'entrée PE `006b9718` appelle l'initialisation du cookie de
+L'en-tête PE du `hp6.exe` original (SHA-256
+`4653e4301ed6dfc271409da2443fd817a65b6514704a3487e86895337e487954`)
+donne l'entrée `016b0940` dans la section `Sitext`. Ses premiers octets sont
+du code obfusqué ; l'export Ghidra disponible ne décompile pas cette entrée.
+L'ancienne attribution de `006b9718` comme « entrée PE » était donc fausse.
+La fonction CRT décompilée `006b9718` appelle l'initialisation du cookie de
 sécurité, puis `006b9457` (`___tmainCRTStartup`, runtime Visual Studio 2008).
 Après les initialiseurs CRT, ce dernier appelle `005d9300`, la fonction
 applicative qui reçoit l'instance Windows, la ligne de commande et l'option
-d'affichage. Le runtime CRT sera fourni par le compilateur du projet ; il ne
-nécessite pas une reconstruction manuelle des fonctions standard.
+d'affichage. Le lien d'exécution entre le stub obfusqué de `Sitext` et
+`006b9718` n'est pas encore établi par cette exportation statique. Le runtime
+CRT sera fourni par le compilateur du projet ; cela ne reconstruit pas la
+couche d'entrée obfusquée de l'original.
 
 Dans `005d9300`, les exports montrent notamment : choix du répertoire de
 l'exécutable, lecture de paramètres système, copie de la ligne de commande,
@@ -2617,3 +2624,533 @@ analyse statique.
 
 **437/470 fonctions intégrées (33 différées, 0 bloquée), 45/45 tests
 CTest verts.**
+
+## 20 oct 2026 — préparation du quad du menu de langue
+
+L'export de `PluginPresentationBitmap_BuildRenderQuad` (`0x0056baa0`)
+permet maintenant de construire le descripteur transmis à
+`FUN_005e92d0` à partir de l'objet bitmap : visibilité à `+0x58`,
+diagonale de transformation à `+0x10..+0x18`, clé de texte à `+0x2c`,
+bits de mode à `+0x28`, rectangle à `+0x48..+0x54`, UV optionnels à
+`+0x40..+0x46` et compartiment par défaut à `+0x38`. La lecture de la
+clé `GUI_LANGUAGEMENU*` rejoint la table que
+`ScreenLanguageSelectTask::Update` remplit déjà. L'implémentation est
+dans `BitmapRenderQuad.cpp` ; le test dédié vérifie la matrice, les modes,
+les UV et le texte localisé.
+
+En comparant les variables de pile de `0x0056baa0` aux offsets lus par
+`0x005e92d0`, deux champs manquaient dans `RenderTextDescriptor` :
+`+0x20` (constante du producteur) et `+0x3c` (copie de `this+0x30`).
+Les champs après ces trous étaient décalés dans la structure C++.
+Des assertions de compilation x86 fixent maintenant `x_left=+0x24`,
+`default_bucket=+0x40`, `match_name=+0x44`, taille `0x54`.
+
+Cette étape prépare le descripteur ; elle ne déclenche pas encore son
+envoi automatique à chaque frame. Il reste à résoudre la sélection de
+caméra/`FUN_006236d0`, le second dictionnaire de langue, puis surtout
+`flush_vertex_batch` (`0x006512f0`) et ses pools de buffers D3D9 avant
+qu'un quad puisse effectivement être dessiné dans la fenêtre. Le projet
+construit et les 47 tests CTest passent.
+
+## 20 oct 2026 — flush des quads vers les buffers D3D9
+
+La séquence `0x006512f0` → `0x00650f70` → `0x00651d60`/
+`0x00651f80` est maintenant intégrée pour le chemin de texte à batch
+neuf. `GeometryBatchFlush.cpp` sélectionne les pools par stride et mode,
+crée les buffers via `CreateVertexBuffer`/`CreateIndexBuffer` si le slot
+est vide, les verrouille, copie les sommets et indices depuis le scratch,
+puis écrit les comptes et handles dans la commande de 0x30 octets.
+`submit_text_runs` appelle le flush exactement avant le produit de
+matrices et la mise en file du paquet.
+
+Le test `text_layout_smoke` exerce désormais ce chemin contre un device
+D3D9 factice avec des buffers réellement mappés : quatre sommets et six
+indices atteignent leurs buffers, les handles dynamiques et les comptes
+finals sont vérifiés. Les autres modes de batch, notamment l'entrée avec
+un `vertex_count_26` déjà non nul, restent à recouper avant de les faire
+passer par cette fonction. Le menu n'est pas encore affiché : le code
+n'a toujours pas de déclencheur de rendu par frame ni d'exécutable autonome
+qui lance les systèmes de présentation avec les données du jeu.
+
+Un test supplémentaire relie désormais une vraie clé
+`GUI_LANGUAGEMENU0` de la table reconstruite au producteur bitmap, puis
+à `layout_text_descriptor` et aux buffers D3D9 factices. Il a révélé et
+fait corriger la traduction des bits de `this+0x28` : les bits source
+1 et 2 vont aux bits destination 0 et 1, tandis que le bit source 4 va
+au bit destination 2. La formule simple `options >> 1` perdait ce
+dernier bit et désactivait le mode texte pour le menu.
+
+## 20 oct 2026 — caméra mode 2 et recherche du déclencheur
+
+Nouveau recoupement du désassemblage de `0x0056baa0` : l'appel à
+`0x00401520` calcule **matrice locale × matrice caméra**. La première
+version du producteur C++ inversait ces opérandes ; un test avec caméra
+translatée et bitmap mis à l'échelle détecte maintenant cette erreur.
+La constante `DAT_007db234` a été lue directement dans l'image Ghidra
+(`00 00 80 3f`, soit 1.0f).
+
+Le chemin `DAT_00fcae50+8 == 2` copie la matrice de l'objet parent
+`bitmap+4` à `parent+0x10`. Il est maintenant reconstruit dans
+`build_bitmap_render_quad_mode2`, avec la table de 12 octets par espace
+de coordonnées (`0x00892000`, index `bitmap+0x34`).
+`submit_bitmap_render_quad_mode2` effectue ensuite le véritable appel à
+`layout_text_descriptor`. Le test connecté emploie cette entrée pour
+la clé `GUI_LANGUAGEMENU0` et vérifie le transfert des quatre sommets
+vers le buffer D3D9 factice. L'autre choix de caméra, qui appelle
+`0x006236d0`, reste non reconstruit.
+
+La recherche en lecture seule des références du projet Ghidra local
+(`tools/trace_render_xrefs.py`) trouve une seule référence à
+`0x00648730`/`0x00648630`, depuis `FUN_005dd020` (chemin de diagnostic),
+et une référence de donnée à `0x0056baa0`, dans sa vtable `0x00827be0`.
+La diffusion de message `0x005db240` est identifiée, mais aucune
+référence directe ne démontre encore l'appel normal par frame qui
+active le renderer des bitmaps. Cette limite est une limite de la
+recherche statique actuelle, pas une preuve que le jeu n'appelle pas
+ces fonctions indirectement.
+
+## 20 oct 2026 — répartition des objets bitmap par espace
+
+La vtable du sous-objet bitmap commence à `0x00827bac`. Son slot
+`+0x34` (`0x00827be0`) contient `FUN_0056baa0`, le producteur de quad.
+`FUN_004653a0` installe cette vtable au décalage `+0xe0` de l'objet de
+présentation. La vtable du gestionnaire commence à `0x00823968`, est
+installée par `0x00450420`, et contient `FUN_004505f0` au slot
+`+0x28` (`0x00823990`).
+
+`FUN_004505f0` est le répartiteur confirmé : il traverse le tableau
+de pointeurs `[gestionnaire+0x4e8, gestionnaire+0x4ec)`, compare le
+`uint16` à `bitmap+8` avec le numéro d'espace à
+`contexte_de_transformation+0x3a8`, puis appelle le slot virtuel
+`bitmap.vtable+0x34` avec les contextes de transformation et de caméra.
+Ce parcours est maintenant dans `PresentationRenderDispatch.cpp`. Le test
+vérifie le filtrage, les deux arguments et le cas où le numéro actif
+ne tient pas sur 16 bits. Les 48 tests CTest passent.
+
+L'inscription d'un bitmap est effectuée par `FUN_00fdbad0` (thunk
+`0x00450640`), appelé depuis l'initialiseur `FUN_0056b3d0`. Le
+gestionnaire refuse l'ajout quand la liste contient `0x21f` entrées,
+écrit dans la capacité disponible sinon, et double la capacité lorsque
+le tableau est plein. Cette logique est également reconstruite dans
+`register_presentation_bitmap`. Les deux fonctions d'allocation sont
+fournies par l'appelant : le chemin du jeu utilise
+`allocate_eastl_block`/`release_eastl_block`, tandis que le test vérifie
+la croissance avec un allocateur isolé. Les références directes
+`0x00422840` et `0x0047a780` au tableau sont des retraits, ce que leur
+désassemblage confirme.
+
+Le gestionnaire donne le chaînon entre les objets bitmap enregistrés et
+leur producteur de quad. Son propre appel par frame passe encore par une
+vtable ; la référence directe à `FUN_004505f0` est seulement son entrée
+de vtable. Après correction du slot à `+0x28`, plusieurs répartiteurs de
+groupes sont apparus dans les exports : `0x00417b70`, `0x00465e10`,
+`0x004a6dd0`, `0x00523710`, `0x00524080`, `0x00554c10` et
+`0x00587e30` parcourent chacun un tableau d'objets et appellent leur
+slot `+0x28` avec deux contextes. `FUN_00465e10` est désormais portée
+comme `dispatch_presentation_group` : son contexte vient de `groupe+0xc`,
+son tableau d'enfants est à `contexte+0x298/+0x29c`, et le test exerce
+le relais groupe → gestionnaire → bitmap. Sa vtable est installée au
+`+0x450` de l'objet construit par `FUN_004657d0`, dans la même famille
+de présentation que le constructeur du bitmap `FUN_004653a0`.
+L'appartenance de ce groupe au menu de langue reste à établir ; le test
+ne prouve pas l'appel effectif pendant une frame. La reconstruction ne crée toujours pas d'objets de
+présentation depuis les ressources du menu et ne possède pas encore un
+exécutable qui présente le menu de langue dans une fenêtre.
+
+## 20 oct 2026 — données réelles du chapitre LanguageSelect
+
+Le conteneur extrait `D:\HP\extract\chapters\languageselect.str`
+(SHA-256 `986513b6575a90b80d379beb00d0bc26f7cbd0d35a73e4d275589969a1841cb4`)
+contient 63 assets. Le script en lecture seule
+`tools/inspect_language_select_assets.py` confirme les 16 entités
+`text_LangaugeSelectMenu0..15.hybrid` (orthographe `Langauge` du jeu),
+chacune avec sa clé `GUI_LANGUAGEMENU0..15` et la police
+`LS_Ascender_Uni_211`. Il relève leurs translations sérialisées à
+`hybrid+0x50` : huit lignes à gauche (indices 0 à 7) et huit à droite
+(8 à 15). Le même relevé donne la matrice 3×4 et la position de
+`CameraLanguageSelectMenu` (`36.31377, -144.20711, -4.22750`).
+L'archive contient aussi `ScreenLanguageSelect.hybrid`,
+`Menu_LanguageSelectMenu.hybrid`, `CameraLanguageSelectMenu.hybrid`,
+16 groupes, 16 marqueurs et la police `.ffn` (69 024 octets).
+L'en-tête des entités encode le nombre d'enfants à `+0x0c` et l'offset
+de leur table à `+0x10` ; chaque entrée mesure 20 octets et commence
+par le hash du nom de l'enfant. Cette table donne un graphe complet et
+ordonné : `ScreenLanguageSelect` contient `Menu_LanguageSelectMenu` ;
+le menu contient `Group_0..15` ; chaque `Group_i` contient
+`text_LangaugeSelectMenui` puis `Marker_i`. La caméra est référencée
+par une propriété de l'écran, hors de cette table d'enfants. Le script
+vérifie les 16 couples et les bornes des tables. Le rôle précis des
+autres propriétés reste à confirmer dans le désérialiseur du jeu.
+
+Ces chaînes et translations proviennent des assets originaux, et non
+de constantes d'interface inventées. Le prochain raccordement matériel
+est le décodage des propriétés de ces entités en objets de présentation
+visibles, puis leur activation par le parcours de frame ; le script ne
+réalise pas ce chargement.
+
+### Lecteur C++ ciblé pour le menu de langue
+
+`src/presentation/LanguageSelectAssets.cpp` lit directement le conteneur
+STRM/AGRP/ASET/DATA extrait. Il vérifie les bornes des chunks et des
+assets, puis la hiérarchie écran → menu → seize groupes → texte et
+marqueur. Dans les entités texte, les propriétés de chaîne à `+0x74`
+et `+0x80` pointent respectivement vers la clé `GUI_LANGUAGEMENU*` et
+la police `LS_Ascender_Uni_211`. Dans chaque marqueur, la propriété à
+`+0x64` pointe vers `Menu_Highlight_Left`. Le lecteur relève également
+les matrices 3×4 à `+0x20` et les positions à `+0x50` des textes,
+marqueurs et de la caméra. `language_select_assets_smoke` l'exécute sur
+le véritable `languageselect.str` quand cette archive est disponible
+dans l'espace de travail.
+
+Les marqueurs ne partagent pas la translation de leur texte : selon la
+ligne, l'écart vertical sérialisé varie, et leur profondeur est aussi
+distincte. La paire repose sur les références d'enfants du groupe,
+pas sur une égalité de positions. Ces données sont maintenant prêtes
+pour la création des objets de présentation ; le lecteur seul ne les
+instancie pas et ne déclenche aucun dessin.
+
+### Piste vers l'instanciation du bitmap
+
+Dans `hp6.exe`, l'initialiseur statique à `0x00705590` pousse
+`0x00465370` comme fonction de construction dans l'enregistrement
+`FUN_0057c8e0` ; il lui passe aussi la taille `0x220` et la table
+`0x0082507c`. `0x00465370` appelle `0x004653a0`, qui installe notamment
+la vtable bitmap `0x00827bd0`. Cette table contient à `+0x0c`
+`FUN_0056b3d0` (initialisation depuis les propriétés) et à `+0x10`
+`FUN_0056baa0` (production du quad). Cela relie une entrée de la
+fabrique de présentation au chemin bitmap déjà reconstruit.
+
+`FUN_0056b3d0` reçoit un bloc de paramètres décodés : la clé texte est
+à `param_1+0x28`, recopiée à `bitmap+0x2c`, puis utilisée par
+`FUN_0056baa0` pour consulter la table de texte. Le passage exact des
+propriétés `.hybrid` à ce bloc de paramètres, ainsi que le lien entre
+le type sérialisé des textes du menu et cette entrée de fabrique,
+restent à tracer. Les hashes de propriétés visibles dans l'asset ne
+figurent pas littéralement dans l'image exécutable, ce qui est
+compatible avec une résolution par noms au chargement, sans la prouver.
+
+### Correction : les seize libellés sont des TextButton
+
+Le dword `Entity+0x1c` de chaque entité `.hybrid` est le hash du nom de
+classe. Croisé avec les chaînes de l'exécutable, il donne exactement :
+`HybridPresentationScreenBasic` pour l'écran,
+`HybridPresentationMenuBasic` pour le menu,
+`HybridPresentationCameraFixed` pour la caméra,
+`HybridPresentationGroupBasic` pour les seize groupes,
+`HybridPresentationTextButton` pour les seize libellés et
+`HybridPresentationFocusLocatorMovable` pour les seize marqueurs.
+`LanguageSelectAssets.cpp` valide désormais ces six types. Le lien
+supposé ci-dessus entre les libellés de ce menu et la fabrique
+`HybridPresentationBitmapBasic` n'est donc **pas établi** : le bitmap
+reste un autre composant du moteur, tandis que les libellés suivent la
+voie de `PluginPresentationString`.
+
+L'enregistrement statique de `HybridPresentationTextButton` à
+`0x007098a0` nomme son constructeur `0x0051bbb0` et une taille
+d'instance de `0x430`. Son constructeur `0x0051bbe0` installe la
+vtable de `PluginPresentationString` à l'offset objet `+0x90`.
+Cette vtable (`0x00827330`) appelle `FUN_0047a2a0` pour initialiser
+la propriété et `FUN_0047a9e0` pour produire le texte à dessiner.
+`FUN_0047a2a0` copie le « String ID » de `param+0x14` vers
+`string+0x24`, « Font Name » de `param+0x20` vers `string+0x30`,
+« LineHeight » de `param+0x24` vers `string+0x34`, puis convertit
+« FontColour » de `param+0x2c` vers `string+0x0c` par `FUN_00478140`.
+Les valeurs sérialisées des seize lignes sont `0.065` pour la hauteur,
+`0xd6d8b3ff` pour la couleur brute, `1` pour l'alignement vertical et
+`5` pour l'horizontal. Le lecteur C++ les expose sans inventer les
+valeurs par défaut des autres propriétés.
+
+`FUN_0047a9e0` appelle `FUN_005f9bc0` pour la mise en page et le
+dessin de `PluginPresentationString`. Ce chemin est distinct de
+`FUN_005e92d0` utilisé par le producteur bitmap déjà reconstruit ;
+sa conversion en commandes de dessin reste à implémenter. La table de
+texte `GUI_LANGUAGEMENU*` remplie par `ScreenLanguageSelectTask` et
+la consultation opérée par `FUN_0047a9e0` sont les deux extrémités
+à raccorder pour afficher les libellés.
+
+`PresentationStringRender.cpp` reconstruit désormais le transfert
+déterministe de `FUN_0047a9e0` vers un descripteur de texte pour le
+mode de coordonnées 2 : bit de visibilité à `string+0x60`, police à
+`+0x30`, couleur déjà convertie à `+0x0c`, rectangle à `+0x50..0x5c`,
+hauteur/espacement à `+0x34/+0x38`, alignements à `+0x40/+0x3c`,
+ombre à `+0x48/+0x4c`, et matrice du parent. Le texte résolu reste un
+argument explicite, puisque sa recherche dans le service et la
+conversion des glyphes de `FUN_005f9bc0` ne sont pas encore portées.
+Le switch natif ramène l'alignement horizontal sérialisé `5` des
+libellés à `0` dans ce descripteur ; le test vérifie ce détail.
+
+### Atlas et placement des glyphes du menu
+
+L'asset `LS_Ascender_Uni_211.ffn` du même chapitre est un conteneur
+`FntF` de 69 024 octets : 128 entrées de glyphes à pas de 16 octets,
+une métrique de hauteur 29, et un atlas alpha 256×256 au format 123.
+`LanguageSelectAssets.cpp` vérifie les bornes, les codepoints uniques
+et les rectangles dans l'atlas, puis expose les métriques et les
+pixels alpha. Il ne convertit pas encore l'atlas en texture D3D9.
+
+`PresentationStringLayout.cpp` porte la branche glyphes ordinaires de
+`FUN_005f9e60` : chaque entrée de 0x28 octets contient un rectangle
+local, quatre coordonnées d'atlas et un indicateur d'espace. Un
+codepoint absent utilise le glyphe espace, comme le chemin natif.
+Les retours à la ligne et tabulations sont pris en charge ; le
+balissage `\\[...]` et ses callbacks ne le sont pas encore.
+Le même fichier porte la mise à l'échelle horizontale de
+`FUN_005f9bc0`, l'échelle verticale et l'espacement de
+`FUN_005fa5e0`, puis les alignements gauche, centre, droite et justifié
+de `FUN_005fa680`. La dernière ligne justifiée reste alignée à gauche.
+Le test sur l'archive originale vérifie le glyphe « A », l'espace et
+les coordonnées après mise à l'échelle. Restent la résolution des
+libellés du service de langues, la construction de la texture atlas,
+les passes d'ombre/clip et la soumission D3D9 avant qu'une frame
+affiche réellement l'écran.
+
+### Quads ordinaires de `PluginPresentationString`
+
+`FUN_005fabd0` rassemble les glyphes dont le pointeur de tag est nul
+et dont l'octet de marque à `glyph+5` vaut zéro. Pour chacun, il écrit
+quatre sommets aux coins du rectangle calculé plus haut. Il convertit
+les coordonnées de l'atlas par la formule entière
+`(texel * 0x1000 - 0x800) / taille_atlas`, retient le mot bas et
+appelle `FUN_00641600` pour les sommets et les six indices
+`{0,1,2,1,3,2}`. Le batch emploie le format `0x12`.
+`PresentationStringGeometry.cpp` produit désormais ces sommets et
+indices à partir des glyphes placés. Le test sur la police originale
+vérifie deux quads pour « A A », l'espace sans quad et les UV exacts
+du glyphe « A ». La passe des tags `FUN_005fafb0`, la matrice, le
+matériau et l'envoi au batcher D3D9 restent à intégrer.
+
+Le fichier `extract/game/localised/en-gb.str` ne contient aucune des
+seize clés `GUI_LANGUAGEMENU0..15` dans son arbre `TX`. Ceci concorde
+avec `FUN_00429890` : le task d'écran remplit ces clés à l'exécution
+depuis la liste des langues installées. Le rendu de ce menu doit donc
+consommer la table dynamique de textes, et pas seulement l'archive
+localisée sur disque.
+
+### Prévisualisation diagnostique, non fidèle au rendu du jeu
+
+`hp6_language_select_preview` ouvre une fenêtre Windows de 1280×720 pour
+vérifier le chargement de `languageselect.str`, les positions des 16
+`TextButton` et `Marker`, et l'atlas `LS_Ascender_Uni_211.ffn`. Ce n'est pas
+encore l'écran original. Les flèches changent la sélection et Échap ferme la
+fenêtre. Exemple depuis `HP6_Reconstructed` :
+
+```powershell
+cmake --build build --target hp6_language_select_preview
+.\build\Debug\hp6_language_select_preview.exe ..\extract\chapters\languageselect.str
+```
+
+Pour produire une capture sans fenêtre :
+
+```powershell
+.\build\Debug\hp6_language_select_preview.exe ..\extract\chapters\languageselect.str --snapshot build\language_menu.bmp
+```
+
+La projection ajustée et le dessin CPU sont des substituts. Ils ne doivent
+pas servir de preuve du comportement D3D9 original. Le fond est noir comme sur la
+capture fournie du jeu. Le fichier
+`LanguageSelect_M.sdt` est un son EA SCHl ; il ne contient pas le décor.
+L'archive du chapitre contient `tf_art_PH_bck_1.fsh`, une texture 512×512
+figurant une page de journal, mais son placement dans le décor reste à tracer.
+
+Le binaire local `D:/HP/hp6.exe` (SHA-256
+`4653e4301ed6dfc271409da2443fd817a65b6514704a3487e86895337e487954`)
+contient 21 libellés UTF-16 à ses offsets fichier `0x43f26c..0x43f3f0`.
+`LanguageSelectNames.h` garde exactement les seize libellés dont l'archive
+locale est installée ici. Leurs emplacements suivent la capture fournie :
+anglais à polonais dans la colonne gauche, russe à norvégien à droite. L'ordre
+du vecteur construit par le service de langues n'a pas encore été vérifié en
+exécution ; il ne faut donc pas le présenter comme établi par décompilation.
+
+La capture montre que l'éclat au centre est le curseur, indépendant du choix
+« Français ». Le chapitre contient `ET_glow_lamp.fsh` ; sa texture 128×128
+correspond visuellement à l'éclat. La prévisualisation décode cette texture
+et la déplace avec la souris ; sa liaison exacte au curseur du moteur reste
+à tracer. Le curseur de Windows est masqué dans la fenêtre du menu.
+
+Le surlignage original ne se réduit pas au locator `Marker_i` du chapitre.
+`game.str` contient `ScreenMenuHighlightLeft` avec cinq enfants, dont un
+follower lié par le nom `Menu_Highlight_Left`, un texte `\\[MENU_SELECT\\]`
+en police `Gomorrah`, et des bitmaps qui référencent
+`PT_highlight_CM.tga` et `PT_menu_bracket_CM.tga`. Le lecteur
+`read_language_select_highlight_assets` vérifie maintenant cette hiérarchie,
+les noms et les transforms de l'archive originale. Le lecteur extrait aussi
+le mip 0 SHPI/DXT1 du fond 512×512 et les blocs SHPI/DXT5 du soulignement
+128×64 et du crochet 32×32 directement des archives. La composition de la
+matrice du follower et les deux textures sont maintenant utilisés dans la
+prévisualisation CPU. La création runtime des objets et leur soumission D3D9
+restent à raccorder avant de revendiquer le moteur original.
+
+### Liaison runtime du focus
+
+Les exports conservés `0x005d3570`, `0x005d3730` et `0x005d3800` montrent
+qu'une matrice 4×4 est publiée sous un nom, retrouvée par comparaison de nom
+ou par un alias à un niveau, puis copiée au follower. `0x005c6030` initialise
+la matrice cherchée à l'identité et appelle `0x004048f0` ; ce dernier copie la
+matrice locale et la multiplie par la matrice retrouvée via `0x00401520`.
+`PresentationFocusRegistry` reproduit ce contrat observable. Le test sur les
+archives lie `Marker_0` à `ScreenMenuHighlightLeft` par
+`Menu_Highlight_Left`, puis vérifie publication, alias, suppression et l'ordre
+de multiplication avec une translation non commutative. Le passage de l'état
+stable 6 du vrai `FocusLocatorMovable` à la publication et la création du
+runtime `Bitmap_Highlight*` restent à raccorder ; le registre isolé ne les
+exécute pas encore.
+
+`0x005c5f40` prépare la matrice locale du follower : il orthonormalise sa
+pose source avec `0x00404970`, puis l'inverse avec `0x00431910`. Le registre
+reconstruit maintenant cette étape. Sur les archives originales,
+`pose_source × inverse(pose_source)` donne l'identité à `1e-4` près. Après
+composition avec `Marker_0`, le glyphe `text_HighlightGlyphLeft` se place à
+moins de `0.01` unité de la position du marqueur.
+
+La prévisualisation dessine maintenant les quads des deux bitmaps avec leurs
+matrices de `game.str`, le follower composé et la pose de
+`CameraLanguageSelectMenu`. Les constantes de `0x0056b3d0` donnent les
+bornes locales `[-0.5,+0.5]` sur les deux axes. Une focale de 750 pixels,
+ajustée à la capture fournie, projette le bitmap de soulignement à environ
+x=151..568 et y=140..224 pour `Marker_1`, et le crochet à x=144..178.
+La prévisualisation emploie ensuite une focale de 768 pixels pour les textes,
+qui place les bords gauches des deux colonnes près de x=206 et x=751.
+Ces focales, l'inversion U du soulignement et le gain d'alpha du texte sont
+des ajustements visuels ; leurs valeurs natives restent à tracer.
+
+`0x005fa800` positionne verticalement les glyphes après la mise à l'échelle
+et l'alignement horizontal. La valeur sérialisée `1` des `TextButton` centre
+le milieu des bornes réelles des glyphes sur l'origine du composant. Cette
+étape est intégrée à `PresentationStringLayout.cpp`. La prévisualisation
+utilise maintenant `shape_plain_presentation_string` puis
+`layout_presentation_string_glyphs` au lieu de placer les caractères avec
+un décalage vertical manuel. Le nombre 768 correspond à la capture ; la
+fonction de projection de `PluginPresentationCameraFixed` reste à retrouver.
+
+`LanguageSelectionGlyphs.gly` dans le chapitre contient explicitement
+`MENU_SELECT:tf_button_a` et `KEYBOARD_MENU_SELECT:tf_key_return`. Le lecteur
+valide la seconde association, décode `tf_key_return.fsh` et la
+prévisualisation l'affiche près du crochet. La taille est déduite de la
+hauteur de ligne `0.05` de `text_HighlightGlyphLeft`. Son alignement exact
+par le gestionnaire de tags est encore à reconstruire.
+
+`ShpiDxtDecode.cpp` décode maintenant les blocs DXT1/3/5 du mip 0 en RGBA8.
+Le test compare des pixels du journal, du soulignement et du crochet avec le
+décodage indépendant de Pillow. Le lecteur conserve aussi les niveaux mip
+complets présents dans chaque SHPI : dix niveaux pour le journal, un seul
+niveau complet pour les deux textures de highlight. Les octets de remplissage
+en fin de bitmap ne sont pas pris pour des niveaux supplémentaires. Ce
+décodage CPU vérifie les assets ; il ne remplace pas leur soumission D3D9.
+## 21 octobre 2026 : état 6 du FocusLocatorMovable
+
+La seconde décompilation locale (`D:/HP/reconstruction`) donne les callbacks
+`004ea9e0` et `004eaa20` du plugin `HybridPresentationFocusLocatorMovable`.
+Sa provenance est un autre EXE (SHA-256 commençant par `41cbb7ad`), mais la vtable
+`0082f570` du présent `hp6.exe` (SHA-256 commençant par `4653e430`) contient bien ces deux
+mêmes adresses aux offsets `+0x10` et `+0x28`. Le nom de liaison est chargé
+depuis le template `+0x60` par `004ea950` dans l'objet `+0x100`.
+
+`004ea9e0` révoque d'abord l'alias du nom puis publie la matrice `objet+0x10`
+quand la transition arrive à l'état 6. `004eaa20` met à jour la transformation
+puis republie si l'état du composant est au moins 6. Le destructeur du
+sous-objet (`004ea9c0`) ne retire pas lui-même la matrice du registre.
+La prévisualisation instancie maintenant les seize locators du chapitre ;
+seul celui du groupe sélectionné atteint l'état 6 et publie sa pose. Le test
+des archives vérifie aussi que le second locator remplace la matrice du
+premier sous le même nom. Le changement de sélection suit les phases
+`6 → 5 → 3` pour l'ancien groupe et `3 → 4 → 6` pour le nouveau,
+conformément à `00416c60`, `00416e70` et `0043b5d0`. La prévisualisation
+termine immédiatement ces phases ; le callback d'attente des animations
+(`00417740`) n'y est pas encore raccordé. Les fonctions génériques
+`005550c0`/`005551f0` identifiées auparavant
+ne sont donc pas le callback spécifique du locator ; l'ancienne attribution
+a été retirée de la carte d'adresses.
+
+Le registre et le follower rendent le changement de sélection observable,
+mais l'instanciation du graphe Hybrid et le rendu D3D9 de la scène restent à
+raccorder. Le snapshot diagnostique est `build/language_focus_lifecycle.bmp`.
+
+`PresentationFocusPhase` représente désormais la portion du dispatcher natif
+`0043b5d0` nécessaire au choix d'une langue. La requête 3 passe de 3 à 4 ;
+une requête 0 n'atteint 6 que lorsque le callback de fin retourne vrai.
+La requête 4 passe de 6 à 5 puis, après le même callback, à 3. Le locator
+reçoit chacune de ces transitions et ne publie sa pose qu'à 6. Un test retarde
+la fin de transition et vérifie que le follower conserve la précédente matrice
+jusqu'à la publication du nouveau locator. La prévisualisation fournit pour
+l'instant `true` à ce callback, car l'animation native et `00417740` ne sont
+pas encore reconstruits. Le rendu conserve donc son apparition immédiate.
+
+### Clips des seize TextButton du chapitre
+
+Le groupe sérialisé de propriété 95 (`0x0701587e`) a trois overrides dans
+chacun des seize `text_LangaugeSelectMenu*` de `languageselect.str` :
+`AnimFilename` référence la banque `0x08eaad23`, `OnActivateTransition`
+(état 1) contient `fadein`, et `FocussedState` (état 6) contient `Rotate`.
+Les sept autres champs gardent leur valeur nulle du constructeur natif
+`00539a00`. `LanguageSelectAssets.cpp` lit les records par hash et taille,
+et le test des assets vérifie les seize boutons. La banque générique relevée
+dans `game.str` possède des canaux `Rotate` ; l'affectation `fadein` n'y a
+pas de préfixe de canal correspondant dans le relevé statique. Aucun de ces
+clips n'est encore joué par la prévisualisation. Le callback de fin de
+l'interface animation 95 (`0040bf30`) retourne immédiatement vrai : finir
+la phase de focus et finir le rendu visuel d'un clip sont deux événements
+distincts. Ce dernier constat vient de la seconde décompilation locale,
+pas d'un test en jeu du présent exécutable.
+
+Le lecteur `read_sas_animation_bank` ouvre maintenant cette banque dans
+`game.str` (`ANIM`, type `0x000684fd`). Il valide les 66 noms et hashes de
+canaux, les bornes des courbes et leurs clés de 24 octets. Treize canaux
+portent le préfixe `Rotate.` ; aucun ne porte `fadein.`. Le test contrôle
+entre autres les trois clés de `Rotate.R` (première valeur 0,8 au temps 0,
+dernière clé au temps 0,75). Les clés sont conservées telles que sérialisées :
+leur application des couleurs ou matrices aux TextButton reste à reconstruire.
+
+`SasCurveEvaluator.cpp` porte maintenant le chemin non pondéré de `00575b70`
+et `005764a0` pour les treize canaux `Rotate` : valeur exacte aux clés,
+segment cubique entre deux clés, drapeau de maintien, et répétition de cycle
+avant ou après les clés via `00575eb0`. Les constantes `1`, `3` et
+`5729578` lues par `005764a0` ont été vérifiées directement dans le présent
+`hp6.exe`. Les tests contrôlent notamment `Rotate.R` aux temps 0, 0,1875,
+0,5625, 0,75 et sur deux cycles ; le milieu du second segment vaut 0,875.
+Les modes pondérés et les autres comportements hors plage lèvent une erreur
+explicite.
+
+`SasColorAnimation.cpp` relie ensuite `Rotate.R/.G/.B` à `005a05c0` et
+`005a0fe0` : échantillonnage des canaux présents, multiplication par 255,
+écriture dans le mot RGBA, conservation de l'alpha en l'absence de `Rotate.A`.
+Le lissage `00576bc0` conserve quatre deltas et applique les facteurs 0,4 et
+0,2 une fois par timestamp. Le test valide une cible de début `0xff99c2cc`,
+une cible blanche au temps 0,75, et le premier pas de lissage depuis la
+couleur du TextButton. La prévisualisation lit la banque de `game.str`, met à
+jour la couleur du texte focalisé toutes les 33 ms et propose
+`--snapshot-time <secondes>` pour produire deux frames reproductibles.
+La simulation de temps s'appuie sur l'horloge Windows ; le tick natif et
+l'application des canaux de matrice à l'objet Hybrid restent à reconstruire.
+Les snapshots `build/language_rotate_t0.bmp` et
+`build/language_rotate_t075.bmp` diffèrent sur 1 809 pixels, tous dans les
+bounds du libellé Français (x=206..339, y=159..190). Le snapshot sans option
+garde le hash précédent `AD2D8D985E20C948920A9643018F92E20BD9BE3F2D2317E37BFA63739800A643`.
+
+### Ordre des langues installé par le SKU
+
+`FUN_005e5f90` réinitialise le vecteur du service à `+0x50/+0x54`, puis
+parcourt des enregistrements séparés par `NUL`. Elle s'arrête au préfixe
+`EOF`, copie `SKUKEY`/`SKUCODE` dans deux champs de 32 octets et ajoute
+chaque valeur `LANGUAGE:` au vecteur, dans son ordre d'apparition.
+`FUN_00429890` parcourt ensuite ce vecteur pour écrire les seize clés
+`GUI_LANGUAGEMENU%d`. `FUN_005e5480` construit la correspondance entre
+les codes locaux et les libellés UTF-16 intégrés à l'exécutable.
+
+`LanguageSkuConfig` reconstruit cette lecture, et la prévisualisation
+accepte `--sku <fichier>` pour placer ces libellés dans l'ordre du SKU.
+Un essai avec deux langues ne dessine que « English » et « Français ».
+Aucun fichier SKU de cette installation n'est présent dans les archives
+extraites examinées ; le rendu par défaut conserve donc l'ordre visible
+sur la capture de référence. Le code ne recrée pas encore le chargement
+natif du fichier SKU par le service du jeu.
+
+### Texture du curseur : attribution encore ouverte
+
+`ET_glow_lamp` et `ET_glow_scythe` sont les deux textures d'éclat nommées dans
+`languageselect.str`. La prévisualisation emploie actuellement la première.
+La texture `ET_GLOW_SPARKLE` extraite de `FrontEnd.str` ressemble davantage à
+l'éclat violet de la capture fournie, et ses octets décodés sont identiques
+dans les chapitres `FrontEnd`, `Hogwarts`, `TheCave` et `BurrowIntro`. Elle
+n'apparaît toutefois pas dans l'inventaire de `languageselect.str` ni dans
+celui de `game.str`. Le lien de chargement du curseur doit être identifié
+avant de changer la source de texture du menu reconstruit.

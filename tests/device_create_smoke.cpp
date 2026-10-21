@@ -81,6 +81,7 @@ std::uint32_t DAT_008663dc = 0;
 std::uint32_t DAT_00866364 = 0;
 
 std::uint32_t DAT_009978e4 = 0x1234; // fake HWND
+void* DAT_00cef694 = reinterpret_cast<void*>(0x1234);
 std::int32_t DAT_00cf1950 = 0;
 std::uint32_t DAT_00cf19a8 = 0;
 std::int32_t DAT_00cf198c = 0;
@@ -448,6 +449,7 @@ int main() {
 
     const std::int32_t top_result = create_and_configure_render_device(640, 480);
     expect("top_level_result_ok", top_result == 0);
+    expect("top_level_copied_game_window", DAT_009978e4 == 0x1234);
     expect("heap_initialized", DAT_00fd1254 & 1u);
     expect("heap_created", create_heap_calls == 1);
     expect("heap_size_has_two_regions_overhead", last_heap_size == 0x2000);

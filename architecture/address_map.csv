@@ -8,6 +8,7 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 00403190,,,,deferred,not_run,unverified
 00404660,float10 __cdecl FUN_00404660(float param_1),hp6::math::abs_x87,src/math/Scalar.cpp,integrated,passed,unverified
 00404670,"undefined4 __fastcall FUN_00404670(float * param_1, float * param_2)",hp6::math::different_xyz,src/math/Vector.cpp,integrated,passed,unverified
+00404970,void FUN_00404970(void),hp6::presentation::make_presentation_focus_follower_local,src/presentation/PresentationFocusRegistry.cpp,integrated,passed,unverified
 00404be0,"undefined __fastcall FUN_00404be0(float * param_1, float * param_2, float * param_3)",hp6::math::transform_translated_xyz,src/math/Transform.cpp,integrated,passed,unverified
 00405390,"undefined __cdecl FUN_00405390(float * param_1, float * param_2, float * param_3)",hp6::math::subtract_xyzw,src/math/Vector.cpp,integrated,passed,unverified
 00422e20,"undefined __thiscall FUN_00422e20(void * this, void * param_1, size_t param_2)",hp6::runtime::store_payload,src/runtime/ScratchBuffers.cpp,integrated,passed,unverified
@@ -22,6 +23,8 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 004301c0,float10 __fastcall FUN_004301c0(undefined4 * param_1),hp6::math::component0,src/math/FloatAccess.cpp,integrated,passed,unverified
 004301e0,float10 __fastcall FUN_004301e0(int * param_1),hp6::math::component1,src/math/FloatAccess.cpp,integrated,passed,unverified
 00430200,float10 __fastcall FUN_00430200(int * param_1),hp6::math::component2,src/math/FloatAccess.cpp,integrated,passed,unverified
+00431910,void FUN_00431910(void),hp6::presentation::make_presentation_focus_follower_local,src/presentation/PresentationFocusRegistry.cpp,integrated,passed,unverified
+0043b5d0,,hp6::presentation::PresentationFocusPhase::tick,src/presentation/PresentationFocusRegistry.cpp,partial,passed,unverified
 00451ec0,undefined4 __thiscall FUN_00451ec0(void *this),hp6::presentation::(anonymous)::ScreenTitlePageTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0048ab90,void __stdcall FUN_0048ab90(void),hp6::presentation::dispatch_presentation_command,src/presentation/CommandDispatch.cpp,integrated,passed,unverified
 0048abf0,uint __stdcall FUN_0048abf0(undefined4 param_1),hp6::presentation::find_and_invoke_command,src/presentation/CommandDispatch.cpp,integrated,passed,unverified
@@ -33,6 +36,8 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0048f240,,hp6::presentation::get_bootup_flow_singleton,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 004d6420,,hp6::render::copy_brightness_setting,src/render/DeviceCreate.cpp,integrated,passed,unverified
 004da7b0,,hp6::presentation::update_chapter_load_state_machine,src/presentation/ChapterLoadStateMachine.cpp,integrated,passed,unverified
+004ea9e0,,hp6::presentation::PresentationFocusLocatorMovable::transition_to,src/presentation/PresentationFocusRegistry.cpp,partial,passed,unverified
+004eaa20,,hp6::presentation::PresentationFocusLocatorMovable::update,src/presentation/PresentationFocusRegistry.cpp,partial,passed,unverified
 0050b370,,hp6::presentation::get_screen_manager_singleton,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 0050b8b0,undefined __thiscall FUN_0050b8b0(void *this),hp6::presentation::enqueue_language_select_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0050b920,undefined __thiscall FUN_0050b920(void *this),hp6::presentation::enqueue_main_menu_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
@@ -52,12 +57,20 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 0053ea00,undefined __thiscall FUN_0053ea00(void *this),hp6::presentation::update_main_menu_screen_task,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0053eb40,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 00542e10,"undefined __cdecl FUN_00542e10(short param_1, undefined4 * param_2)",hp6::render::submit_render_command,src/render/SubmitRenderCommand.cpp,integrated,passed,unverified
+00575b70,,hp6::presentation::sample_sas_nonweighted_curve,src/presentation/SasCurveEvaluator.cpp,partial,passed,unverified
+00575eb0,,hp6::presentation::sample_sas_nonweighted_curve,src/presentation/SasCurveEvaluator.cpp,partial,passed,unverified
+005764a0,,hp6::presentation::sample_sas_nonweighted_curve,src/presentation/SasCurveEvaluator.cpp,partial,passed,unverified
+00576bc0,,hp6::presentation::SasColorSmoother::update,src/presentation/SasColorAnimation.cpp,partial,passed,unverified
 00576f30,,hp6::presentation::resolve_and_load_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 00577390,,hp6::presentation::advance_to_next_chapter,src/presentation/ChapterFlow.cpp,integrated,passed,unverified
 0059f450,undefined4 __thiscall FUN_0059f450(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::query_ready,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
 0059f460,undefined __thiscall FUN_0059f460(void *this),hp6::presentation::(anonymous)::IdleInputTimerTask::update,src/presentation/ScreenTasks.cpp,integrated,passed,unverified
+005a05c0,,hp6::presentation::find_sas_color_channels,src/presentation/SasColorAnimation.cpp,partial,passed,unverified
+005a0fe0,,hp6::presentation::sample_sas_color_target,src/presentation/SasColorAnimation.cpp,partial,passed,unverified
 005a1cd0,,hp6::presentation::register_debug_audio_subsystem,src/presentation/EngineBootstrap.cpp,integrated,passed,unverified
 005a2310,,hp6::math::transpose_matrix4x4,src/math/Transform.cpp,integrated,passed,unverified
+005c5f40,undefined __fastcall FUN_005c5f40(int param_1),hp6::presentation::make_presentation_focus_follower_local,src/presentation/PresentationFocusRegistry.cpp,integrated,passed,unverified
+005c6030,void FUN_005c6030(void),hp6::presentation::compose_presentation_focus_follower,src/presentation/PresentationFocusRegistry.cpp,integrated,passed,unverified
 005d1580,"undefined __stdcall FUN_005d1580(float * param_1, float * param_2)",hp6::math::normalize_xyz_preserve_w,src/math/VectorWithGlobal.cpp,integrated,compiled_only,unverified
 005d1680,"undefined __stdcall FUN_005d1680(float * param_1, float * param_2)",hp6::math::normalize_xyzw,src/math/Vector.cpp,integrated,passed,unverified
 005d16f0,"undefined __stdcall FUN_005d16f0(float * param_1, float * param_2, float * param_3)",hp6::math::cross_xyz,src/math/Vector.cpp,integrated,passed,unverified
@@ -103,7 +116,9 @@ address,ghidra_signature,cpp_symbol,source,integration,build,equivalence
 005e0bf0,,hp6::runtime::initialize_frame_pump_timing,src/runtime/FrameClock.cpp,integrated,passed,unverified
 005e0cc0,uint __stdcall FUN_005e0cc0(void),hp6::runtime::run_frame_tick,src/runtime/FrameClock.cpp,integrated,passed,unverified
 005e8b50,undefined4 __fastcall FUN_005e8b50(float * param_1),hp6::math::any_nonzero_xyz,src/math/Scalar.cpp,integrated,passed,unverified
+005fa800,void FUN_005fa800(void *param_1),hp6::presentation::layout_presentation_string_glyphs,src/presentation/PresentationStringLayout.cpp,integrated,passed,unverified
 005ff790,undefined __stdcall FUN_005ff790(void),hp6::runtime::drain_pending_visual_effects,src/runtime/FrameClock.cpp,integrated,passed,unverified
+005e5f90,"undefined __stdcall FUN_005e5f90(int param_1, char * param_2)",hp6::presentation::parse_language_sku_config,src/presentation/LanguageSkuConfig.cpp,partial,passed,unverified
 00606b00,uint __stdcall FUN_00606b00(int param_1),,,deferred,not_run,unverified
 006194a0,,hp6::render::initialize_render_framework_heap,src/render/RenderHeap.cpp,integrated,passed,unverified
 00625ce0,,,,deferred,not_run,unverified
