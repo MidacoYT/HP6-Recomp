@@ -9875,6 +9875,17 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceSecondaryHeapExpand.cpp",
       "updated_at": "2026-10-22T13:39:48.773186+00:00"
+    },
+    "005de540": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_release_region_005de540",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Lock/free/unlock wrapper tested with explicit free-payload fake.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapReleaseRegion.cpp",
+      "updated_at": "2026-10-22T13:42:10.839563+00:00"
     }
   },
   "schema_version": 1

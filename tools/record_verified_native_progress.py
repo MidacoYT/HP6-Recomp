@@ -41,6 +41,7 @@ FUNCTIONS = [
     ("005dbbb0", "service_secondary_heap_expand_005dbbb0", "src/platform/ServiceSecondaryHeapExpand.cpp", "passed", "Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 still absent."),
     ("005dd2c0", "service_heap_free_callback_005dd2c0", "src/platform/ServiceHeapDebugCallbacks.cpp", "compiled_only", "OutputDebugStringA diagnostic callback."),
     ("005ddc80", "service_heap_release_callback_005ddc80", "src/platform/ServiceHeapDebugCallbacks.cpp", "compiled_only", "OutputDebugStringA and int3 diagnostic callback."),
+    ("005de540", "service_heap_release_region_005de540", "src/platform/ServiceHeapReleaseRegion.cpp", "passed", "Lock/free/unlock wrapper tested with explicit free-payload fake."),
     ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 absent."),
     ("005dede0", "service_heap_usable_end_offset_005dede0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Metadata offset branches tested."),
 ]

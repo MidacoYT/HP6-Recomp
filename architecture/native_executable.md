@@ -38,8 +38,8 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   `0x0098B490` (stride `0x48`) et des limites de stockage voisines. La variante native
   de `DeviceCreate.cpp` et `RenderStateCache.cpp` relie quatre adresses
   intérieures à leur tableau de base réel. La liaison comporte encore
-  7 symboles non résolus après reconstruction des trois méthodes d'allocation
-  de la vtable de service : quatre fonctions internes du service mémoire,
+  6 symboles non résolus après reconstruction des trois méthodes d'allocation
+  de la vtable de service : trois fonctions internes du service mémoire,
   le rendu `0x005DD020`, et les tables de commandes et d'écrans. Le nombre
   compte les dépendances nouvellement exposées, pas les fonctions cachées
   derrière ces deux tables.
@@ -123,7 +123,9 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   `ServiceSecondaryHeapExpand.cpp` : arrondi du bloc, allocation dans le tas
   secondaire, ajout au tas principal et libération sur échec. Son test couvre
   les trois branches avec des callees explicites. La libération
-  `0x005DE540` appelée sur échec reste absente.
+  `0x005DE540` appelée sur échec est maintenant reconstruite dans
+  `ServiceHeapReleaseRegion.cpp` : verrou, libération par `0x005DE580`,
+  déverrouillage. Son test couvre les branches avec et sans verrou.
   `ServiceContextRegistry.cpp` reconstruit `0x005DB380` et ses appels
   `0x005E0010`/`0x005DFF60` depuis les corps `0x00FF8820`, `0x0100ED60`
   et `0x0100ED00` : hachage `0x00404620`, recherche exacte, chaîne
@@ -282,7 +284,6 @@ leurs fonctions internes encore inconnues restent sans stub.
 | `PTR_PTR_00876AB0` | `0x0087B0CC` | 93 commandes et leurs handlers |
 | `PTR_PTR_00870948` | `0x0087BB8C` | 26 tâches d'écran et leurs vtables |
 | `service_heap_allocate_core_005dbc50` | `0x005DBC50` | allocation nommée et avec options |
-| `service_heap_release_region_005de540` | `0x005DE540` | libération de la région si son ajout au tas principal échoue |
 | `service_heap_allocate_core_005dde30` | `0x005DDE30` | allocation dans le tas |
 | `service_heap_allocate_00ff9850` | `0x00FF9850` | ajout de mémoire au tas |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |
