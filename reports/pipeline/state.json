@@ -9908,6 +9908,94 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapAllocateAlignedLocked.cpp",
       "updated_at": "2026-10-22T13:48:16.713932+00:00"
+    },
+    "005ddba0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_insert_region_005ddba0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Head-list insertion and usable-end update tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapInsertRegion.cpp",
+      "updated_at": "2026-10-22T13:58:16.227970+00:00"
+    },
+    "005df3a0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_reserve_region_005df3a0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Reserve/commit and region-boundary metadata tested with real VirtualAlloc.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapReserveRegion.cpp",
+      "updated_at": "2026-10-22T13:58:16.227970+00:00"
+    },
+    "00ff9850": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_allocate_00ff9850",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Provided-region and heap-reserved branches tested; complete executable still has unresolved symbols.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAllocateRegion.cpp",
+      "updated_at": "2026-10-22T13:58:16.227970+00:00"
+    },
+    "005db4d0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_aligned_split_address_005db4d0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Absolute alignment split address checked against the x86 body.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAlignmentLeafs.cpp",
+      "updated_at": "2026-10-22T14:00:44.653131+00:00"
+    },
+    "005ddb00": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_large_bin_005ddb00",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Six large-block bin ranges tested at boundaries.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAlignmentLeafs.cpp",
+      "updated_at": "2026-10-22T14:00:44.653131+00:00"
+    },
+    "005ddc00": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_initialize_free_block_005ddc00",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Standalone free-block tags and end cursor tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapSplitBlocks.cpp",
+      "updated_at": "2026-10-22T14:00:44.653131+00:00"
+    },
+    "005de470": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_split_tail_005de470",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Free-prefix split and small-remainder branch tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapSplitBlocks.cpp",
+      "updated_at": "2026-10-22T14:00:44.653131+00:00"
+    },
+    "005de4d0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_split_prefix_005de4d0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Unlink and split of free block tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapSplitBlocks.cpp",
+      "updated_at": "2026-10-22T14:00:44.653131+00:00"
     }
   },
   "schema_version": 1

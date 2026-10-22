@@ -38,8 +38,8 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   `0x0098B490` (stride `0x48`) et des limites de stockage voisines. La variante native
   de `DeviceCreate.cpp` et `RenderStateCache.cpp` relie quatre adresses
   intérieures à leur tableau de base réel. La liaison comporte encore
-  6 symboles non résolus après reconstruction des trois méthodes d'allocation
-  de la vtable de service : trois fonctions internes du service mémoire,
+  5 symboles non résolus après reconstruction des trois méthodes d'allocation
+  de la vtable de service : deux fonctions internes du service mémoire,
   le rendu `0x005DD020`, et les tables de commandes et d'écrans. Le nombre
   compte les dépendances nouvellement exposées, pas les fonctions cachées
   derrière ces deux tables.
@@ -67,9 +67,9 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   callbacks et branche optionnelle d'allocation. `ServiceHeapEnableLock.cpp`
   reconstruit l'opération 0 de `0x005DD830` avec le verrou embarqué à `+0x4E8`
   et l'initialisation de `0x005DD260`/`0x00FF8F50`. L'allocateur appelé par
-  `0x005DD4C0` (`0x00FF9850`) reste à reconstruire ; le test de
-  l'initialisation utilise un double uniquement pour cet appel. La liaison
-  native ne tire pas encore cette branche depuis son chemin actuel.
+  `0x005DD4C0` (`0x00FF9850`) est maintenant reconstruit et testé dans
+  `ServiceHeapAllocateRegion.cpp`. Le test isolé de l'initialisation conserve
+  un double explicite pour cet appel.
   `ServiceHeapConstruct.cpp` reprend le constructeur `0x005DD2D0` utilisé
   avant l'enregistrement des sous-allocateurs. Il initialise les champs
   observés dans le désassemblage, place les deux rappels à `+0x4B8`/`+0x4C0`
@@ -116,7 +116,11 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   le verrou autour de `0x005DDE30` (`0x005DDDB0`) et le calcul de l'offset
   utilisable du bloc (`0x005DEDE0`). Les callbacks de diagnostic
   `0x005DD2C0`/`0x005DDC80` sont relocalisés. Le cœur `0x005DDE30`,
-  `0x005DDE30` et `0x00FF9850` restent absents. Le cœur `0x005DBC50`
+  `0x005DDE30` reste absent. `0x00FF9850` est reconstruit dans
+  `ServiceHeapAllocateRegion.cpp`, avec ses deux branches d'ajout de région.
+  `ServiceHeapReserveRegion.cpp` et `ServiceHeapInsertRegion.cpp` reprennent
+  la réservation des pages et l'insertion en liste depuis `0x005DF3A0` et
+  `0x005DDBA0`. Le cœur `0x005DBC50`
   est reconstruit dans `ServiceHeapAllocateNamedCore.cpp` : registre des
   contextes, arrondi, choix du chemin aligné et mot de métadonnées final.
   `ServiceHeapAllocateAlignedLocked.cpp` reprend le verrou autour de
@@ -290,7 +294,7 @@ leurs fonctions internes encore inconnues restent sans stub.
 | `PTR_PTR_00870948` | `0x0087BB8C` | 26 tâches d'écran et leurs vtables |
 | `service_heap_allocate_aligned_core_005de780` | `0x005DE780` | cœur d'allocation alignée |
 | `service_heap_allocate_core_005dde30` | `0x005DDE30` | allocation dans le tas |
-| `service_heap_allocate_00ff9850` | `0x00FF9850` | ajout de mémoire au tas |
+| `render_overlay_005dd020` | `0x005DD020` | rendu appelé par le moteur |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |
 
 Les vtables `PTR_FUN_007159B0` (premier mot `0x006B2E49`) et

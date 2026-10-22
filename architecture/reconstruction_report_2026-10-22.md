@@ -25,18 +25,17 @@ instructions vérifiées. Sept handlers courts de commandes sont reconstruits,
 dont `OnLanguageMenuSelectItem` à `0x0048C950`.
 
 Le programme `hp6.exe` **ne se lie pas encore**. L'édition de liens du
-22 octobre 2026 signale ces six références externes :
+22 octobre 2026 signale ces cinq références externes :
 
 | Symbole | Travail requis |
 | --- | --- |
 | `service_heap_allocate_aligned_core_005de780` | Allocation alignée dans le tas |
 | `service_heap_allocate_core_005dde30` | Allocation dans les listes de blocs du tas |
-| `service_heap_allocate_00ff9850` | Ajout et initialisation d'une région mémoire |
 | `render_overlay_005dd020` | Rendu appelé par la porte du moteur |
 | `PTR_PTR_00876ab0` | Table de 93 commandes, 86 handlers distincts |
 | `PTR_PTR_00870948` | Table de 26 tâches d'écran, 24 activations distinctes |
 
-Le nombre six est un nombre de **symboles de liaison** ; il ne mesure pas le
+Le nombre cinq est un nombre de **symboles de liaison** ; il ne mesure pas le
 nombre de fonctions nécessaires derrière les deux tables. Les tables ne sont
 pas remplacées par des pointeurs factices. Le menu de langue du véritable
 exécutable reconstruit n'a donc pas encore été affiché.
@@ -48,10 +47,10 @@ exécutable reconstruit n'a donc pas encore été affiché.
 - `python tools/audit_native_dispatch_tables.py D:\HP\hp6.exe D:\HP\hp6ss\build\sdk-lab\pc\hp6.exe` : 93 commandes et 26 tâches vérifiées.
 - `cmake --build build --config Debug --target ALL_BUILD` : bibliothèque et
   programmes de test compilés.
-- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **77/77**
+- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **82/82**
   tests réussis, dont le registre de contexte et le callback de croissance.
 - `cmake --build build --config Debug --target hp6` : échec attendu avec les
-  six références externes listées ci-dessus.
+  cinq références externes listées ci-dessus.
 
 Les tests isolés emploient parfois des doubles explicites pour un callee
 encore absent. Leur succès ne prouve pas que le démarrage ou le rendu complet
@@ -59,7 +58,7 @@ fonctionne.
 
 ## Suite de la reconstruction
 
-1. Reconstituer les trois fonctions mémoire encore absentes et vérifier les
+1. Reconstituer les deux fonctions mémoire encore absentes et vérifier les
    conventions d'appel et les données globales contre le binaire.
 2. Vérifier des allocations
    réelles dans une exécution native.

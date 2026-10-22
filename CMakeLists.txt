@@ -44,6 +44,11 @@ add_library(hp6_reconstructed STATIC
     src/platform/ServiceHeapReleaseRegion.cpp
     src/platform/ServiceHeapAllocateNamedCore.cpp
     src/platform/ServiceHeapAllocateAlignedLocked.cpp
+    src/platform/ServiceHeapInsertRegion.cpp
+    src/platform/ServiceHeapReserveRegion.cpp
+    src/platform/ServiceHeapAllocateRegion.cpp
+    src/platform/ServiceHeapAlignmentLeafs.cpp
+    src/platform/ServiceHeapSplitBlocks.cpp
     src/platform/NativeServiceHolderVtable.cpp
     src/platform/ServiceHolderCleanup.cpp
     src/platform/ServiceHeapLeafs.cpp
@@ -425,6 +430,33 @@ if(BUILD_TESTING)
             src/platform/ServiceHeapAllocateAlignedLocked.cpp)
         target_compile_features(hp6_service_heap_allocate_named_core_smoke PRIVATE cxx_std_20)
         add_test(NAME service_heap_allocate_named_core_smoke COMMAND hp6_service_heap_allocate_named_core_smoke)
+        add_executable(hp6_service_heap_insert_region_smoke
+            tests/service_heap_insert_region_smoke.cpp
+            src/platform/ServiceHeapInsertRegion.cpp)
+        target_compile_features(hp6_service_heap_insert_region_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_insert_region_smoke COMMAND hp6_service_heap_insert_region_smoke)
+        add_executable(hp6_service_heap_reserve_region_smoke
+            tests/service_heap_reserve_region_smoke.cpp
+            src/platform/ServiceHeapReserveRegion.cpp)
+        target_compile_features(hp6_service_heap_reserve_region_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_reserve_region_smoke COMMAND hp6_service_heap_reserve_region_smoke)
+        add_executable(hp6_service_heap_allocate_region_smoke
+            tests/service_heap_allocate_region_smoke.cpp
+            src/platform/ServiceHeapAllocateRegion.cpp
+            src/platform/ServiceHeapReserveRegion.cpp
+            src/platform/ServiceHeapInsertRegion.cpp)
+        target_compile_features(hp6_service_heap_allocate_region_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_allocate_region_smoke COMMAND hp6_service_heap_allocate_region_smoke)
+        add_executable(hp6_service_heap_alignment_leafs_smoke
+            tests/service_heap_alignment_leafs_smoke.cpp
+            src/platform/ServiceHeapAlignmentLeafs.cpp)
+        target_compile_features(hp6_service_heap_alignment_leafs_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_alignment_leafs_smoke COMMAND hp6_service_heap_alignment_leafs_smoke)
+        add_executable(hp6_service_heap_split_blocks_smoke
+            tests/service_heap_split_blocks_smoke.cpp
+            src/platform/ServiceHeapSplitBlocks.cpp)
+        target_compile_features(hp6_service_heap_split_blocks_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_split_blocks_smoke COMMAND hp6_service_heap_split_blocks_smoke)
         add_executable(hp6_service_heap_allocation_wrappers_smoke
             tests/service_heap_allocation_wrappers_smoke.cpp
             src/platform/ServiceHeapAllocationWrappers.cpp)
