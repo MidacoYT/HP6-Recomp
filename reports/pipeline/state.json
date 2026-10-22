@@ -9996,6 +9996,39 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapSplitBlocks.cpp",
       "updated_at": "2026-10-22T14:00:44.653131+00:00"
+    },
+    "005db450": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_round_block_005db450",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Minimum allocation block size and 8-byte rounding tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapFreeBin.cpp",
+      "updated_at": "2026-10-22T14:06:06.757589+00:00"
+    },
+    "005de3e0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_insert_free_bin_005de3e0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Small and large free-list bin insertion tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapFreeBin.cpp",
+      "updated_at": "2026-10-22T14:06:06.757589+00:00"
+    },
+    "005df6d0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_allocate_direct_005df6d0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Direct large-block VirtualAlloc path and metadata tested.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAllocateDirect.cpp",
+      "updated_at": "2026-10-22T14:07:16.905882+00:00"
     }
   },
   "schema_version": 1

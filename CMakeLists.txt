@@ -49,6 +49,8 @@ add_library(hp6_reconstructed STATIC
     src/platform/ServiceHeapAllocateRegion.cpp
     src/platform/ServiceHeapAlignmentLeafs.cpp
     src/platform/ServiceHeapSplitBlocks.cpp
+    src/platform/ServiceHeapFreeBin.cpp
+    src/platform/ServiceHeapAllocateDirect.cpp
     src/platform/NativeServiceHolderVtable.cpp
     src/platform/ServiceHolderCleanup.cpp
     src/platform/ServiceHeapLeafs.cpp
@@ -457,6 +459,17 @@ if(BUILD_TESTING)
             src/platform/ServiceHeapSplitBlocks.cpp)
         target_compile_features(hp6_service_heap_split_blocks_smoke PRIVATE cxx_std_20)
         add_test(NAME service_heap_split_blocks_smoke COMMAND hp6_service_heap_split_blocks_smoke)
+        add_executable(hp6_service_heap_free_bin_smoke
+            tests/service_heap_free_bin_smoke.cpp
+            src/platform/ServiceHeapFreeBin.cpp
+            src/platform/ServiceHeapAlignmentLeafs.cpp)
+        target_compile_features(hp6_service_heap_free_bin_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_free_bin_smoke COMMAND hp6_service_heap_free_bin_smoke)
+        add_executable(hp6_service_heap_allocate_direct_smoke
+            tests/service_heap_allocate_direct_smoke.cpp
+            src/platform/ServiceHeapAllocateDirect.cpp)
+        target_compile_features(hp6_service_heap_allocate_direct_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_allocate_direct_smoke COMMAND hp6_service_heap_allocate_direct_smoke)
         add_executable(hp6_service_heap_allocation_wrappers_smoke
             tests/service_heap_allocation_wrappers_smoke.cpp
             src/platform/ServiceHeapAllocationWrappers.cpp)

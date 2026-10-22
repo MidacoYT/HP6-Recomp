@@ -125,6 +125,11 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   contextes, arrondi, choix du chemin aligné et mot de métadonnées final.
   `ServiceHeapAllocateAlignedLocked.cpp` reprend le verrou autour de
   `0x005DE780` depuis le wrapper `0x005DE700`. Ce cœur aligné reste absent.
+  `ServiceHeapAlignmentLeafs.cpp`, `ServiceHeapSplitBlocks.cpp` et
+  `ServiceHeapFreeBin.cpp` reconstruisent les classes de tailles et les
+  transformations de blocs utilisées par les deux cœurs encore absents.
+  `ServiceHeapAllocateDirect.cpp` reprend l'allocation directe par
+  `VirtualAlloc` de `0x005DF6D0`, appelée depuis `0x005DDE30`.
   La croissance `0x005DB640`
   est reconstruite dans `ServicePrimaryHeapGrowth.cpp` avec ses quatre
   arguments vérifiés au site d'appel `0x005DE252`. Elle dépend encore de
