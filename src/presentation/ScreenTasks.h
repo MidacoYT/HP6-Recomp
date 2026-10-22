@@ -247,4 +247,11 @@ void mark_language_select_pending_task_ready(void* task);
 // for its own `& 0xffffff00` returns.
 std::int32_t update_language_select_screen_task(void* task);
 
+// 0x005da610 and 0x0048c8f0. The LanguageSelection command decides
+// whether the installed SKU needs the language menu, then loads the
+// matching chapter through resolve_and_load_chapter.
+bool is_transgaming_macos();
+std::int32_t handle_language_selection_command(const char* args);
+std::int32_t begin_language_selection(); // 0x00505670
+
 } // namespace hp6::presentation

@@ -45,8 +45,9 @@ void* get_bootup_flow_singleton();
 // neither table (the case for the literal "Global" TriggerBootupFlow
 // passes — confirmed by reading both tables directly, see
 // architecture/startup_path.md), DAT_00d472dc is left untouched and a
-// deferred fallback (get_bootup_flow_singleton's slot +0x2c) runs
-// instead. On a successful resolution, also clears a feature flag
+// deferred EventSlotGroupManager fallback (the +0x2c slot of the object
+// at get_bootup_flow_singleton()+4) runs instead; it clears event slots,
+// not the chapter index. On a successful resolution, also clears a feature flag
 // (FUN_0056d910, deferred) unless the new chapter is FRONT_END, and
 // runs a second deferred hook (thunk_FUN_00fe3520) when the matched
 // table entry's third field is non-zero. The function's tail — building

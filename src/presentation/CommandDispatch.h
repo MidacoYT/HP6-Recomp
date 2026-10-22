@@ -45,7 +45,12 @@ std::int32_t dispatch_presentation_command(const char* command);
 struct ScreenTaskEntry {
     void* vtable;
     const char* name;
+    std::uint32_t state; // +8, zero in all 26 initial PE records
 };
+
+#if defined(_M_IX86) || defined(__i386__)
+static_assert(sizeof(ScreenTaskEntry) == 0x0c);
+#endif
 
 // 0x0048ce30 ("HybridScreenActivateMappedTask"; cdecl, `name` explicit).
 // Looks `name` up by exact-match comparison (same custom byte loop as

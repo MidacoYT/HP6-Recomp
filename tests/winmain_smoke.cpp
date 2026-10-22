@@ -27,16 +27,14 @@
 #endif
 
 // ---- hp6::platform::service_holder dependencies ---------------------------
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -120,7 +118,7 @@ const char* PTR_DAT_0080a91c[11] = {
 
 // ---- handle_trigger_bootup_flow's own extern dependencies ------------------
 void* DAT_00fcadf0 = nullptr; // PresentationTaskHandler
-void* PTR_LAB_00828360 = nullptr; // Task_BootupFlowControl's real vtable
+extern void* PTR_LAB_00828360[4] = {}; // test-local task vtable slots
 void* DAT_00fcadec = nullptr;
 std::uint8_t DAT_008663d5 = 1; // quality tier already resolved
 
@@ -300,7 +298,6 @@ std::int32_t register_timer_completion(void*, void*, std::int32_t, std::int32_t,
                                        std::int32_t) {
     return 0;
 }
-void autosave_timer_callback() {}
 } // namespace hp6::platform
 
 // ---- WinMain.cpp's own extern dependencies ---------------------------------
@@ -351,7 +348,7 @@ std::int32_t unused_command_handler(const char*) { return 0; }
 // ---- generic heap-factory, backing both RenderHeap's
 // initialize_render_framework_heap and the engine bootstrap's time
 // manager allocation (the same service-holder slot serves both) -------
-void* fake_create_heap(std::int32_t size, const void*) {
+void* HP6_STDCALL fake_create_heap(std::int32_t size, const void*) {
     return std::malloc(static_cast<std::size_t>(size));
 }
 
@@ -564,10 +561,11 @@ int main() {
     texture_vtable[8 / 4] = reinterpret_cast<void*>(&fake_release);
     vertex_buffer_vtable[8 / 4] = reinterpret_cast<void*>(&fake_release);
 
-    PTR_FUN_0083e56c = reinterpret_cast<void*>(&fake_create_heap);
+    PTR_FUN_0083e55c[4] = reinterpret_cast<void*>(&fake_create_heap);
 
     DAT_00fcadf0 = &fake_task_handler;
-    PTR_LAB_00828360 = bootup_task_vtable;
+    PTR_LAB_00828360[0] = bootup_task_vtable[0];
+    PTR_LAB_00828360[1] = bootup_task_vtable[1];
 
     // ---- avoid an infinite real message loop: a prior WM_QUIT makes
     // run_message_loop return 0 immediately, exactly like

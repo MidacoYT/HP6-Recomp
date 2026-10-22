@@ -8,7 +8,7 @@
 // Addresses read/written by the binary but absent from the exported
 // globals; the final binary must supply their stored values explicitly.
 extern void* DAT_00fcadf0;     // PresentationTaskHandler singleton
-extern void* PTR_LAB_00828360; // Task_BootupFlowControl's real vtable
+extern void* PTR_LAB_00828360[4]; // Task_BootupFlowControl's real vtable
 extern std::uint8_t DAT_008663d5; // quality-tier flag; also in DeviceReset.cpp
 extern void* DAT_00fcadec;     // chapter registry; also in ChapterFlow.cpp
 

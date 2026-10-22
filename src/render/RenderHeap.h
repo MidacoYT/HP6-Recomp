@@ -8,14 +8,15 @@ namespace hp6::render {
 // named sub-allocator ("LocalAllocator::<name>::Allocator") through the
 // already-integrated named allocation service (hp6::presentation::
 // allocate_tagged / hp6::platform::service_holder) and then constructs and
-// configures an object on it via three more unresolved functions
-// (0x005dd2d0, 0x005dd4c0, three calls to the jump-table dispatcher
-// 0x005dd830) wrapped in MSVC x86 SEH. `record` receives a 0x128-byte
+// configures an object through 0x005dd2d0, 0x005dd4c0 and three calls to
+// the 0x005dd830 jump table, wrapped in MSVC x86 SEH. These constructor and
+// dispatcher paths are reconstructed separately; this caller is pending.
+// `record` receives a 0x128-byte
 // allocator-record struct; `region_base`/`size` describe the memory region
 // this sub-allocator manages; `flags` is `1 << capability_bit`. Returns
 // non-zero on success in the exported x86. The definition in
-// RenderHeap.cpp exists only so dependents link; it aborts loudly if ever
-// actually reached, rather than silently faking the real registration.
+// RenderHeap.cpp currently supplies a fixed-success placeholder and does
+// not implement the binary's registration behavior.
 std::int32_t create_local_allocator_register(const char* name, std::uint32_t size,
                                               void* record, void* region_base,
                                               std::uint32_t flags, bool mark_flag);

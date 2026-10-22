@@ -17,20 +17,14 @@ namespace hp6::platform {
 struct ExternBlock; // only for forward clarity; externs live in the TU below
 }
 
-// Contiguous game-space equivalents (x86-sized). Order matters: the service
-// slot is read at &PTR_FUN_0083e55c + 0x0c.
-void* PTR_FUN_0083e55c = nullptr;  // object pointer target
-void* pad_0083e560_0 = nullptr;    // table +0x04
-void* pad_0083e564_0 = nullptr;    // table +0x08
-void* slot_0083e568_0 = nullptr;   // table +0x0c (service slot 3)
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+// Vtable storage through the next table at 0x0083E5C8.
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 void* PTR_LAB_0071b500 = nullptr;
 void* PTR_LAB_0071b540 = nullptr;
@@ -131,40 +125,33 @@ int main() {
         return 0;
     }
 
-    // Contiguous slot installs the release stub at +0x0c. Global emission
-    // order is implementation-defined, so verify adjacency first.
+    // Contiguous table installs the release stub at +0x0c.
     TestService service;
     auto* vtable = *reinterpret_cast<void***>(&service);
-    slot_0083e568_0 = vtable[3];
-    const auto* slot_read =
-        reinterpret_cast<void* const*>(&PTR_FUN_0083e55c)[3];
-    if (slot_read != vtable[3]) {
-        std::printf("handle_registry_smoke: skipped (global layout adjacency)\n");
-        return 0;
-    }
+    PTR_FUN_0083e55c[3] = vtable[3];
 
     // One-shot holder initialization.
     expect("holder_first",
            hp6::platform::service_holder() ==
-               reinterpret_cast<void**>(&DAT_00fcdd74));
+               DAT_00fcdd74);
     expect("holder_flags", (DAT_00fd1254 & 1u) != 0u);
     expect("holder_object",
-           DAT_00fcdd74 == static_cast<void*>(&PTR_FUN_0083e55c));
+           DAT_00fcdd74[0] == static_cast<void*>(PTR_FUN_0083e55c));
     expect("holder_second",
-           DAT_00fcdd78 == static_cast<void*>(&PTR_FUN_0083e56c));
+           DAT_00fcdd74[1] == static_cast<void*>(PTR_FUN_0083e55c + 4));
     expect("holder_watcher",
-           DAT_00cef6bc == reinterpret_cast<void**>(&DAT_00fcdd74));
+           DAT_00cef6bc == DAT_00fcdd74);
     // cleanup_00711e60 is registered through the CRT thunk; atexit fires
     // after main, so only the registration side effect is observable here.
     expect("holder_stable",
            hp6::platform::service_holder() ==
-               reinterpret_cast<void**>(&DAT_00fcdd74));
+               DAT_00fcdd74);
 
     // Virtual release through slot +0xc with (object, 0).
     std::uint32_t object = 0x12345678u;
     hp6::platform::release_through_service(&object);
     expect("release_object", release_object == &object);
-    expect("release_holder", release_holder == &DAT_00fcdd74);
+    expect("release_holder", release_holder == DAT_00fcdd74);
     expect("release_mode", release_mode == 0u);
     expect("release_calls", release_calls == 1);
 
@@ -208,10 +195,10 @@ int main() {
     expect("ctor1_vt", store[0] == &PTR_FUN_007159b0);
     expect("ctor1_release", release_calls == 4);
     hp6::platform::construct_vtable_00715d0c(store + 1, 0);
-    expect("ctor2_vt", store[1] == &PTR_FUN_00715d0c);
+    expect("ctor2_vt", store[1] == PTR_FUN_00715d0c);
     expect("ctor2_flag0_norelease", release_calls == 4);
     hp6::platform::construct_vtable_00715da8(store + 2, 1);
-    expect("ctor3_vt", store[2] == &PTR_LAB_00715da8);
+    expect("ctor3_vt", store[2] == PTR_LAB_00715da8);
     expect("ctor3_release", release_calls == 5);
     hp6::platform::construct_vtable_0071b520(store + 3, 1);
     expect("ctor4_vt", store[3] == &PTR_LAB_0071b520);

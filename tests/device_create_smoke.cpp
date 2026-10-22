@@ -18,16 +18,14 @@
 
 // ---- hp6::platform::service_holder dependencies (also required by
 // RenderHeap.cpp's initialize_render_framework_heap) ------------------------
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -356,7 +354,7 @@ std::int32_t HP6_STDCALL fake_create_vertex_buffer(void*, std::uint32_t, std::ui
 
 int create_heap_calls = 0;
 std::int32_t last_heap_size = 0;
-void* fake_create_heap(std::int32_t size, const void*) {
+void* HP6_STDCALL fake_create_heap(std::int32_t size, const void*) {
     ++create_heap_calls;
     last_heap_size = size;
     return reinterpret_cast<void*>(0x9000);
@@ -438,7 +436,7 @@ int main() {
     expect("saved_hwnd_used", last_present_params != nullptr);
 
     // ---- create_and_configure_render_device (005dca10) --------------------
-    PTR_FUN_0083e56c = reinterpret_cast<void*>(&fake_create_heap);
+    PTR_FUN_0083e55c[4] = reinterpret_cast<void*>(&fake_create_heap);
     DAT_00cf194c = &fake_d3d9;
     DAT_00cf1944 = nullptr;
     DAT_00cf19d0 = 0;

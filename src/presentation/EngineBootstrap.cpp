@@ -27,7 +27,7 @@ extern std::uint8_t DAT_0087cc00[8];
 extern void* DAT_00cef730; // TimeManager::Instance singleton (see FrameClock.cpp)
 
 extern void* DAT_0089eb0c;       // frame pump "this" (see FrameClock.cpp)
-extern void* PTR_PTR_0087eadc;   // the real game object assigned to it; concrete type unexplored
+extern void* PTR_PTR_0087eadc;   // first interface of the engine object (0x0083E5C8)
 
 extern void* DAT_00d6af14; // engine-service object; see DeviceCreate.h's doc comment
 

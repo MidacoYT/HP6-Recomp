@@ -18,10 +18,8 @@
 
 // ---- hp6::platform::service_holder's dependencies (shared lazy-init
 // block; see tests/handle_registry_smoke.cpp for the same pattern) ----
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
@@ -29,8 +27,8 @@ void cleanup_00711e60() {}
 // from a .obj requires every undefined symbol that whole .obj needs);
 // unused by this test beyond satisfying the linker.
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -52,7 +50,7 @@ struct TagDescriptorView {
     std::int32_t reserved;
 };
 
-void* HP6_CDECL fake_named_allocate(std::int32_t size, const void* descriptor) {
+void* HP6_STDCALL fake_named_allocate(std::int32_t size, const void* descriptor) {
     ++named_allocate_calls;
     last_named_size = size;
     last_named_tag = static_cast<const TagDescriptorView*>(descriptor)->name;
@@ -109,7 +107,7 @@ int main() {
     std::setvbuf(stdout, nullptr, _IONBF, 0);
 
     // ---- allocate_tagged (005dc750) ---------------------------------------
-    PTR_FUN_0083e56c = reinterpret_cast<void*>(&fake_named_allocate);
+    PTR_FUN_0083e55c[4] = reinterpret_cast<void*>(&fake_named_allocate);
     void* allocated = allocate_tagged(0x164, "GOF::GameServicesCreate::FMVDataManager");
     expect("named_allocate_called_once", named_allocate_calls == 1);
     expect("named_allocate_size", last_named_size == 0x164);

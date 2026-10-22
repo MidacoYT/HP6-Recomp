@@ -3154,3 +3154,29 @@ dans les chapitres `FrontEnd`, `Hogwarts`, `TheCave` et `BurrowIntro`. Elle
 n'apparaît toutefois pas dans l'inventaire de `languageselect.str` ni dans
 celui de `game.str`. Le lien de chargement du curseur doit être identifié
 avant de changer la source de texture du menu reconstruit.
+
+## 21 octobre 2026 : branche native qui choisit le menu de langue
+
+L'entrée 71 de `presentation_commands.csv` lie la commande
+`LanguageSelection` à `0x0048C8F0`. Son désassemblage dans l'exécutable
+sans SecuROM montre le test exact : la distance entre les pointeurs du
+vecteur de langues (`DAT_00FCAE04+0xBC` moins `+0xB8`) vaut quatre octets
+pour une seule langue. Sinon, si `0x005DA610` ne détecte pas TransGaming
+sur MacOSX, la fonction appelle `FUN_00576F30("LanguageSelect")` ; la
+table des chapitres donne alors l'index 9. Avec une seule langue, elle
+place l'index sélectionné à zéro et appelle `0x00429CB0`, le thunk du
+chemin de confirmation `0x00FD7920` qui rejoint `FrontEnd`.
+
+`0x00505670` est l'appelant identifié par sa référence à la chaîne
+`LanguageSelection`. Il installe la chaîne vide `DS_HIGHLIGHTTEXT`, met
+`DAT_00CEF53E` à 1 et `DAT_00CEF53D` à 0, puis expédie la commande si
+au moins une langue est installée. `ScreenTasks.cpp` reconstruit ces
+branches et le test couvre zéro, une et deux langues. Ceci précise le
+choix du chapitre initial que les sections du 18 octobre ne pouvaient
+encore attribuer. La construction du service des langues et le passage
+par la vtable native jusqu'à `0x00505670` restent à raccorder.
+La lecture de `0x00828360` précise ensuite que `0x00505670` est son
+slot `+0x0C` : il s'agit de la tâche `Task_BootupFlowControl` créée
+par la commande `TriggerBootupFlow` à `0x0048C970`. Le pointeur de
+vtable écrit dans `BootupFlow.cpp` a été corrigé pour désigner la table
+elle-même, et non le pointeur vers sa première méthode.

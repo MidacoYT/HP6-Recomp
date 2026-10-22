@@ -5,9 +5,9 @@
 
 extern void* DAT_00892df8;
 extern void* PTR_LAB_00715d30;
-extern void* PTR_FUN_00715d0c;
+extern void* PTR_FUN_00715d0c[1];
 extern void* PTR_LAB_00715e18;
-extern void* PTR_LAB_00715da8;
+extern void* PTR_LAB_00715da8[26];
 
 namespace hp6::platform {
 namespace {
@@ -41,12 +41,12 @@ void destroy_components(std::uint8_t* record) {
     invoke_at(record, 8, 8);
     invoke_at(record, 0x0c, 8);
     invoke_at(record, 4, 0x0c);
-    *reinterpret_cast<void**>(record) = &PTR_LAB_00715da8;
+    *reinterpret_cast<void**>(record) = PTR_LAB_00715da8;
 }
 
 void destroy_components_variant(std::uint8_t* record) {
     *reinterpret_cast<void**>(record) = &PTR_LAB_00715d30;
-    *reinterpret_cast<void**>(record + 0x1c) = &PTR_FUN_00715d0c;
+    *reinterpret_cast<void**>(record + 0x1c) = PTR_FUN_00715d0c;
     destroy_components(record);
 }
 

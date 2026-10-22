@@ -7,7 +7,18 @@
 
 #include <cstdint>
 
+#if defined(_MSC_VER) && defined(_M_IX86)
+#define HP6_SYNC_FASTCALL __fastcall
+#else
+#define HP6_SYNC_FASTCALL
+#endif
+
 namespace hp6::platform {
+
+// 006d8f90. Reads the acquisition depth at +0x20. 006d8ea0 increments
+// this field on successful WaitForSingleObject/EnterCriticalSection, while
+// 006be470 tests it before releasing the global PATH lock.
+std::uint32_t HP6_SYNC_FASTCALL lock_acquisition_depth(const std::uint8_t* lock);
 
 // 006d92a1. The lock lives at frame + 4; the frame is carried in ECX
 // (__fastcall) in the original.

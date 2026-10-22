@@ -49,9 +49,8 @@ void* zero_fill_record(void* record);
 // (-10000000 / interval_divisor_hz, in 100ns units — a negative
 // LARGE_INTEGER due time is relative to now) and arms it
 // (SetWaitableTimer) with a completion routine registered through
-// 0x006d95d0 (not reconstructed; a distinct per-timer registration
-// helper, tracked as an external dependency) and the fixed callback at
-// LAB_006d9cae. Returns `interval_divisor_hz` unchanged. Reached from
+// 0x006d95d0 and the fixed callback at LAB_006d9cae (both reconstructed).
+// Returns `interval_divisor_hz` unchanged. Reached from
 // 0x00688130 (not yet reconstructed), alongside
 // reset_oversized_record/initialize_default_record_and_cache_flag —
 // most likely a periodic-autosave-trigger setup, matching the

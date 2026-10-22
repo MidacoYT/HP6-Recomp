@@ -17,7 +17,7 @@ extern std::int32_t* DAT_00cf18e4;             // bump arena [0]=base [1]=capaci
 extern std::uint32_t* DAT_00cf1a08;            // -> scratch index cursor variable
 extern volatile std::uint32_t _DAT_00000000;   // deliberate null-store trap target
 extern void* DAT_0096b48c;                     // shared bump write-pointer (matrices/commands)
-extern void* DAT_00fcdd78;                     // allocator service holder slot 1
+extern void* DAT_00fcdd74[6];                  // allocator service holder slot 1 at +4
 extern void* DAT_00fcaec0;                     // pointer-valued global; its value+0x14 is the
                                                // tag registry (+0x0 first node, +0xc transform)
 extern std::uint16_t DAT_00d714b8;             // default submit bucket (text mode, no tag)
@@ -578,9 +578,13 @@ void* allocate_eastl_block(std::uint32_t size) {
     } context;
     // *DAT_00fcdd78: the allocator function pointer lives AT the address
     // DAT_00fcdd78 holds (slot 0 of the 0x0083e56c table).
-    auto* allocate =
-        *reinterpret_cast<void* (**)(std::uint32_t, void*)>(DAT_00fcdd78);
-    return allocate(size, &context);
+#ifdef _MSC_VER
+    using AllocateCall = void* (__thiscall*)(void*, std::uint32_t, void*);
+#else
+    using AllocateCall = void* (*)(void*, std::uint32_t, void*);
+#endif
+    auto allocate = *reinterpret_cast<AllocateCall*>(DAT_00fcdd74[1]);
+    return allocate(&DAT_00fcdd74[1], size, &context);
 }
 
 } // namespace hp6::presentation

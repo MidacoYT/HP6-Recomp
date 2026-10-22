@@ -61,9 +61,8 @@ std::int32_t g_cached_interval = 0;      // DAT_00899d80
 // this project.
 extern std::int32_t register_timer_completion(void* context, void* callback, std::int32_t,
                                                std::int32_t, std::uint32_t, std::int32_t);
-// LAB_006d9cae — the fixed callback passed to register_timer_completion
-// above; not reconstructed, same status.
-extern void autosave_timer_callback();
+// LAB_006d9cae — the fixed callback passed to register_timer_completion.
+std::uint32_t autosave_timer_callback();
 
 void zero_fill(void* ptr, std::int32_t size) {
     std::memset(ptr, 0, static_cast<std::size_t>(size));
@@ -109,6 +108,31 @@ std::int32_t enumerate_logical_drives_into_table() {
 void* zero_fill_record(void* record) {
     zero_fill(record, 0x1c);
     return record;
+}
+
+// 006d9cae..006d9d14 in the SHA-256-verified unprotected hp6.exe.
+// The protected image contains different (.text) bytes at this address.
+// IAT 00713098 = WaitForSingleObject; 00713134 = SetWaitableTimer.
+std::uint32_t autosave_timer_callback() {
+    for (;;) {
+        WaitForSingleObject(static_cast<HANDLE>(timer_handle()), INFINITE);
+        if (due_time_low() == nullptr && due_time_high() == 0) {
+            g_cached_interval = 0;
+            return 0;
+        }
+        ++g_timer_flag_a;
+        ++g_timer_flag_b;
+        for (std::int32_t slot : g_timer_shared_record) {
+            if (slot != 0) {
+                auto callback = reinterpret_cast<void (*)()>(
+                    static_cast<std::uintptr_t>(static_cast<std::uint32_t>(slot)));
+                callback();
+            }
+        }
+        SetWaitableTimer(static_cast<HANDLE>(timer_handle()),
+                         reinterpret_cast<LARGE_INTEGER*>(&due_time_low()),
+                         0, nullptr, nullptr, FALSE);
+    }
 }
 
 std::int32_t schedule_autosave_timer(std::int32_t interval_divisor_hz) {

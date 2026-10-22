@@ -5,7 +5,7 @@
 
 // Shared with src/platform/HandleRegistry.cpp's service_holder(), which
 // performs the lazy init both globals depend on.
-extern void* DAT_00fcdd78;
+extern void* DAT_00fcdd74[6];
 
 namespace hp6::presentation {
 namespace {
@@ -15,11 +15,11 @@ void* vtable_of(void* object) {
 }
 
 #ifdef _MSC_VER
-using NamedAllocateCall = void* (__cdecl*)(std::int32_t, const void*);
+using NamedAllocateCall = void* (__thiscall*)(void*, std::int32_t, const void*);
 using SubsystemAllocateCall = void* (__thiscall*)(void*, std::int32_t, const void*);
 using TaskQueryCall = std::int32_t (__thiscall*)(void*);
 #else
-using NamedAllocateCall = void* (*)(std::int32_t, const void*);
+using NamedAllocateCall = void* (*)(void*, std::int32_t, const void*);
 using SubsystemAllocateCall = void* (*)(void*, std::int32_t, const void*);
 using TaskQueryCall = std::int32_t (*)(void*);
 #endif
@@ -41,12 +41,10 @@ struct TaskQueueNode {
 void* allocate_tagged(std::int32_t size, const char* name) {
     hp6::platform::service_holder();
     const TagDescriptor descriptor{1, name, 0};
-    // DAT_00fcdd78 holds the address of PTR_FUN_0083e56c, whose own
-    // content is the real function pointer — one more dereference than
-    // service_slot() needs, since this global holds a plain function
-    // pointer rather than a vtable base.
-    auto allocate = *reinterpret_cast<NamedAllocateCall*>(DAT_00fcdd78);
-    return allocate(size, &descriptor);
+    // 0x005DC7A3..0x005DC7BB loads the secondary vtable slot and calls it
+    // with ECX=&DAT_00FCDD78. The method at 0x005DB800 adjusts ECX by -4.
+    auto allocate = *reinterpret_cast<NamedAllocateCall*>(DAT_00fcdd74[1]);
+    return allocate(&DAT_00fcdd74[1], size, &descriptor);
 }
 
 void* allocate_via_task_handler(void* task_handler, std::int32_t size, const char* tag) {

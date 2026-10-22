@@ -9,16 +9,14 @@
 #include <cstdio>
 
 // ---- hp6::presentation::allocate_tagged dependencies (service_holder) ----
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -75,6 +73,10 @@ float DAT_008003ac = 1.0f;
 
 namespace {
 int failures = 0;
+void* __stdcall fake_named_allocate(std::int32_t, const void*) {
+    static std::uint8_t storage[64];
+    return storage;
+}
 void expect(const char* label, bool ok) {
     if (!ok) { ++failures; std::printf("FAIL %s\n", label); }
 }
@@ -84,11 +86,7 @@ int main() {
     using namespace hp6::presentation;
     std::setvbuf(stdout, nullptr, _IONBF, 0);
 
-    PTR_FUN_0083e56c = reinterpret_cast<void*>(+[](std::int32_t size, const void*) -> void* {
-        static std::uint8_t storage[64];
-        (void)size;
-        return storage;
-    });
+    PTR_FUN_0083e55c[4] = reinterpret_cast<void*>(&fake_named_allocate);
 
     initialize_engine_core_systems();
 

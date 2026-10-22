@@ -9,7 +9,7 @@
 // DAT_00fcdd78 is shared with src/platform/HandleRegistry.cpp's
 // service_holder() (which performs the lazy init both globals depend on)
 // and src/presentation/TaskSystem.cpp's allocate_tagged.
-extern void* DAT_00fcdd78;
+extern void* DAT_00fcdd74[6];
 
 // Override tables for the two render-framework heap regions; empty (all
 // counts 0) in every path reconstructed so far, so every lookup below
@@ -26,9 +26,9 @@ namespace hp6::render {
 namespace {
 
 #ifdef _MSC_VER
-using CreateHeapCall = void* (__cdecl*)(std::int32_t, const void*);
+using CreateHeapCall = void* (__thiscall*)(void*, std::int32_t, const void*);
 #else
-using CreateHeapCall = void* (*)(std::int32_t, const void*);
+using CreateHeapCall = void* (*)(void*, std::int32_t, const void*);
 #endif
 
 // Mirrors the {flag, name, reserved} shape hp6::presentation::
@@ -77,12 +77,8 @@ const char* lookup_region_name(std::uint32_t region_index) {
 
 std::int32_t create_local_allocator_register(const char*, std::uint32_t, void*, void*,
                                               std::uint32_t, bool) {
-    // Unlike the two D3D9 failure-path stubs in DeviceCreate.cpp, this one
-    // sits on the unconditional success path of
-    // initialize_render_framework_heap — aborting here would make every
-    // caller untestable. Returns a neutral "succeeded" value (matching the
-    // exported x86's non-zero-on-success contract) without fabricating the
-    // real registration's internal behavior.
+    // Fixed-success placeholder until 0x00FF8B60 is integrated. It does
+    // not register the sub-allocator created by the original binary.
     return 1;
 }
 
@@ -112,8 +108,8 @@ void initialize_render_framework_heap(std::uint8_t* registry) {
     (void)unused_field_b;
     (void)unused_field_c;
 
-    auto create_heap = *reinterpret_cast<CreateHeapCall const*>(DAT_00fcdd78);
-    void* heap_handle = create_heap(total, &descriptor);
+    auto create_heap = *reinterpret_cast<CreateHeapCall const*>(DAT_00fcdd74[1]);
+    void* heap_handle = create_heap(&DAT_00fcdd74[1], total, &descriptor);
     *reinterpret_cast<void**>(registry + 0x260) = heap_handle;
     if (heap_handle == nullptr) {
         std::abort();

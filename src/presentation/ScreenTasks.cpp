@@ -9,6 +9,9 @@
 #include <cstdint>
 #include <cstdio>
 #include <cstring>
+#ifdef _WIN32
+#include <windows.h>
+#endif
 
 // Addresses read/written by the binary but absent from the exported
 // globals; tests provide their own definitions the way the other
@@ -400,7 +403,7 @@ struct ScreenLanguageSelectTask {
     // from exactly one caller: this Update's state-2 timeout branch,
     // 0x00429cb0). Commits the selected language and hops to the
     // FrontEnd chapter. See ScreenTasks.h for the deferred blocks.
-    std::int32_t try_confirm_language_selection() {
+    static std::int32_t try_confirm_language_selection() {
         if (DAT_00879654 >= 0) { // "" if (-1 < DAT_00879654)
             auto* service = static_cast<std::uint8_t*>(DAT_00fcae04);
             // The exported x86 re-walks the +0xb8/+0xbc vector with an
@@ -796,6 +799,42 @@ void mark_language_select_pending_task_ready(void* task_ptr) {
 
 std::int32_t update_language_select_screen_task(void* task_ptr) {
     return static_cast<ScreenLanguageSelectTask*>(task_ptr)->update();
+}
+
+// 0x005da610: the game's TransGaming/MacOSX compatibility check.
+bool is_transgaming_macos() {
+#ifdef _WIN32
+    const HMODULE module = GetModuleHandleA("ntdll.dll");
+    if (module == nullptr) return false;
+    auto get_os = reinterpret_cast<const char* (*)()>(GetProcAddress(module, "TGGetOS"));
+    auto is_transgaming = reinterpret_cast<int (*)()>(GetProcAddress(module, "IsTransgaming"));
+    return get_os != nullptr && is_transgaming != nullptr &&
+           std::strcmp(get_os(), "MacOSX") == 0 && is_transgaming() != 0;
+#else
+    return false;
+#endif
+}
+
+// 0x0048c8f0, command-table entry 71 ("LanguageSelection"). The
+// +0xb8/+0xbc fields are a vector of 32-bit language-name pointers in
+// the game's x86 service. A single installed language skips the menu;
+// a multi-language SKU opens the LanguageSelect chapter unless the
+// TransGaming compatibility check says to choose the first entry.
+std::int32_t handle_language_selection_command(const char* /*args*/) {
+    const auto* service = static_cast<const std::uint8_t*>(DAT_00fcae04);
+    const auto begin = *reinterpret_cast<const std::uint32_t* const*>(service + 0xb8);
+    const auto end = *reinterpret_cast<const std::uint32_t* const*>(service + 0xbc);
+    const auto byte_count = reinterpret_cast<std::uintptr_t>(end) -
+                            reinterpret_cast<std::uintptr_t>(begin);
+    if ((byte_count & ~std::uintptr_t{3}) != 4 && !is_transgaming_macos()) {
+        resolve_and_load_chapter(DAT_00fcadec, "LanguageSelect");
+        return 1;
+    }
+    if ((byte_count & ~std::uintptr_t{3}) > 0) {
+        DAT_00879654 = 0;
+        ScreenLanguageSelectTask::try_confirm_language_selection();
+    }
+    return 1;
 }
 
 } // namespace hp6::presentation

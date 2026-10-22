@@ -25,16 +25,14 @@
 // ---- hp6::platform::service_holder's dependencies (unused by this
 // test's own calls, but pulled in transitively through
 // HandleRegistry.obj; see tests/handle_registry_smoke.cpp). ----------
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -48,6 +46,7 @@ void* DAT_00fcae14 = nullptr; // current ScreenLanguageSelect task
 std::uint8_t DAT_00cef67a = 0;
 std::int32_t DAT_00868814 = 0;
 std::uint8_t DAT_00cef53d = 0;
+std::uint8_t DAT_00cef53e = 0;
 bool check_for_input() { return false; }
 
 // ---- FrameClock.cpp's own globals (pulled in transitively because
@@ -244,13 +243,15 @@ const CommandTableEntry kDeactivateNoFocus{"Presentation.Screens.DeactivateScree
                                            &deactivate_no_focus_handler};
 const CommandTableEntry kActivateWithFocus{"Presentation.Screens.ActivateScreenWithFocus",
                                            &activate_with_focus_handler};
+const CommandTableEntry kLanguageSelection{"LanguageSelection",
+                                            &hp6::presentation::handle_language_selection_command};
 extern const CommandTableEntry* const PTR_PTR_00876ab0[93] = {
     &kIsScreenActive, &kActivateNoFocus, &kDeactivateNoFocus, &kActivateWithFocus,
     HP6_X10(&kUnusedCommand), HP6_X10(&kUnusedCommand), HP6_X10(&kUnusedCommand),
     HP6_X10(&kUnusedCommand), HP6_X10(&kUnusedCommand), HP6_X10(&kUnusedCommand),
     HP6_X10(&kUnusedCommand), HP6_X10(&kUnusedCommand),
     &kUnusedCommand, &kUnusedCommand, &kUnusedCommand, &kUnusedCommand, &kUnusedCommand,
-    &kUnusedCommand, &kUnusedCommand, &kUnusedCommand, &kUnusedCommand,
+    &kUnusedCommand, &kUnusedCommand, &kUnusedCommand, &kLanguageSelection,
 };
 
 using hp6::presentation::ScreenTaskEntry;
@@ -741,6 +742,45 @@ int main() {
                lang_service_object[4] == 0);
         expect("lang_update_state2_no_selection_still_books_flag",
                DAT_00d6b8a0 == 1);
+    }
+
+    // Command-table entry 71, 0x0048c8f0: the installed language count
+    // determines the first chapter on a normal Windows installation.
+    {
+        const char* languages[2] = {"en-GB", "fr-FR"};
+        std::memset(lang_service_object, 0, sizeof(lang_service_object));
+        *reinterpret_cast<const void**>(lang_service_object + 0xb8) = languages;
+        *reinterpret_cast<const void**>(lang_service_object + 0xbc) = languages + 2;
+        DAT_00d472dc = -1;
+        expect("language_selection_multiple_returns_one",
+               handle_language_selection_command(nullptr) == 1);
+        expect("language_selection_multiple_loads_language_chapter",
+               DAT_00d472dc == 9);
+
+        *reinterpret_cast<const void**>(lang_service_object + 0xbc) = languages + 1;
+        DAT_00879654 = -1;
+        DAT_00d472dc = -1;
+        expect("language_selection_single_returns_one",
+               handle_language_selection_command(nullptr) == 1);
+        expect("language_selection_single_picks_first", DAT_00879654 == 0);
+        expect("language_selection_single_loads_front_end", DAT_00d472dc == 8);
+
+        *reinterpret_cast<const void**>(lang_service_object + 0xbc) = languages + 2;
+        DAT_00d472dc = -1;
+        DAT_00cef53d = 1;
+        DAT_00cef53e = 0;
+        expect("begin_language_selection_returns_one", begin_language_selection() == 1);
+        expect("begin_language_selection_dispatches", DAT_00d472dc == 9);
+        expect("begin_language_selection_sets_flag", DAT_00cef53e == 1);
+        expect("begin_language_selection_clears_flag", DAT_00cef53d == 0);
+        const wchar_t* highlight = read_localized_text(0x00cf8168u, "DS_HIGHLIGHTTEXT");
+        expect("begin_language_selection_installs_empty_highlight",
+               highlight != nullptr && highlight[0] == L'\0');
+
+        *reinterpret_cast<const void**>(lang_service_object + 0xbc) = languages;
+        DAT_00d472dc = -1;
+        expect("begin_language_selection_empty_returns_zero", begin_language_selection() == 0);
+        expect("begin_language_selection_empty_keeps_chapter", DAT_00d472dc == -1);
     }
 
     if (failures != 0) {

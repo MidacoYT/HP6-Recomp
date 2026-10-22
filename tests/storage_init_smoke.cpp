@@ -31,16 +31,14 @@ std::int32_t DAT_00cf1b00 = 0;
 
 // ---- hp6::platform::service_holder dependencies (pulled in transitively
 // through initialize_file_system_storage's own call to it) -----------------
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -62,7 +60,6 @@ std::int32_t register_timer_completion(void*, void*, std::int32_t, std::int32_t,
     ++register_timer_completion_calls;
     return 0;
 }
-void autosave_timer_callback() {}
 } // namespace hp6::platform
 
 namespace {

@@ -103,8 +103,12 @@ void resolve_and_load_chapter(void* /*chapter_registry*/, const char* chapter_na
     }
 
     if (resolved == nullptr) {
-        // NOT YET INTEGRATED: get_bootup_flow_singleton()'s vtable slot
-        // +0x2c fallback when `chapter_name` matches neither table.
+        // NOT YET INTEGRATED: FUN_00576f30 first calls the +0x2c slot
+        // of the EventSlotGroupManager at get_bootup_flow_singleton()+4.
+        // Vtable 008283d8 routes this through 0048f0f0 and the shadow
+        // manager at +0x14 (vtable 00843cf8). This clears event slots;
+        // it does not resolve a chapter. The native function also emits
+        // a "ChapterLoading <name>" notification after this call.
         return;
     }
 

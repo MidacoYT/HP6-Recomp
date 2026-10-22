@@ -50,21 +50,19 @@ const char* PTR_DAT_0080a91c[11] = {
 
 // ---- handle_trigger_bootup_flow's own extern dependencies -----------------
 void* DAT_00fcadf0 = nullptr; // PresentationTaskHandler
-void* PTR_LAB_00828360 = nullptr; // Task_BootupFlowControl's real vtable
+extern void* PTR_LAB_00828360[4] = {}; // test-local vtable slots
 
 // ---- hp6::platform::service_holder dependencies (pulled in transitively
 // through allocate_tagged, not exercised directly by this test but
 // required to link) ----------------------------------------------------
-void* PTR_FUN_0083e55c = nullptr;
-void* PTR_FUN_0083e56c = nullptr;
-void* DAT_00fcdd74 = nullptr;
-void* DAT_00fcdd78 = nullptr;
+void* PTR_FUN_0083e55c[27] = {};
+void* DAT_00fcdd74[6] = {};
 void** DAT_00cef6bc = nullptr;
 std::uint32_t DAT_00fd1254 = 0;
 void cleanup_00711e60() {}
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 
@@ -100,7 +98,6 @@ std::int32_t HP6_STDCALL fake_bootup_task_ready() {
     ++bootup_task_ready_calls;
     return 0; // not ready: matches submit_task marking byte+4 = 1
 }
-void* bootup_task_vtable[2] = {nullptr, reinterpret_cast<void*>(&fake_bootup_task_ready)};
 
 std::int32_t unused_command_handler(const char*) { return 0; }
 } // namespace
@@ -136,7 +133,7 @@ int main() {
     // ---- handle_trigger_bootup_flow (0048c970) -----------------------------
     FakeTaskHandler handler;
     DAT_00fcadf0 = &handler;
-    PTR_LAB_00828360 = bootup_task_vtable;
+    PTR_LAB_00828360[1] = reinterpret_cast<void*>(&fake_bootup_task_ready);
 
     const std::int32_t handle_result = handle_trigger_bootup_flow(nullptr);
     expect("handler_returns_1", handle_result == 1);
@@ -145,7 +142,7 @@ int main() {
     expect("handler_queried_readiness", bootup_task_ready_calls == 1);
 
     auto* task = static_cast<std::uint8_t*>(node_arena[0]);
-    expect("handler_set_vtable", *reinterpret_cast<void**>(task) == bootup_task_vtable);
+    expect("handler_set_vtable", *reinterpret_cast<void**>(task) == PTR_LAB_00828360);
 
     // ---- trigger_bootup_flow (00ff7fa0) -------------------------------------
     // Dispatching "TriggerBootupFlow" re-enters handle_trigger_bootup_flow

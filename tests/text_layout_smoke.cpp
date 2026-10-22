@@ -20,13 +20,12 @@
 std::int32_t* DAT_00cf18e4 = nullptr;          // bump arena
 volatile std::uint32_t _DAT_00000000 = 0;      // null-store trap target
 void* DAT_0096b48c = nullptr;                  // bump write-pointer
-void* DAT_00fcdd74 = nullptr;                  // service holder slot 0
-void* DAT_00fcdd78 = nullptr;                  // service holder slot 1
+void* DAT_00fcdd74[6] = {};                    // service holder +0x00..+0x14
 void** DAT_00cef6bc = nullptr;                 // watch pointer
 std::uint32_t DAT_00fd1254 = 0;                // lazy-init flag
 void* PTR_FUN_007159b0 = nullptr;
-void* PTR_FUN_00715d0c = nullptr;
-void* PTR_LAB_00715da8 = nullptr;
+extern void* PTR_FUN_00715d0c[1] = {};
+extern void* PTR_LAB_00715da8[26] = {};
 void* PTR_LAB_0071b520 = nullptr;
 std::uint32_t DAT_008998c8 = 0;
 void* DAT_00fcaec0 = nullptr;                  // pointer-valued global
@@ -140,7 +139,7 @@ static std::uint32_t bits_of(float value) {
 static int stub_error_context_matches = 0;
 static alignas(16) std::uint8_t eastl_pool[0x10000];
 static std::uint8_t* eastl_cursor = eastl_pool;
-static void* test_eastl_allocate(std::uint32_t size, void* context) {
+static void* __stdcall test_eastl_allocate(std::uint32_t size, void* context) {
     // 005e27e0's context frame: {1, "eastl_overflow_error_allocator", 0}.
     struct AllocatorContext {
         std::int32_t level;
@@ -167,9 +166,7 @@ static void service_release_stub(void* /*holder*/, void* object,
 // Slot +0xc of table 0 is read at address(PTR_FUN_0083e55c) + 0xc; this
 // test never dispatches it (no eastl block is freed), so a scalar is
 // enough — its only consumer is service_holder's one-shot init.
-void* PTR_FUN_0083e55c = nullptr;
-void* slot_0083e568_0 = nullptr; // table +0x0c (never dispatched here)
-void* PTR_FUN_0083e56c = reinterpret_cast<void*>(&test_eastl_allocate);
+void* PTR_FUN_0083e55c[27] = {};
 
 static void init_batch_cursors(std::uint8_t* vertices, std::uint8_t* indices) {
     DAT_00cf19f0 = vertices;
@@ -182,6 +179,7 @@ static void init_batch_cursors(std::uint8_t* vertices, std::uint8_t* indices) {
 }
 
 int main() {
+    PTR_FUN_0083e55c[4] = reinterpret_cast<void*>(&test_eastl_allocate);
     std::setvbuf(stdout, nullptr, _IONBF, 0); // keep output across a crash
     fake_device_vtable[0x68 / 4] = reinterpret_cast<void*>(&fake_create_vertex);
     fake_device_vtable[0x6c / 4] = reinterpret_cast<void*>(&fake_create_index);

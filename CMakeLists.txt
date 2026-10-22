@@ -2,6 +2,7 @@ cmake_minimum_required(VERSION 3.20)
 project(HP6Reconstructed LANGUAGES CXX)
 
 add_library(hp6_reconstructed STATIC
+    src/audio/PathVolume.cpp
     src/archive/Entry.cpp
     src/archive/Header.cpp
     src/math/Scalar.cpp
@@ -23,11 +24,41 @@ add_library(hp6_reconstructed STATIC
     src/platform/StartupSupport.cpp
     src/platform/GameWindow.cpp
     src/platform/Sync.cpp
+    src/platform/SyncAccessors.cpp
     src/platform/ThreadPriority.cpp
     src/platform/TimerWheel.cpp
     src/platform/ServiceLifecycle.cpp
     src/platform/ServiceLifecycleExtra.cpp
     src/platform/HandleRegistry.cpp
+    src/platform/ServiceVtableConstructors.cpp
+    src/platform/ServiceHolderDestructor.cpp
+    src/platform/ServiceHolderSecondary.cpp
+    src/platform/ServiceHolderAllocateOptions.cpp
+    src/platform/ServiceHolderAllocateNamed.cpp
+    src/platform/ServiceHolderAllocateContext.cpp
+    src/platform/ServiceHolderHeapInitialize.cpp
+    src/platform/ServiceContextName.cpp
+    src/platform/ServiceContextRegistry.cpp
+    src/platform/ServicePrimaryHeapGrowth.cpp
+    src/platform/NativeServiceHolderVtable.cpp
+    src/platform/ServiceHolderCleanup.cpp
+    src/platform/ServiceHeapLeafs.cpp
+    src/platform/ServiceHeapLock.cpp
+    src/platform/ServiceHeapNode.cpp
+    src/platform/ServiceHeapCoalesce.cpp
+    src/platform/ServiceHeapCoalesceGeneral.cpp
+    src/platform/ServiceHeapInitialize.cpp
+    src/platform/ServiceHeapConstruct.cpp
+    src/platform/ServiceHeapDispatch.cpp
+    src/platform/ServiceHeapEnableLock.cpp
+    src/platform/ServiceHeapFree.cpp
+    src/platform/ServiceHeapAllocationWrappers.cpp
+    src/platform/ServiceHeapDebugCallbacks.cpp
+    src/platform/ServiceHandleFree.cpp
+    src/platform/ServiceHeapReleaseCheck.cpp
+    src/platform/ServiceHeapTailBlock.cpp
+    src/platform/ServiceHeapReleasePages.cpp
+    src/platform/ServiceHeapTeardown.cpp
     src/platform/Diagnostics.cpp
     src/platform/RegistryConfig.cpp
     src/platform/StorageInit.cpp
@@ -57,11 +88,22 @@ add_library(hp6_reconstructed STATIC
     src/runtime/ScratchBuffers.cpp
     src/runtime/RecordDescriptor.cpp
     src/runtime/FrameClock.cpp
+    src/runtime/VerifiedBinaryLeafs.cpp
     src/presentation/TaskSystem.cpp
     src/presentation/CommandDispatch.cpp
+    src/presentation/NativeCommandLeafs.cpp
     src/presentation/GuiTextTable.cpp
     src/presentation/ScreenTasks.cpp
+    src/presentation/NativeScreenRecordMethods.cpp
+    src/presentation/LanguageSelectionStart.cpp
     src/presentation/EngineBootstrap.cpp
+    src/presentation/EngineEventSnapshot.cpp
+    src/presentation/EngineRenderGate.cpp
+    src/presentation/EngineRenderGateTick.cpp
+    src/presentation/EngineRenderGateSimulate.cpp
+    src/presentation/EngineTickDispatch.cpp
+    src/presentation/EngineMessageDelivery.cpp
+    src/presentation/EngineListenerRecycle.cpp
     src/presentation/ChapterFlow.cpp
     src/presentation/ChapterLoadStateMachine.cpp
     src/presentation/BootupFlow.cpp
@@ -103,6 +145,13 @@ if(WIN32)
         src/platform/NativeHeapOverrides.cpp
         src/platform/NativeArrayAliases.cpp
         src/platform/TimerCompletion.cpp
+        src/platform/NativePurecallVtable.cpp
+        src/platform/NativeSingleDestructorVtable.cpp
+        src/platform/NativeServiceBaseVtable.cpp
+    src/platform/NativeServiceFinalVtable.cpp
+        src/presentation/NativeBootupTaskVtable.cpp
+        src/presentation/NativeEngineRenderGateVtable.cpp
+        src/presentation/NativeListenerPool.cpp
         $<TARGET_OBJECTS:hp6_native_render_aliases>)
     target_link_libraries(hp6 PRIVATE hp6_reconstructed d3d9 shell32)
     option(HP6_BUILD_LANGUAGE_INSPECTOR "Build the standalone asset inspection window" OFF)
@@ -162,6 +211,9 @@ if(BUILD_TESTING)
     add_executable(hp6_core_smoke tests/core_smoke.cpp)
     target_link_libraries(hp6_core_smoke PRIVATE hp6_reconstructed)
     add_test(NAME core_smoke COMMAND hp6_core_smoke)
+    add_executable(hp6_verified_binary_leafs_smoke tests/verified_binary_leafs_smoke.cpp)
+    target_link_libraries(hp6_verified_binary_leafs_smoke PRIVATE hp6_reconstructed)
+    add_test(NAME verified_binary_leafs_smoke COMMAND hp6_verified_binary_leafs_smoke)
     add_executable(hp6_projection_flags_smoke tests/projection_flags_smoke.cpp)
     target_link_libraries(hp6_projection_flags_smoke PRIVATE hp6_reconstructed)
     add_test(NAME projection_flags_smoke COMMAND hp6_projection_flags_smoke)
@@ -287,6 +339,129 @@ if(BUILD_TESTING)
         add_executable(hp6_frame_clock_smoke tests/frame_clock_smoke.cpp)
         target_link_libraries(hp6_frame_clock_smoke PRIVATE hp6_reconstructed)
         add_test(NAME frame_clock_smoke COMMAND hp6_frame_clock_smoke)
+        add_executable(hp6_engine_render_gate_smoke
+            tests/engine_render_gate_smoke.cpp
+            src/presentation/EngineRenderGate.cpp
+            src/presentation/EngineRenderGateTick.cpp)
+        target_include_directories(hp6_engine_render_gate_smoke PRIVATE src)
+        target_compile_features(hp6_engine_render_gate_smoke PRIVATE cxx_std_20)
+        add_test(NAME engine_render_gate_smoke COMMAND hp6_engine_render_gate_smoke)
+        add_executable(hp6_engine_event_snapshot_smoke
+            tests/engine_event_snapshot_smoke.cpp
+            src/presentation/EngineEventSnapshot.cpp
+            src/presentation/EngineRenderGateSimulate.cpp)
+        target_include_directories(hp6_engine_event_snapshot_smoke PRIVATE src)
+        target_compile_features(hp6_engine_event_snapshot_smoke PRIVATE cxx_std_20)
+        add_test(NAME engine_event_snapshot_smoke COMMAND hp6_engine_event_snapshot_smoke)
+        add_executable(hp6_engine_tick_dispatch_smoke
+            tests/engine_tick_dispatch_smoke.cpp
+            src/presentation/EngineTickDispatch.cpp)
+        target_compile_features(hp6_engine_tick_dispatch_smoke PRIVATE cxx_std_20)
+        add_test(NAME engine_tick_dispatch_smoke COMMAND hp6_engine_tick_dispatch_smoke)
+        add_executable(hp6_engine_message_delivery_smoke
+            tests/engine_message_delivery_smoke.cpp
+            src/presentation/EngineMessageDelivery.cpp)
+        target_compile_features(hp6_engine_message_delivery_smoke PRIVATE cxx_std_20)
+        add_test(NAME engine_message_delivery_smoke COMMAND hp6_engine_message_delivery_smoke)
+        add_executable(hp6_engine_listener_recycle_smoke
+            tests/engine_listener_recycle_smoke.cpp
+            src/presentation/EngineListenerRecycle.cpp)
+        target_compile_features(hp6_engine_listener_recycle_smoke PRIVATE cxx_std_20)
+        add_test(NAME engine_listener_recycle_smoke COMMAND hp6_engine_listener_recycle_smoke)
+        add_executable(hp6_service_holder_destructor_smoke
+            tests/service_holder_destructor_smoke.cpp
+            src/platform/ServiceHolderDestructor.cpp
+            src/platform/ServiceHolderSecondary.cpp)
+        target_include_directories(hp6_service_holder_destructor_smoke PRIVATE src)
+        target_compile_features(hp6_service_holder_destructor_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_holder_destructor_smoke COMMAND hp6_service_holder_destructor_smoke)
+        add_executable(hp6_native_service_holder_vtable_smoke
+            tests/native_service_holder_vtable_smoke.cpp
+            src/platform/NativeServiceHolderVtable.cpp
+            src/platform/ServiceHolderDestructor.cpp
+            src/platform/ServiceHolderSecondary.cpp
+            src/runtime/VerifiedBinaryLeafs.cpp)
+        target_include_directories(hp6_native_service_holder_vtable_smoke PRIVATE src)
+        target_compile_features(hp6_native_service_holder_vtable_smoke PRIVATE cxx_std_20)
+        add_test(NAME native_service_holder_vtable_smoke COMMAND hp6_native_service_holder_vtable_smoke)
+        add_executable(hp6_service_holder_allocate_options_smoke
+            tests/service_holder_allocate_options_smoke.cpp
+            src/platform/ServiceHolderAllocateOptions.cpp
+            src/platform/ServiceHolderAllocateNamed.cpp
+            src/platform/ServiceHolderAllocateContext.cpp
+            src/platform/ServiceContextName.cpp)
+        target_include_directories(hp6_service_holder_allocate_options_smoke PRIVATE src)
+        target_compile_features(hp6_service_holder_allocate_options_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_holder_allocate_options_smoke COMMAND hp6_service_holder_allocate_options_smoke)
+        add_executable(hp6_service_context_registry_smoke
+            tests/service_context_registry_smoke.cpp
+            src/platform/ServiceContextRegistry.cpp)
+        target_compile_features(hp6_service_context_registry_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_context_registry_smoke COMMAND hp6_service_context_registry_smoke)
+        add_executable(hp6_service_primary_heap_growth_smoke
+            tests/service_primary_heap_growth_smoke.cpp
+            src/platform/ServicePrimaryHeapGrowth.cpp)
+        target_include_directories(hp6_service_primary_heap_growth_smoke PRIVATE src)
+        target_compile_features(hp6_service_primary_heap_growth_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_primary_heap_growth_smoke COMMAND hp6_service_primary_heap_growth_smoke)
+        add_executable(hp6_service_heap_allocation_wrappers_smoke
+            tests/service_heap_allocation_wrappers_smoke.cpp
+            src/platform/ServiceHeapAllocationWrappers.cpp)
+        target_compile_features(hp6_service_heap_allocation_wrappers_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_allocation_wrappers_smoke COMMAND hp6_service_heap_allocation_wrappers_smoke)
+        add_executable(hp6_service_holder_cleanup_smoke
+            tests/service_holder_cleanup_smoke.cpp
+            src/platform/ServiceHolderCleanup.cpp)
+        target_include_directories(hp6_service_holder_cleanup_smoke PRIVATE src)
+        target_compile_features(hp6_service_holder_cleanup_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_holder_cleanup_smoke COMMAND hp6_service_holder_cleanup_smoke)
+        add_executable(hp6_service_heap_teardown_smoke
+            tests/service_heap_teardown_smoke.cpp
+            src/platform/ServiceHeapTeardown.cpp
+            src/platform/ServiceHeapLeafs.cpp)
+        target_include_directories(hp6_service_heap_teardown_smoke PRIVATE src)
+        target_compile_features(hp6_service_heap_teardown_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_teardown_smoke COMMAND hp6_service_heap_teardown_smoke)
+        add_executable(hp6_service_heap_initialize_smoke
+            tests/service_heap_initialize_smoke.cpp
+            src/platform/ServiceHeapInitialize.cpp
+            src/platform/ServiceHeapEnableLock.cpp)
+        target_include_directories(hp6_service_heap_initialize_smoke PRIVATE src)
+        target_compile_features(hp6_service_heap_initialize_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_initialize_smoke COMMAND hp6_service_heap_initialize_smoke)
+        add_executable(hp6_service_heap_construct_smoke
+            tests/service_heap_construct_smoke.cpp
+            src/platform/ServiceHeapConstruct.cpp)
+        target_include_directories(hp6_service_heap_construct_smoke PRIVATE src)
+        target_compile_features(hp6_service_heap_construct_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_construct_smoke COMMAND hp6_service_heap_construct_smoke)
+        add_executable(hp6_service_heap_dispatch_smoke
+            tests/service_heap_dispatch_smoke.cpp
+            src/platform/ServiceHeapDispatch.cpp)
+        target_compile_features(hp6_service_heap_dispatch_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_dispatch_smoke COMMAND hp6_service_heap_dispatch_smoke)
+        add_executable(hp6_native_service_final_vtable_smoke
+            tests/native_service_final_vtable_smoke.cpp
+            src/platform/NativeServiceFinalVtable.cpp)
+        target_include_directories(hp6_native_service_final_vtable_smoke PRIVATE src)
+        target_compile_features(hp6_native_service_final_vtable_smoke PRIVATE cxx_std_20)
+        add_test(NAME native_service_final_vtable_smoke COMMAND hp6_native_service_final_vtable_smoke)
+        add_executable(hp6_service_handle_free_smoke
+            tests/service_handle_free_smoke.cpp
+            src/platform/ServiceHandleFree.cpp)
+        target_compile_features(hp6_service_handle_free_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_handle_free_smoke COMMAND hp6_service_handle_free_smoke)
+        add_executable(hp6_native_screen_record_methods_smoke
+            tests/native_screen_record_methods_smoke.cpp
+            src/presentation/NativeScreenRecordMethods.cpp)
+        target_include_directories(hp6_native_screen_record_methods_smoke PRIVATE src)
+        target_compile_features(hp6_native_screen_record_methods_smoke PRIVATE cxx_std_20)
+        add_test(NAME native_screen_record_methods_smoke COMMAND hp6_native_screen_record_methods_smoke)
+        add_executable(hp6_service_heap_free_smoke
+            tests/service_heap_free_smoke.cpp
+            src/platform/ServiceHeapFree.cpp)
+        target_compile_features(hp6_service_heap_free_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_free_smoke COMMAND hp6_service_heap_free_smoke)
         add_executable(hp6_storage_init_smoke tests/storage_init_smoke.cpp)
         target_link_libraries(hp6_storage_init_smoke PRIVATE hp6_reconstructed)
         add_test(NAME storage_init_smoke COMMAND hp6_storage_init_smoke)

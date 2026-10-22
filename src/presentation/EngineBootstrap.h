@@ -87,11 +87,9 @@ void* get_or_create_time_manager();
 // knowledge base). Called once from WinMain (0x005d9300), right after
 // create_and_configure_render_device. Seeds the frame pump's fixed step
 // size (hp6::runtime::initialize_frame_pump_timing), assigns the frame
-// pump's "this" object (DAT_0089eb0c = &PTR_PTR_0087eadc — a real,
-// already-existing game object; FrameClock.h's note that its concrete
-// type was unidentified is resolved to the extent that this is where it
-// is assigned, though the type behind PTR_PTR_0087eadc itself remains
-// unexplored), registers every lifecycle/render message, hashes in the
+// pump's "this" object (DAT_0089eb0c = &PTR_PTR_0087eadc, whose first
+// vtable has three verified slots; adjacent interface fields still need
+// relocation), registers every lifecycle/render message, hashes in the
 // debug audio subsystem, shows the (currently dead) debug build overlay
 // twice, creates the TimeManager, invokes vtable slot 2 of the engine-
 // service object at DAT_00d6af14 (its real construction — found this
