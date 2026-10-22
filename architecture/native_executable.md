@@ -38,9 +38,9 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   `0x0098B490` (stride `0x48`) et des limites de stockage voisines. La variante native
   de `DeviceCreate.cpp` et `RenderStateCache.cpp` relie quatre adresses
   intérieures à leur tableau de base réel. La liaison comporte encore
-  5 symboles non résolus après reconstruction des trois méthodes d'allocation
-  de la vtable de service : deux fonctions internes du service mémoire,
-  le rendu `0x005DD020`, et les tables de commandes et d'écrans. Le nombre
+  3 symboles non résolus après reconstruction des cœurs d'allocation
+  de la vtable de service : le rendu `0x005DD020`, et les tables de commandes
+  et d'écrans. Le nombre
   compte les dépendances nouvellement exposées, pas les fonctions cachées
   derrière ces deux tables.
   Les deux
@@ -115,8 +115,9 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   installe les callbacks. `ServiceHeapAllocationWrappers.cpp` reconstruit
   le verrou autour de `0x005DDE30` (`0x005DDDB0`) et le calcul de l'offset
   utilisable du bloc (`0x005DEDE0`). Les callbacks de diagnostic
-  `0x005DD2C0`/`0x005DDC80` sont relocalisés. Le cœur `0x005DDE30`,
-  `0x005DDE30` reste absent. `0x00FF9850` est reconstruit dans
+  `0x005DD2C0`/`0x005DDC80` sont relocalisés. Le cœur `0x005DDE30`
+  est reconstruit dans `ServiceHeapAllocateCore.cpp`.
+  `0x00FF9850` est reconstruit dans
   `ServiceHeapAllocateRegion.cpp`, avec ses deux branches d'ajout de région.
   `ServiceHeapReserveRegion.cpp` et `ServiceHeapInsertRegion.cpp` reprennent
   la réservation des pages et l'insertion en liste depuis `0x005DF3A0` et
@@ -124,10 +125,12 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   est reconstruit dans `ServiceHeapAllocateNamedCore.cpp` : registre des
   contextes, arrondi, choix du chemin aligné et mot de métadonnées final.
   `ServiceHeapAllocateAlignedLocked.cpp` reprend le verrou autour de
-  `0x005DE780` depuis le wrapper `0x005DE700`. Ce cœur aligné reste absent.
+  `0x005DE780` depuis le wrapper `0x005DE700`. Le cœur aligné est dans
+  `ServiceHeapAllocateAlignedCore.cpp` ; son équivalence complète reste à
+  vérifier avec des traces mémoire plus larges.
   `ServiceHeapAlignmentLeafs.cpp`, `ServiceHeapSplitBlocks.cpp` et
   `ServiceHeapFreeBin.cpp` reconstruisent les classes de tailles et les
-  transformations de blocs utilisées par les deux cœurs encore absents.
+  transformations de blocs utilisées par ces deux cœurs.
   `ServiceHeapAllocateDirect.cpp` reprend l'allocation directe par
   `VirtualAlloc` de `0x005DF6D0`, appelée depuis `0x005DDE30`.
   `ServiceHeapCommitRegion.cpp` reprend l'ajout de pages à une réserve
@@ -299,8 +302,6 @@ leurs fonctions internes encore inconnues restent sans stub.
 | --- | --- | --- |
 | `PTR_PTR_00876AB0` | `0x0087B0CC` | 93 commandes et leurs handlers |
 | `PTR_PTR_00870948` | `0x0087BB8C` | 26 tâches d'écran et leurs vtables |
-| `service_heap_allocate_aligned_core_005de780` | `0x005DE780` | cœur d'allocation alignée |
-| `service_heap_allocate_core_005dde30` | `0x005DDE30` | allocation dans le tas |
 | `render_overlay_005dd020` | `0x005DD020` | rendu appelé par le moteur |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |
 

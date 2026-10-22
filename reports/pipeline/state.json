@@ -9761,10 +9761,10 @@
       "cpp_symbol": "service_primary_heap_growth_005db640",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Callback path tested with explicit fake; callee 0x005DBBB0 still incomplete.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Callback path tested with explicit fake; callee 0x005DBBB0 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServicePrimaryHeapGrowth.cpp",
-      "updated_at": "2026-10-22T13:37:09.245357+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005db680": {
       "batch": "native_verified_20261022",
@@ -9783,10 +9783,10 @@
       "cpp_symbol": "hp6::platform::ServiceHolderObject::allocate_context",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Wrapper tested with explicit fake; core allocator 0x005DDE30 absent.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Wrapper tested with explicit fake; core allocator 0x005DDE30 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHolderAllocateContext.cpp",
-      "updated_at": "2026-10-22T13:37:09.245357+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005db7a0": {
       "batch": "native_verified_20261022",
@@ -9794,10 +9794,10 @@
       "cpp_symbol": "hp6::platform::ServiceHolderObject::allocate_named",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Argument mapping tested with explicit fake; core 0x005DBC50 absent.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Argument mapping tested with explicit fake; core 0x005DBC50 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHolderAllocateNamed.cpp",
-      "updated_at": "2026-10-22T13:37:09.245357+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005db800": {
       "batch": "native_verified_20261022",
@@ -9805,10 +9805,10 @@
       "cpp_symbol": "hp6::platform::ServiceHolderSecondary::allocate_from_options",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Option scan tested with explicit fake; core 0x005DBC50 absent.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Option scan tested with explicit fake; core 0x005DBC50 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHolderAllocateOptions.cpp",
-      "updated_at": "2026-10-22T13:37:09.245357+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005dba40": {
       "batch": "native_verified_20261022",
@@ -9849,10 +9849,10 @@
       "cpp_symbol": "service_heap_allocate_locked_005dddb0",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Lock sequence tested with fake; core allocator 0x005DDE30 absent.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Lock sequence tested with fake; core allocator 0x005DDE30 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapAllocationWrappers.cpp",
-      "updated_at": "2026-10-22T13:37:09.245357+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005dede0": {
       "batch": "native_verified_20261022",
@@ -9871,10 +9871,10 @@
       "cpp_symbol": "service_secondary_heap_expand_005dbbb0",
       "equivalence": "unverified",
       "integration": "integrated",
-      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 still absent.",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 is now reconstructed.",
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceSecondaryHeapExpand.cpp",
-      "updated_at": "2026-10-22T13:39:48.773186+00:00"
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     },
     "005de540": {
       "batch": "native_verified_20261022",
@@ -10040,6 +10040,28 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapCommitRegion.cpp",
       "updated_at": "2026-10-22T14:13:46.276676+00:00"
+    },
+    "005dde30": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_allocate_core_005dde30",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Small-cache, free-bin, top-block, direct and growth branches reconstructed; whole-function equivalence remains unverified.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAllocateCore.cpp",
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
+    },
+    "005de780": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_allocate_aligned_core_005de780",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Aligned fallback and free-bin selection tested; whole-function equivalence remains unverified.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapAllocateAlignedCore.cpp",
+      "updated_at": "2026-10-22T14:25:27.601297+00:00"
     }
   },
   "schema_version": 1

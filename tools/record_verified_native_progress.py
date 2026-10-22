@@ -34,13 +34,13 @@ FUNCTIONS = [
     ("005db480", "hp6::platform::heap_control_at_30_005db480", "src/platform/ServiceHeapLeafs.cpp", "compiled_only", "Heap control address leaf."),
     ("005db490", "hp6::platform::heap_header_flag_005db490", "src/platform/ServiceHeapLeafs.cpp", "compiled_only", "Heap header flag leaf."),
     ("005db4d0", "service_heap_aligned_split_address_005db4d0", "src/platform/ServiceHeapAlignmentLeafs.cpp", "passed", "Absolute alignment split address checked against the x86 body."),
-    ("005db640", "service_primary_heap_growth_005db640", "src/platform/ServicePrimaryHeapGrowth.cpp", "passed", "Callback path tested with explicit fake; callee 0x005DBBB0 still incomplete."),
+    ("005db640", "service_primary_heap_growth_005db640", "src/platform/ServicePrimaryHeapGrowth.cpp", "passed", "Callback path tested with explicit fake; callee 0x005DBBB0 is now reconstructed."),
     ("005db680", "service_context_name_005db680", "src/platform/ServiceContextName.cpp", "passed", "Prefix concatenation tested; original has unbounded copies."),
-    ("005db710", "hp6::platform::ServiceHolderObject::allocate_context", "src/platform/ServiceHolderAllocateContext.cpp", "passed", "Wrapper tested with explicit fake; core allocator 0x005DDE30 absent."),
-    ("005db7a0", "hp6::platform::ServiceHolderObject::allocate_named", "src/platform/ServiceHolderAllocateNamed.cpp", "passed", "Argument mapping tested with explicit fake; core 0x005DBC50 absent."),
-    ("005db800", "hp6::platform::ServiceHolderSecondary::allocate_from_options", "src/platform/ServiceHolderAllocateOptions.cpp", "passed", "Option scan tested with explicit fake; core 0x005DBC50 absent."),
+    ("005db710", "hp6::platform::ServiceHolderObject::allocate_context", "src/platform/ServiceHolderAllocateContext.cpp", "passed", "Wrapper tested with explicit fake; core allocator 0x005DDE30 is now reconstructed."),
+    ("005db7a0", "hp6::platform::ServiceHolderObject::allocate_named", "src/platform/ServiceHolderAllocateNamed.cpp", "passed", "Argument mapping tested with explicit fake; core 0x005DBC50 is now reconstructed."),
+    ("005db800", "hp6::platform::ServiceHolderSecondary::allocate_from_options", "src/platform/ServiceHolderAllocateOptions.cpp", "passed", "Option scan tested with explicit fake; core 0x005DBC50 is now reconstructed."),
     ("005dba40", "service_holder_heap_initialize_005dba40", "src/platform/ServiceHolderHeapInitialize.cpp", "compiled_only", "Lazy heap setup compiled; full native allocation remains unlinked."),
-    ("005dbbb0", "service_secondary_heap_expand_005dbbb0", "src/platform/ServiceSecondaryHeapExpand.cpp", "passed", "Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 still absent."),
+    ("005dbbb0", "service_secondary_heap_expand_005dbbb0", "src/platform/ServiceSecondaryHeapExpand.cpp", "passed", "Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 is now reconstructed."),
     ("005dbc50", "service_heap_allocate_core_005dbc50", "src/platform/ServiceHeapAllocateNamedCore.cpp", "passed", "Named and aligned allocation paths tested with explicit fakes; inner allocators remain unresolved."),
     ("005dd2c0", "service_heap_free_callback_005dd2c0", "src/platform/ServiceHeapDebugCallbacks.cpp", "compiled_only", "OutputDebugStringA diagnostic callback."),
     ("005ddba0", "service_heap_insert_region_005ddba0", "src/platform/ServiceHeapInsertRegion.cpp", "passed", "Head-list insertion and usable-end update tested."),
@@ -56,7 +56,9 @@ FUNCTIONS = [
     ("005df100", "service_heap_commit_region_005df100", "src/platform/ServiceHeapCommitRegion.cpp", "passed", "Reserved-region commit, coalescing, and new-region fallback tested; equivalence remains unverified."),
     ("005df6d0", "service_heap_allocate_direct_005df6d0", "src/platform/ServiceHeapAllocateDirect.cpp", "passed", "Direct large-block VirtualAlloc path and metadata tested."),
     ("00ff9850", "service_heap_allocate_00ff9850", "src/platform/ServiceHeapAllocateRegion.cpp", "passed", "Provided-region and heap-reserved branches tested; complete executable still has unresolved symbols."),
-    ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 absent."),
+    ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 is now reconstructed."),
+    ("005dde30", "service_heap_allocate_core_005dde30", "src/platform/ServiceHeapAllocateCore.cpp", "passed", "Small-cache, free-bin, top-block, direct and growth branches reconstructed; whole-function equivalence remains unverified."),
+    ("005de780", "service_heap_allocate_aligned_core_005de780", "src/platform/ServiceHeapAllocateAlignedCore.cpp", "passed", "Aligned fallback and free-bin selection tested; whole-function equivalence remains unverified."),
     ("005dede0", "service_heap_usable_end_offset_005dede0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Metadata offset branches tested."),
 ]
 
@@ -68,6 +70,7 @@ def main() -> None:
     state = json.loads(STATE.read_text(encoding="utf-8"))
     now = datetime.now(timezone.utc).isoformat()
     added = 0
+    revised = 0
     for address, symbol, source, build, limitation in FUNCTIONS:
         section, data = bytes_at(image, base, sections, int(address, 16), 1)
         if data is None or section not in (".text", ".1911"):
@@ -79,6 +82,17 @@ def main() -> None:
         if existing is not None:
             if existing.get("batch") != "native_verified_20261022":
                 raise RuntimeError(f"{address}: existing independent review must not be overwritten")
+            note = "Traced from SHA-verified unprotected HP6 x86 PE. " + limitation
+            changes = {
+                "build": build,
+                "cpp_symbol": symbol,
+                "integration_note": note,
+                "source": source,
+            }
+            if any(existing.get(key) != value for key, value in changes.items()):
+                existing.update(changes)
+                existing["updated_at"] = now
+                revised += 1
             continue
         state["functions"][address] = {
             "batch": "native_verified_20261022",
@@ -93,7 +107,7 @@ def main() -> None:
         }
         added += 1
     STATE.write_text(json.dumps(state, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
-    print(f"Recorded {added} newly reviewed native functions in {STATE}")
+    print(f"Recorded {added} new and revised {revised} native functions in {STATE}")
 
 
 if __name__ == "__main__":
