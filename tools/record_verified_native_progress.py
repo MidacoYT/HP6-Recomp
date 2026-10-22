@@ -53,6 +53,7 @@ FUNCTIONS = [
     ("005de4d0", "service_heap_split_prefix_005de4d0", "src/platform/ServiceHeapSplitBlocks.cpp", "passed", "Unlink and split of free block tested."),
     ("005de700", "service_heap_allocate_aligned_locked_005de700", "src/platform/ServiceHeapAllocateAlignedLocked.cpp", "passed", "Lock/aligned-core/unlock path tested with explicit inner allocator fake."),
     ("005df3a0", "service_heap_reserve_region_005df3a0", "src/platform/ServiceHeapReserveRegion.cpp", "passed", "Reserve/commit and region-boundary metadata tested with real VirtualAlloc."),
+    ("005df100", "service_heap_commit_region_005df100", "src/platform/ServiceHeapCommitRegion.cpp", "passed", "Reserved-region commit, coalescing, and new-region fallback tested; equivalence remains unverified."),
     ("005df6d0", "service_heap_allocate_direct_005df6d0", "src/platform/ServiceHeapAllocateDirect.cpp", "passed", "Direct large-block VirtualAlloc path and metadata tested."),
     ("00ff9850", "service_heap_allocate_00ff9850", "src/platform/ServiceHeapAllocateRegion.cpp", "passed", "Provided-region and heap-reserved branches tested; complete executable still has unresolved symbols."),
     ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 absent."),

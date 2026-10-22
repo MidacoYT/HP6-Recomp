@@ -47,7 +47,7 @@ exécutable reconstruit n'a donc pas encore été affiché.
 - `python tools/audit_native_dispatch_tables.py D:\HP\hp6.exe D:\HP\hp6ss\build\sdk-lab\pc\hp6.exe` : 93 commandes et 26 tâches vérifiées.
 - `cmake --build build --config Debug --target ALL_BUILD` : bibliothèque et
   programmes de test compilés.
-- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **84/84**
+- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **85/85**
   tests réussis, dont le registre de contexte et le callback de croissance.
 - `cmake --build build --config Debug --target hp6` : échec attendu avec les
   cinq références externes listées ci-dessus.

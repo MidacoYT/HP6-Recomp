@@ -10029,6 +10029,17 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapAllocateDirect.cpp",
       "updated_at": "2026-10-22T14:07:16.905882+00:00"
+    },
+    "005df100": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_heap_commit_region_005df100",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Reserved-region commit, coalescing, and new-region fallback tested; equivalence remains unverified.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceHeapCommitRegion.cpp",
+      "updated_at": "2026-10-22T14:13:46.276676+00:00"
     }
   },
   "schema_version": 1
