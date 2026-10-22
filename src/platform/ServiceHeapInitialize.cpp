@@ -6,7 +6,7 @@
 
 extern void service_heap_enable_lock_005dd830_0(void* heap);
 extern std::uint32_t service_heap_allocate_00ff9850(
-    void* heap, std::uint32_t size, std::uint8_t mode,
+    void* heap, void* region, std::uint32_t size, std::uint8_t mode,
     std::uint32_t, std::uint32_t, std::uint32_t);
 extern void service_heap_lock_005dd290(void* lock);
 extern void service_heap_unlock_005dd2a0(void* lock);
@@ -75,7 +75,9 @@ std::uint32_t service_heap_initialize_005dd4c0(
 
     std::uint32_t result = 0;
     if (request != 0 || size != 0)
-        result = service_heap_allocate_00ff9850(heap, size, mode, 0, 0, 0);
+        result = service_heap_allocate_00ff9850(
+            heap, reinterpret_cast<void*>(static_cast<std::uintptr_t>(request)),
+            size, mode, 0, 0, 0);
     if (heap[0x514] == 0) {
         heap[0x514] = 1;
         for (auto* node = static_cast<CallbackNode*>(DAT_00cef724);

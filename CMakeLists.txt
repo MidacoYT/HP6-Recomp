@@ -40,6 +40,7 @@ add_library(hp6_reconstructed STATIC
     src/platform/ServiceContextName.cpp
     src/platform/ServiceContextRegistry.cpp
     src/platform/ServicePrimaryHeapGrowth.cpp
+    src/platform/ServiceSecondaryHeapExpand.cpp
     src/platform/NativeServiceHolderVtable.cpp
     src/platform/ServiceHolderCleanup.cpp
     src/platform/ServiceHeapLeafs.cpp
@@ -404,6 +405,12 @@ if(BUILD_TESTING)
         target_include_directories(hp6_service_primary_heap_growth_smoke PRIVATE src)
         target_compile_features(hp6_service_primary_heap_growth_smoke PRIVATE cxx_std_20)
         add_test(NAME service_primary_heap_growth_smoke COMMAND hp6_service_primary_heap_growth_smoke)
+        add_executable(hp6_service_secondary_heap_expand_smoke
+            tests/service_secondary_heap_expand_smoke.cpp
+            src/platform/ServiceSecondaryHeapExpand.cpp)
+        target_include_directories(hp6_service_secondary_heap_expand_smoke PRIVATE src)
+        target_compile_features(hp6_service_secondary_heap_expand_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_secondary_heap_expand_smoke COMMAND hp6_service_secondary_heap_expand_smoke)
         add_executable(hp6_service_heap_allocation_wrappers_smoke
             tests/service_heap_allocation_wrappers_smoke.cpp
             src/platform/ServiceHeapAllocationWrappers.cpp)

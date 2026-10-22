@@ -35,9 +35,10 @@ void service_heap_unlock_005dd2a0(void* lock) {
     calls += lock == active_heap + 0x4e8 ? 'U' : '?';
 }
 std::uint32_t service_heap_allocate_00ff9850(
-    void* heap, std::uint32_t size, std::uint8_t mode,
+    void* heap, void* region, std::uint32_t size, std::uint8_t mode,
     std::uint32_t a, std::uint32_t b, std::uint32_t c) {
-    calls += heap == active_heap && size == 0x80 && mode == 2 &&
+    calls += heap == active_heap && region == reinterpret_cast<void*>(1) &&
+                     size == 0x80 && mode == 2 &&
                      a == 0 && b == 0 && c == 0 ? 'A' : '?';
     return 0xabcdef00;
 }

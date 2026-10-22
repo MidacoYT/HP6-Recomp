@@ -31,7 +31,7 @@ Le programme `hp6.exe` **ne se lie pas encore**. L'édition de liens du
 | --- | --- |
 | `service_heap_allocate_core_005dbc50` | Allocation nommée, contexte et alignement |
 | `service_heap_allocate_core_005dde30` | Allocation dans les listes de blocs du tas |
-| `service_secondary_heap_expand_005dbbb0` | Agrandissement du tas principal |
+| `service_heap_release_region_005de540` | Libération de la région si son ajout au tas principal échoue |
 | `service_heap_allocate_00ff9850` | Ajout et initialisation d'une région mémoire |
 | `render_overlay_005dd020` | Rendu appelé par la porte du moteur |
 | `PTR_PTR_00876ab0` | Table de 93 commandes, 86 handlers distincts |
@@ -49,7 +49,7 @@ exécutable reconstruit n'a donc pas encore été affiché.
 - `python tools/audit_native_dispatch_tables.py D:\HP\hp6.exe D:\HP\hp6ss\build\sdk-lab\pc\hp6.exe` : 93 commandes et 26 tâches vérifiées.
 - `cmake --build build --config Debug --target ALL_BUILD` : bibliothèque et
   programmes de test compilés.
-- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **74/74**
+- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **75/75**
   tests réussis, dont le registre de contexte et le callback de croissance.
 - `cmake --build build --config Debug --target hp6` : échec attendu avec les
   sept références externes listées ci-dessus.
@@ -60,7 +60,7 @@ fonctionne.
 
 ## Suite de la reconstruction
 
-1. Reconstituer `0x005DBBB0` et suivre ses appels réels vers les allocateurs
+1. Reconstituer `0x005DE540` et suivre ses appels réels vers les allocateurs
    du tas, avec les conventions d'appel et les données globales vérifiées.
 2. Terminer les trois autres fonctions mémoire et vérifier des allocations
    réelles dans une exécution native.

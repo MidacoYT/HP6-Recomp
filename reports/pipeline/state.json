@@ -9864,6 +9864,17 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapAllocationWrappers.cpp",
       "updated_at": "2026-10-22T13:37:09.245357+00:00"
+    },
+    "005dbbb0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "service_secondary_heap_expand_005dbbb0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 still absent.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/platform/ServiceSecondaryHeapExpand.cpp",
+      "updated_at": "2026-10-22T13:39:48.773186+00:00"
     }
   },
   "schema_version": 1

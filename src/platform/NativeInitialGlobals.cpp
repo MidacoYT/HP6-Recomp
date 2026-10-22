@@ -83,6 +83,7 @@ void* DAT_00fcae04 = nullptr; // 0x00FCAE04 .data
 void* DAT_00fcae14 = nullptr; // 0x00FCAE14 .data
 void* DAT_00fcae8c = nullptr; // 0x00FCAE8C .data
 void* DAT_00fcae94 = nullptr; // 0x00FCAE94 .data
+void* DAT_00fcaea8 = nullptr; // 0x00FCAEA8 .data, zero in both verified PEs
 void* DAT_00fcaeac = nullptr; // 0x00FCAEAC .data
 void* DAT_00fcaed4 = nullptr; // 0x00FCAED4 .data
 void* DAT_00d46aa8 = nullptr; // 0x00D46AA8 .data

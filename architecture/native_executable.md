@@ -119,7 +119,11 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   `0x005DBC50` et `0x00FF9850` restent absents. La croissance `0x005DB640`
   est reconstruite dans `ServicePrimaryHeapGrowth.cpp` avec ses quatre
   arguments vérifiés au site d'appel `0x005DE252`. Elle dépend encore de
-  l'agrandissement `0x005DBBB0`.
+  l'agrandissement `0x005DBBB0`, maintenant reconstruit dans
+  `ServiceSecondaryHeapExpand.cpp` : arrondi du bloc, allocation dans le tas
+  secondaire, ajout au tas principal et libération sur échec. Son test couvre
+  les trois branches avec des callees explicites. La libération
+  `0x005DE540` appelée sur échec reste absente.
   `ServiceContextRegistry.cpp` reconstruit `0x005DB380` et ses appels
   `0x005E0010`/`0x005DFF60` depuis les corps `0x00FF8820`, `0x0100ED60`
   et `0x0100ED00` : hachage `0x00404620`, recherche exacte, chaîne
@@ -278,7 +282,7 @@ leurs fonctions internes encore inconnues restent sans stub.
 | `PTR_PTR_00876AB0` | `0x0087B0CC` | 93 commandes et leurs handlers |
 | `PTR_PTR_00870948` | `0x0087BB8C` | 26 tâches d'écran et leurs vtables |
 | `service_heap_allocate_core_005dbc50` | `0x005DBC50` | allocation nommée et avec options |
-| `service_secondary_heap_expand_005dbbb0` | `0x005DBBB0` | croissance du tas principal depuis le tas secondaire |
+| `service_heap_release_region_005de540` | `0x005DE540` | libération de la région si son ajout au tas principal échoue |
 | `service_heap_allocate_core_005dde30` | `0x005DDE30` | allocation dans le tas |
 | `service_heap_allocate_00ff9850` | `0x00FF9850` | ajout de mémoire au tas |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |

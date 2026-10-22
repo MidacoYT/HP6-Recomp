@@ -38,6 +38,7 @@ FUNCTIONS = [
     ("005db7a0", "hp6::platform::ServiceHolderObject::allocate_named", "src/platform/ServiceHolderAllocateNamed.cpp", "passed", "Argument mapping tested with explicit fake; core 0x005DBC50 absent."),
     ("005db800", "hp6::platform::ServiceHolderSecondary::allocate_from_options", "src/platform/ServiceHolderAllocateOptions.cpp", "passed", "Option scan tested with explicit fake; core 0x005DBC50 absent."),
     ("005dba40", "service_holder_heap_initialize_005dba40", "src/platform/ServiceHolderHeapInitialize.cpp", "compiled_only", "Lazy heap setup compiled; full native allocation remains unlinked."),
+    ("005dbbb0", "service_secondary_heap_expand_005dbbb0", "src/platform/ServiceSecondaryHeapExpand.cpp", "passed", "Region rounding, attach, and failure release tested with explicit fakes; callee 0x005DE540 still absent."),
     ("005dd2c0", "service_heap_free_callback_005dd2c0", "src/platform/ServiceHeapDebugCallbacks.cpp", "compiled_only", "OutputDebugStringA diagnostic callback."),
     ("005ddc80", "service_heap_release_callback_005ddc80", "src/platform/ServiceHeapDebugCallbacks.cpp", "compiled_only", "OutputDebugStringA and int3 diagnostic callback."),
     ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 absent."),
