@@ -29,7 +29,7 @@ Le programme `hp6.exe` **ne se lie pas encore**. L'édition de liens du
 
 | Symbole | Travail requis |
 | --- | --- |
-| `service_heap_allocate_core_005dbc50` | Allocation nommée, contexte et alignement |
+| `service_heap_allocate_aligned_core_005de780` | Allocation alignée dans le tas |
 | `service_heap_allocate_core_005dde30` | Allocation dans les listes de blocs du tas |
 | `service_heap_allocate_00ff9850` | Ajout et initialisation d'une région mémoire |
 | `render_overlay_005dd020` | Rendu appelé par la porte du moteur |
@@ -48,7 +48,7 @@ exécutable reconstruit n'a donc pas encore été affiché.
 - `python tools/audit_native_dispatch_tables.py D:\HP\hp6.exe D:\HP\hp6ss\build\sdk-lab\pc\hp6.exe` : 93 commandes et 26 tâches vérifiées.
 - `cmake --build build --config Debug --target ALL_BUILD` : bibliothèque et
   programmes de test compilés.
-- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **76/76**
+- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **77/77**
   tests réussis, dont le registre de contexte et le callback de croissance.
 - `cmake --build build --config Debug --target hp6` : échec attendu avec les
   six références externes listées ci-dessus.

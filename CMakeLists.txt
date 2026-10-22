@@ -42,6 +42,8 @@ add_library(hp6_reconstructed STATIC
     src/platform/ServicePrimaryHeapGrowth.cpp
     src/platform/ServiceSecondaryHeapExpand.cpp
     src/platform/ServiceHeapReleaseRegion.cpp
+    src/platform/ServiceHeapAllocateNamedCore.cpp
+    src/platform/ServiceHeapAllocateAlignedLocked.cpp
     src/platform/NativeServiceHolderVtable.cpp
     src/platform/ServiceHolderCleanup.cpp
     src/platform/ServiceHeapLeafs.cpp
@@ -417,6 +419,12 @@ if(BUILD_TESTING)
             src/platform/ServiceHeapReleaseRegion.cpp)
         target_compile_features(hp6_service_heap_release_region_smoke PRIVATE cxx_std_20)
         add_test(NAME service_heap_release_region_smoke COMMAND hp6_service_heap_release_region_smoke)
+        add_executable(hp6_service_heap_allocate_named_core_smoke
+            tests/service_heap_allocate_named_core_smoke.cpp
+            src/platform/ServiceHeapAllocateNamedCore.cpp
+            src/platform/ServiceHeapAllocateAlignedLocked.cpp)
+        target_compile_features(hp6_service_heap_allocate_named_core_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_allocate_named_core_smoke COMMAND hp6_service_heap_allocate_named_core_smoke)
         add_executable(hp6_service_heap_allocation_wrappers_smoke
             tests/service_heap_allocation_wrappers_smoke.cpp
             src/platform/ServiceHeapAllocationWrappers.cpp)

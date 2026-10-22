@@ -116,7 +116,12 @@ exclue de la compilation globale tant qu'elle ne peut pas être liée.
   le verrou autour de `0x005DDE30` (`0x005DDDB0`) et le calcul de l'offset
   utilisable du bloc (`0x005DEDE0`). Les callbacks de diagnostic
   `0x005DD2C0`/`0x005DDC80` sont relocalisés. Le cœur `0x005DDE30`,
-  `0x005DBC50` et `0x00FF9850` restent absents. La croissance `0x005DB640`
+  `0x005DDE30` et `0x00FF9850` restent absents. Le cœur `0x005DBC50`
+  est reconstruit dans `ServiceHeapAllocateNamedCore.cpp` : registre des
+  contextes, arrondi, choix du chemin aligné et mot de métadonnées final.
+  `ServiceHeapAllocateAlignedLocked.cpp` reprend le verrou autour de
+  `0x005DE780` depuis le wrapper `0x005DE700`. Ce cœur aligné reste absent.
+  La croissance `0x005DB640`
   est reconstruite dans `ServicePrimaryHeapGrowth.cpp` avec ses quatre
   arguments vérifiés au site d'appel `0x005DE252`. Elle dépend encore de
   l'agrandissement `0x005DBBB0`, maintenant reconstruit dans
@@ -283,7 +288,7 @@ leurs fonctions internes encore inconnues restent sans stub.
 | --- | --- | --- |
 | `PTR_PTR_00876AB0` | `0x0087B0CC` | 93 commandes et leurs handlers |
 | `PTR_PTR_00870948` | `0x0087BB8C` | 26 tâches d'écran et leurs vtables |
-| `service_heap_allocate_core_005dbc50` | `0x005DBC50` | allocation nommée et avec options |
+| `service_heap_allocate_aligned_core_005de780` | `0x005DE780` | cœur d'allocation alignée |
 | `service_heap_allocate_core_005dde30` | `0x005DDE30` | allocation dans le tas |
 | `service_heap_allocate_00ff9850` | `0x00FF9850` | ajout de mémoire au tas |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |
