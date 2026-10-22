@@ -305,6 +305,12 @@ leurs fonctions internes encore inconnues restent sans stub.
 | `render_overlay_005dd020` | `0x005DD020` | rendu appelé par le moteur |
 | `PTR_PTR_0087EADC` | `0x0083E5C8` | objet du moteur et ses méthodes |
 
+Depuis l'image x86 vérifiée, `0x005EF430` reconstruit l'ordre des entrées du
+rendu de diagnostic en trois phases ; `0x0053CC00` cherche un écran par son
+nom virtuel et `0x0048ACE0` vérifie sa présence dans la liste active. Les
+tests de ces chemins emploient des objets synthétiques x86. Le rendu complet
+`0x005DD020` et les deux tables ci-dessus restent à raccorder.
+
 Les vtables `PTR_FUN_007159B0` (premier mot `0x006B2E49`) et
 `PTR_LAB_0071B520` (premier mot `0x006DCB59`) restent absentes pour les
 constructeurs correspondants ; elles ne sont plus dans la chaîne de liaison

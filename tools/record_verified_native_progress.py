@@ -22,12 +22,14 @@ PE = ROOT.parent / "hp6ss/build/sdk-lab/pc/hp6.exe"
 FUNCTIONS = [
     ("0045df40", "command_return_one_0045df40", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "Returns AL=1; eight command-table entries share it."),
     ("0048ad30", "command_storage_popup_active_0048ad30", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "Reads the storage-popup state at +0x0C."),
+    ("0048ace0", "command_screen_active_0048ace0", "src/presentation/NativeScreenQuery.cpp", "passed", "Looks up the named screen then scans the active-screen list; synthetic x86 list test passed."),
     ("0048b020", "command_toggle_text_clip_0048b020", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "Toggles DAT_00CEF76D."),
     ("0048b410", "command_quit_game_0048b410", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "Pause-menu state transition only when current state is 1."),
     ("0048b430", "command_resume_play_0048b430", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "Pause-menu state transition only when current state is 1."),
     ("0048c130", "command_quit_to_windows_0048c130", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "USER32 PostQuitMessage import verified in PE import table."),
     ("0048c950", "command_language_menu_select_0048c950", "src/presentation/NativeCommandLeafs.cpp", "compiled_only", "MSVCR80 atoi import verified in PE import table."),
     ("005db380", "service_context_registry_name_005db380", "src/platform/ServiceContextRegistry.cpp", "passed", "Hash table, canonical string pool, and overflow limits tested; native startup still blocked."),
+    ("0053cc00", "screen_find_by_name_0053cc00", "src/presentation/NativeScreenQuery.cpp", "passed", "Traverses screen registry and compares virtual method +0x34 name; synthetic x86 list test passed."),
     ("005db440", "hp6::platform::heap_node_payload_005db440", "src/platform/ServiceHeapLeafs.cpp", "compiled_only", "Two-instruction heap leaf."),
     ("005db450", "service_heap_round_block_005db450", "src/platform/ServiceHeapFreeBin.cpp", "passed", "Minimum allocation block size and 8-byte rounding tested."),
     ("005db470", "hp6::platform::heap_relative_base_005db470", "src/platform/ServiceHeapLeafs.cpp", "compiled_only", "Heap back-offset leaf."),
@@ -59,6 +61,7 @@ FUNCTIONS = [
     ("005dddb0", "service_heap_allocate_locked_005dddb0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Lock sequence tested with fake; core allocator 0x005DDE30 is now reconstructed."),
     ("005dde30", "service_heap_allocate_core_005dde30", "src/platform/ServiceHeapAllocateCore.cpp", "passed", "Small-cache, free-bin, top-block, direct and growth branches reconstructed; whole-function equivalence remains unverified."),
     ("005de780", "service_heap_allocate_aligned_core_005de780", "src/platform/ServiceHeapAllocateAlignedCore.cpp", "passed", "Aligned fallback and free-bin selection tested; whole-function equivalence remains unverified."),
+    ("005ef430", "overlay_rebuild_order_005ef430", "src/render/OverlayOrderRebuild.cpp", "passed", "Three descriptor phases and signed priority selection tested; complete overlay path still unlinked."),
     ("005dede0", "service_heap_usable_end_offset_005dede0", "src/platform/ServiceHeapAllocationWrappers.cpp", "passed", "Metadata offset branches tested."),
 ]
 

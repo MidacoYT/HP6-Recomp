@@ -21,8 +21,15 @@ Les neuf entrées de la vtable du service à `0x0083E55C` sont relocalisées ; l
 trois méthodes d'allocation appellent les fonctions internes encore absentes
 au lieu d'en simuler le résultat. Le registre des noms de contexte à
 `0x005DB380` et le callback de croissance à `0x005DB640` proviennent des
-instructions vérifiées. Sept handlers courts de commandes sont reconstruits,
+instructions vérifiées. Huit handlers de commandes sont reconstruits,
 dont `OnLanguageMenuSelectItem` à `0x0048C950`.
+
+La recherche d'écran `0x0053CC00` et la commande « écran actif »
+`0x0048ACE0` sont également reconstruits depuis les instructions et testés
+sur les deux listes du gestionnaire d'écrans. La fonction `0x005EF430` du rendu de diagnostic est reconstruite depuis le
+binaire : elle rassemble les entrées de trois listes, trie la liste médiane
+par priorité signée et produit l'ordre utilisé par l'overlay. Les deux cœurs
+d'allocation sont aussi reliés dans un test de parcours commun.
 
 Le programme `hp6.exe` **ne se lie pas encore**. L'édition de liens du
 22 octobre 2026 signale ces trois références externes :
@@ -45,7 +52,7 @@ exécutable reconstruit n'a donc pas encore été affiché.
 - `python tools/audit_native_dispatch_tables.py D:\HP\hp6.exe D:\HP\hp6ss\build\sdk-lab\pc\hp6.exe` : 93 commandes et 26 tâches vérifiées.
 - `cmake --build build --config Debug --target ALL_BUILD` : bibliothèque et
   programmes de test compilés.
-- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **87/87**
+- `ctest --test-dir build -C Debug --output-on-failure --timeout 20` : **90/90**
   tests réussis, dont le registre de contexte et le callback de croissance.
 - `cmake --build build --config Debug --target hp6` : échec attendu avec les
   trois références externes listées ci-dessus.

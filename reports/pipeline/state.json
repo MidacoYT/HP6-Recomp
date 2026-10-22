@@ -10062,6 +10062,39 @@
       "provenance": "unprotected PE disassembly; not a ReAgent candidate",
       "source": "src/platform/ServiceHeapAllocateAlignedCore.cpp",
       "updated_at": "2026-10-22T14:25:27.601297+00:00"
+    },
+    "005ef430": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "overlay_rebuild_order_005ef430",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Three descriptor phases and signed priority selection tested; complete overlay path still unlinked.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/render/OverlayOrderRebuild.cpp",
+      "updated_at": "2026-10-22T14:32:21.674617+00:00"
+    },
+    "0048ace0": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "command_screen_active_0048ace0",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Looks up the named screen then scans the active-screen list; synthetic x86 list test passed.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/presentation/NativeScreenQuery.cpp",
+      "updated_at": "2026-10-22T14:36:19.752881+00:00"
+    },
+    "0053cc00": {
+      "batch": "native_verified_20261022",
+      "build": "passed",
+      "cpp_symbol": "screen_find_by_name_0053cc00",
+      "equivalence": "unverified",
+      "integration": "integrated",
+      "integration_note": "Traced from SHA-verified unprotected HP6 x86 PE. Traverses screen registry and compares virtual method +0x34 name; synthetic x86 list test passed.",
+      "provenance": "unprotected PE disassembly; not a ReAgent candidate",
+      "source": "src/presentation/NativeScreenQuery.cpp",
+      "updated_at": "2026-10-22T14:36:19.752881+00:00"
     }
   },
   "schema_version": 1

@@ -89,6 +89,7 @@ add_library(hp6_reconstructed STATIC
     src/render/RenderStateCache.cpp
     src/render/RenderTargetSetup.cpp
     src/render/ScreenOverlayRender.cpp
+    src/render/OverlayOrderRebuild.cpp
     src/render/SceneBatchRenderer.cpp
     src/render/SubmitRenderCommand.cpp
     src/runtime/PoolAccess.cpp
@@ -106,6 +107,7 @@ add_library(hp6_reconstructed STATIC
     src/presentation/TaskSystem.cpp
     src/presentation/CommandDispatch.cpp
     src/presentation/NativeCommandLeafs.cpp
+    src/presentation/NativeScreenQuery.cpp
     src/presentation/GuiTextTable.cpp
     src/presentation/ScreenTasks.cpp
     src/presentation/NativeScreenRecordMethods.cpp
@@ -276,6 +278,18 @@ if(BUILD_TESTING)
     add_executable(hp6_screen_overlay_render_smoke tests/screen_overlay_render_smoke.cpp)
     target_link_libraries(hp6_screen_overlay_render_smoke PRIVATE hp6_reconstructed)
     add_test(NAME screen_overlay_render_smoke COMMAND hp6_screen_overlay_render_smoke)
+    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        add_executable(hp6_native_screen_query_smoke tests/native_screen_query_smoke.cpp
+            src/presentation/NativeScreenQuery.cpp)
+        target_compile_features(hp6_native_screen_query_smoke PRIVATE cxx_std_20)
+        add_test(NAME native_screen_query_smoke COMMAND hp6_native_screen_query_smoke)
+    endif()
+    if(CMAKE_SIZEOF_VOID_P EQUAL 4)
+        add_executable(hp6_overlay_order_rebuild_smoke tests/overlay_order_rebuild_smoke.cpp
+            src/render/OverlayOrderRebuild.cpp)
+        target_compile_features(hp6_overlay_order_rebuild_smoke PRIVATE cxx_std_20)
+        add_test(NAME overlay_order_rebuild_smoke COMMAND hp6_overlay_order_rebuild_smoke)
+    endif()
     add_executable(hp6_scene_batch_renderer_smoke tests/scene_batch_renderer_smoke.cpp)
     target_link_libraries(hp6_scene_batch_renderer_smoke PRIVATE hp6_reconstructed)
     add_test(NAME scene_batch_renderer_smoke COMMAND hp6_scene_batch_renderer_smoke)
@@ -495,6 +509,15 @@ if(BUILD_TESTING)
             src/platform/ServiceHeapFreeBin.cpp)
         target_compile_features(hp6_service_heap_allocate_aligned_core_smoke PRIVATE cxx_std_20)
         add_test(NAME service_heap_allocate_aligned_core_smoke COMMAND hp6_service_heap_allocate_aligned_core_smoke)
+        add_executable(hp6_service_heap_integrated_allocation_smoke
+            tests/service_heap_integrated_allocation_smoke.cpp
+            src/platform/ServiceHeapAllocateCore.cpp
+            src/platform/ServiceHeapAllocateAlignedCore.cpp
+            src/platform/ServiceHeapFreeBin.cpp
+            src/platform/ServiceHeapAlignmentLeafs.cpp
+            src/platform/ServiceHeapSplitBlocks.cpp)
+        target_compile_features(hp6_service_heap_integrated_allocation_smoke PRIVATE cxx_std_20)
+        add_test(NAME service_heap_integrated_allocation_smoke COMMAND hp6_service_heap_integrated_allocation_smoke)
         add_executable(hp6_service_heap_allocation_wrappers_smoke
             tests/service_heap_allocation_wrappers_smoke.cpp
             src/platform/ServiceHeapAllocationWrappers.cpp)
